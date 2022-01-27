@@ -77,6 +77,7 @@ pre {
 
 
 /* ----------------------- NAVBAR ---------------------------- */
+
 .navbar {
   width: 100%;
   display: flex;
@@ -237,19 +238,6 @@ pre {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
   }
 }
-
-/* .main .count_button_hover {
-  width: 120px;
-  height: 80px;
-  border-radius: 10px;
-  font-size: 0.9em;
-  font-weight: bold;
-  background-color: var(--count-hover-color);
-  box-shadow: 0px 15px 20px var( --count-box-shadow-color);
-  color: #fff;
-  transform: translateY(-8px);
-   font-family: Verdana, Geneva, Tahoma, sans-serif;
-} */
 
 @keyframes goHover {
   0% {

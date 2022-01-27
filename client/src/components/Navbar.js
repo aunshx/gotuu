@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-// import { NavLink } from "react-router-dom";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
@@ -20,13 +19,10 @@ const Navbar = (props) => {
   };
 
   return (
-    <div className='navbar'>
-      {/* <NavLink to='/home'> */}
+    <div className='navbar' id='nav'>
       <div className='logo cursor_pointer'>
         <img src={logo} alt='Go Tuu logo' />
-        {/* <div className='logo'>YE</div> */}
       </div>
-      {/* </NavLink> */}
       <div className=''>
         {menu ? (
           <FontAwesomeIcon
