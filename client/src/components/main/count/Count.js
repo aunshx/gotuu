@@ -37,7 +37,7 @@ const Count = ({
     <div
       className={
         isHovering
-          ? "count_button_hover flex_middle cursor_pointer"
+          ? "count_button flex_middle cursor_pointer"
           : "count_button flex_middle cursor_pointer"
       }
       onMouseEnter={isHoveringTrue}
