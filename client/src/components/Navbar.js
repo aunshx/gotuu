@@ -7,7 +7,7 @@ import { Tooltip } from "@mui/material";
 
 import logo from "../resources/images/gotuuLogo.png";
 
-const Navbar = (props) => {
+const Navbar = ({ goMain }) => {
   const [menu, setMenu] = useState(false);
 
   const verticalMenu = () => {
@@ -19,7 +19,7 @@ const Navbar = (props) => {
   };
 
   return (
-    <div className='navbar' id='nav'>
+    <div className='navbar' id='nav' ref={goMain}>
       <div className='logo cursor_pointer'>
         <img src={logo} alt='Go Tuu logo' />
       </div>

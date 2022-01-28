@@ -7,7 +7,7 @@ import Count from './count/Count';
 import Go from './Go';
 import Timeline from './timeline/Timeline';
 
-const Main = (props) => {
+const Main = ({ goMain }) => {
     const [isHovering, setIsHovering] = useState(false)
     const [isCounting, setIsCounting] = useState(false)
     const [start, setStart] = useState(false)
@@ -41,7 +41,7 @@ const Main = (props) => {
       setStart(true)
       console.log('YE')
       setTimeout(() => reffie.current.scrollIntoView({ behavior: "smooth" }), 1005);
-    };
+    }
   return (
     <div className='main flex_middle'>
       <div className='app'>

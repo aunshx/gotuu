@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -9,13 +9,22 @@ import Main from './main/Main';
 import Timeline from './main/timeline/Timeline';
 
 const Home = (props) => {
-  return <>
-    <Navbar />
-    <div className="home">
-      <Main />
-      <Timeline />
-    </div>
-  </>;
+
+  const goMain = useRef();
+
+  const goToMain = () => {
+    goMain.current.scrollIntoView({ behavior: "smooth" });
+  };
+
+  return (
+    <>
+      <Navbar goMain={goMain} />
+      <div className='home'>
+        <Main />
+        <Timeline goToMain={goToMain} />
+      </div>
+    </>
+  );
 };
 
 Home.propTypes = {};

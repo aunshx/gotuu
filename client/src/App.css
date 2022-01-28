@@ -350,10 +350,11 @@ pre {
   height: 100vh;
   border: 1px solid green;
   height: 100%;
+  position: relative;
 }
 
 .timeline .main {
-  width: 800px;
+  width: 40vw;
   border: 1px solid green;
 }
 
@@ -585,4 +586,30 @@ pre {
   z-index: -1;
 }
 
-/* --------------- the rotating line */
+#go-up {
+  position: absolute;
+  bottom: 100px;
+  right: 100px;
+}
+
+#go-up:hover {
+  animation: goUpIcon 0.4s 1 linear;
+}
+
+@keyframes goUpIcon {
+  0% {
+    transform: translateY(0px);
+  }
+  25% {
+    transform: translateY(-5px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+  75% {
+    transform: translateY(-5px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
