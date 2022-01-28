@@ -9,6 +9,7 @@ const Count = ({
   isHoveringTrue,
   isHoveringFalse,
   stopCountDown,
+  scrollSmoothHandler,
 }) => {
   const [time, setTime] = useState(0);
 
@@ -31,6 +32,8 @@ const Count = ({
   const stopCount = () => {
     stopCountDown();
     setTime(0);
+    console.log('yeye')
+    scrollSmoothHandler()
   };
 
   return (

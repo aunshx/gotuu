@@ -6,12 +6,14 @@ import { faRandom } from "@fortawesome/free-solid-svg-icons";
 
 import Navbar from "./Navbar";
 import Main from './main/Main';
+import Timeline from './main/timeline/Timeline';
 
 const Home = (props) => {
   return <>
     <Navbar />
     <div className="home">
       <Main />
+      <Timeline />
     </div>
   </>;
 };
