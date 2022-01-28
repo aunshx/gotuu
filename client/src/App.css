@@ -7,6 +7,13 @@
     --count-color: #e8544a;
     --count-hover-color: #f53224;
     --count-box-shadow-color: rgba(229, 80, 46, 0.4);
+    --line-mini-color: #2ee543;
+    --line-tiny-color: #9fe52e;
+    --line-extra-small-color: #dce52e;
+    --line-small-color: #e5ab2e;
+    --line-medium-color: #e5862e;
+    --line-large-color: #e5592e;
+    --line-humongous-color: #e52e2e;
 }
 
 * {
@@ -95,7 +102,9 @@ pre {
   flex-direction: column;
 }
 
-/* ------------------------- HOME ------------------------------ */
+.scroll_hidden {
+  overflow: hidden;
+}
 
 
 /* ----------------------- NAVBAR ---------------------------- */
@@ -309,18 +318,19 @@ pre {
       border-radius: 50%;
       color: #fff;
       background-color: var(--primary-color);
-      width: 70px;
-      height: 70px;
+      width: 100px;
+      height: 100px;
       font-size: 1.5em;
       font-weight: bold;
       box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+      animation: convertToGo 0.3s 1 linear;
     }
-
+/* 
 .main .button_hover,
 .main-active  .button_hover {
   border-radius: 50%;
-  width: 70px;
-  height: 70px;
+  width: 100px;
+  height: 100px;
   font-size: 1.5em;
   font-weight: bold;
   background-color: var(--primary-hover-color);
@@ -328,30 +338,88 @@ pre {
   color: #fff;
   animation: goHover 0.3s ease 0s;
   transform: translateY(-8px);
-}
+} */
 
 .main .count_button,
 .main-active  .count_button {
-  width: 120px;
-  height: 80px;
+  width: 200px;
+  height: 120px;
   border-radius: 10px;
-  font-size: 0.9em;
+  font-size: 1.1em;
   font-weight: bold;
   background-color: var(--count-color);
   box-shadow: 0px 15px 20px var( --count-box-shadow-color);
   color: #fff;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-    animation: convertToCount 0.3s 1 linear;
+  animation: convertToCount 0.3s 1 linear;
 
 }
+
+@keyframes convertToGo {
+
+  0% {
+    width: 200px;
+    height: 120px;
+    border-radius: 10px;
+    font-size: 0.9em;
+    font-weight: bold;
+    background-color: var(--count-color);
+    box-shadow: 0px 15px 20px var( --count-box-shadow-color);
+    color: #fff;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+  }
+    25% {
+    border-radius: 10%;
+      color: #fff;
+      background-color: #a86032;
+      width: 175px;
+      height: 115px;
+      font-size: 1em;
+      font-weight: bold;
+      box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  }
+    50% {
+    border-radius: 15%;
+      color: #fff;
+      background-color: #a89732;
+      width: 150px;
+      height: 110px;
+      font-size: 1.1em;
+      font-weight: bold;
+      box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  75% {
+      border-radius: 35%;
+      color: #fff;
+      background-color: #6da832;
+      width: 125px;
+      height: 105px;
+      font-size: 1.25em;
+      font-weight: bold;
+      box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  }
+
+    100% {
+    border-radius: 50%;
+      color: #fff;
+      background-color: var(--primary-color);
+      width: 100px;
+      height: 100px;
+      font-size: 1.5em;
+      font-weight: bold;
+      box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  }
+}
+
 
 @keyframes convertToCount {
   0% {
     border-radius: 50%;
       color: #fff;
       background-color: var(--primary-color);
-      width: 70px;
-      height: 70px;
+      width: 100px;
+      height: 100px;
       font-size: 1.5em;
       font-weight: bold;
       box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
@@ -361,8 +429,8 @@ pre {
       border-radius: 35%;
       color: #fff;
       background-color: #6da832;
-      width: 82px;
-      height: 73px;
+      width: 125px;
+      height: 105px;
       font-size: 1.25em;
       font-weight: bold;
       box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
@@ -372,8 +440,8 @@ pre {
     border-radius: 15%;
       color: #fff;
       background-color: #a89732;
-      width: 93px;
-      height: 76px;
+      width: 150px;
+      height: 110px;
       font-size: 1.1em;
       font-weight: bold;
       box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
@@ -383,16 +451,16 @@ pre {
     border-radius: 10%;
       color: #fff;
       background-color: #a86032;
-      width: 105px;
-      height: 78px;
+      width: 175px;
+      height: 115px;
       font-size: 1em;
       font-weight: bold;
       box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
   }
 
   100% {
-    width: 120px;
-    height: 80px;
+    width: 200px;
+    height: 120px;
     border-radius: 10px;
     font-size: 0.9em;
     font-weight: bold;
@@ -419,29 +487,28 @@ pre {
 .timeline {
   width: 100%;
   height: 100vh;
-  border: 1px solid green;
-  /* height: 100%; */
   position: relative;
+  margin: 2em 0;
 }
 
 .timeline .main {
   width: 40vw;
-  border: 1px solid green;
 }
 
 .timeline .main .title {
   text-transform: uppercase;
-  font-weight: 700;
+  font-weight: 1000;
   color: var(--primary-color);
-  font-size: 1.5em;
+  font-size: 2em;
   text-align: center;
+  margin: 0 0 1em 0;
 }
 
 .timeline .main .line .element_mini {
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background-color: #2ee543;
+  background-color: var(--line-mini-color);
   font-weight: bold;
 }
 
@@ -450,7 +517,7 @@ pre {
   -webkit-transform: rotate(5deg);
   transform: rotate(5deg);
   height: 1px;
-  background-color: #2ee543;
+  background-color: var(--line-mini-color);
   padding: 1px;
   width: 90%;
   z-index: -1;
@@ -461,7 +528,7 @@ pre {
   -webkit-transform: rotate(-5deg);
   transform: rotate(-5deg);
   height: 1px;
-  background-color: #2ee543;
+  background-color: var(--line-mini-color);
   padding: 1px;
   width: 90%;
   z-index: -1;
@@ -471,7 +538,7 @@ pre {
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background-color: #9fe52e;
+  background-color: var(--line-tiny-color);
   font-weight: bold;
   margin: 0.5em 0;
 }
@@ -481,7 +548,7 @@ pre {
   -webkit-transform: rotate(7.5deg);
   transform: rotate(7.5deg);
   height: 1px;
-  background-color: #9fe52e;
+  background-color: var(--line-tiny-color);
   padding: 1px;
   width: 90%;
   z-index: -1;
@@ -492,7 +559,7 @@ pre {
   -webkit-transform: rotate(-7.5deg);
   transform: rotate(-7.5deg);
   height: 1px;
-  background-color: #9fe52e;
+  background-color: var(--line-tiny-color);
   padding: 1px;
   width: 90%;
   z-index: -1;
@@ -503,7 +570,7 @@ pre {
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  background-color: #dce52e;
+  background-color: var(--line-extra-small-color);
   font-weight: bold;
   margin: 0.5em 0;
 }
@@ -514,7 +581,7 @@ pre {
   -webkit-transform: rotate(9.5deg);
   transform: rotate(9.5deg);
   height: 1px;
-  background-color: #dce52e;
+  background-color: var(--line-extra-small-color);
   padding: 1px;
   width: 90%;
   z-index: -1;
@@ -525,7 +592,7 @@ pre {
   -webkit-transform: rotate(-9.5deg);
   transform: rotate(-9.5deg);
   height: 1px;
-  background-color: #dce52e;
+  background-color: var(--line-extra-small-color);
   padding: 1px;
   width: 90%;
   z-index: -1;
@@ -536,7 +603,7 @@ pre {
   width: 90px;
   height: 90px;
   border-radius: 50%;
-  background-color: #e5ab2e;
+  background-color: var(--line-small-color);
   font-weight: bold;
   margin: 0.8em 0;
 }
@@ -545,8 +612,8 @@ pre {
    -ms-transform: rotate(11deg);
   -webkit-transform: rotate(11deg);
   transform: rotate(11deg);
-  height: 1px;
-  background-color: #e5ab2e;
+  height: 1.5px;
+  background-color: var(--line-small-color);
   padding: 1px;
   width: 90%;
   z-index: -1;
@@ -556,8 +623,8 @@ pre {
    -ms-transform: rotate(-11deg);
   -webkit-transform: rotate(-11deg);
   transform: rotate(-11deg);
-  height: 1px;
-  background-color: #e5ab2e;
+  height: 1.5px;
+  background-color: var(--line-small-color);
   padding: 1px;
   width: 90%;
   z-index: -1;
@@ -567,7 +634,7 @@ pre {
   width: 100px;
   height: 100px;
   border-radius: 50%;
-  background-color: #e5862e;
+  background-color: var(--line-medium-color);
   font-weight: bold;
   margin: 1em 0;
 }
@@ -576,8 +643,8 @@ pre {
    -ms-transform: rotate(13.5deg);
   -webkit-transform: rotate(13.5deg);
   transform: rotate(13.5deg);
-  height: 1px;
-  background-color: #e5862e;
+  height: 2px;
+  background-color: var(--line-medium-color);
   padding: 1px;
   width: 90%;
   z-index: -1;
@@ -587,8 +654,8 @@ pre {
    -ms-transform: rotate(-13.5deg);
   -webkit-transform: rotate(-13.5deg);
   transform: rotate(-13.5deg);
-  height: 1px;
-  background-color: #e5862e;
+  height: 2px;
+  background-color: var(--line-medium-color);
   padding: 1px;
   width: 90%;
   z-index: -1;
@@ -598,7 +665,7 @@ pre {
   width: 110px;
   height: 110px;
   border-radius: 50%;
-  background-color: #e5592e;
+  background-color: var(--line-large-color);
   font-weight: bold;
   margin: 1.2em 0;
 }
@@ -608,8 +675,8 @@ pre {
    -ms-transform: rotate(15deg);
   -webkit-transform: rotate(15deg);
   transform: rotate(15deg);
-  height: 1px;
-  background-color: #e5592e;
+  height: 2.5px;
+  background-color: var(--line-large-color);
   padding: 1px;
   width: 90%;
   z-index: -1;
@@ -619,8 +686,8 @@ pre {
    -ms-transform: rotate(-15deg);
   -webkit-transform: rotate(-15deg);
   transform: rotate(-15deg);
-  height: 1px;
-  background-color: #e5592e;
+  height: 2.5px;
+  background-color: var(--line-large-color);
   padding: 1px;
   width: 90%;
   z-index: -1;
@@ -630,7 +697,7 @@ pre {
   width: 120px;
   height: 120px;
   border-radius: 50%;
-  background-color: #e52e2e;
+  background-color: var(--line-humongous-color);
   font-weight: bold;
   margin: 1.5em 0;
 }
@@ -639,8 +706,8 @@ pre {
    -ms-transform: rotate(17.5deg);
   -webkit-transform: rotate(17.5deg);
   transform: rotate(17.5deg);
-  height: 1px;
-  background-color: #e5592e;
+  height: 3px;
+  background-color: var(--line-humongous-color);
   padding: 1px;
   width: 90%;
   z-index: -1;
@@ -650,8 +717,8 @@ pre {
    -ms-transform: rotate(-17.5deg);
   -webkit-transform: rotate(-17.5deg);
   transform: rotate(-17.5deg);
-  height: 1px;
-  background-color: #e5592e;
+  height: 3px;
+  background-color: var(--line-humongous-color);
   padding: 1px;
   width: 90%;
   z-index: -1;

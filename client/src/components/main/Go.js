@@ -5,9 +5,10 @@ const Go = ({ isHovering, isHoveringTrue, isHoveringFalse, startCountDown }) => 
   return (
     <div
       className={
-        isHovering
-          ? "button_hover flex_middle cursor_pointer"
-          : "button flex_middle cursor_pointer"
+        // isHovering
+        //   ? "button_hover flex_middle cursor_pointer"
+        //   :
+        "button flex_middle cursor_pointer"
       }
       onMouseEnter={isHoveringTrue}
       onMouseLeave={isHoveringFalse}

@@ -14,7 +14,7 @@ const Timeline = ({ goToMain }) => {
         <div className='main'>
           <div className='title flex_middle'>
             <TimelineIcon className='mrg-r-point-5' style={{ fontSize: 30 }} />
-            <div>TIMELINE</div>
+            <div>TUULINE</div>
           </div>
           <div className='line'>
             <div className='flex_left'>

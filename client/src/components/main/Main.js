@@ -16,6 +16,7 @@ const Main = ({ goMain, isActive, setIsActive }) => {
     const [isCounting, setIsCounting] = useState(false)
     const [start, setStart] = useState(false)
     const [isFull, setIsFull] = useState(false)
+    const [isComplete, setIsComplete] = useState(false)
     const reffie = useRef()
     const handle = useRef()
 
