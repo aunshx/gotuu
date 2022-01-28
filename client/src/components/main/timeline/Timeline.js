@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -6,15 +6,86 @@ import { faArrowCircleUp } from "@fortawesome/free-solid-svg-icons";
 
 import TimelineIcon from "@mui/icons-material/Timeline";
 import Element from './Element';
+import DatePicker from './DatePicker';
+import { Menu, MenuItem } from '@mui/material';
+
+// sksksk
 
 const Timeline = ({ goToMain }) => {
+
+  const [anchorEl, setAnchorEl] = useState(null)
+  const open = Boolean(anchorEl)
+
+  const handleClick = (event) => {
+      setAnchorEl(event.currentTarget)
+  }
+
+  const handleClose = () => {
+        setAnchorEl(null)
+  }
+
   return (
     <>
       <div className='timeline app'>
         <div className='main'>
-          <div className='title flex_middle'>
-            <TimelineIcon className='mrg-r-point-5' style={{ fontSize: 30 }} />
+          <div className='title flex_evenly'>
+            <div>
+              <TimelineIcon
+                className='mrg-r-point-5'
+                style={{ fontSize: 30 }}
+              />
+            </div>
             <div>TUULINE</div>
+            <div className='date cursor_pointer' onClick={handleClick}>
+              Today{" "}
+            </div>
+            <Menu
+              id='fade-menu'
+              anchorEl={anchorEl}
+              open={open}
+              onClick={handleClose}
+              PaperProps={{
+                elevation: 0,
+                sx: {
+                  overflow: "visible",
+                  filter: "drop-shadow(0px 2px 4px rgba(0,0,0,0.32))",
+                  mt: 1.5,
+                  "& .MuiAvatar-root": {
+                    width: 32,
+                    height: 32,
+                    ml: -0.5,
+                    mr: 1,
+                  },
+                  "&:before": {
+                    content: '""',
+                    display: "block",
+                    position: "absolute",
+                    top: 0,
+                    left: 66,
+                    width: 10,
+                    height: 10,
+                    bgcolor: "background.paper",
+                    transform: "translateY(-50%) rotate(45deg)",
+                    zIndex: 0,
+                  },
+                },
+                style: {
+                  transform: "translateX(0px) translateY(-1px)",
+                },
+              }}
+              transformOrigin={{
+                horizontal: "center",
+                vertical: "top",
+              }}
+              anchorOrigin={{
+                horizontal: "center",
+                vertical: "bottom",
+              }}
+            >
+              <MenuItem>
+                <DatePicker />
+              </MenuItem>
+            </Menu>
           </div>
           <div className='line'>
             <div className='flex_left'>

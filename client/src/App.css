@@ -96,6 +96,24 @@ pre {
   justify-content: flex-end;
 }
 
+.flex_evenly {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.flex_around {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.flex_between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .app {
     display: flex;
   align-items: center;
@@ -502,6 +520,17 @@ pre {
   font-size: 2em;
   text-align: center;
   margin: 0 0 1em 0;
+}
+
+.timeline .main .title .date {
+  color: gray;
+  font-size: 0.7em;
+  text-align: center;
+  text-transform:capitalize;
+}
+
+.timeline .main .title .date:hover {
+  color: var(--count-color);
 }
 
 .timeline .main .line .element_mini {
