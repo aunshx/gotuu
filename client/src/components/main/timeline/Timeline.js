@@ -71,7 +71,7 @@ const Timeline = ({ goToMain }) => {
                     display: "block",
                     position: "absolute",
                     top: 0,
-                    left: 66,
+                    left: 120,
                     width: 10,
                     height: 10,
                     bgcolor: "background.paper",
