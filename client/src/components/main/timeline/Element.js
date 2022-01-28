@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Tooltip } from '@mui/material';
 
-const Element = ({ duration }) => {
+const Element = ({ duration, type }) => {
     const [classy, setClassy] = useState('')
     const [showInHours, setShowInHours] = useState(false)
 
@@ -31,18 +31,43 @@ const Element = ({ duration }) => {
     }, [classy, duration]);
     
   return (
-    <Tooltip title={showInHours ? "Hours" : "Minutes"} placement='top'>
-      <div
-        className={`element_${classy} flex_middle cursor_pointer`}
-        onClick={() => setShowInHours(!showInHours)}
-      >
-        {showInHours
-          ? (duration / 360000).toFixed("2")
-          : (duration / 60000).toFixed("2")}
-      </div>
-    </Tooltip>
-  );
-};
+    <>
+      {type % 2 === 0 ? (
+        <div>
+          <Tooltip title={showInHours ? "Hours" : "Minutes"} placement='top'>
+            <div
+              className={`element_${classy} flex_middle cursor_pointer`}
+              onClick={() => setShowInHours(!showInHours)}
+            >
+              {showInHours
+                ? (duration / 3600000).toFixed("2")
+                : (duration / 60000).toFixed("2")}
+            </div>
+          </Tooltip>
+          <Tooltip>
+            
+          </Tooltip>
+        </div>
+      ) : (
+        <div>
+          <Tooltip title={showInHours ? "Hours" : "Minutes"} placement='top'>
+            <div
+              className={`element_${classy} flex_middle cursor_pointer`}
+              onClick={() => setShowInHours(!showInHours)}
+            >
+              {showInHours
+                ? (duration / 3600000).toFixed("2")
+                : (duration / 60000).toFixed("2")}
+            </div>
+          </Tooltip>
+          <Tooltip>
+            <div className={`liner_${classy} cursor_pointer`}></div>
+          </Tooltip>
+        </div>
+      )}
+    </>
+  )
+}
 
 Element.propTypes = {};
 
