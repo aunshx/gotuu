@@ -105,8 +105,11 @@ pre {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  border: 1px solid blue;
   height: 50px;
+}
+
+.navbar-active {
+  display: none;
 }
 
 .navbar .logo img {
@@ -170,8 +173,65 @@ pre {
   height: calc(100vh - 50px);
   height: -moz-calc(100vh - 50px);
   height: -webkit-calc(100vh - 50px);
-  border: 1px solid red;
-    }
+  }
+
+    .main-active {
+       position: relative;
+  width: 100%;
+  height: calc(100vh);
+  height: -moz-calc(100vh);
+  height: -webkit-calc(100vh);
+  }
+
+  .main-active:after {
+    content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          border-radius: 0;
+          background: linear-gradient(120deg, yellow, green, blue, red);
+          background-size: 400% 400%;
+          animation: frame-enter 0s forwards ease-in-out reverse, gradient-animation 4s ease-in-out infinite;
+
+  }
+
+@keyframes gradient-animation {
+  0% {
+    background-position: 15% 0%;
+  }
+
+  50% {
+    background-position: 85% 100%;
+  }
+
+  100% {
+    background-position: 15% 0%;
+  }
+}
+
+  @keyframes frame-enter {
+  0% {
+    clip-path: polygon(0% 100%, 3px 100%, 3px 3px, calc(100% - 3px) 3px, calc(100% - 3px) calc(100% - 3px), 3px calc(100% - 3px), 3px 100%, 100% 100%, 100% 0%, 0% 0%);
+  }
+
+  25% {
+    clip-path: polygon(0% 100%, 3px 100%, 3px 3px, calc(100% - 3px) 3px, calc(100% - 3px) calc(100% - 3px), calc(100% - 3px) calc(100% - 3px), calc(100% - 3px) 100%, 100% 100%, 100% 0%, 0% 0%);
+  }
+
+  50% {
+    clip-path: polygon(0% 100%, 3px 100%, 3px 3px, calc(100% - 3px) 3px, calc(100% - 3px) 3px, calc(100% - 3px) 3px, calc(100% - 3px) 3px, calc(100% - 3px) 3px, 100% 0%, 0% 0%);
+  }
+
+  75% {
+    -webkit-clip-path: polygon(0% 100%, 3px 100%, 3px 3px, 3px 3px, 3px 3px, 3px 3px, 3px 3px, 3px 3px, 3px 0%, 0% 0%);
+  }
+
+  100% {
+    -webkit-clip-path: polygon(0% 100%, 3px 100%, 3px 100%, 3px 100%, 3px 100%, 3px 100%, 3px 100%, 3px 100%, 3px 100%, 0% 100%);
+  }
+}
 
   .main .go-down {
     border-radius: 50%;
@@ -349,7 +409,7 @@ pre {
   width: 100%;
   height: 100vh;
   border: 1px solid green;
-  height: 100%;
+  /* height: 100%; */
   position: relative;
 }
 
