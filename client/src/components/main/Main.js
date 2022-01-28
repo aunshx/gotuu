@@ -7,15 +7,20 @@ import Time from './count/Time'
 import Count from './count/Count';
 import Go from './Go';
 import Timeline from './timeline/Timeline';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCompressAlt, faExpandAlt } from '@fortawesome/free-solid-svg-icons';
+import { Tooltip } from '@mui/material';
 
 const Main = ({ goMain }) => {
     const [isHovering, setIsHovering] = useState(false)
     const [isCounting, setIsCounting] = useState(false)
     const [start, setStart] = useState(false)
+    const [isFull, setIsFull] = useState(false)
     const reffie = useRef()
     const handle = useRef()
 
     const toggleFullScreen = () => {
+      setIsFull(true)
      if (handle.current.requestFullscreen) {
        console.log(handle.current)
         handle.current.requestFullscreen();
@@ -29,8 +34,8 @@ const Main = ({ goMain }) => {
     };
 
     const stopFullScreen = () => {
+      setIsFull(false)
      if (document.exitFullscreen) {
-       console.log("nnnnnnnnnnnnnnnn", document);
        document.exitFullscreen();
      } else if (document.msExitFullscreen) {
        document.msExitFullscreen();
@@ -59,32 +64,29 @@ const Main = ({ goMain }) => {
 
     const startCountDown = () => {
         setIsCounting(true)
-        toggleFullScreen()
     }
 
     const stopCountDown = () => {
         setIsCounting(false)
         stopFullScreen()
-        console.log('STOPPPPED')
     }
 
     const scrollSmoothHandler = () => {
       setStart(true)
-      console.log('YE')
       setTimeout(() => reffie.current.scrollIntoView({ behavior: "smooth" }), 1005);
     }
   return (
     <div className='main flex_middle' ref={handle}>
       <div className='app'>
         {isCounting ? (
-            <Count
-              isCounting={isCounting}
-              isHovering={isHovering}
-              isHoveringTrue={isHoveringTrue}
-              isHoveringFalse={isHoveringFalse}
-              stopCountDown={stopCountDown}
-              scrollSmoothHandler={scrollSmoothHandler}
-            />
+          <Count
+            isCounting={isCounting}
+            isHovering={isHovering}
+            isHoveringTrue={isHoveringTrue}
+            isHoveringFalse={isHoveringFalse}
+            stopCountDown={stopCountDown}
+            scrollSmoothHandler={scrollSmoothHandler}
+          />
         ) : (
           <Go
             isHovering={isHovering}
@@ -92,6 +94,31 @@ const Main = ({ goMain }) => {
             isHoveringFalse={isHoveringFalse}
             startCountDown={startCountDown}
           />
+        )}
+        {isFull ? (
+          <Tooltip title='Close' placement='top'>
+            <div
+              className='expand-icon cursor_pointer'
+              onClick={stopFullScreen}
+            >
+              <FontAwesomeIcon
+                icon={faCompressAlt}
+                style={{ fontSize: 20, color: "gray" }}
+              />
+            </div>
+          </Tooltip>
+        ) : (
+          <Tooltip title='Expand' placement='top'>
+            <div
+              className='expand-icon cursor_pointer'
+              onClick={toggleFullScreen}
+            >
+              <FontAwesomeIcon
+                icon={faExpandAlt}
+                style={{ fontSize: 20, color: "gray" }}
+              />
+            </div>
+          </Tooltip>
         )}
         {start && <div className='go-down' ref={reffie}></div>}
       </div>

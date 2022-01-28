@@ -197,6 +197,11 @@ pre {
 
   }
 
+  .main .expand-icon {
+    position: absolute;
+    bottom: 70px;
+  }
+
 @keyframes gradient-animation {
   0% {
     background-position: 15% 0%;
