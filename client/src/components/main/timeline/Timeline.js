@@ -5,7 +5,8 @@ import moment from 'moment'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowCircleUp } from "@fortawesome/free-solid-svg-icons";
 
-import TimelineIcon from "@mui/icons-material/Timeline";
+import TimelineIcon from "@mui/icons-material/Timeline"; 
+import CloseIcon from "@mui/icons-material/Close"; 
 import Element from './Element';
 import DatePicker from './DatePicker';
 import { Menu, MenuItem } from '@mui/material';
@@ -30,7 +31,7 @@ const Timeline = ({ goToMain }) => {
   return (
     <>
       <div className='timeline app'>
-        <div className='main' onClick={handleClose}>
+9        <div className='main'>
           <div className='title flex_evenly'>
             <div>
               <TimelineIcon
@@ -91,12 +92,23 @@ const Timeline = ({ goToMain }) => {
                 vertical: "bottom",
               }}
             >
-              {/* <MenuItem> */}
+              <>
+                <div className='triple_grid'>
+                  <div></div>
+                  <div className='flex_middle ft-bold'>Select Date</div>
+                  <div className='flex_middle cursor_pointer'>
+                    <CloseIcon
+                      onClick={handleClose}
+                      className='close_date'
+                      style={{ fontSize: 20 }}
+                    />
+                  </div>
+                </div>
                 <DatePicker
                   setDateSelected={setDateSelected}
                   dateSelected={dateSelected}
                 />
-              {/* </MenuItem> */}
+              </>
             </Menu>
           </div>
           {/* <div>

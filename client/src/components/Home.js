@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRandom } from "@fortawesome/free-solid-svg-icons";
 
-import Navbar from "./Navbar";
+import Navbar from "./navbar/Navbar";
 import Main from './main/Main';
 import Timeline from './main/timeline/Timeline';
 
