@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -10,6 +10,8 @@ import Timeline from './main/timeline/Timeline';
 
 const Home = (props) => {
 
+  const [isActive, setIsActive] = useState(false)
+
   const goMain = useRef();
 
   const goToMain = () => {
@@ -18,9 +20,9 @@ const Home = (props) => {
 
   return (
     <>
-      <Navbar goMain={goMain} />
+      <Navbar goMain={goMain} isActive={isActive} />
       <div className='home'>
-        <Main />
+        <Main isActive={isActive} setIsActive={setIsActive} />
         <Timeline goToMain={goToMain} />
       </div>
     </>

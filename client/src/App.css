@@ -197,7 +197,8 @@ pre {
 
   }
 
-  .main .expand-icon {
+  .main .expand-icon,
+  .main-active  .expand-icon {
     position: absolute;
     bottom: 70px;
   }
@@ -238,7 +239,8 @@ pre {
   }
 }
 
-  .main .go-down {
+  .main .go-down,
+  .main-active .go-down {
     border-radius: 50%;
     width: 50px;
     height: 50px;
@@ -248,7 +250,8 @@ pre {
     animation: goDownOnBall 1s 1 linear;
   }
 
-  .main .go-down-invisible {
+  .main .go-down-invisible, 
+  .main-active  .go-down-invisible {
     display: none;
   }
 
@@ -301,7 +304,8 @@ pre {
     }
   }
 
-.main .button {
+.main .button,
+.main-active  .button {
       border-radius: 50%;
       color: #fff;
       background-color: var(--primary-color);
@@ -312,7 +316,8 @@ pre {
       box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
     }
 
-.main .button_hover {
+.main .button_hover,
+.main-active  .button_hover {
   border-radius: 50%;
   width: 70px;
   height: 70px;
@@ -325,7 +330,8 @@ pre {
   transform: translateY(-8px);
 }
 
-.main .count_button {
+.main .count_button,
+.main-active  .count_button {
   width: 120px;
   height: 80px;
   border-radius: 10px;

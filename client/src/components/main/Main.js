@@ -11,7 +11,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCompressAlt, faExpandAlt } from '@fortawesome/free-solid-svg-icons';
 import { Tooltip } from '@mui/material';
 
-const Main = ({ goMain }) => {
+const Main = ({ goMain, isActive, setIsActive }) => {
     const [isHovering, setIsHovering] = useState(false)
     const [isCounting, setIsCounting] = useState(false)
     const [start, setStart] = useState(false)
@@ -64,11 +64,12 @@ const Main = ({ goMain }) => {
 
     const startCountDown = () => {
         setIsCounting(true)
+        setIsActive(true)
     }
 
     const stopCountDown = () => {
         setIsCounting(false)
-        stopFullScreen()
+        setIsActive(false)
     }
 
     const scrollSmoothHandler = () => {
@@ -76,7 +77,12 @@ const Main = ({ goMain }) => {
       setTimeout(() => reffie.current.scrollIntoView({ behavior: "smooth" }), 1005);
     }
   return (
-    <div className='main flex_middle' ref={handle}>
+    <div
+      className={
+        isActive ? "main-active flex_middle" : "main flex_middle"
+      }
+      ref={handle}
+    >
       <div className='app'>
         {isCounting ? (
           <Count
