@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import moment from 'moment'
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowCircleUp } from "@fortawesome/free-solid-svg-icons";
@@ -12,6 +13,8 @@ import { Menu, MenuItem } from '@mui/material';
 // sksksk
 
 const Timeline = ({ goToMain }) => {
+
+  const [dateSelected, setDateSelected] = useState()
 
   const [anchorEl, setAnchorEl] = useState(null)
   const open = Boolean(anchorEl)
@@ -27,7 +30,7 @@ const Timeline = ({ goToMain }) => {
   return (
     <>
       <div className='timeline app'>
-        <div className='main'>
+        <div className='main' onClick={handleClose}>
           <div className='title flex_evenly'>
             <div>
               <TimelineIcon
@@ -37,17 +40,23 @@ const Timeline = ({ goToMain }) => {
             </div>
             <div>TUULINE</div>
             <div className='date cursor_pointer' onClick={handleClick}>
-              Today{" "}
+              {dateSelected ? (
+                <>{moment(dateSelected).format("DD/MM/YYYY")}</>
+              ) : (
+                <>Today</>
+              )}
             </div>
             <Menu
               id='fade-menu'
               anchorEl={anchorEl}
               open={open}
-              onClick={handleClose}
+              // onClick={handleClose}
               PaperProps={{
                 elevation: 0,
                 sx: {
                   overflow: "visible",
+                  width: "250px",
+                  height: "350px",
                   filter: "drop-shadow(0px 2px 4px rgba(0,0,0,0.32))",
                   mt: 1.5,
                   "& .MuiAvatar-root": {
@@ -82,11 +91,17 @@ const Timeline = ({ goToMain }) => {
                 vertical: "bottom",
               }}
             >
-              <MenuItem>
-                <DatePicker />
-              </MenuItem>
+              {/* <MenuItem> */}
+                <DatePicker
+                  setDateSelected={setDateSelected}
+                  dateSelected={dateSelected}
+                />
+              {/* </MenuItem> */}
             </Menu>
           </div>
+          {/* <div>
+            <DatePicker />
+          </div> */}
           <div className='line'>
             <div className='flex_left'>
               <Element duration={300000} />
