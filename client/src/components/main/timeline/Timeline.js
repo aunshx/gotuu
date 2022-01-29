@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment'
 
@@ -14,24 +14,28 @@ import { Menu, MenuItem } from '@mui/material';
 // sksksk
 
 const Timeline = ({ goToMain }) => {
+  const [dateSelected, setDateSelected] = useState();
 
-  const [dateSelected, setDateSelected] = useState()
+  useEffect(() => {
+    console.log(moment(dateSelected).toISOString(), "- Has changed");
+  }, [dateSelected])
 
-  const [anchorEl, setAnchorEl] = useState(null)
-  const open = Boolean(anchorEl)
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
 
   const handleClick = (event) => {
-      setAnchorEl(event.currentTarget)
-  }
+    setAnchorEl(event.currentTarget);
+  };
 
   const handleClose = () => {
-        setAnchorEl(null)
-  }
+    setAnchorEl(null);
+  };
 
   return (
     <>
       <div className='timeline app'>
-9        <div className='main'>
+        9{" "}
+        <div className='main'>
           <div className='title flex_evenly'>
             <div>
               <TimelineIcon
@@ -169,7 +173,7 @@ const Timeline = ({ goToMain }) => {
       </div>
     </>
   );
-};
+};;
 
 Timeline.propTypes = {};
 

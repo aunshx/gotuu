@@ -27,7 +27,6 @@ const SideNavbar = ({ verticalMenu }) => {
       </div>
       <div className='app'>
         <div>
-          <Tooltip title='Home'>
             <div className='flex_middle mrg-t-b-1'>
               <a href='#main'>
                 <div className='flex_middle navbar_option'>
@@ -42,10 +41,8 @@ const SideNavbar = ({ verticalMenu }) => {
                 </div>
               </a>
             </div>
-          </Tooltip>
         </div>
         <div>
-          <Tooltip title='Timeline'>
             <div className='flex_middle mrg-t-b-1'>
               <a href='#timeline'>
                 <div className='flex_middle navbar_option'>
@@ -60,10 +57,8 @@ const SideNavbar = ({ verticalMenu }) => {
                 </div>
               </a>
             </div>
-          </Tooltip>
         </div>
         <div>
-          <Tooltip title='Metrics'>
             <div className='flex_middle mrg-t-b-1'>
               <a href='#timeline'>
                 <div className='flex_middle navbar_option'>
@@ -78,11 +73,9 @@ const SideNavbar = ({ verticalMenu }) => {
                 </div>
               </a>
             </div>
-          </Tooltip>
         </div>
         {isAuthenticated ? (
           <div>
-            <Tooltip title='Login'>
               <div className='flex_middle mrg-t-b-1'>
                 <a href='#timeline'>
                   <div className='flex_middle navbar_option'>
@@ -97,11 +90,9 @@ const SideNavbar = ({ verticalMenu }) => {
                   </div>
                 </a>
               </div>
-            </Tooltip>
           </div>
         ) : (
           <div>
-            <Tooltip title='Logout'>
               <div className='flex_middle mrg-t-b-1'>
                 <a href='#timeline'>
                   <div className='flex_middle navbar_option'>
@@ -116,7 +107,6 @@ const SideNavbar = ({ verticalMenu }) => {
                   </div>
                 </a>
               </div>
-            </Tooltip>
           </div>
         )}
       </div>
