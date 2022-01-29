@@ -1,13 +1,11 @@
 import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
-
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faRandom } from "@fortawesome/free-solid-svg-icons";
+import { connect } from "react-redux";
 
 import Navbar from "./navbar/Navbar";
 import Main from './main/Main';
 import Timeline from './main/timeline/Timeline';
-import { connect } from 'react-redux';
+import Metrics from './main/metrics/Metrics';
 
 const Home = ({ auth: { isAuthenticated } }) => {
 
@@ -24,7 +22,8 @@ const Home = ({ auth: { isAuthenticated } }) => {
       <Navbar goMain={goMain} isActive={isActive} />
       <div className='home'>
         <Main isActive={isActive} setIsActive={setIsActive} />
-        {isAuthenticated ? <Timeline goToMain={goToMain} /> : ""}
+        {isAuthenticated && <Timeline goToMain={goToMain} /> }
+        {isAuthenticated && <Metrics goToMain={goToMain} /> }
       </div>
     </>
   );

@@ -53,7 +53,7 @@ const SideNavbar = ({
             </div>
             <div>
               <div className='flex_middle mrg-t-b-1'>
-                <a href='#timeline'>
+                <a href='#metrics'>
                   <div className='flex_middle navbar_option'>
                     <div>
                       <FontAwesomeIcon

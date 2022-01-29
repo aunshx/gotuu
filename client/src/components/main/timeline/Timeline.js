@@ -4,7 +4,7 @@ import moment from 'moment'
 import {connect} from 'react-redux'
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowCircleUp } from "@fortawesome/free-solid-svg-icons";
+import { faArrowCircleUp, faThermometerEmpty } from "@fortawesome/free-solid-svg-icons";
 
 import TimelineIcon from "@mui/icons-material/Timeline"; 
 import CloseIcon from "@mui/icons-material/Close"; 
@@ -135,7 +135,7 @@ const Timeline = ({
           </div>
 
           <div className='line'>
-            {timeline.length > 0 &&
+            {timeline.length > 0 ? (
               timeline.map((event, index) => (
                 <>
                   {index % 2 === 0 ? (
@@ -153,12 +153,35 @@ const Timeline = ({
                         <Element duration={event.duration} />
                       </div>
                       <div className='flex_middle'>
-                        <div className={`liner_mini_right cursor_pointer`}></div>
+                        <div
+                          className={`liner_mini_right cursor_pointer`}
+                        ></div>
                       </div>
                     </div>
                   )}
                 </>
-              ))}
+              ))
+            ) : (
+              <div className='empty_timeline app '>
+                <div className='flex_middle' style={{ marginBottom: "1em" }}>
+                  <div>
+                    <FontAwesomeIcon
+                      icon={faThermometerEmpty}
+                      style={{
+                        color: "gray",
+                        fontSize: 25,
+                        marginRight: "0.5em",
+                      }}
+                    />
+                  </div>
+                  <div style={{ color: "gray" }}>Timeline is empty.</div>
+                </div>
+                <div>
+                  Try starting and completing a new Tuu! Or click on 'today' to
+                  check previous Tuus!
+                </div>
+              </div>
+            )}
           </div>
         </div>
         <div id='go-up' className='cursor_pointer'>
