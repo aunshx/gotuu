@@ -1,12 +1,45 @@
-import Home from './components/Home';
+import React, { useEffect } from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { Provider } from "react-redux";
 
-import './App.css'
+import { loadUser } from "./redux/actions/auth";
+import { LOGOUT } from "./redux/actions/types";
+
+import Home from "./components/Home";
+import Register from "./components/auth/Register";
+import Login from "./components/auth/Login";
+import NotFound from "./components/layout/NotFound";
+import store from "./store";
+import setAuthToken from './utils/setAuthToken'
+
+import "./App.css";
 
 function App() {
+    useEffect(() => {
+      // check for token in LS
+      if (localStorage.token) {
+        setAuthToken(localStorage.token);
+      }
+      store.dispatch(loadUser());
+
+      // log user out from all tabs if they log out in one tab
+      window.addEventListener("storage", () => {
+        if (!localStorage.token) store.dispatch({ type: LOGOUT });
+      });
+    }, []);
   return (
-    <div>
-      <Home />
-    </div>
+    <Provider store={store}>
+      <Router>
+        <>
+          <Switch>
+            <Route exact path='/' component={Home} />
+            <Route exact path='/register' component={Register} />
+            <Route exact path='/login' component={Login} />
+            <Route component={NotFound} />
+          </Switch>
+        </>
+      </Router>
+    </Provider>
   );
 }
 

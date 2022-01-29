@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from "react-redux";   
-// import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 // import { logout } from "../../redux/actions/auth";
 
 import CloseIcon from '@mui/icons-material/Close';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faChartBar, faHome, faProjectDiagram, faSignInAlt, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faBookOpen, faChartBar, faHome, faProjectDiagram, faSignInAlt, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 import { Tooltip } from "@mui/material";
 
 const SideNavbar = ({ verticalMenu }) => {
@@ -26,87 +26,101 @@ const SideNavbar = ({ verticalMenu }) => {
         </div>
       </div>
       <div className='app'>
-        <div>
-            <div className='flex_middle mrg-t-b-1'>
-              <a href='#main'>
-                <div className='flex_middle navbar_option'>
-                  <div>
-                    <FontAwesomeIcon
-                      icon={faHome}
-                      style={{ fontSize: 20 }}
-                      className='icon'
-                    />
-                  </div>
-                  <div className='mrg-r-point-5 ft-bold link'>Home</div>
-                </div>
-              </a>
-            </div>
-        </div>
-        <div>
-            <div className='flex_middle mrg-t-b-1'>
-              <a href='#timeline'>
-                <div className='flex_middle navbar_option'>
-                  <div>
-                    <FontAwesomeIcon
-                      icon={faProjectDiagram}
-                      style={{ fontSize: 20 }}
-                      className='icon'
-                    />
-                  </div>
-                  <div className='mrg-r-point-5 ft-bold link'>Timeline</div>
-                </div>
-              </a>
-            </div>
-        </div>
-        <div>
-            <div className='flex_middle mrg-t-b-1'>
-              <a href='#timeline'>
-                <div className='flex_middle navbar_option'>
-                  <div>
-                    <FontAwesomeIcon
-                      icon={faChartBar}
-                      style={{ fontSize: 20 }}
-                      className='icon'
-                    />
-                  </div>
-                  <div className='mrg-r-point-5 ft-bold link'>Metrics</div>
-                </div>
-              </a>
-            </div>
-        </div>
         {isAuthenticated ? (
-          <div>
+          <div className='app'>
+            <div>
               <div className='flex_middle mrg-t-b-1'>
                 <a href='#timeline'>
                   <div className='flex_middle navbar_option'>
                     <div>
                       <FontAwesomeIcon
-                        icon={faSignInAlt}
+                        icon={faProjectDiagram}
                         style={{ fontSize: 20 }}
                         className='icon'
                       />
                     </div>
-                    <div className='mrg-r-point-5 ft-bold link'>Login</div>
+                    <div className='mrg-r-point-5 ft-bold link'>Timeline</div>
                   </div>
                 </a>
               </div>
+            </div>
+            <div>
+              <div className='flex_middle mrg-t-b-1'>
+                <a href='#timeline'>
+                  <div className='flex_middle navbar_option'>
+                    <div>
+                      <FontAwesomeIcon
+                        icon={faChartBar}
+                        style={{ fontSize: 20 }}
+                        className='icon'
+                      />
+                    </div>
+                    <div className='mrg-r-point-5 ft-bold link'>Metrics</div>
+                  </div>
+                </a>
+              </div>
+            </div>
+            <div>
+              <div className='flex_middle mrg-t-b-1'>
+                <a href='#main'>
+                  <div className='flex_middle navbar_option'>
+                    <div>
+                      <FontAwesomeIcon
+                        icon={faHome}
+                        style={{ fontSize: 20 }}
+                        className='icon'
+                      />
+                    </div>
+                    <div className='mrg-r-point-5 ft-bold link'>Home</div>
+                  </div>
+                </a>
+              </div>
+            </div>
+            <div className='flex_middle mrg-t-b-1'>
+              <a href='#timeline'>
+                <div className='flex_middle navbar_option'>
+                  <div>
+                    <FontAwesomeIcon
+                      icon={faSignInAlt}
+                      style={{ fontSize: 20 }}
+                      className='icon'
+                    />
+                  </div>
+                  <div className='mrg-r-point-5 ft-bold link'>Logout</div>
+                </div>
+              </a>
+            </div>
           </div>
         ) : (
-          <div>
-              <div className='flex_middle mrg-t-b-1'>
-                <a href='#timeline'>
-                  <div className='flex_middle navbar_option'>
-                    <div>
-                      <FontAwesomeIcon
-                        icon={faSignOutAlt}
-                        style={{ fontSize: 20 }}
-                        className='icon'
-                      />
-                    </div>
-                    <div className='mrg-r-point-5 ft-bold link'>Logout</div>
+          <div className='app'>
+            <div className='flex_middle mrg-t-b-1'>
+              <a href='#timeline'>
+                <div className='flex_middle navbar_option'>
+                  <div>
+                    <FontAwesomeIcon
+                      icon={faBookOpen}
+                      style={{ fontSize: 20 }}
+                      className='icon'
+                    />
                   </div>
-                </a>
-              </div>
+                  <div className='mrg-r-point-5 ft-bold link'>About</div>
+                </div>
+              </a>
+            </div>
+            <div className='flex_middle mrg-t-b-1'>
+              <Link to='/login'>
+                <div className='flex_middle navbar_option'>
+                  <div>
+                    <FontAwesomeIcon
+                      icon={faSignInAlt}
+                      style={{ fontSize: 20 }}
+                      className='icon'
+                    />
+                  </div>
+                  <div className='mrg-r-point-5 ft-bold link'>Login</div>
+                </div>
+              </Link>
+            </div>
           </div>
         )}
       </div>

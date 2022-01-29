@@ -16,6 +16,8 @@
     --line-humongous-color: #e52e2e;
     --closing-color: #e52e2e;
     --grey-color: rgb(105, 105, 105);
+    --login-card-background: rgb(236, 230, 230);
+    --dark-font-color: rgb(31, 31, 31);
 }
 
 * {
@@ -286,10 +288,42 @@ pre {
   color: var(--grey-color);
 }
 
+/* ----------------------- LOGIN ------------------------- */
+.login {
+  height: 100vh;
+  width: 100vw;
+}
 
-/* -------------------------- HOME ----------------------------- */
+.login .card {
+    box-shadow: 0 4px 8px 0 var(--login-card-background);
+    max-width: 300px;
+    margin: auto;
+    text-align: center;
+    font-family: arial;
+    border-radius: 10px;
+    background-color: var(--login-card-background);
+    min-width: 20em;
+    min-height: 400px;
+    color: #f4f4f4;
+    border: 2px solid var(--primary-color);
+    z-index: 1;
+    font-family: 'PT Serif',serif;
+    opacity: 0.95;
+}
 
-/* ------------------------------------------------------------- */
+.login .card img {
+  object-fit: contain;
+  width: 80px;
+  height: 80px;
+}
+
+.login .card .title {
+    color: var(--dark-font-color);
+    font-size: 22px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+
 
     /* ------------------------- MAIN -------------------------- */
     .main {
@@ -885,4 +919,58 @@ pre {
   100% {
     transform: translateY(0px);
   }
+}
+
+/* --------------------- SNACKBAR ------------------------ */
+.MuiSnackbar-anchorOriginBottomCenter:nth-child(2) {
+    bottom: 92px !important;
+}
+
+.MuiSnackbar-root .MuiAlert-root {
+    height: 40px;
+    padding-top: 2px;
+    margin-bottom: 10px;
+}
+
+.MuiSnackbar-root .MuiAlert-root .MuiAlert-message {
+    padding-top: 10px;
+}
+
+.MuiSnackbar-root .MuiAlert-filledSuccess {
+    background-color: #2ebf06;
+}
+
+.MuiSnackbar-root .MuiAlert-filledError {
+    background-color: #f71717;
+}
+
+.MuiSnackbar-root .MuiAlert-filledInfo {
+    background-color: #219be7;
+}
+
+.MuiSnackbar-root .snackbar_alert_info {
+    box-shadow: 2px 2px 7px -3px rgba(15, 15, 15, 0.75);
+    background-color: #5a5a5a;
+    font-weight: 600;
+    color: rgba(245, 245, 245);
+    height: 30px;
+    padding: 0em 1.5em 3.5em 1em;
+}
+
+.MuiSnackbar-root .snackbar_alert_error {
+    box-shadow: 2px 2px 7px -3px rgba(15, 15, 15, 0.75);
+    background-color: #ee2525;
+    font-weight: 600;
+    color: rgba(245, 245, 245);
+    height: 30px;
+    padding: 0em 1.5em 3.5em 1em;
+}
+
+.MuiSnackbar-root .snackbar_alert_success {
+    box-shadow: 2px 2px 7px -3px rgba(15, 15, 15, 0.75);
+    background-color: #31c10a;
+    font-weight: 600;
+    color: rgba(245, 245, 245);
+    height: 30px;
+    padding: 0em 1.5em 3.5em 1em;
 }

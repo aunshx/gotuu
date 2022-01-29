@@ -104,11 +104,6 @@ let ans = {}
 // @access   Private
 router.get("/get-dates-existing-events", auth, async (req, res) => {
 
-    // const { date } = req.body
-    
-    // const todayStart = moment(date).startOf("day");
-    // const todayEnd = moment(date).endOf("day");
-
 let ans = {}
   try {
 

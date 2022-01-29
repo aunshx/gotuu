@@ -12,13 +12,9 @@ export const LOGOUT = "LOGOUT";
 
 // Different Errors for the snackbar
 export const SNACKBAR_RESET = "SNACKBAR_RESET";
-export const ERROR_400 = "ERROR_400";
-export const ERROR_401 = "ERROR_401";
-export const ERROR_500 = "ERROR_500";
-export const ERROR_SOMETHING_ELSE = "ERROR_SOMETHING_ELSE";
-
-// Success for snackbar
+export const ERROR_SNACKBAR = "ERROR_SNACKBAR";
 export const SUCCESS_200 = "SUCCESS_200";
+export const ERROR_AUTH_SNACKBAR = "ERROR_AUTH_SNACKBAR";
 
 // Forgot Password
 export const FORGOT_PASSWORD_LINK_SENT = "FORGOT_PASSWORD_LINK_SENT";

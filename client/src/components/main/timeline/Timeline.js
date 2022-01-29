@@ -15,9 +15,12 @@ import { Menu, MenuItem } from '@mui/material';
 
 const Timeline = ({ goToMain }) => {
   const [dateSelected, setDateSelected] = useState();
+  const [isDatePickerOpened, setIsDatePickerOpened] = useState(false)
 
   useEffect(() => {
-    console.log(moment(dateSelected).toISOString(), "- Has changed");
+    if (isDatePickerOpened) {
+      console.log(moment(dateSelected).toISOString(), "- Has changed");
+    }
   }, [dateSelected])
 
   const [anchorEl, setAnchorEl] = useState(null);
@@ -25,10 +28,12 @@ const Timeline = ({ goToMain }) => {
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
+    setIsDatePickerOpened(true)
   };
 
   const handleClose = () => {
     setAnchorEl(null);
+    setIsDatePickerOpened(false)
   };
 
   return (
@@ -96,7 +101,7 @@ const Timeline = ({ goToMain }) => {
                 vertical: "bottom",
               }}
             >
-              <>
+        
                 <div className='triple_grid'>
                   <div></div>
                   <div className='flex_middle ft-bold'>Select Date</div>
@@ -112,7 +117,6 @@ const Timeline = ({ goToMain }) => {
                   setDateSelected={setDateSelected}
                   dateSelected={dateSelected}
                 />
-              </>
             </Menu>
           </div>
           {/* <div>
