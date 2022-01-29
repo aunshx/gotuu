@@ -99,5 +99,38 @@ let ans = {}
   }
 });
 
+// @route    GET api/timeline
+// @desc     Get all dates where events are input
+// @access   Private
+router.get("/get-dates-existing-events", auth, async (req, res) => {
+
+    // const { date } = req.body
+    
+    // const todayStart = moment(date).startOf("day");
+    // const todayEnd = moment(date).endOf("day");
+
+let ans = {}
+  try {
+
+    try {
+        ans = await Timeline.find(
+          { $and: [{ userId: req.user.id }, { duration: { $gte: 0 } }] },
+          {
+            createdAt: 1,
+          }
+        );
+
+    } catch (error) {
+        console.error(error)
+        return res.status(400).send({ msg: [ 'Could not get details of event' ] })
+    }
+
+    return res.status(200).send(ans)
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
+
 
 module.exports = router;
