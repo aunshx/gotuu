@@ -381,6 +381,16 @@ pre {
     bottom: 70px;
   }
 
+  .main .expand-icon .icons-left,
+  .main-active  .expand-icon .icons-left {
+    margin-right: 50px;
+  }
+
+  .main .expand-icon .icons-right,
+  .main-active  .expand-icon .icons-right {
+    margin-left: 50px;
+  }
+
 @keyframes gradient-animation {
   0% {
     background-position: 15% 0%;
