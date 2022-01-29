@@ -18,6 +18,8 @@ import { getTimelineEvent, getTimelineDatesCaptured } from '../../../redux/actio
 
 const Timeline = ({
   goToMain,
+  // Redux States
+  timeline: { timeline },
   // Redux Actions
   getTimelineEvent,
   getTimelineDatesCaptured,
@@ -131,52 +133,32 @@ const Timeline = ({
               />
             </Menu>
           </div>
-          {/* <div>
-            <DatePicker />
-          </div> */}
+
           <div className='line'>
-            <div className='flex_left'>
-              <Element duration={300000} />
-            </div>
-            <div className='flex_middle'>
-              <div className={`liner_mini_left cursor_pointer`}></div>
-            </div>
-            <div className='flex_right'>
-              <Element duration={900000} />
-            </div>
-            <div className='flex_middle'>
-              <div className={`liner_tiny_right cursor_pointer`}></div>
-            </div>
-            <div className='flex_left'>
-              <Element duration={1800000} />
-            </div>
-            <div className='flex_middle'>
-              <div className={`liner_extra-small_left cursor_pointer`}></div>
-            </div>
-            <div className='flex_right'>
-              <Element duration={3600000} />
-            </div>
-            <div className='flex_middle'>
-              <div className={`liner_small_right cursor_pointer`}></div>
-            </div>
-            <div className='flex_left'>
-              <Element duration={7200000} />
-            </div>
-            <div className='flex_middle'>
-              <div className={`liner_medium_left cursor_pointer`}></div>
-            </div>
-            <div className='flex_right'>
-              <Element duration={14400000} />
-            </div>
-            <div className='flex_middle'>
-              <div className={`liner_large_right cursor_pointer`}></div>
-            </div>
-            <div className='flex_left'>
-              <Element duration={14405000} />
-            </div>
-            <div className='flex_middle'>
-              <div className={`liner_humongous_left cursor_pointer`}></div>
-            </div>
+            {timeline.length > 0 &&
+              timeline.map((event, index) => (
+                <>
+                  {index % 2 === 0 ? (
+                    <div key={index}>
+                      <div className='flex_left'>
+                        <Element duration={event.duration} />
+                      </div>
+                      <div className='flex_middle'>
+                        <div className={`liner_mini_left cursor_pointer`}></div>
+                      </div>
+                    </div>
+                  ) : (
+                    <div key={index}>
+                      <div className='flex_right'>
+                        <Element duration={event.duration} />
+                      </div>
+                      <div className='flex_middle'>
+                        <div className={`liner_mini_right cursor_pointer`}></div>
+                      </div>
+                    </div>
+                  )}
+                </>
+              ))}
           </div>
         </div>
         <div id='go-up' className='cursor_pointer'>
@@ -192,12 +174,13 @@ const Timeline = ({
 };;
 
 Timeline.propTypes = {
+  timeline: PropTypes.object.isRequired,
   getTimelineEvent: PropTypes.func.isRequired,
   getTimelineDatesCaptured: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
-
+  timeline: state.timeline
 })
 
 const mapActionsToProps = {

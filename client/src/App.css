@@ -17,6 +17,7 @@
     --line-humongous-color: #e52e2e;
     --closing-color: #e52e2e;
     --grey-color: rgb(105, 105, 105);
+    --light-grey-color: rgb(220, 220, 220);
     --login-card-background: rgb(236, 230, 230);
     --dark-font-color: rgb(31, 31, 31);
 }
@@ -700,7 +701,7 @@ pre {
   font-weight: bold;
 }
 
-.timeline .main .line .liner_mini_left {
+/* .timeline .main .line .liner_mini_left {
    -ms-transform: rotate(5deg);
   -webkit-transform: rotate(5deg);
   transform: rotate(5deg);
@@ -717,6 +718,41 @@ pre {
   transform: rotate(-5deg);
   height: 1px;
   background-color: var(--line-mini-color);
+  padding: 1px;
+  width: 90%;
+  z-index: -1;
+} */
+
+.timeline .main .line .liner_mini_left {
+   -ms-transform: rotate(7deg);
+  -webkit-transform: rotate(7deg);
+  transform: rotate(7deg);
+  height: 0.1em;
+  background-color: var(--light-grey-color);
+  /* padding: 1px; */
+  width: 90%;
+  z-index: -1;
+}
+
+@media (max-width: 360px) {
+  .timeline .main .line .liner_mini_left {
+   -ms-transform: rotate(15deg);
+  -webkit-transform: rotate(15deg);
+  transform: rotate(15deg);
+  height: 0.1em;
+  background-color: var(--light-grey-color);
+  /* padding: 1px; */
+  width: 90%;
+  z-index: -1;
+}
+}
+
+.timeline .main .line .liner_mini_right {
+   -ms-transform: rotate(-7deg);
+  -webkit-transform: rotate(-7deg);
+  transform: rotate(-7deg);
+  height: 1px;
+  background-color: var(--light-grey-color);
   padding: 1px;
   width: 90%;
   z-index: -1;
@@ -995,4 +1031,4 @@ pre {
 }
 
 /* ---------------------- DATE PICKER --------------------------- */
-.nice-dates-day.-highlight { color: orange; }
+.nice-dates-day.-highlight { color: var(--primary-color-darker); }
