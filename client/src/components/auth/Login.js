@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from "react";
-import { Redirect } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { login } from "../../redux/actions/auth";
@@ -42,7 +42,7 @@ const textFieldInputLabelStyle = {
 
 const textFieldStyle = {
   height: "20px",
-  width: "250px",
+  width: "230px",
 };
 
 const Login = ({
@@ -150,7 +150,7 @@ const Login = ({
                     inputProps={{
                       style: {
                         height: "20px",
-                        width: "209px",
+                        width: "186px",
                       },
                     }}
                     name='password'
@@ -220,6 +220,21 @@ const Login = ({
                   Login
                 </div>
               </LoadingButton>
+            </div>
+            <div className='app'>
+              <div
+                style={{
+                  borderBottom: "1px solid #b5b5b5",
+                  width: "90%",
+                  padding: "1em 0 0 0",
+                }}
+              ></div>
+              <div className='sign_up_login'>
+                Don't have an account?{" "}
+                <Link to='/register' style={{ color: 'grey' }}>
+                  <span className='link cursor_pointer ft-bold'>Sign Up</span>
+                </Link>
+              </div>
             </div>
           </div>
         </div>

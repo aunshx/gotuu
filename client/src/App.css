@@ -3,6 +3,7 @@
 
 :root {
     --primary-color: #7ed957;
+    --primary-color-darker: #44af16;
     --primary-hover-color: #2EE59D;
     --count-color: #e8544a;
     --count-hover-color: #f53224;
@@ -296,13 +297,13 @@ pre {
 
 .login .card {
     box-shadow: 0 4px 8px 0 var(--login-card-background);
-    max-width: 300px;
+    width: 300px;
+    padding: 0.5 1em;
     margin: auto;
     text-align: center;
     font-family: arial;
     border-radius: 10px;
     background-color: var(--login-card-background);
-    min-width: 20em;
     min-height: 400px;
     color: #f4f4f4;
     border: 2px solid var(--primary-color);
@@ -331,7 +332,16 @@ pre {
   width: 90%;
 }
 
+.login .card .sign_up_login {
+  color: var(--grey-color);
+  font-size: 1em;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 1em 0 0 0;
+}
 
+.login .card .sign_up_login .link:hover {
+  color: var(--primary-color-darker);
+}
 
     /* ------------------------- MAIN -------------------------- */
     .main {
