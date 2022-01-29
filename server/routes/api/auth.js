@@ -33,8 +33,6 @@ router.post(
     console.log('Hit')
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-                console.log("Error is validation");
-
       return res.status(400).send({ errors: errors.array() });
     }
 
@@ -45,7 +43,6 @@ router.post(
       let user = await User.findOne({ email });
 
       if (!user) {
-              console.log("Error is User");
 
         return res
           .status(400)
@@ -55,7 +52,6 @@ router.post(
       const isMatch = await bcrypt.compare(password, user.password);
 
       if (!isMatch) {
-              console.log("Error is Password");
 
         return res
           .status(400)
@@ -64,7 +60,7 @@ router.post(
 
       const payload = {
         user: {
-          id: user.id,
+          id: user._id,
         },
       };
 
@@ -74,8 +70,6 @@ router.post(
         { expiresIn: "5 days" },
         (err, token) => {
           if (err) throw err;
-          console.log("Error is JWT");
-
           res.send({ token });
         }
       );

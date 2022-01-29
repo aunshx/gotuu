@@ -2,16 +2,23 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from "react-redux";   
 import { Link } from "react-router-dom";
-// import { logout } from "../../redux/actions/auth";
 
 import CloseIcon from '@mui/icons-material/Close';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faBookOpen, faChartBar, faHome, faProjectDiagram, faSignInAlt, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 import { Tooltip } from "@mui/material";
 
-const SideNavbar = ({ verticalMenu }) => {
-    // TODO: Connect this to redux
-    const [isAuthenticated, setIsAuthenticated] = useState(false)
+import { logout } from "../../redux/actions/auth";
+
+
+const SideNavbar = ({
+  verticalMenu,
+  // Redux States
+  auth: { isAuthenticated },
+  // Redux Actions
+  logout,
+}) => {
+  // TODO: Connect this to redux
   return (
     <div className='side_navbar'>
       <div className='title triple_grid mrg-t-b-1'>
@@ -77,18 +84,19 @@ const SideNavbar = ({ verticalMenu }) => {
               </div>
             </div>
             <div className='flex_middle mrg-t-b-1'>
-              <a href='#timeline'>
-                <div className='flex_middle navbar_option'>
-                  <div>
-                    <FontAwesomeIcon
-                      icon={faSignInAlt}
-                      style={{ fontSize: 20 }}
-                      className='icon'
-                    />
-                  </div>
-                  <div className='mrg-r-point-5 ft-bold link'>Logout</div>
+              <div
+                className='flex_middle navbar_option cursor_pointer'
+                onClick={() => logout()}
+              >
+                <div>
+                  <FontAwesomeIcon
+                    icon={faSignInAlt}
+                    style={{ fontSize: 20 }}
+                    className='icon'
+                  />
                 </div>
-              </a>
+                <div className='mrg-r-point-5 ft-bold link'>Logout</div>
+              </div>
             </div>
           </div>
         ) : (
@@ -128,6 +136,17 @@ const SideNavbar = ({ verticalMenu }) => {
   );
 };
 
-SideNavbar.propTypes = {};
+SideNavbar.propTypes = {
+  auth: PropTypes.object.isRequired,
+  logout: PropTypes.func.isRequired
+};
 
-export default SideNavbar;
+const mapStateToProps = state => ({
+  auth: state.auth
+})
+
+const mapActionsToProps = {
+  logout
+}
+
+export default connect(mapStateToProps, mapActionsToProps)(SideNavbar);

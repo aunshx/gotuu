@@ -7,8 +7,9 @@ import { faRandom } from "@fortawesome/free-solid-svg-icons";
 import Navbar from "./navbar/Navbar";
 import Main from './main/Main';
 import Timeline from './main/timeline/Timeline';
+import { connect } from 'react-redux';
 
-const Home = (props) => {
+const Home = ({ auth: { isAuthenticated } }) => {
 
   const [isActive, setIsActive] = useState(false)
 
@@ -23,12 +24,21 @@ const Home = (props) => {
       <Navbar goMain={goMain} isActive={isActive} />
       <div className='home'>
         <Main isActive={isActive} setIsActive={setIsActive} />
-        <Timeline goToMain={goToMain} />
+        {isAuthenticated ? <Timeline goToMain={goToMain} /> : ""}
       </div>
     </>
   );
 };
 
-Home.propTypes = {};
+Home.propTypes = {
+  auth: PropTypes.object.isRequired,
+};
 
-export default Home;
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+
+const mapActionsToProps = {
+};
+
+export default connect(mapStateToProps, mapActionsToProps)(Home);
