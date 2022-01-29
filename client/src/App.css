@@ -657,6 +657,7 @@ pre {
   height: 100vh;
   position: relative;
   margin: 2em 0;
+  padding: 2em 0;
 }
 
 .timeline .main {
@@ -992,3 +993,6 @@ pre {
     height: 30px;
     padding: 0em 1.5em 3.5em 1em;
 }
+
+/* ---------------------- DATE PICKER --------------------------- */
+.nice-dates-day.-highlight { color: orange; }

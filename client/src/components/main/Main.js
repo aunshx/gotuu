@@ -82,6 +82,7 @@ const Main = ({ goMain, isActive, setIsActive }) => {
       className={
         isActive ? "main-active flex_middle" : "main flex_middle"
       }
+      id='main'
       ref={handle}
     >
       <div className='app'>

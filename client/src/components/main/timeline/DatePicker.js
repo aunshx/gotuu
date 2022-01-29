@@ -1,34 +1,50 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { getDay } from "date-fns";
+import { connect } from "react-redux";
 import moment from 'moment'
-import { enGB } from "date-fns/locale";
+import { enIN } from "date-fns/locale";
 import { DatePickerCalendar } from "react-nice-dates";
 import "react-nice-dates/build/style.css";
-
-const modifiers = {
-  disabled: date => getDay(date) === 6, // Disables Saturdays
-  highlight: date => getDay(date) === 2 // Highlights Tuesdays
-}
 
 const modifiersClassNames = {
   highlight: '-highlight'
 }
 
-function DatePicker({ dateSelected, setDateSelected }) {
+const DatePicker = ({
+  dateSelected,
+  setDateSelected,
+  // Redux Actions
+  timeline: { datesCaptured },
+}) => {
 
+  let modifiers = {
+    highlight: (dateSelected) =>
+      datesCaptured.some((ele) => (
+    
+          moment(dateSelected).format("DD/MM/YYYY") ===
+            moment(ele.createdAt).format("DD/MM/YYYY")
+        
+      ))
+  };
   return (
     <>
       <DatePickerCalendar
         date={dateSelected}
         onDateChange={setDateSelected}
-        // locale={enGB}
-        // modifiers={modifiers}
-        // modifiersClassNames={modifiersClassNames}
+        locale={enIN}
+        modifiers={modifiers}
+        modifiersClassNames={modifiersClassNames}
       />
     </>
   );
+};
+DatePicker.propTypes = {
+  timeline: PropTypes.object.isRequired,
 }
-DatePicker.propTypes = {}
 
-export default DatePicker;
+const mapStateToProps = state => ({
+  timeline: state.timeline
+})
+
+export default connect(mapStateToProps)(DatePicker);

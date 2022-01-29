@@ -1,5 +1,11 @@
 import api from "../../utils/api";
 import setAuthToken from "../../utils/setAuthToken";
+import moment from "moment";
+
+import {
+  getTimelineDatesCaptured,
+  getTimelineEvent
+} from './timeline'
 
 import {
   // Snackbar
@@ -32,6 +38,12 @@ export const loadUser = () => async (dispatch) => {
       type: USER_LOADED,
       payload: res.data,
     });
+
+    let date = new Date()
+
+    dispatch(getTimelineDatesCaptured());
+    dispatch(getTimelineEvent(moment(date).toISOString()));
+
   } catch (err) {
     dispatch({
       type: AUTH_ERROR,
@@ -93,7 +105,7 @@ export const login =
       dispatch(loadUser());
     } catch (error) {
       if (error.response.status === 500) {
-        value.message = "Okkkkkkkkk";
+        value.message = "Oops! Something went wrong. Please reload!";
         value.type = "error";
 
         dispatch({
@@ -145,7 +157,7 @@ export const login =
           5000
         );
       } else if (error.response.status === 401) {
-        value.message = 'You are unauthorized.';
+        value.message = 'Your session has expired. Please login again.';
         value.type = "error";
 
         dispatch({
@@ -169,7 +181,7 @@ export const login =
           5000
         );
       } else {
-        value.message = "jjjjj";
+        value.message = "Oops! Looks like something went wrong. Please reload!";
         value.type = "error";
 
         dispatch({

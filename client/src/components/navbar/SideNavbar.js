@@ -14,7 +14,7 @@ import { logout } from "../../redux/actions/auth";
 const SideNavbar = ({
   verticalMenu,
   // Redux States
-  auth: { isAuthenticated },
+  auth: { isAuthenticated, user },
   // Redux Actions
   logout,
 }) => {
@@ -23,7 +23,7 @@ const SideNavbar = ({
     <div className='side_navbar'>
       <div className='title triple_grid mrg-t-b-1'>
         <div />
-        <div className='center_everything'>Navbar</div>
+        <div className='center_everything'>Hi! {user !== null ? user.name : ''} </div>
         <div className='center_everything' style={{ marginTop: "0.2em" }}>
           <CloseIcon
             className='cancel cursor_pointer'
@@ -69,7 +69,7 @@ const SideNavbar = ({
             </div>
             <div>
               <div className='flex_middle mrg-t-b-1'>
-                <a href='#main'>
+                <a href='#nav'>
                   <div className='flex_middle navbar_option'>
                     <div>
                       <FontAwesomeIcon

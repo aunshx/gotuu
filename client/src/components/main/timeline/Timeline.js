@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment'
+import {connect} from 'react-redux'
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowCircleUp } from "@fortawesome/free-solid-svg-icons";
@@ -11,35 +12,47 @@ import Element from './Element';
 import DatePicker from './DatePicker';
 import { Menu, MenuItem } from '@mui/material';
 
+import { getTimelineEvent, getTimelineDatesCaptured } from '../../../redux/actions/timeline'
+
 // sksksk
 
-const Timeline = ({ goToMain }) => {
+const Timeline = ({
+  goToMain,
+  // Redux Actions
+  getTimelineEvent,
+  getTimelineDatesCaptured,
+}) => {
   const [dateSelected, setDateSelected] = useState();
-  const [isDatePickerOpened, setIsDatePickerOpened] = useState(false)
+  const [isDatePickerOpened, setIsDatePickerOpened] = useState(false);
 
   useEffect(() => {
+    const date = new Date();
     if (isDatePickerOpened) {
-      console.log(moment(dateSelected).toISOString(), "- Has changed");
+      getTimelineEvent(moment(dateSelected).toISOString());
+      getTimelineDatesCaptured()
+    } else {
+      getTimelineEvent(moment(date).toISOString());
+      getTimelineDatesCaptured()
     }
-  }, [dateSelected])
+  }, [dateSelected]);
 
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
-    setIsDatePickerOpened(true)
+    setIsDatePickerOpened(true);
   };
 
   const handleClose = () => {
     setAnchorEl(null);
-    setIsDatePickerOpened(false)
+    setIsDatePickerOpened(false);
   };
 
   return (
     <>
-      <div className='timeline app'>
-        9{" "}
+      <div className='timeline app' id='timeline'>
+        {" "}
         <div className='main'>
           <div className='title flex_evenly'>
             <div>
@@ -101,22 +114,21 @@ const Timeline = ({ goToMain }) => {
                 vertical: "bottom",
               }}
             >
-        
-                <div className='triple_grid'>
-                  <div></div>
-                  <div className='flex_middle ft-bold'>Select Date</div>
-                  <div className='flex_middle cursor_pointer'>
-                    <CloseIcon
-                      onClick={handleClose}
-                      className='close_date'
-                      style={{ fontSize: 20 }}
-                    />
-                  </div>
+              <div className='triple_grid'>
+                <div></div>
+                <div className='flex_middle ft-bold'>Select Date</div>
+                <div className='flex_middle cursor_pointer'>
+                  <CloseIcon
+                    onClick={handleClose}
+                    className='close_date'
+                    style={{ fontSize: 20 }}
+                  />
                 </div>
-                <DatePicker
-                  setDateSelected={setDateSelected}
-                  dateSelected={dateSelected}
-                />
+              </div>
+              <DatePicker
+                setDateSelected={setDateSelected}
+                dateSelected={dateSelected}
+              />
             </Menu>
           </div>
           {/* <div>
@@ -179,6 +191,18 @@ const Timeline = ({ goToMain }) => {
   );
 };;
 
-Timeline.propTypes = {};
+Timeline.propTypes = {
+  getTimelineEvent: PropTypes.func.isRequired,
+  getTimelineDatesCaptured: PropTypes.func.isRequired
+};
 
-export default Timeline;
+const mapStateToProps = state => ({
+
+})
+
+const mapActionsToProps = {
+  getTimelineEvent,
+  getTimelineDatesCaptured,
+};
+
+export default connect(mapStateToProps, mapActionsToProps)(Timeline);
