@@ -126,6 +126,10 @@ export const login =
         });
 
         dispatch({
+          type: ERROR_AUTH_SNACKBAR,
+        });
+
+        dispatch({
           type: LOGIN_LOADING_COMPLETE,
         });
 

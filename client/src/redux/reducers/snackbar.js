@@ -20,6 +20,7 @@ function authReducer(state = initialState, action) {
   switch (type) {
     case ERROR_AUTH_SNACKBAR:
         return {
+          ...state,
             errorSnackbar: true
         }
     case ERROR_SNACKBAR:

@@ -323,6 +323,14 @@ pre {
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
+.login .card .errors {
+  background-color: var(--count-color);
+  color: white;
+  border-radius: 10px;
+  margin: 0.5em 0 1em 0;
+  width: 90%;
+}
+
 
 
     /* ------------------------- MAIN -------------------------- */

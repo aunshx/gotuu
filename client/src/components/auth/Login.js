@@ -104,7 +104,11 @@ const Login = ({
         <div className='card'>
           <img src={logo} alt='John' />
           <div className='title ft-bold'>Login</div>
-          {/* <Alert /> */}
+          <div className='app'>
+            {(passwordEmptyError || emailEmptyError) && (
+              <div className='errors'>Password or email cannot be empty</div>
+            )}
+          </div>
           <div style={{ paddingBottom: "1em" }}>
             <div style={{ marginBottom: "1.3em" }}>
               <CssTextField
@@ -135,7 +139,7 @@ const Login = ({
               <div>
                 <div>
                   <CssTextField
-                    error={errorSnackbar || passwordEmptyError}
+                    error={passwordEmptyError || errorSnackbar}
                     label='Password'
                     size='small'
                     variant='outlined'
