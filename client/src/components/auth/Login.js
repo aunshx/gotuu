@@ -13,6 +13,7 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { styled } from "@mui/material/styles";
 import Divider from "@mui/material/Divider";
+import { makeStyles } from "@mui/styles";
 
 import logo from "../../resources/images/gotuuLogo.png";
 import Alert from "../layout/Alerts";
@@ -23,16 +24,30 @@ const CssTextField = styled(TextField, {
 })((p) => ({
   // input label when focused
   "& label.Mui-focused": {
-    color: p.focusColor,
+    color: '#44af16',
   },
   // focused color for input with variant='outlined'
   "& .MuiOutlinedInput-root": {
     "&.Mui-focused fieldset": {
-      borderColor: p.focusColor,
+      borderColor: '#44af16',
       fontSize: "0.9em",
     },
   },
 }));
+
+const loginIconButtonStyle = makeStyles({
+  root: {
+    color: "gray",
+    border: "1px solid grey",
+    backgroundColor: "none",
+    fontSize: "10px",
+    "&:hover": {
+      backgroundColor: "transparent",
+      color: "#1686f0",
+      border: "1px solid #1686f0",
+    },
+  },
+});
 
 const textFieldInputLabelStyle = {
   fontSize: "0.9em",
@@ -45,6 +60,7 @@ const textFieldStyle = {
   width: "230px",
 };
 
+
 const Login = ({
   login,
   auth: { isAuthenticated, loginLoading, errorSnackbar },
@@ -54,6 +70,8 @@ const Login = ({
     password: "",
     showPassword: false,
   });
+  // const loginStyle = loginIconButtonStyle()
+
   const [showChangePassword, setShowChangePassword] = useState(false);
   const [passwordEmptyError, setPasswordEmptyError] = useState(false);
   const [emailEmptyError, setEmailEmptyError] = useState(false);
@@ -210,11 +228,13 @@ const Login = ({
                 }
                 variant='outlined'
                 onClick={onSubmit}
-                className='login_button_submit'
+                // className={loginStyle.root}
               >
                 <div
                   style={{
                     margin: "0em 0.5em 0em 0em",
+                    color: 'green',
+                    borderColor: 'green'
                   }}
                 >
                   Login
