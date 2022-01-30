@@ -51,62 +51,63 @@ const data = [
   },
 ];
 
-const BlockOne = () => {
+const BlockOne = ({ }) => {
+  const [duration, setDuration] = useState("week");
 
-    const [duration, setDuration] = useState("week");
-
-    const onChangeDuration = (e) => {
-      setDuration(e.target.value);
-    };
-    return (
-      <div className='charts'>
-        <div className='triple_grid'>
-          <div></div>
-          <div className='title'>Avg duration of Tuus</div>
-          <div className='flex_right mrg-r-one'>
-            <DurationSelector
-              duration={duration}
-              onChangeDuration={onChangeDuration}
-            />
+  const onChangeDuration = (e) => {
+    setDuration(e.target.value);
+  };
+  return (
+        <div
+          className='charts animate__animated animate__bounce'
+        >
+          <div className='triple_grid'>
+            <div></div>
+            <div className='title'>Avg duration of Tuus</div>
+            <div className='flex_right mrg-r-one'>
+              <DurationSelector
+                duration={duration}
+                onChangeDuration={onChangeDuration}
+              />
+            </div>
+          </div>
+          <div
+            style={{
+              width: "100%",
+              height: "80%",
+            }}
+          >
+            <ResponsiveContainer width='100%' height='100%'>
+              <AreaChart
+                width={500}
+                height={400}
+                data={data}
+                margin={{
+                  top: 10,
+                  right: 30,
+                  left: 0,
+                  bottom: 0,
+                }}
+              >
+                <CartesianGrid strokeDasharray='3 3' />
+                <XAxis dataKey='name' stroke='#44af16' />
+                <YAxis stroke='#44af16' />
+                <Tooltip />
+                <Area
+                  type='monotone'
+                  dataKey='uv'
+                  stroke='#cacccb'
+                  fill='#cacccb'
+                />
+              </AreaChart>
+            </ResponsiveContainer>
+          </div>
+          <div className='footnote flex_middle'>
+            Avg duration = (total duration/number of tuuls)
           </div>
         </div>
-        <div
-          style={{
-            width: "100%",
-            height: "80%",
-          }}
-        >
-          <ResponsiveContainer width='100%' height='100%'>
-            <AreaChart
-              width={500}
-              height={400}
-              data={data}
-              margin={{
-                top: 10,
-                right: 30,
-                left: 0,
-                bottom: 0,
-              }}
-            >
-              <CartesianGrid strokeDasharray='3 3' />
-              <XAxis dataKey='name' stroke='#44af16' />
-              <YAxis stroke='#44af16' />
-              <Tooltip />
-              <Area
-                type='monotone'
-                dataKey='uv'
-                stroke='#cacccb'
-                fill='#cacccb'
-              />
-            </AreaChart>
-          </ResponsiveContainer>
-        </div>
-        <div className='footnote flex_middle'>
-          Avg duration = (total duration/number of tuuls)
-        </div>
-      </div>
-    );
-}
+  );
+};
 
 BlockOne.propTypes = {};
 

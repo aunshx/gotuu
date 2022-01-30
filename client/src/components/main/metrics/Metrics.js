@@ -26,25 +26,35 @@ const Metrics = ({ goToMain }) => {
           </div>
           <div>Metrics</div>
         </div>
-        <div className="details">
-            <div className="metrics_details_one">
-                <BlockOne />
+        <div className='details'>
+          <div className='metrics_details_one' data-aos='fade-up'>
+            <BlockOne />
+          </div>
+          <div className='metrics_details_two'>
+            <div className='app'>
+              <div data-aos='fade-up'>
+                <LiveStreak />
+              </div>
+              <div data-aos='fade-up'>
+                <TotalTuus />
+              </div>
+              <div data-aos='fade-up'>
+                <CommonTime />
+              </div>
+              <div data-aos='fade-up'>
+                <AvgBreakTime />
+              </div>
+              <div data-aos='fade-up'>
+                <TotalPerformance />
+              </div>
             </div>
-            <div className="metrics_details_two">
-                <div className="app">
-                    <LiveStreak />
-                    <TotalTuus />
-                    <CommonTime  />
-                    <AvgBreakTime />
-                    <TotalPerformance />
-                </div>
-            </div>
-            <div className="metrics_details_three">
-                <BlockThree />
-            </div>
+          </div>
+          <div className='metrics_details_three' data-aos='fade-up'>
+            <BlockThree />
+          </div>
         </div>
       </div>
-      <div id='go-up' className='cursor_pointer'>
+      <div id='go-up' className='cursor_pointer' data-aos='fade-up-left'>
         <FontAwesomeIcon
           icon={faArrowCircleUp}
           style={{ fontSize: 35, color: "#7ed957" }}

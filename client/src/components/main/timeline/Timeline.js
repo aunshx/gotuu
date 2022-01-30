@@ -184,7 +184,11 @@ const Timeline = ({
             )}
           </div>
         </div>
-        <div id='go-up' className='cursor_pointer animated bounce'>
+        <div
+          id='go-up'
+          className='cursor_pointer animated bounce'
+          data-aos='fade-up-left'
+        >
           <FontAwesomeIcon
             icon={faArrowCircleUp}
             style={{ fontSize: 35, color: "#7ed957" }}
