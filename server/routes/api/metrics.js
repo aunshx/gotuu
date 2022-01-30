@@ -68,7 +68,7 @@ router.get("/average-duration-tuus", auth, async (req, res) => {
     return res.status(200).send(complete);
   } catch (err) {
     console.error(err.message);
-    res.status(500).send("Server Error");
+    res.status(400).send('Something went wrong!');
   }
 });
 

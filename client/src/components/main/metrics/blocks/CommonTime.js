@@ -9,7 +9,7 @@ import DurationSelector from "../DurationSelector";
 
 const message = "Average duration of tuus all time";
 
-const CommonTime = (props) => {
+const CommonTime = ({ avgDurationTuus, avgDurationTuusLoading }) => {
   const [duration, setDuration] = useState("week");
 
   const onChangeDuration = (e) => {
@@ -30,7 +30,7 @@ const CommonTime = (props) => {
               style={{ fontSize: 22, color: "orange" }}
             />
           </div>
-          <div>10</div>
+          <div>{avgDurationTuus}</div>
         </div>
         <div className='top_margin_progress_blocks flex_middle'>
           <DurationSelector
