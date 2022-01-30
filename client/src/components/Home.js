@@ -4,8 +4,10 @@ import { connect } from "react-redux";
 
 import Navbar from "./navbar/Navbar";
 import Main from './main/Main';
+
 import Timeline from './main/timeline/Timeline';
-import Metrics from './main/metrics/Metrics';
+import New from './main/metrics/New';
+
 import { getAvgDurationOfTuus, getAvgDurationOfTuusPerDay, getTotalNumberOfTuus } from '../redux/actions/metrics';
 
 const Home = ({
@@ -15,6 +17,12 @@ const Home = ({
   getAvgDurationOfTuusPerDay,
   getTotalNumberOfTuus,
 }) => {
+  //   useEffect(() => {
+  //       getTotalNumberOfTuus()
+  //     getAvgDurationOfTuus()
+  //   getAvgDurationOfTuusPerDay()
+  // },[])
+
   const [isActive, setIsActive] = useState(false);
 
   const goMain = useRef();
@@ -29,7 +37,7 @@ const Home = ({
       <div className='home'>
         <Main isActive={isActive} setIsActive={setIsActive} />
         {isAuthenticated && <Timeline goToMain={goToMain} />}
-        {isAuthenticated && <Metrics goToMain={goToMain} />}
+        {isAuthenticated && <New goToMain={goToMain} />}
       </div>
     </>
   );

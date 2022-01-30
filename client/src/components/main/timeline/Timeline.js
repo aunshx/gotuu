@@ -137,9 +137,9 @@ const Timeline = ({
           <div className='line'>
             {timeline.length > 0 ? (
               timeline.map((event, index) => (
-                <>
+                <div key={index}>
                   {index % 2 === 0 ? (
-                    <div key={index}>
+                    <div>
                       <div className='flex_left'>
                         <Element duration={event.duration} />
                       </div>
@@ -148,7 +148,7 @@ const Timeline = ({
                       </div>
                     </div>
                   ) : (
-                    <div key={index}>
+                    <div>
                       <div className='flex_right'>
                         <Element duration={event.duration} />
                       </div>
@@ -159,7 +159,7 @@ const Timeline = ({
                       </div>
                     </div>
                   )}
-                </>
+                </div>
               ))
             ) : (
               <div className='empty_timeline app '>

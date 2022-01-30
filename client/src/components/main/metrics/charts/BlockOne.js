@@ -6,7 +6,7 @@ import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContai
 
 import DurationSelector from "../DurationSelector";
 
-const BlockOne = ({ data, getAvgDurationOfTuusPerDay }) => {
+const BlockOne = ({ avgDurationTuusPerDay, getAvgDurationOfTuusPerDay }) => {
   const [duration, setDuration] = useState("week");
 
   const onChangeDuration = (e) => {
@@ -30,12 +30,12 @@ const BlockOne = ({ data, getAvgDurationOfTuusPerDay }) => {
           height: "80%",
         }}
       >
-        {data.length > 0 && (
+        {avgDurationTuusPerDay.length > 0 && (
           <ResponsiveContainer width='100%' height='100%'>
             <AreaChart
               width={500}
               height={400}
-              data={data}
+              data={avgDurationTuusPerDay}
               margin={{
                 top: 10,
                 right: 30,
