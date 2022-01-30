@@ -11,7 +11,7 @@ import logo from '../../../../resources/images/gotuuLogo.png'
 
 const message = "Total number of tuus completed";
 
-const TotalTuus = (props) => {
+const TotalTuus = ({ totalCountTuus }) => {
   const [duration, setDuration] = useState("week");
 
   const onChangeDuration = (e) => {
@@ -27,9 +27,9 @@ const TotalTuus = (props) => {
       <div className=''>
         <div className='flex_middle'>
           <div style={{ margin: "3px 10px 0 0" }}>
-            <img src={logo} alt="GoTuu Logo" />
+            <img src={logo} alt='GoTuu Logo' />
           </div>
-          <div>10</div>
+          <div>{totalCountTuus}</div>
         </div>
         <div className='top_margin_progress_blocks flex_middle'>
           <DurationSelector

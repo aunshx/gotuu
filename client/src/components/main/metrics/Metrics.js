@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect } from "react";
 import PropTypes from 'prop-types';
-
+import { connect } from "react-redux";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChartBar, faArrowCircleUp } from "@fortawesome/free-solid-svg-icons";
@@ -12,7 +12,18 @@ import CommonTime from './blocks/CommonTime';
 import AvgBreakTime from './blocks/AvgBreakTime';
 import TotalPerformance from './blocks/TotalPerformance';
 
-const Metrics = ({ goToMain }) => {
+import {
+  getTotalNumberOfTuus
+} from '../../../redux/actions/metrics'
+
+const Metrics = ({
+  goToMain,
+  // Redux State
+  metrics: { totalCountTuus },
+  // Redux Actions
+  getTotalNumberOfTuus,
+}) => {
+  useEffect(() => getTotalNumberOfTuus(), []);
   return (
     <div className='metrics flex_middle' id='metrics'>
       <div className='main'>
@@ -36,7 +47,7 @@ const Metrics = ({ goToMain }) => {
                 <LiveStreak />
               </div>
               <div data-aos='fade-up'>
-                <TotalTuus />
+                <TotalTuus totalCountTuus={totalCountTuus} />
               </div>
               <div data-aos='fade-up'>
                 <CommonTime />
@@ -65,6 +76,16 @@ const Metrics = ({ goToMain }) => {
   );
 };
 
-Metrics.propTypes = {};
+Metrics.propTypes = {
+  getTotalNumberOfTuus: PropTypes.func.isRequired,
+};
 
-export default Metrics;
+const mapStateToProps = state => ({
+  metrics: state.metrics
+})
+
+const mapStateToActions = {
+  getTotalNumberOfTuus
+}
+
+export default connect(mapStateToProps, mapStateToActions)(Metrics);
