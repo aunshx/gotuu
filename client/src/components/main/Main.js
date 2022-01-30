@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
-import { FullScreen, useFullScreenHandle } from "react-full-screen";
 
 import GetTime from '../../utils/GetTime'
 import Time from './count/Time'
@@ -20,6 +19,8 @@ const Main = ({ goMain, isActive, setIsActive }) => {
     const [toggleNote, setToggleNote] = useState(false)
     const reffie = useRef()
     const handle = useRef()
+
+    useEffect(() => document.title = "Gotuu | Track your time", [])
 
     const toggleFullScreen = () => {
       setIsFull(true)
