@@ -8,6 +8,12 @@ import {
 } from './timeline'
 
 import {
+  getAvgDurationOfTuusPerDay,
+  getAvgDurationOfTuus,
+  getTotalNumberOfTuus,
+} from "./metrics";
+
+import {
   // Snackbar
   ERROR_SNACKBAR,
   SNACKBAR_RESET,
@@ -43,6 +49,9 @@ export const loadUser = () => async (dispatch) => {
 
     dispatch(getTimelineDatesCaptured());
     dispatch(getTimelineEvent(moment(date).toISOString()));
+    dispatch(getAvgDurationOfTuus());
+    dispatch(getTotalNumberOfTuus());
+    dispatch(getAvgDurationOfTuusPerDay());
 
   } catch (err) {
     dispatch({

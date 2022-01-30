@@ -6,11 +6,13 @@ import { faStopwatch } from "@fortawesome/free-solid-svg-icons";
 
 import QuestionMarkTrigger from "./QuestionMarkTrigger";
 import DurationSelector from "../DurationSelector";
+import { Tooltip } from "@mui/material";
 
 const message = "Average duration of tuus all time";
 
 const CommonTime = ({ avgDurationTuus, avgDurationTuusLoading }) => {
   const [duration, setDuration] = useState("week");
+  const [showInHours, setShowInHours] = useState(false);
 
   const onChangeDuration = (e) => {
     setDuration(e.target.value);
@@ -30,8 +32,17 @@ const CommonTime = ({ avgDurationTuus, avgDurationTuusLoading }) => {
               style={{ fontSize: 22, color: "orange" }}
             />
           </div>
-          <div>{avgDurationTuus}</div>
-        </div>
+            <Tooltip title={showInHours ? "Hours" : "Minutes"} placement='top'>
+              <div
+                className={`flex_middle cursor_pointer`}
+                onClick={() => setShowInHours(!showInHours)}
+              >
+                {showInHours
+                  ? (avgDurationTuus / 3600000).toFixed("2")
+                  : (avgDurationTuus / 60000).toFixed("0")}
+              </div>
+            </Tooltip>
+          </div>
         <div className='top_margin_progress_blocks flex_middle'>
           <DurationSelector
             duration={duration}
