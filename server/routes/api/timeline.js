@@ -42,14 +42,20 @@ router.post("/add-details-event", auth, async (req, res) => {
 
     const { id, duration } = req.body
 
+    let intDuration = parseInt(duration)
+
 let ans = {}
   try {
 
     try {
-        ans = await Timeline.findOneAndUpdate({ _id: id }, { duration }, {
+        ans = await Timeline.findOneAndUpdate(
+          { _id: id },
+          { duration: intDuration },
+          {
             new: true,
-            upsert: true
-        } )
+            upsert: true,
+          }
+        );
     } catch (error) {
         console.error(error)
         return res.status(400).send({ msg: [ 'Could not add details of event' ] })

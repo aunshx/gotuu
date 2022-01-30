@@ -7,7 +7,7 @@ const TimelineSchema = new mongoose.Schema(
       ref: "User",
     },
     duration: {
-      type: String,
+      type: Number,
     },
     date: {
       type: Date,
