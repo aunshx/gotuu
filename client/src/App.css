@@ -1065,6 +1065,7 @@ pre {
 
 .metrics .main {
   width: 80vw;
+  margin: 0 0 3em 0;
 }
 
 .metrics .main .title {
@@ -1073,7 +1074,7 @@ pre {
   color: var(--primary-color);
   font-size: 2em;
   text-align: center;
-  margin: 0.5em 0 0.5em 0;
+  margin: 1em 0;
 }
 
 .metrics .main .details {
@@ -1156,3 +1157,5 @@ pre {
         justify-content: center;
         margin: 0em 0em 0em 0em;
     }
+
+    /* ------------------------ REACT TRANSITIONS ---------------- */

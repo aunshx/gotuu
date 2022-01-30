@@ -26,7 +26,7 @@ const TotalTuus = (props) => {
       </div>
       <div className=''>
         <div className='flex_middle'>
-          <div style={{ marginRight: "10px" }}>
+          <div style={{ margin: "3px 10px 0 0" }}>
             <img src={logo} alt="GoTuu Logo" />
           </div>
           <div>10</div>
