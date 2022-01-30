@@ -5,6 +5,12 @@ import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChartBar, faArrowCircleUp } from "@fortawesome/free-solid-svg-icons";
 import BlockOne from './charts/BlockOne';
+import BlockThree from './charts/BlockThree';
+import LiveStreak from './blocks/LiveStreak';
+import TotalTuus from './blocks/TotalTuus';
+import CommonTime from './blocks/CommonTime';
+import AvgBreakTime from './blocks/AvgBreakTime';
+import TotalPerformance from './blocks/TotalPerformance';
 
 const Metrics = ({ goToMain }) => {
   return (
@@ -25,10 +31,17 @@ const Metrics = ({ goToMain }) => {
                 <BlockOne />
             </div>
             <div className="metrics_details_two">
-
+                <div className="app">
+                    <LiveStreak />
+                    <TotalTuus />
+                    <CommonTime  />
+                    <AvgBreakTime />
+                    <TotalPerformance />
+                </div>
             </div>
-            <div className="metrics_details_three">k</div>
-            <div className="metrics_details_four">l</div>
+            <div className="metrics_details_three">
+                <BlockThree />
+            </div>
         </div>
       </div>
       <div id='go-up' className='cursor_pointer'>
