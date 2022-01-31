@@ -6,19 +6,34 @@ import { faSmileBeam, faFrown, faMeh } from "@fortawesome/free-solid-svg-icons";
 import SnoozeIcon from "@mui/icons-material/Snooze";
 import QuestionMarkTrigger from "./QuestionMarkTrigger";
 import DurationSelector from "../DurationSelector";
+import { useEffect } from "react";
 
 const message = "Total performance is calculated based on the avg duration of break times and avg duration of a tuu";
 
-const TotalPerformance = (props) => {
+const TotalPerformance = ({ data, loading }) => {
     const [isSmiling, setIsSmiling] = useState(false)
-    const [isMeh, setIsMeh] = useState(true)
+    const [isMeh, setIsMeh] = useState(false)
     const [isFrown, setIsFrown] = useState(false)
 
-  const [duration, setDuration] = useState("week");
+    useEffect(() => {
+      if (data <= 1800000) {
+        setIsFrown(true);
+        setIsSmiling(false);
+        setIsMeh(false);
+      }
 
-  const onChangeDuration = (e) => {
-    setDuration(e.target.value);
-  };
+      if (1800000 < data && data <= 3600000) {
+        setIsFrown(false);
+        setIsSmiling(false);
+        setIsMeh(true);
+      }
+
+      if (3600000 < data) {
+        setIsFrown(false);
+        setIsSmiling(true);
+        setIsMeh(false);
+      }
+    }, [data])
 
   return (
     <div className='progress_blocks_main'>
@@ -27,7 +42,7 @@ const TotalPerformance = (props) => {
         <QuestionMarkTrigger message={message} />
       </div>
       <div className=''>
-        <div className='flex_middle'>
+        <div className='flex_middle' style={{ marginBottom: "0.5em" }}>
           <div style={{ marginRight: "10px" }}>
             {isSmiling && (
               <FontAwesomeIcon
@@ -46,7 +61,7 @@ const TotalPerformance = (props) => {
                 icon={faFrown}
                 style={{
                   fontSize: 22,
-                  color: "##3abcfc",
+                  color: "#e52e2e",
                   marginTop: "0.2em",
                 }}
               />
@@ -55,12 +70,6 @@ const TotalPerformance = (props) => {
           {isSmiling && <div>Good</div>}
           {isMeh && <div>Average</div>}
           {isFrown && <div>Bad</div>}
-        </div>
-        <div className='top_margin_progress_blocks flex_middle'>
-          <DurationSelector
-            duration={duration}
-            onChangeDuration={onChangeDuration}
-          />
         </div>
       </div>
     </div>

@@ -1533,7 +1533,7 @@ export const getAvgDurationOfTuusSevenDays = () => async (dispatch) => {
     }
   }
 };
-
+  
 // ---------------------------------- MONTH ------------------------------------
 
 // Get dates where event has been captured
