@@ -126,7 +126,6 @@ router.get("/number-of-tuus-per-day-currentMonth", auth, async (req, res) => {
           $and: [
             { userId: new mongoose.Types.ObjectId(req.user.id) },
             { duration: { $ne: null } },
-            {},
           ],
         },
       },
@@ -212,6 +211,98 @@ router.get("/average-duration-tuus-per-day-sevendays", auth, async (req, res) =>
     res.status(400).send("Something went wrong!");
   }
 });
+
+// -------------------------- MONTH-----------------------------------------
+// @route    POST api/metrics
+// @desc     Get average duration of tuus per day-  month
+// @access   Private
+router.get("/average-duration-tuus-per-day-monthly", auth, async (req, res) => {
+  let ans = {};
+  try {
+    ans = await Timeline.aggregate([
+      {
+        $match: {
+          $and: [
+            { userId: new mongoose.Types.ObjectId(req.user.id) },
+            { duration: { $ne: null } },
+          ],
+        },
+      },
+      {
+        $group: {
+          _id: {
+            date: {
+              $dateToString: {
+                date: "$createdAt",
+                format: "%m",
+              },
+            },
+          },
+          sum: { $sum: "$duration" },
+        },
+      },
+      {
+        $project: {
+          date: "$_id",
+          sum: 1,
+          _id: 0,
+        },
+      },
+    ]).sort({ "date.date": 1 });
+
+    return res.status(200).send(ans);
+  } catch (error) {
+    console.error(error.message);
+    res.status(400).send("Something went wrong!");
+  }
+});
+
+// ---------- PER YEAR------------------
+// @route    POST api/metrics
+// @desc     Get average duration of tuus per day - yearly
+// @access   Private
+
+router.get("/average-duration-tuus-per-day-yearly", auth, async (req, res) => {
+  let ans = {};
+  try {
+    ans = await Timeline.aggregate([
+      {
+        $match: {
+          $and: [
+            { userId: new mongoose.Types.ObjectId(req.user.id) },
+            { duration: { $ne: null } },
+          ],
+        },
+      },
+      {
+        $group: {
+          _id: {
+            date: {
+              $dateToString: {
+                date: "$createdAt",
+                format: "%Y",
+              },
+            },
+          },
+          sum: { $sum: "$duration" },
+        },
+      },
+      {
+        $project: {
+          date: "$_id",
+          sum: 1,
+          _id: 0,
+        },
+      },
+    ]).sort({ "date.date": 1 });
+
+    return res.status(200).send(ans);
+  } catch (error) {
+    console.error(error.message);
+    res.status(400).send("Something went wrong!");
+  }
+});
+
 
 // -----------------------------------------------------------------------
 

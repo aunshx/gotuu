@@ -8,18 +8,41 @@ import DurationSelector from "../DurationSelector";
 import NothingToShow from "../../NothingToShow";
 import { connect } from "react-redux";
 
-const BlockOne = ({ data, dataHours, loading }) => {
+import {
+  getAvgDurationOfTuusPerDayPerYear,
+  getAvgDurationOfTuusPerDayPerMonth,
+  getAvgDurationOfTuusPerDay,
+} from "../../../../redux/actions/metrics";
+
+const BlockOne = ({
+  data,
+  dataHours,
+  loading,
+  // Redux Actions
+  getAvgDurationOfTuusPerDayPerYear,
+  getAvgDurationOfTuusPerDayPerMonth,
+  getAvgDurationOfTuusPerDay,
+}) => {
   const [duration, setDuration] = useState("week");
 
-  const [showHours, setShowHours] = useState(false)
+  const [showHours, setShowHours] = useState(false);
 
   const onChangeDuration = (e) => {
     setDuration(e.target.value);
+    if (e.target.value === "month") {
+      getAvgDurationOfTuusPerDayPerMonth();
+    }
+    if (e.target.value === "week") {
+      getAvgDurationOfTuusPerDay();
+    }
+    if (e.target.value === "year") {
+      getAvgDurationOfTuusPerDayPerYear();
+    }
   };
 
   const showTime = () => {
-    setShowHours(!showHours)
-  }
+    setShowHours(!showHours);
+  };
   return (
     <div className='charts animate__animated animate__bounce'>
       <div className='triple_grid'>
@@ -35,7 +58,9 @@ const BlockOne = ({ data, dataHours, loading }) => {
             {showHours ? "h" : "m"}
           </div>
         </div>
-        <div className='title'>Avg duration of Tuus - <span> {showHours ? 'hrs' : 'min'} </span></div>
+        <div className='title'>
+          Avg duration of Tuus - <span> {showHours ? "hrs" : "min"} </span>
+        </div>
         <div className='flex_right mrg-r-one'>
           <DurationSelector
             duration={duration}
@@ -102,14 +127,18 @@ const BlockOne = ({ data, dataHours, loading }) => {
 };
 
 BlockOne.propTypes = {
-
+  getAvgDurationOfTuusPerDayPerYear: PropTypes.func.isRequired,
+  getAvgDurationOfTuusPerDayPerMonth: PropTypes.func.isRequired,
+  getAvgDurationOfTuusPerDay: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
 });
 
 const mapStateToActions = {
-
+  getAvgDurationOfTuusPerDayPerYear,
+  getAvgDurationOfTuusPerDayPerMonth,
+  getAvgDurationOfTuusPerDay,
 };
 
 export default connect(mapStateToProps, mapStateToActions)(BlockOne);
