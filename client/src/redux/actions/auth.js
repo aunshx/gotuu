@@ -49,6 +49,9 @@ export const loadUser = () => async (dispatch) => {
 
     dispatch(getTimelineDatesCaptured());
     dispatch(getTimelineEvent(moment(date).toISOString()));
+    dispatch(getAvgDurationOfTuusPerDay());
+    dispatch(getAvgDurationOfTuus());
+    dispatch(getTotalNumberOfTuus());
 
   } catch (err) {
     dispatch({

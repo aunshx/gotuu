@@ -2,85 +2,46 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import notFound from "../../resources/images/pageNotFound.png";
-import logo from "../../resources/images/gotuuLogo.png";
+import oops from "../../resources/images/oops.png";
 
 const NotFound = () => {
   return (
     <>
-      <div className='center-screen'>
+      <div className='bg_not_found'></div>
+      <div className='not_found'>
         <div
-          className='flexit'
           style={{
             display: "flex",
             flexDirection: "column",
-            backgroundColor: "black",
-            borderRadius: "10px",
-            border: "2px solid pink",
-            width: "80%",
+            width: "100vw",
+            height: "100vh",
           }}
         >
-          <div
-            className='one-more'
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              flexDirection: "column",
-              margin: "0em",
-            }}
-          >
-            <img
-              src={logo}
-              alt='logo'
-              style={{
-                width: "20%",
-                height: "50%",
-                objectFit: "contain",
-                margin: "0 -15px",
-                marginTop: "0.5em",
-              }}
-            />
-            <h5
-              style={{
-                color: "pink",
-                margin: "0 -15px",
-              }}
-            >
-              Says
-            </h5>
-            <h1
-              style={{
-                color: "pink",
-                fontSize: "3em",
-                margin: "0 -15px",
-              }}
-            >
-              <i> Oops!</i>
-            </h1>
+          <div className='app crux' style={{ margin: "2em 0" }}>
+            <img src={oops} alt='Oops Logo' />
+            <div>Looks like you've gone to the unknown</div>
           </div>
-          <img
-            src={notFound}
-            alt='Not found'
-            style={{
-              width: "70%",
-              height: "50%",
-              objectFit: "contain",
-              alignSelf: "center",
-            }}
-          />
-          <Link to='/'>
-            <button
-              className='inputButton'
-              style={{
-                margin: "2em",
-                width: "10%",
-                padding: "1em",
-                alignSelf: "center",
-              }}
-            >
-              Go Back
-            </button>
-          </Link>
+          <div className='app'>
+            <div className='fourOfour app' style={{ justifyContent: "center" }}>
+              <div>404</div>
+              <div style={{ marginBottom: "1em" }}>Page Not Found</div>
+            </div>
+          </div>
+          <div className='flex_middle'>
+            <Link to='/'>
+              <button
+                className='inputButton'
+                style={{
+                  margin: "2em",
+                  width: "150px",
+                  padding: "1em",
+                  alignSelf: "center",
+                }}
+              >
+                Go Back
+              </button>
+            </Link>
+          </div>
         </div>
       </div>
     </>

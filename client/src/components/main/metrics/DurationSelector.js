@@ -35,72 +35,74 @@ const DurationSelector = ({ duration, onChangeDuration }) => {
   const classes = useStyles();
 
   return (
-    <FormControl>
-      <CssTextField
-        select
-        placeholder='Difficulty'
-        variant='standard'
-        name='duration'
-        value={duration}
-        onChange={onChangeDuration}
-        size='small'
-        inputProps={{
-          classes: {
-            icon: classes.icon,
-          },
-        }}
-        sx={{
-          width: 100,
-          padding: "0em 0em 0em 1.2em",
-        }}
-        InputProps={{
-          style: {
-            border: "none",
-            color: "gray",
-            fontSize: "0.7em",
-            padding: "0 0 0.2em 0",
-          },
-          disableUnderline: true,
-        }}
-      >
-        <MenuItem
-          style={{
-            fontSize: "0.9em",
-            height: "20px",
+    <div>
+      <FormControl>
+        <CssTextField
+          select
+          placeholder='Difficulty'
+          variant='standard'
+          name='duration'
+          value={duration}
+          onChange={onChangeDuration}
+          size='small'
+          inputProps={{
+            classes: {
+              icon: classes.icon,
+            },
           }}
-          value={"week"}
-        >
-          vs 7 Days
-        </MenuItem>
-        <MenuItem
-          value={"month"}
-          style={{
-            fontSize: "0.9em",
-            height: "20px",
+          sx={{
+            width: 100,
+            padding: "0em 0em 0em 1.2em",
+          }}
+          InputProps={{
+            style: {
+              border: "none",
+              color: "gray",
+              fontSize: "0.7em",
+              padding: "0 0 0.2em 0",
+            },
+            disableUnderline: true,
           }}
         >
-          vs Month
-        </MenuItem>
-        <MenuItem
-          value={"year"}
-          style={{
-            fontSize: "0.9em",
-            height: "20px",
-          }}
-        >
-          vs Year
-        </MenuItem>
-        <MenuItem
-          value={"all"}
-          style={{
-            fontSize: "0.9em",
-            height: "20px",
-          }}
-        >
-          vs All Time
-        </MenuItem>
-      </CssTextField>
-    </FormControl>
+          <MenuItem
+            style={{
+              fontSize: "0.9em",
+              height: "20px",
+            }}
+            value={"week"}
+          >
+            vs 7 Days
+          </MenuItem>
+          <MenuItem
+            value={"month"}
+            style={{
+              fontSize: "0.9em",
+              height: "20px",
+            }}
+          >
+            vs Month
+          </MenuItem>
+          <MenuItem
+            value={"year"}
+            style={{
+              fontSize: "0.9em",
+              height: "20px",
+            }}
+          >
+            vs Year
+          </MenuItem>
+          <MenuItem
+            value={"all"}
+            style={{
+              fontSize: "0.9em",
+              height: "20px",
+            }}
+          >
+            vs All Time
+          </MenuItem>
+        </CssTextField>
+      </FormControl>
+    </div>
   );
 };
 
