@@ -14,13 +14,21 @@ import {
 const initialState = {
   timeline: [],
   datesCaptured: [],
-  timelineLoading: false
+  timelineLoading: false,
+  currentEventId: ''
 };
 
 function authReducer(state = initialState, action) {
   const { type, payload } = action;
 
   switch (type) {
+    // Create new event
+    case ADD_ENTRY_TIMELINE:
+      return {
+        ...state,
+        currentEventId: payload,
+      };
+      
     // Create dates captured
     case CREATE_DATES_CAPTURED:
       return {
@@ -33,13 +41,6 @@ function authReducer(state = initialState, action) {
       return {
         ...state,
         timeline: payload,
-      };
-
-    // Create new timeline
-    case ADD_ENTRY_TIMELINE:
-      return {
-        ...state,
-        timeline: [...state.timeline, payload],
       };
 
     // Loading Timeline

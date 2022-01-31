@@ -23,7 +23,7 @@ const LiveStreak = (props) => {
         <QuestionMarkTrigger message={message} />
       </div>
       <div className=''>
-        <div className='flex_middle'>
+        <div className='flex_middle' style={{ marginBottom: '0.5em' }}>
           <div style={{ marginRight: "10px" }}>
             <FontAwesomeIcon
               icon={faFire}
@@ -31,12 +31,6 @@ const LiveStreak = (props) => {
             />
           </div>
           <div>10</div>
-        </div>
-        <div className='top_margin_progress_blocks flex_middle'>
-          <DurationSelector
-            duration={duration}
-            onChangeDuration={onChangeDuration}
-          />
         </div>
       </div>
     </div>

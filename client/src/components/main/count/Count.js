@@ -2,6 +2,15 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import Time from './Time'
+import { connect } from 'react-redux';
+
+import store from '../../../store'
+import {
+  ERROR_SNACKBAR, SNACKBAR_RESET
+} from '../../../redux/actions/types'
+import {
+  addDurationToEventEnd
+} from '../../../redux/actions/timeline'
 
 const Count = ({
   isHovering,
@@ -10,6 +19,13 @@ const Count = ({
   isHoveringFalse,
   stopCountDown,
   scrollSmoothHandler,
+  // Redux State
+  timeline: {
+    currentEventId
+  },
+
+  // Redux Actions
+  addDurationToEventEnd,
 }) => {
   const [time, setTime] = useState(0);
 
@@ -29,11 +45,29 @@ const Count = ({
     };
   }, [isCounting]);
 
-  const stopCount = () => {
-    stopCountDown();
-    setTime(0);
-    console.log('yeye')
-    scrollSmoothHandler()
+  const stopCount = (currentEventId, time) => {
+    if(time < 60000){
+      let value = {
+        message: 'Cannot stop event before 1 minute is complete',
+        type: 'info'
+      }
+      store.dispatch({
+        type: ERROR_SNACKBAR,
+        payload: value
+      });
+
+      setTimeout(() => (
+        store.dispatch({
+          type: SNACKBAR_RESET
+        })
+      ), 5000)
+    } else {
+      stopCountDown();
+      setTime(0);
+      scrollSmoothHandler();
+      addDurationToEventEnd(currentEventId, time);
+    }
+    
   };
 
   return (
@@ -45,13 +79,24 @@ const Count = ({
       }
       onMouseEnter={isHoveringTrue}
       onMouseLeave={isHoveringFalse}
-      onClick={stopCount}
+      onClick={() => stopCount(currentEventId, time)}
     >
       <Time time={time} />
     </div>
   );
 };
 
-Count.propTypes = {};
+Count.propTypes = {
+  timeline: PropTypes.object.isRequired,
+  addDurationToEventEnd: PropTypes.func.isRequired,
+};
 
-export default Count;
+const mapStateToProps = (state) => ({
+  timeline: state.timeline,
+});
+
+const mapActionsToProps = {
+  addDurationToEventEnd,
+};
+
+export default connect(mapStateToProps, mapActionsToProps)(Count);

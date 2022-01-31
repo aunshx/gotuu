@@ -13,7 +13,7 @@ const Timeline = require("../../models/Timeline");
 // @route    POST api/timeline
 // @desc     Add Event on BUtton Click
 // @access   Private
-router.post("/add-event", auth, async (req, res) => {
+router.get("/add-event", auth, async (req, res) => {
 
 let ans = {}
   try {

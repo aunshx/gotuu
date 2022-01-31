@@ -6,6 +6,8 @@ import Time from './count/Time'
 import Count from './count/Count';
 import Go from './Go';
 import Timeline from './timeline/Timeline';
+import Alerts from '../layout/Alerts'
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCompressAlt, faExpandAlt, faStickyNote } from '@fortawesome/free-solid-svg-icons';
 import { Tooltip } from '@mui/material';
@@ -111,39 +113,46 @@ const Main = ({ goMain, isActive, setIsActive }) => {
             startCountDown={startCountDown}
           />
         )}
-        {isFull ? (
-          <Tooltip title='Close' placement='top'>
-            <div
-              className='expand-icon cursor_pointer'
-              onClick={stopFullScreen}
-            >
-              <FontAwesomeIcon
-                icon={faCompressAlt}
-                style={{ fontSize: 20, color: "gray" }}
-              />
-            </div>
-          </Tooltip>
-        ) : (
-          <div className='expand-icon flex_evenly cursor_pointer'>
-            <Tooltip title='Expand' placement='top'>
-              <div onClick={toggleFullScreen} className='icons-left' >
-                <FontAwesomeIcon
-                  icon={faExpandAlt}
-                  style={{ fontSize: 20, color: "gray" }}
-                />
+        {isCounting && (
+          <>
+            {isFull ? (
+              <Tooltip title='Close' placement='top'>
+                <div
+                  className='expand-icon cursor_pointer'
+                  onClick={stopFullScreen}
+                >
+                  <FontAwesomeIcon
+                    icon={faCompressAlt}
+                    style={{ fontSize: 20, color: "gray" }}
+                  />
+                </div>
+              </Tooltip>
+            ) : (
+              <div className='expand-icon flex_evenly cursor_pointer'>
+                <Tooltip title='Expand' placement='top'>
+                  <div onClick={toggleFullScreen} className='icons-left'>
+                    <FontAwesomeIcon
+                      icon={faExpandAlt}
+                      style={{ fontSize: 20, color: "gray" }}
+                    />
+                  </div>
+                </Tooltip>
+                <Tooltip title='Create Note' placement='top'>
+                  <div onClick={toggleNewNote} className='icons-right'>
+                    <FontAwesomeIcon
+                      icon={faStickyNote}
+                      style={{ fontSize: 20, color: "gray" }}
+                    />
+                  </div>
+                </Tooltip>
               </div>
-            </Tooltip>
-            <Tooltip title='Create Note' placement='top'>
-              <div onClick={toggleNewNote} className='icons-right' >
-                <FontAwesomeIcon
-                  icon={faStickyNote}
-                  style={{ fontSize: 20, color: "gray" }}
-                />
-              </div>
-            </Tooltip>
-          </div>
+            )}
+          </>
         )}
         {start && <div className='go-down' ref={reffie}></div>}
+        <div>
+          <Alerts />
+        </div>
       </div>
     </div>
   );

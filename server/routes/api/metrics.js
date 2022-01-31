@@ -7,7 +7,6 @@ const config = require("config");
 const { check, validationResult } = require("express-validator");
 const moment = require("moment");
 const mongoose = require('mongoose')
-const User = require("../../models/User");
 const Timeline = require("../../models/Timeline");
 const { getMonthInString } = require('../../middleware/getMonthInString')
 
@@ -306,49 +305,6 @@ router.get("/average-duration-tuus-per-day-yearly", auth, async (req, res) => {
 
 
 // -----------------------------------------------------------------------
-
-// @route    POST api/metrics
-// @desc     Get live streak
-// @access   Private
-router.get("/live-streak", auth, async (req, res) => {
-  let ans = {};
-  try {
-    let date = new Date()
-    let dateISO = moment(date).toISOString()
-
-    ans = await Timeline.find(
-      {
-        $and: [
-          { userId: new mongoose.Types.ObjectId(req.user.id) },
-          { duration: { $ne: null } },
-        ],
-      },
-      { updatedAt: 1, _id: 0 }
-    )
-            let u = [];
-
-    if(ans.length > 0){
-      let k = 0;
-      u.push(ans[0].updatedAt);
-      for (let j = 1; j < ans.length - 1; j++) {
-        if (ans[j].updatedAt.getDate() !== ans[j+1].updatedAt.getDate()) {
-          u.push(ans[j+1].updatedAt);
-        }
-      }
-    }
-
-    console.log(
-      new Date(ans[0].updatedAt.setDate((ans[0].updatedAt).getDate() + 2)),
-      new Date(date.setDate(date.getDate() + 2)),
-      u[0].getDate()
-    );
-
-    return res.status(200).send(ans)
-  } catch(error) {
-    console.error(error.message);
-    res.status(400).send("Something went wrong!");
-  }
-});
 
 // -------------------------- TOTAL TUUS - BLOCK ----------------------------
 
@@ -723,6 +679,53 @@ router.get("/average-duration-tuus-all-time", auth, async (req, res) => {
 })
 
 // --------------------------------------------------------------------------
+
+// -------------------------------- LIVE STREAK - BLOCK -----------------------
+
+// @route    POST api/metrics
+// @desc     Get live streak
+// @access   Private
+router.get("/live-streak", auth, async (req, res) => {
+  let ans = {};
+  try {
+    let date = new Date()
+    let dateISO = moment(date).toISOString()
+
+    ans = await Timeline.find(
+      {
+        $and: [
+          { userId: new mongoose.Types.ObjectId(req.user.id) },
+          { duration: { $ne: null } },
+        ],
+      },
+      { updatedAt: 1, _id: 0 }
+    )
+            let u = [];
+
+    if(ans.length > 0){
+      let k = 0;
+      u.push(ans[0].updatedAt);
+      for (let j = 1; j < ans.length - 1; j++) {
+        if (ans[j].updatedAt.getDate() !== ans[j+1].updatedAt.getDate()) {
+          u.push(ans[j+1].updatedAt);
+        }
+      }
+    }
+
+    console.log(
+      new Date(ans[0].updatedAt.setDate((ans[0].updatedAt).getDate() + 2)),
+      new Date(date.setDate(date.getDate() + 2)),
+      u[0].getDate()
+    );
+
+    return res.status(200).send(ans)
+  } catch(error) {
+    console.error(error.message);
+    res.status(400).send("Something went wrong!");
+  }
+});
+
+//  ---------------------------------------------------------------------------
 
 // @route    POST api/timeline
 // @desc     Get events of a specific date
