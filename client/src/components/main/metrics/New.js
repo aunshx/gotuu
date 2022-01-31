@@ -71,13 +71,13 @@ const New = ({
               </div>
               <div data-aos='fade-up'>
                 <TotalTuus
-                  totalCountTuus={totalCountTuus}
+                  data={totalCountTuus}
                   loading={totalCountTuusLoading}
                 />
               </div>
               <div data-aos='fade-up'>
                 <CommonTime
-                  avgDurationTuus={avgDurationTuus}
+                  data={avgDurationTuus}
                   loading={avgDurationTuusLoading}
                 />
               </div>

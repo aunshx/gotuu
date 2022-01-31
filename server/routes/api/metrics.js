@@ -9,6 +9,7 @@ const moment = require("moment");
 const mongoose = require('mongoose')
 const User = require("../../models/User");
 const Timeline = require("../../models/Timeline");
+const { getMonthInString } = require('../../middleware/getMonthInString')
 
 // =============== NUMBER OF TUUS PER DAY =================
 
@@ -349,17 +350,28 @@ router.get("/live-streak", auth, async (req, res) => {
   }
 });
 
+// -------------------------- TOTAL TUUS - BLOCK ----------------------------
+
+// ------------------------------- TODAY ----------------------------------
 // @route    POST api/metrics
 // @desc     Get total number of tuus
 // @access   Private
-router.get("/total-number-tuus", auth, async (req, res) => {
+router.get("/total-number-tuus-today", auth, async (req, res) => {
   let ans = {};
+
+  var startOfToday = new Date();
+  startOfToday.setHours(0, 0, 0, 0);
+  // creates ObjectId() from date:
+  var _id =
+    Math.floor(startOfToday.getTime() / 1000).toString(16) + "0000000000000000";
+
   try {
 
     ans = await Timeline.find({
       $and: [
         { userId: new mongoose.Types.ObjectId(req.user.id) },
-        { duration: { $ne: null} },
+        { duration: { $ne: null } },
+        { _id: { $gte: new mongoose.Types.ObjectId(_id) } },
       ],
     }).count();
     return res.status(200).send(ans.toString())
@@ -369,47 +381,348 @@ router.get("/total-number-tuus", auth, async (req, res) => {
   }
 });
 
-// @route    POST api/timeline
-// @desc     Add Duration to the initial event
+// ------------------------------- ALL TIME ----------------------------------
+// @route    POST api/metrics
+// @desc     Get total number of tuus
 // @access   Private
-router.get("/average-duration-tuus", auth, async (req, res) => {
-  const { id, duration } = req.body;
-
-  let ans = {}
-  let ans2 = 0
+router.get("/total-number-tuus-all-time", auth, async (req, res) => {
+  let ans = {};
   try {
-        ans = await Timeline.aggregate([
-          {
-            $match: {
-              $and: [
-                { userId: new mongoose.Types.ObjectId(req.user.id) },
-                { duration: { $ne: null } },
-              ],
-            },
-          },
-          {
-            $group: {
-              _id: "$userId",
-              totalSum: { $sum: "$duration" },
-            },
-          },
-        ]);
 
-        ans2 = await Timeline.find({
-          $and: [
+    ans = await Timeline.find({
+      $and: [
         { userId: new mongoose.Types.ObjectId(req.user.id) },
-        { duration: { $ne: null} },
-      ]
-        }).count();
-
-        let complete = (ans[0].totalSum/ans2).toFixed('0')
-
-    return res.status(200).send(complete);
-  } catch (err) {
-    console.error(err.message);
-    res.status(400).send('Something went wrong!');
+        { duration: { $ne: null } },
+      ],
+    }).count();
+    return res.status(200).send(ans.toString())
+  } catch(error) {
+    console.error(error.message);
+    res.status(400).send("Something went wrong!");
   }
 });
+
+// ------------------------------- 7 DAYS ----------------------------------
+// @route    POST api/metrics
+// @desc     Get total number of tuus
+// @access   Private
+router.get("/total-number-tuus-seven-days", auth, async (req, res) => {
+  let ans = {};
+  try {
+
+    ans = await Timeline.find({
+      $and: [
+        { userId: new mongoose.Types.ObjectId(req.user.id) },
+        { duration: { $ne: null } },
+        {
+          updatedAt: {
+            $gte: new Date(new Date() - 7 * 60 * 60 * 24 * 1000),
+          },
+        },
+      ],
+    }).count();
+    return res.status(200).send(ans.toString())
+  } catch(error) {
+    console.error(error.message);
+    res.status(400).send("Something went wrong!");
+  }
+});
+
+// ------------------------------- MONTH ----------------------------------
+// @route    POST api/metrics
+// @desc     Get total number of tuus
+// @access   Private
+router.get("/total-number-tuus-monthly", auth, async (req, res) => {
+  let ans = {};
+
+  let selectMonth = await getMonthInString()
+
+  try {
+    ans = await Timeline.find({
+          $and: [
+            { userId: new mongoose.Types.ObjectId(req.user.id) },
+            { duration: { $ne: null } },
+            { $eq: [{ $month: "$createdAt" }, selectMonth] },
+          ],
+        }).count()
+
+    return res.status(200).send(ans.toString())
+  } catch(error) {
+    console.error(error.message);
+    res.status(400).send("Something went wrong!");
+  }
+});
+
+// ------------------------------- YEAR ----------------------------------
+// @route    POST api/metrics
+// @desc     Get total number of tuus
+// @access   Private
+router.get("/total-number-tuus-yearly", auth, async (req, res) => {
+  let ans = {};
+
+  let selectYear = await moment().year()
+
+  try {
+    ans = await Timeline.find({
+          $and: [
+            { userId: new mongoose.Types.ObjectId(req.user.id) },
+            { duration: { $ne: null } },
+            { $eq: [{ $year: "$createdAt" }, selectYear] },
+          ],
+        }).count()
+
+    return res.status(200).send(ans.toString())
+  } catch(error) {
+    console.error(error.message);
+    res.status(400).send("Something went wrong!");
+  }
+});
+
+// -------------------------------------------------------------------------------
+
+// ---------------------------------- COMMON TIME - BLOCK --------------------------
+
+// ------------------------------- TODAY -------------------------------------------
+// @route    POST api/metrics
+// @desc     Get total number of tuus
+// @access   Private
+router.get("/average-duration-tuus-today", auth, async (req, res) => {
+  let ans = {};
+  let ans2 = 0;
+
+  var startOfToday = new Date();
+  startOfToday.setHours(0, 0, 0, 0);
+  // creates ObjectId() from date:
+  var _id =
+    Math.floor(startOfToday.getTime() / 1000).toString(16) + "0000000000000000";
+
+  try {
+    ans = await Timeline.aggregate([
+      {
+        $match: {
+          $and: [
+            { userId: new mongoose.Types.ObjectId(req.user.id) },
+            { duration: { $ne: null } },
+           { _id: { $gte: new mongoose.Types.ObjectId(_id) } },
+          ],
+        },
+      },
+      {
+        $group: {
+          _id: "$userId",
+          totalSum: { $sum: "$duration" },
+        },
+      },
+    ]);
+
+    ans2 = await Timeline.find({
+      $and: [
+        { userId: new mongoose.Types.ObjectId(req.user.id) },
+        { duration: { $ne: null } },
+        { _id: { $gte: new mongoose.Types.ObjectId(_id) } },
+      ],
+    }).count();
+
+    let complete = (ans[0].totalSum / ans2).toFixed("0");
+
+    return res.status(200).send(complete);
+  } catch (error) {
+    console.error(error.message);
+    res.status(400).send("Something went wrong!");
+  }
+});
+
+// ------------------------------- 7 DAYS ----------------------------------
+// @route    POST api/metrics
+// @desc     Get total number of tuus
+// @access   Private
+router.get(
+  "/average-duration-tuus-seven-days",
+  auth,
+  async (req, res) => {
+  let ans = {};
+  let ans2 = 0;
+
+  try {
+    ans = await Timeline.aggregate([
+      {
+        $match: {
+          $and: [
+            { userId: new mongoose.Types.ObjectId(req.user.id) },
+            { duration: { $ne: null } },
+            {
+              updatedAt: {
+                $gte: new Date(new Date() - 7 * 60 * 60 * 24 * 1000),
+              },
+            },
+          ],
+        },
+      },
+      {
+        $group: {
+          _id: "$userId",
+          totalSum: { $sum: "$duration" },
+        },
+      },
+    ]);
+
+    ans2 = await Timeline.find({
+      $and: [
+        { userId: new mongoose.Types.ObjectId(req.user.id) },
+        { duration: { $ne: null } },
+        {
+          updatedAt: {
+            $gte: new Date(new Date() - 7 * 60 * 60 * 24 * 1000),
+          },
+        },
+      ],
+    }).count();
+
+    let complete = (ans[0].totalSum / ans2).toFixed("0");
+
+    return res.status(200).send(complete);
+    
+    } catch (error) {
+      console.error(error.message);
+      res.status(400).send("Something went wrong!");
+    }
+  }
+);
+
+// ------------------------------- MONTH ----------------------------------
+// @route    POST api/metrics
+// @desc     Get total number of tuus
+// @access   Private
+router.get("/average-duration-tuus-monthly", auth, async (req, res) => {
+  let ans = {};
+  let ans2 = 0;
+
+  let selectMonth = await moment().month() + 1;
+
+  try {
+    ans = await Timeline.aggregate([
+      {
+        $match: {
+          $and: [
+            { userId: new mongoose.Types.ObjectId(req.user.id) },
+            { duration: { $ne: null } },
+            {$expr: { $eq: [{ $month: "$createdAt" }, selectMonth] } },
+          ],
+        },
+      },
+      {
+        $group: {
+          _id: "$userId",
+          totalSum: { $sum: "$duration" },
+        },
+      },
+    ]);
+
+    ans2 = await Timeline.find({
+      $and: [
+        { userId: new mongoose.Types.ObjectId(req.user.id) },
+        { duration: { $ne: null } },
+        { $eq: [{ $month: "$createdAt" }, selectMonth] },
+      ],
+    }).count();
+
+    let complete = (ans[0].totalSum / ans2).toFixed("0");
+
+    return res.status(200).send(complete);
+  } catch (error) {
+    console.error(error.message);
+    res.status(400).send("Something went wrong!");
+  }
+});
+
+// ------------------------------- YEAR ----------------------------------
+// @route    POST api/metrics
+// @desc     Get total number of tuus
+// @access   Private
+router.get("/average-duration-tuus-yearly", auth, async (req, res) => {
+
+  let selectYear = await moment().year();
+
+  let ans = {};
+  let ans2 = 0;
+  try {
+    ans = await Timeline.aggregate([
+      {
+        $match: {
+          $and: [
+            { userId: new mongoose.Types.ObjectId(req.user.id) },
+            { duration: { $ne: null } },
+            {$expr: { $eq: [{ $year: "$createdAt" }, selectYear] } },
+          ],
+        },
+      },
+      {
+        $group: {
+          _id: "$userId",
+          totalSum: { $sum: "$duration" },
+        },
+      },
+    ]);
+
+    ans2 = await Timeline.find({
+      $and: [
+        { userId: new mongoose.Types.ObjectId(req.user.id) },
+        { duration: { $ne: null } },
+        { $eq: [{ $year: "$createdAt" }, selectYear] },
+      ],
+    }).count();
+
+    let complete = (ans[0].totalSum / ans2).toFixed("0");
+
+    return res.status(200).send(complete);
+  } catch (error) {
+    console.error(error.message);
+    res.status(400).send("Something went wrong!");
+  }
+});
+
+// ------------------------------- ALL TIME ----------------------------------
+// @route    POST api/metrics
+// @desc     Get total number of tuus
+// @access   Private
+router.get("/average-duration-tuus-all-time", auth, async (req, res) => {
+ let ans = {};
+ let ans2 = 0;
+ try {
+   ans = await Timeline.aggregate([
+     {
+       $match: {
+         $and: [
+           { userId: new mongoose.Types.ObjectId(req.user.id) },
+           { duration: { $ne: null } },
+         ],
+       },
+     },
+     {
+       $group: {
+         _id: "$userId",
+         totalSum: { $sum: "$duration" },
+       },
+     },
+   ]);
+
+   ans2 = await Timeline.find({
+     $and: [
+       { userId: new mongoose.Types.ObjectId(req.user.id) },
+       { duration: { $ne: null } },
+     ],
+   }).count();
+
+   let complete = (ans[0].totalSum / ans2).toFixed("0");
+
+   return res.status(200).send(complete);
+ } catch (error) {
+   console.error(error.message);
+   res.status(400).send("Something went wrong!");
+ }
+})
+
+// --------------------------------------------------------------------------
 
 // @route    POST api/timeline
 // @desc     Get events of a specific date

@@ -21,19 +21,20 @@ import {
 } from "../actions/types";
 
 const initialState = {
+  // Total Count -- BLOCK
   totalCountTuus: 0,
   totalCountTuusLoading: false,
 
-  // Avg Duration 
+  // Avg Duration - BLOCK
   avgDurationTuus: 0,
   avgDurationTuusLoading: false,
 
-  // Avg DUration Per Day
+  // Avg DUration Per Day - GRAPH
   avgDurationTuusPerDay: [],
   avgDurationTuusPerDayHours: [],
   avgDurationTuusPerDayLoading: false,
 
-  // Number of Tuus - Graph
+  // Number of Tuus - GRAPH
   numberOfTuusGraph: [],
   numberOfTuusGraphLoading: false
 };

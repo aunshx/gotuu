@@ -746,132 +746,23 @@ export const getAvgDurationOfTuusPerDayPerYear = () => async (dispatch) => {
   }
 };
 
-// --------------------------------------------------------------------------
+// ---------------------------- TOTAL TUUS - BLOCK ----------------------------
 
-// Get average duration of each tuu
-export const getAvgDurationOfTuus = () => async (dispatch) => {
-  let value = {
-    message: "1",
-    type: "info",
-  };
-
-  try {
-    dispatch({
-      type: AVG_DURATION_TUUS_LOADING,
-    });
-
-    const res = await api.get("/metrics/average-duration-tuus");
-
-    dispatch({
-      type: AVG_DURATION_TUUS,
-      payload: res.data,
-    });
-
-    dispatch({
-      type: AVG_DURATION_TUUS_LOADING_COMPLETE,
-    });
-  } catch (error) {
-    if (error.response.status === 500) {
-      value.message = "Oops! Something went wrong. Please reload!";
-      value.type = "error";
-
-      dispatch({
-        type: ERROR_SNACKBAR,
-        payload: value,
-      });
-
-      dispatch({
-        type: AVG_DURATION_TUUS_LOADING_COMPLETE,
-      });
-
-      setTimeout(
-        () =>
-          dispatch({
-            type: SNACKBAR_RESET,
-          }),
-        5000
-      );
-    } else if (error.response.status === 400) {
-      value.message = error.response.data.errors[0].msg;
-      value.type = "error";
-
-      dispatch({
-        type: ERROR_SNACKBAR,
-        payload: value,
-      });
-
-      dispatch({
-        type: AVG_DURATION_TUUS_LOADING_COMPLETE,
-      });
-
-      setTimeout(
-        () =>
-          dispatch({
-            type: SNACKBAR_RESET,
-          }),
-        5000
-      );
-    } else if (error.response.status === 401) {
-      value.message = "Your session has expired. Please login again.";
-      value.type = "error";
-
-      dispatch({
-        type: ERROR_SNACKBAR,
-        payload: value,
-      });
-
-      dispatch({
-        type: AVG_DURATION_TUUS_LOADING_COMPLETE,
-      });
-
-      setTimeout(
-        () =>
-          dispatch({
-            type: SNACKBAR_RESET,
-          }),
-        5000
-      );
-    } else {
-      value.message = "Oops! Looks like something went wrong. Please reload!";
-      value.type = "error";
-
-      dispatch({
-        type: ERROR_SNACKBAR,
-        payload: value,
-      });
-
-      dispatch({
-        type: AVG_DURATION_TUUS_LOADING_COMPLETE,
-      });
-
-      setTimeout(
-        () =>
-          dispatch({
-            type: SNACKBAR_RESET,
-          }),
-        5000
-      );
-    }
-
-    dispatch({
-      type: AVG_DURATION_TUUS_LOADING_COMPLETE,
-    });
-  }
-};
+// ----------------------------  TODAY ---------------------------------------
 
 // Get dates where event has been captured
 export const getTotalNumberOfTuus = () => async (dispatch) => {
   let value = {
     message: "1",
     type: "info",
-  };
+  }; 
 
   try {
     dispatch({
       type: TOTAL_COUNT_TUUS_LOADING,
     });
 
-    const res = await api.get("/metrics/total-number-tuus");
+    const res = await api.get("/metrics/total-number-tuus-today");
 
     dispatch({
       type: TOTAL_COUNT_TUUS,
@@ -966,6 +857,1009 @@ export const getTotalNumberOfTuus = () => async (dispatch) => {
 
     dispatch({
       type: TOTAL_COUNT_TUUS_LOADING_COMPLETE,
+    });
+  }
+};
+
+// ----------------------------  7 Days ---------------------------------------
+
+// Get dates where event has been captured
+export const getTotalNumberOfTuusSevenDays = () => async (dispatch) => {
+  let value = {
+    message: "1",
+    type: "info",
+  };
+
+  try {
+    dispatch({
+      type: TOTAL_COUNT_TUUS_LOADING,
+    });
+
+    const res = await api.get("/metrics/total-number-tuus-seven-days");
+
+    dispatch({
+      type: TOTAL_COUNT_TUUS,
+      payload: res.data,
+    });
+
+    dispatch({
+      type: TOTAL_COUNT_TUUS_LOADING_COMPLETE,
+    });
+  } catch (error) {
+    if (error.response.status === 500) {
+      value.message = "Oops! Something went wrong. Please reload!";
+      value.type = "error";
+
+      dispatch({
+        type: ERROR_SNACKBAR,
+        payload: value,
+      });
+
+      dispatch({
+        type: TOTAL_COUNT_TUUS_LOADING_COMPLETE,
+      });
+
+      setTimeout(
+        () =>
+          dispatch({
+            type: SNACKBAR_RESET,
+          }),
+        5000
+      );
+    } else if (error.response.status === 400) {
+      value.message = error.response.data.errors[0].msg;
+      value.type = "error";
+
+      dispatch({
+        type: ERROR_SNACKBAR,
+        payload: value,
+      });
+
+      dispatch({
+        type: TOTAL_COUNT_TUUS_LOADING_COMPLETE,
+      });
+
+      setTimeout(
+        () =>
+          dispatch({
+            type: SNACKBAR_RESET,
+          }),
+        5000
+      );
+    } else if (error.response.status === 401) {
+      value.message = "Your session has expired. Please login again.";
+      value.type = "error";
+
+      dispatch({
+        type: ERROR_SNACKBAR,
+        payload: value,
+      });
+
+      dispatch({
+        type: TOTAL_COUNT_TUUS_LOADING_COMPLETE,
+      });
+
+      setTimeout(
+        () =>
+          dispatch({
+            type: SNACKBAR_RESET,
+          }),
+        5000
+      );
+    } else {
+      value.message = "Oops! Looks like something went wrong. Please reload!";
+      value.type = "error";
+
+      dispatch({
+        type: ERROR_SNACKBAR,
+        payload: value,
+      });
+
+      dispatch({
+        type: TOTAL_COUNT_TUUS_LOADING_COMPLETE,
+      });
+
+      setTimeout(
+        () =>
+          dispatch({
+            type: SNACKBAR_RESET,
+          }),
+        5000
+      );
+    }
+
+    dispatch({
+      type: TOTAL_COUNT_TUUS_LOADING_COMPLETE,
+    });
+  }
+};
+
+// ---------------------------------- MONTH ------------------------------------
+
+// Get dates where event has been captured
+export const getTotalNumberOfTuusMonth = () => async (dispatch) => {
+  let value = {
+    message: "1",
+    type: "info",
+  };
+
+  try {
+    dispatch({
+      type: TOTAL_COUNT_TUUS_LOADING,
+    });
+
+    const res = await api.get("/metrics/total-number-tuus-monthly");
+
+    dispatch({
+      type: TOTAL_COUNT_TUUS,
+      payload: res.data,
+    });
+
+    dispatch({
+      type: TOTAL_COUNT_TUUS_LOADING_COMPLETE,
+    });
+  } catch (error) {
+    if (error.response.status === 500) {
+      value.message = "Oops! Something went wrong. Please reload!";
+      value.type = "error";
+
+      dispatch({
+        type: ERROR_SNACKBAR,
+        payload: value,
+      });
+
+      dispatch({
+        type: TOTAL_COUNT_TUUS_LOADING_COMPLETE,
+      });
+
+      setTimeout(
+        () =>
+          dispatch({
+            type: SNACKBAR_RESET,
+          }),
+        5000
+      );
+    } else if (error.response.status === 400) {
+      value.message = error.response.data.errors[0].msg;
+      value.type = "error";
+
+      dispatch({
+        type: ERROR_SNACKBAR,
+        payload: value,
+      });
+
+      dispatch({
+        type: TOTAL_COUNT_TUUS_LOADING_COMPLETE,
+      });
+
+      setTimeout(
+        () =>
+          dispatch({
+            type: SNACKBAR_RESET,
+          }),
+        5000
+      );
+    } else if (error.response.status === 401) {
+      value.message = "Your session has expired. Please login again.";
+      value.type = "error";
+
+      dispatch({
+        type: ERROR_SNACKBAR,
+        payload: value,
+      });
+
+      dispatch({
+        type: TOTAL_COUNT_TUUS_LOADING_COMPLETE,
+      });
+
+      setTimeout(
+        () =>
+          dispatch({
+            type: SNACKBAR_RESET,
+          }),
+        5000
+      );
+    } else {
+      value.message = "Oops! Looks like something went wrong. Please reload!";
+      value.type = "error";
+
+      dispatch({
+        type: ERROR_SNACKBAR,
+        payload: value,
+      });
+
+      dispatch({
+        type: TOTAL_COUNT_TUUS_LOADING_COMPLETE,
+      });
+
+      setTimeout(
+        () =>
+          dispatch({
+            type: SNACKBAR_RESET,
+          }),
+        5000
+      );
+    }
+
+    dispatch({
+      type: TOTAL_COUNT_TUUS_LOADING_COMPLETE,
+    });
+  }
+};
+// ---------------------------------- YEAR ------------------------------------
+
+// Get dates where event has been captured
+export const getTotalNumberOfTuusYear = () => async (dispatch) => {
+  let value = {
+    message: "1",
+    type: "info",
+  };
+
+  try {
+    dispatch({
+      type: TOTAL_COUNT_TUUS_LOADING,
+    });
+
+    const res = await api.get("/metrics/total-number-tuus-yearly");
+
+    dispatch({
+      type: TOTAL_COUNT_TUUS,
+      payload: res.data,
+    });
+
+    dispatch({
+      type: TOTAL_COUNT_TUUS_LOADING_COMPLETE,
+    });
+  } catch (error) {
+    if (error.response.status === 500) {
+      value.message = "Oops! Something went wrong. Please reload!";
+      value.type = "error";
+
+      dispatch({
+        type: ERROR_SNACKBAR,
+        payload: value,
+      });
+
+      dispatch({
+        type: TOTAL_COUNT_TUUS_LOADING_COMPLETE,
+      });
+
+      setTimeout(
+        () =>
+          dispatch({
+            type: SNACKBAR_RESET,
+          }),
+        5000
+      );
+    } else if (error.response.status === 400) {
+      value.message = error.response.data.errors[0].msg;
+      value.type = "error";
+
+      dispatch({
+        type: ERROR_SNACKBAR,
+        payload: value,
+      });
+
+      dispatch({
+        type: TOTAL_COUNT_TUUS_LOADING_COMPLETE,
+      });
+
+      setTimeout(
+        () =>
+          dispatch({
+            type: SNACKBAR_RESET,
+          }),
+        5000
+      );
+    } else if (error.response.status === 401) {
+      value.message = "Your session has expired. Please login again.";
+      value.type = "error";
+
+      dispatch({
+        type: ERROR_SNACKBAR,
+        payload: value,
+      });
+
+      dispatch({
+        type: TOTAL_COUNT_TUUS_LOADING_COMPLETE,
+      });
+
+      setTimeout(
+        () =>
+          dispatch({
+            type: SNACKBAR_RESET,
+          }),
+        5000
+      );
+    } else {
+      value.message = "Oops! Looks like something went wrong. Please reload!";
+      value.type = "error";
+
+      dispatch({
+        type: ERROR_SNACKBAR,
+        payload: value,
+      });
+
+      dispatch({
+        type: TOTAL_COUNT_TUUS_LOADING_COMPLETE,
+      });
+
+      setTimeout(
+        () =>
+          dispatch({
+            type: SNACKBAR_RESET,
+          }),
+        5000
+      );
+    }
+
+    dispatch({
+      type: TOTAL_COUNT_TUUS_LOADING_COMPLETE,
+    });
+  }
+};
+
+// ---------------------------------- ALL TIME ------------------------------------
+
+// Get dates where event has been captured
+export const getTotalNumberOfTuusAllTime = () => async (dispatch) => {
+  let value = {
+    message: "1",
+    type: "info",
+  };
+
+  try {
+    dispatch({
+      type: TOTAL_COUNT_TUUS_LOADING,
+    });
+
+    const res = await api.get("/metrics/total-number-tuus-all-time");
+
+    dispatch({
+      type: TOTAL_COUNT_TUUS,
+      payload: res.data,
+    });
+
+    dispatch({
+      type: TOTAL_COUNT_TUUS_LOADING_COMPLETE,
+    });
+  } catch (error) {
+    if (error.response.status === 500) {
+      value.message = "Oops! Something went wrong. Please reload!";
+      value.type = "error";
+
+      dispatch({
+        type: ERROR_SNACKBAR,
+        payload: value,
+      });
+
+      dispatch({
+        type: TOTAL_COUNT_TUUS_LOADING_COMPLETE,
+      });
+
+      setTimeout(
+        () =>
+          dispatch({
+            type: SNACKBAR_RESET,
+          }),
+        5000
+      );
+    } else if (error.response.status === 400) {
+      value.message = error.response.data.errors[0].msg;
+      value.type = "error";
+
+      dispatch({
+        type: ERROR_SNACKBAR,
+        payload: value,
+      });
+
+      dispatch({
+        type: TOTAL_COUNT_TUUS_LOADING_COMPLETE,
+      });
+
+      setTimeout(
+        () =>
+          dispatch({
+            type: SNACKBAR_RESET,
+          }),
+        5000
+      );
+    } else if (error.response.status === 401) {
+      value.message = "Your session has expired. Please login again.";
+      value.type = "error";
+
+      dispatch({
+        type: ERROR_SNACKBAR,
+        payload: value,
+      });
+
+      dispatch({
+        type: TOTAL_COUNT_TUUS_LOADING_COMPLETE,
+      });
+
+      setTimeout(
+        () =>
+          dispatch({
+            type: SNACKBAR_RESET,
+          }),
+        5000
+      );
+    } else {
+      value.message = "Oops! Looks like something went wrong. Please reload!";
+      value.type = "error";
+
+      dispatch({
+        type: ERROR_SNACKBAR,
+        payload: value,
+      });
+
+      dispatch({
+        type: TOTAL_COUNT_TUUS_LOADING_COMPLETE,
+      });
+
+      setTimeout(
+        () =>
+          dispatch({
+            type: SNACKBAR_RESET,
+          }),
+        5000
+      );
+    }
+
+    dispatch({
+      type: TOTAL_COUNT_TUUS_LOADING_COMPLETE,
+    });
+  }
+};
+
+// ---------------------------- COMMON TIME - BLOCK ----------------------------
+
+// ----------------------------  TODAY ---------------------------------------
+
+// Get dates where event has been captured
+export const getAvgDurationOfTuus = () => async (dispatch) => {
+  let value = {
+    message: "1",
+    type: "info",
+  }; 
+
+  try {
+    dispatch({
+      type: AVG_DURATION_TUUS_LOADING,
+    });
+
+    const res = await api.get("/metrics/average-duration-tuus-today");
+
+    dispatch({
+      type: AVG_DURATION_TUUS,
+      payload: res.data,
+    });
+
+    dispatch({
+      type: AVG_DURATION_TUUS_LOADING_COMPLETE,
+    });
+  } catch (error) {
+    if (error.response.status === 500) {
+      value.message = "Oops! Something went wrong. Please reload!";
+      value.type = "error";
+
+      dispatch({
+        type: ERROR_SNACKBAR,
+        payload: value,
+      });
+
+      dispatch({
+        type: AVG_DURATION_TUUS_LOADING_COMPLETE,
+      });
+
+      setTimeout(
+        () =>
+          dispatch({
+            type: SNACKBAR_RESET,
+          }),
+        5000
+      );
+    } else if (error.response.status === 400) {
+      value.message = error.response.data.errors[0].msg;
+      value.type = "error";
+
+      dispatch({
+        type: ERROR_SNACKBAR,
+        payload: value,
+      });
+
+      dispatch({
+        type: AVG_DURATION_TUUS_LOADING_COMPLETE,
+      });
+
+      setTimeout(
+        () =>
+          dispatch({
+            type: SNACKBAR_RESET,
+          }),
+        5000
+      );
+    } else if (error.response.status === 401) {
+      value.message = "Your session has expired. Please login again.";
+      value.type = "error";
+
+      dispatch({
+        type: ERROR_SNACKBAR,
+        payload: value,
+      });
+
+      dispatch({
+        type: AVG_DURATION_TUUS_LOADING_COMPLETE,
+      });
+
+      setTimeout(
+        () =>
+          dispatch({
+            type: SNACKBAR_RESET,
+          }),
+        5000
+      );
+    } else {
+      value.message = "Oops! Looks like something went wrong. Please reload!";
+      value.type = "error";
+
+      dispatch({
+        type: ERROR_SNACKBAR,
+        payload: value,
+      });
+
+      dispatch({
+        type: AVG_DURATION_TUUS_LOADING_COMPLETE,
+      });
+
+      setTimeout(
+        () =>
+          dispatch({
+            type: SNACKBAR_RESET,
+          }),
+        5000
+      );
+    }
+  }
+};
+
+// ----------------------------  7 Days ---------------------------------------
+
+// Get dates where event has been captured
+export const getAvgDurationOfTuusSevenDays = () => async (dispatch) => {
+  let value = {
+    message: "1",
+    type: "info",
+  };
+
+  try {
+    dispatch({
+      type: AVG_DURATION_TUUS_LOADING,
+    });
+
+    const res = await api.get(
+      "/metrics/average-duration-tuus-seven-days"
+    );
+
+    dispatch({
+      type: AVG_DURATION_TUUS,
+      payload: res.data,
+    });
+
+    dispatch({
+      type: AVG_DURATION_TUUS_LOADING_COMPLETE,
+    });
+  } catch (error) {
+    if (error.response.status === 500) {
+      value.message = "Oops! Something went wrong. Please reload!";
+      value.type = "error";
+
+      dispatch({
+        type: ERROR_SNACKBAR,
+        payload: value,
+      });
+
+      dispatch({
+        type: AVG_DURATION_TUUS_LOADING_COMPLETE,
+      });
+
+      setTimeout(
+        () =>
+          dispatch({
+            type: SNACKBAR_RESET,
+          }),
+        5000
+      );
+    } else if (error.response.status === 400) {
+      value.message = error.response.data.errors[0].msg;
+      value.type = "error";
+
+      dispatch({
+        type: ERROR_SNACKBAR,
+        payload: value,
+      });
+
+      dispatch({
+        type: AVG_DURATION_TUUS_LOADING_COMPLETE,
+      });
+
+      setTimeout(
+        () =>
+          dispatch({
+            type: SNACKBAR_RESET,
+          }),
+        5000
+      );
+    } else if (error.response.status === 401) {
+      value.message = "Your session has expired. Please login again.";
+      value.type = "error";
+
+      dispatch({
+        type: ERROR_SNACKBAR,
+        payload: value,
+      });
+
+      dispatch({
+        type: AVG_DURATION_TUUS_LOADING_COMPLETE,
+      });
+
+      setTimeout(
+        () =>
+          dispatch({
+            type: SNACKBAR_RESET,
+          }),
+        5000
+      );
+    } else {
+      value.message = "Oops! Looks like something went wrong. Please reload!";
+      value.type = "error";
+
+      dispatch({
+        type: ERROR_SNACKBAR,
+        payload: value,
+      });
+
+      dispatch({
+        type: AVG_DURATION_TUUS_LOADING_COMPLETE,
+      });
+
+      setTimeout(
+        () =>
+          dispatch({
+            type: SNACKBAR_RESET,
+          }),
+        5000
+      );
+    }
+  }
+};
+
+// ---------------------------------- MONTH ------------------------------------
+
+// Get dates where event has been captured
+export const getAvgDurationOfTuusMonth = () => async (dispatch) => {
+  let value = {
+    message: "1",
+    type: "info",
+  };
+
+  try {
+    dispatch({
+      type: AVG_DURATION_TUUS_LOADING,
+    });
+
+    const res = await api.get("/metrics/average-duration-tuus-monthly");
+
+    dispatch({
+      type: AVG_DURATION_TUUS,
+      payload: res.data,
+    });
+
+    dispatch({
+      type: AVG_DURATION_TUUS_LOADING_COMPLETE,
+    });
+  } catch (error) {
+    if (error.response.status === 500) {
+      value.message = "Oops! Something went wrong. Please reload!";
+      value.type = "error";
+
+      dispatch({
+        type: ERROR_SNACKBAR,
+        payload: value,
+      });
+
+      dispatch({
+        type: AVG_DURATION_TUUS_LOADING_COMPLETE,
+      });
+
+      setTimeout(
+        () =>
+          dispatch({
+            type: SNACKBAR_RESET,
+          }),
+        5000
+      );
+    } else if (error.response.status === 400) {
+      value.message = error.response.data.errors[0].msg;
+      value.type = "error";
+
+      dispatch({
+        type: ERROR_SNACKBAR,
+        payload: value,
+      });
+
+      dispatch({
+        type: AVG_DURATION_TUUS_LOADING_COMPLETE,
+      });
+
+      setTimeout(
+        () =>
+          dispatch({
+            type: SNACKBAR_RESET,
+          }),
+        5000
+      );
+    } else if (error.response.status === 401) {
+      value.message = "Your session has expired. Please login again.";
+      value.type = "error";
+
+      dispatch({
+        type: ERROR_SNACKBAR,
+        payload: value,
+      });
+
+      dispatch({
+        type: AVG_DURATION_TUUS_LOADING_COMPLETE,
+      });
+
+      setTimeout(
+        () =>
+          dispatch({
+            type: SNACKBAR_RESET,
+          }),
+        5000
+      );
+    } else {
+      value.message = "Oops! Looks like something went wrong. Please reload!";
+      value.type = "error";
+
+      dispatch({
+        type: ERROR_SNACKBAR,
+        payload: value,
+      });
+
+      dispatch({
+        type: AVG_DURATION_TUUS_LOADING_COMPLETE,
+      });
+
+      setTimeout(
+        () =>
+          dispatch({
+            type: SNACKBAR_RESET,
+          }),
+        5000
+      );
+    }
+  }
+};
+// ---------------------------------- YEAR ------------------------------------
+
+// Get dates where event has been captured
+export const getAgDurationOfTuusYear = () => async (dispatch) => {
+  let value = {
+    message: "1",
+    type: "info",
+  };
+
+  try {
+    dispatch({
+      type: AVG_DURATION_TUUS_LOADING,
+    });
+
+    const res = await api.get("/metrics/average-duration-tuus-yearly");
+
+    dispatch({
+      type: AVG_DURATION_TUUS,
+      payload: res.data,
+    });
+
+    dispatch({
+      type: AVG_DURATION_TUUS_LOADING_COMPLETE,
+    });
+  } catch (error) {
+    if (error.response.status === 500) {
+      value.message = "Oops! Something went wrong. Please reload!";
+      value.type = "error";
+
+      dispatch({
+        type: ERROR_SNACKBAR,
+        payload: value,
+      });
+
+      dispatch({
+        type: AVG_DURATION_TUUS_LOADING_COMPLETE,
+      });
+
+      setTimeout(
+        () =>
+          dispatch({
+            type: SNACKBAR_RESET,
+          }),
+        5000
+      );
+    } else if (error.response.status === 400) {
+      value.message = error.response.data.errors[0].msg;
+      value.type = "error";
+
+      dispatch({
+        type: ERROR_SNACKBAR,
+        payload: value,
+      });
+
+      dispatch({
+        type: AVG_DURATION_TUUS_LOADING_COMPLETE,
+      });
+
+      setTimeout(
+        () =>
+          dispatch({
+            type: SNACKBAR_RESET,
+          }),
+        5000
+      );
+    } else if (error.response.status === 401) {
+      value.message = "Your session has expired. Please login again.";
+      value.type = "error";
+
+      dispatch({
+        type: ERROR_SNACKBAR,
+        payload: value,
+      });
+
+      dispatch({
+        type: AVG_DURATION_TUUS_LOADING_COMPLETE,
+      });
+
+      setTimeout(
+        () =>
+          dispatch({
+            type: SNACKBAR_RESET,
+          }),
+        5000
+      );
+    } else {
+      value.message = "Oops! Looks like something went wrong. Please reload!";
+      value.type = "error";
+
+      dispatch({
+        type: ERROR_SNACKBAR,
+        payload: value,
+      });
+
+      dispatch({
+        type: AVG_DURATION_TUUS_LOADING_COMPLETE,
+      });
+
+      setTimeout(
+        () =>
+          dispatch({
+            type: SNACKBAR_RESET,
+          }),
+        5000
+      );
+    }
+  }
+};
+
+// ---------------------------------- ALL TIME ------------------------------------
+
+// Get average duration of each tuu
+export const getAvgDurationOfTuusAllTime = () => async (dispatch) => {
+  let value = {
+    message: "1",
+    type: "info",
+  };
+
+  try {
+    dispatch({
+      type: AVG_DURATION_TUUS_LOADING,
+    });
+
+    const res = await api.get("/metrics/average-duration-tuus-all-time");
+
+    dispatch({
+      type: AVG_DURATION_TUUS,
+      payload: res.data,
+    });
+
+    dispatch({
+      type: AVG_DURATION_TUUS_LOADING_COMPLETE,
+    });
+  } catch (error) {
+    if (error.response.status === 500) {
+      value.message = "Oops! Something went wrong. Please reload!";
+      value.type = "error";
+
+      dispatch({
+        type: ERROR_SNACKBAR,
+        payload: value,
+      });
+
+      dispatch({
+        type: AVG_DURATION_TUUS_LOADING_COMPLETE,
+      });
+
+      setTimeout(
+        () =>
+          dispatch({
+            type: SNACKBAR_RESET,
+          }),
+        5000
+      );
+    } else if (error.response.status === 400) {
+      value.message = error.response.data.errors[0].msg;
+      value.type = "error";
+
+      dispatch({
+        type: ERROR_SNACKBAR,
+        payload: value,
+      });
+
+      dispatch({
+        type: AVG_DURATION_TUUS_LOADING_COMPLETE,
+      });
+
+      setTimeout(
+        () =>
+          dispatch({
+            type: SNACKBAR_RESET,
+          }),
+        5000
+      );
+    } else if (error.response.status === 401) {
+      value.message = "Your session has expired. Please login again.";
+      value.type = "error";
+
+      dispatch({
+        type: ERROR_SNACKBAR,
+        payload: value,
+      });
+
+      dispatch({
+        type: AVG_DURATION_TUUS_LOADING_COMPLETE,
+      });
+
+      setTimeout(
+        () =>
+          dispatch({
+            type: SNACKBAR_RESET,
+          }),
+        5000
+      );
+    } else {
+      value.message = "Oops! Looks like something went wrong. Please reload!";
+      value.type = "error";
+
+      dispatch({
+        type: ERROR_SNACKBAR,
+        payload: value,
+      });
+
+      dispatch({
+        type: AVG_DURATION_TUUS_LOADING_COMPLETE,
+      });
+
+      setTimeout(
+        () =>
+          dispatch({
+            type: SNACKBAR_RESET,
+          }),
+        5000
+      );
+    }
+
+    dispatch({
+      type: AVG_DURATION_TUUS_LOADING_COMPLETE,
     });
   }
 };
