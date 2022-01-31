@@ -104,8 +104,6 @@ router.get("/number-of-tuus-per-day-sevendays", auth, async (req, res) => {
       },
     ]).sort({ 'date.date': 1 })
 
-    // console.log(new Date(new Date() - 8 * 60 * 60 * 24 * 1000));
-
     return res.status(200).send(ans);
   } catch (error) {
     console.error(error.message);
@@ -163,15 +161,28 @@ router.get("/number-of-tuus-per-day-currentMonth", auth, async (req, res) => {
 
 // ----------------------------------------------------------------------------------
 
+// -------------------------- AVG DURATION _ GRAPH ------------------------------------
+
+// -------------------------- 7 DAYS -----------------------------------------
 // @route    POST api/metrics
 // @desc     Get average duration of tuus per day
 // @access   Private
-router.get("/average-duration-tuus-per-day", auth, async (req, res) => {
+router.get("/average-duration-tuus-per-day-sevendays", auth, async (req, res) => {
   let ans = {};
   try {
     ans = await Timeline.aggregate([
       {
-        $match: { userId: new mongoose.Types.ObjectId(req.user.id) },
+        $match: {
+          $and: [
+            { userId: new mongoose.Types.ObjectId(req.user.id) },
+            { duration: { $ne: null } },
+            {
+              updatedAt: {
+                $gte: new Date(new Date() - 7 * 60 * 60 * 24 * 1000),
+              },
+            },
+          ],
+        },
       },
       {
         $group: {
@@ -193,7 +204,7 @@ router.get("/average-duration-tuus-per-day", auth, async (req, res) => {
           _id: 0,
         },
       },
-    ]);
+    ]).sort({ "date.date": 1 });
 
     return res.status(200).send(ans);
   } catch (error) {
@@ -201,6 +212,8 @@ router.get("/average-duration-tuus-per-day", auth, async (req, res) => {
     res.status(400).send("Something went wrong!");
   }
 });
+
+// -----------------------------------------------------------------------
 
 // @route    POST api/metrics
 // @desc     Get live streak

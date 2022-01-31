@@ -25,6 +25,7 @@ const New = ({
     totalCountTuus,
     avgDurationTuus,
     avgDurationTuusPerDay,
+    avgDurationTuusPerDayHours,
     numberOfTuusGraph,
     avgDurationTuusLoading,
     totalCountTuusLoading,
@@ -58,8 +59,9 @@ const New = ({
         <div className='details'>
           <div className='metrics_details_one' data-aos='fade-up'>
             <BlockOne
-              avgDurationTuusPerDay={avgDurationTuusPerDay}
-              avgDurationTuusPerDayLoading={avgDurationTuusPerDayLoading}
+              data={avgDurationTuusPerDay}
+              dataHours={avgDurationTuusPerDayHours}
+              loading={avgDurationTuusPerDayLoading}
             />
           </div>
           <div className='metrics_details_two'>
@@ -70,13 +72,13 @@ const New = ({
               <div data-aos='fade-up'>
                 <TotalTuus
                   totalCountTuus={totalCountTuus}
-                  totalCountTuusLoading={totalCountTuusLoading}
+                  loading={totalCountTuusLoading}
                 />
               </div>
               <div data-aos='fade-up'>
                 <CommonTime
                   avgDurationTuus={avgDurationTuus}
-                  avgDurationTuusLoading={avgDurationTuusLoading}
+                  loading={avgDurationTuusLoading}
                 />
               </div>
               <div data-aos='fade-up'>
@@ -90,7 +92,7 @@ const New = ({
           <div className='metrics_details_three' data-aos='fade-up'>
             <BlockThree
               data={numberOfTuusGraph}
-              numberOfTuusGraphLoading={numberOfTuusGraphLoading}
+              loading={numberOfTuusGraphLoading}
             />
           </div>
         </div>

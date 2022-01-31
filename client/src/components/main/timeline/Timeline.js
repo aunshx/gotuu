@@ -12,6 +12,8 @@ import Element from './Element';
 import DatePicker from './DatePicker';
 import { Menu, MenuItem } from '@mui/material';
 
+import NothingToShow from '../NothingToShow'
+
 import { getTimelineEvent, getTimelineDatesCaptured } from '../../../redux/actions/timeline'
 
 // sksksk
@@ -162,25 +164,13 @@ const Timeline = ({
                 </div>
               ))
             ) : (
-              <div className='empty_timeline app '>
-                <div className='flex_middle' style={{ marginBottom: "1em" }}>
-                  <div>
-                    <FontAwesomeIcon
-                      icon={faThermometerEmpty}
-                      style={{
-                        color: "gray",
-                        fontSize: 25,
-                        marginRight: "0.5em",
-                      }}
-                    />
-                  </div>
-                  <div style={{ color: "gray" }}>Timeline is empty.</div>
-                </div>
-                <div>
-                  Try starting and completing a new Tuu! Or click on 'today' to
-                  check previous Tuus!
-                </div>
-              </div>
+              <>
+                <NothingToShow 
+                primaryMessage={'Timeline is empty'} 
+                secondaryMessage={"Try starting and completing a new Tuu! Or click on 'today' to check previous Tuus!"} 
+
+        />
+              </>
             )}
           </div>
         </div>

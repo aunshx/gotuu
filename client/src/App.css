@@ -178,6 +178,43 @@ pre {
   }
 }
 
+.spinner-graph {
+  display: flex;
+  width: 2em;
+  height: 2em;
+  border: 3px solid transparent;
+  border-top-color: var(--primary-color);
+  border-bottom-color: var(--primary-color);
+  border-radius: 50%;
+  animation: spin 1.5s linear infinite;
+}
+
+.spinner-graph:before {
+  content: '';
+  display: block;
+  margin: auto;
+  width: 0.75em;
+  height: 0.75em;
+  border: 3px solid var(--primary-color);
+  border-radius: 50%;
+  animation: pulse 1s alternate ease-in-out infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse {
+  from {
+    transform: scale(0.5);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
 
 
 /* ----------------------- NAVBAR ---------------------------- */
@@ -716,7 +753,7 @@ pre {
   font-weight: bold;
 }
 
-.timeline .line .empty_timeline {
+.empty_timeline {
   color: var(--light-grey-color);
   font-size: 0.9em;
   font-family: Arial, Helvetica, sans-serif;
@@ -1128,14 +1165,6 @@ pre {
   font-family: Arial, Helvetica, sans-serif;
 }
 
- /* .progress_charts_main {
-        width: 95%;
-        height: 95%;
-        background-color: white;
-        border-radius: 10px;
-        box-shadow: 0px 0px 6px -3px rgba(15, 15, 15, 0.75);
-    } */
-
     .top_margin_progress_blocks {
         margin-top: 0.5em;
     }
@@ -1166,6 +1195,53 @@ pre {
         justify-content: center;
         margin: 0em 0em 0em 0em;
     }
+
+    /* Switch */
+.switch .button_switch {
+  padding: 5px 5px;
+  cursor: pointer;
+  font-size: 0.7em;
+  outline: none;
+  color: #fff;
+  background-color: var(--primary-color);
+  border: none;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  box-shadow: 0 3px rgb(202, 202, 202);
+}
+
+.switch .button_switch:hover {background-color: var(--primary-color-darker)}
+
+.switch .button_switch:active {
+  background-color: var(--primary-color-darker);
+  box-shadow: 0 2px #666;
+  transform: translateY(4px);
+}
+
+.switch .button_switch-2 {
+  padding: 5px 5px;
+  cursor: pointer;
+  font-size: 0.7em;
+  outline: none;
+  color: #fff;
+  background-color: var(--count-color);
+  border: none;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  box-shadow: 0 3px rgb(202, 202, 202);
+}
+
+.switch .button_switch-2:hover {background-color: var(--closing-color)}
+
+.switch .button_switch-2:active {
+  background-color: var(--closing-color);
+  box-shadow: 0 2px #666;
+  transform: translateY(4px);
+}
+
+  /* ------ */
 
    /* ------------------------ NOT FOUND ----------------------- */
 

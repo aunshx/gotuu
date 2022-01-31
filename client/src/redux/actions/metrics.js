@@ -18,6 +18,7 @@ SNACKBAR_RESET,
 
   // Avg Duration of Tuus
     AVG_DURATION_TUUS_PER_DAY,
+    AVG_DURATION_TUUS_PER_DAY_HOURS,
     AVG_DURATION_TUUS_PER_DAY_LOADING,
     AVG_DURATION_TUUS_PER_DAY_LOADING_COMPLETE,
 
@@ -369,6 +370,7 @@ export const getNumberOfTuusYear = () => async (dispatch) => {
   }
 };
 
+// -------------- BLOCK ONE - GRAPH ------------------------------
 // Get avg duration of tuus per day
 export const getAvgDurationOfTuusPerDay = () => async (dispatch) => {
   let value = {
@@ -381,32 +383,34 @@ export const getAvgDurationOfTuusPerDay = () => async (dispatch) => {
       type: AVG_DURATION_TUUS_PER_DAY_LOADING,
     });
 
-    const res = await api.get("/metrics/average-duration-tuus-per-day");
+    const res = await api.get(
+      "/metrics/average-duration-tuus-per-day-sevendays"
+    );
 
-    let res2 = res.data.map((ele) => {
+    let resMin = res.data.map((ele) => {
       return {
         name: ele.date.date,
         value: (ele.sum/6000).toFixed('0')
       }
     })
     
-    let res3 = res.data.map((ele) => {
+    let resHour = res.data.map((ele) => {
       return {
         name: ele.date.date,
         value: (ele.sum/360000).toFixed('1')
       }
     })
 
-
-
-    let resMin = res2.reverse()
-    let resHour = res3.reverse()
-
-    // console.log(res.data, resMin, resHour)
+    console.log(resMin)
 
     dispatch({
       type: AVG_DURATION_TUUS_PER_DAY,
-      payload: res3.reverse(),
+      payload: resMin,
+    });
+
+    dispatch({
+      type: AVG_DURATION_TUUS_PER_DAY_HOURS,
+      payload: resHour,
     });
 
     dispatch({

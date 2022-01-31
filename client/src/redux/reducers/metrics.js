@@ -10,6 +10,7 @@ import {
 
   // Avg Duration of Tuus
   AVG_DURATION_TUUS_PER_DAY,
+  AVG_DURATION_TUUS_PER_DAY_HOURS,
   AVG_DURATION_TUUS_PER_DAY_LOADING,
   AVG_DURATION_TUUS_PER_DAY_LOADING_COMPLETE,
 
@@ -29,11 +30,12 @@ const initialState = {
 
   // Avg DUration Per Day
   avgDurationTuusPerDay: [],
+  avgDurationTuusPerDayHours: [],
   avgDurationTuusPerDayLoading: false,
 
   // Number of Tuus - Graph
   numberOfTuusGraph: [],
-  numberOfTuusGraphLoading: []
+  numberOfTuusGraphLoading: false
 };
 
 function authReducer(state = initialState, action) {
@@ -62,6 +64,11 @@ function authReducer(state = initialState, action) {
       return {
         ...state,
         avgDurationTuusPerDay: payload,
+      };
+    case AVG_DURATION_TUUS_PER_DAY_HOURS:
+      return {
+        ...state,
+        avgDurationTuusPerDayHours: payload,
       };
     case AVG_DURATION_TUUS_PER_DAY_LOADING:
       return {

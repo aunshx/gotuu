@@ -19,6 +19,7 @@ import {
   getNumberOfTuusYear
 } from '../../../../redux/actions/metrics'
 import { connect } from "react-redux";
+import NothingToShow from "../../NothingToShow";
 
 const BlockThree = ({
   data,
@@ -59,8 +60,16 @@ const BlockThree = ({
           width: "100%",
           height: "80%",
         }}
+        className="flex_middle"
       >
-        <ResponsiveContainer width='100%' height='100%'>
+        {numberOfTuusGraphLoading? (
+          <div className="spinner-graph">
+
+          </div>
+        ) : (
+          <>
+            {data.length > 0 ? (
+              <ResponsiveContainer width='100%' height='100%'>
           <BarChart
             width={500}
             height={300}
@@ -76,8 +85,9 @@ const BlockThree = ({
             <XAxis
               dataKey='name'
               scale='point'
-              padding={{ left: 10, right: 10 }}
+              padding={{ left: 20, right: 20 }}
               stroke='#44af16'
+              tick={{ fontSize: "0.85em" }}
             />
             <YAxis stroke='#44af16' />
             <Tooltip />
@@ -85,6 +95,14 @@ const BlockThree = ({
             <Bar dataKey='value' fill='#b0df9c' background={{ fill: "#eee" }} />
           </BarChart>
         </ResponsiveContainer>
+            ) : (
+              <NothingToShow 
+                primaryMessage={'Graph is empty'} 
+                secondaryMessage={"Try starting and completing a new Tuu! Or click on 'today' to check previous Tuus!"} 
+              />
+            )}
+          </>
+        )}
       </div>
       <div className='footnote flex_middle'>
         Number of Tuus = Total number of tuus completed
