@@ -1,4 +1,5 @@
 import api from "../../utils/api";
+import switchMonth from "../../utils/switchMonth";
 
 import {
 // Snackbar 
@@ -20,7 +21,353 @@ SNACKBAR_RESET,
     AVG_DURATION_TUUS_PER_DAY_LOADING,
     AVG_DURATION_TUUS_PER_DAY_LOADING_COMPLETE,
 
+  // Number of Tuus- Graph
+  NUMBER_OF_TUUS,
+  NUMBER_OF_TUUS_LOADING,
+  NUMBER_OF_TUUS_LOADING_COMPLETE,
+
 } from "./types";
+
+// Get avg duration of tuus per day - seven days
+export const getNumberOfTuusPerDay = () => async (dispatch) => {
+  let value = {
+    message: "1",
+    type: "info",
+  };
+
+  try {
+    dispatch({
+      type: NUMBER_OF_TUUS_LOADING,
+    });
+
+    const res = await api.get("/metrics/number-of-tuus-per-day-sevendays");
+
+    let res2 = res.data.map((ele) => {
+      return {
+        name: ele.date.date,
+        value: ele.count,
+      };
+    });
+
+    dispatch({
+      type: NUMBER_OF_TUUS,
+      payload: res2,
+    });
+
+    dispatch({
+      type: NUMBER_OF_TUUS_LOADING_COMPLETE,
+    });
+  } catch (error) {
+    if (error.response.status === 500) {
+      value.message = "Oops! Something went wrong. Please reload!";
+      value.type = "error";
+
+      dispatch({
+        type: ERROR_SNACKBAR,
+        payload: value,
+      });
+
+      dispatch({
+        type: NUMBER_OF_TUUS_LOADING_COMPLETE,
+      });
+
+      setTimeout(
+        () =>
+          dispatch({
+            type: SNACKBAR_RESET,
+          }),
+        5000
+      );
+    } else if (error.response.status === 400) {
+      value.message = error.response.data.errors[0].msg;
+      value.type = "error";
+
+      dispatch({
+        type: ERROR_SNACKBAR,
+        payload: value,
+      });
+
+      dispatch({
+        type: NUMBER_OF_TUUS_LOADING_COMPLETE,
+      });
+
+      setTimeout(
+        () =>
+          dispatch({
+            type: SNACKBAR_RESET,
+          }),
+        5000
+      );
+    } else if (error.response.status === 401) {
+      value.message = "Your session has expired. Please login again.";
+      value.type = "error";
+
+      dispatch({
+        type: ERROR_SNACKBAR,
+        payload: value,
+      });
+
+      dispatch({
+        type: NUMBER_OF_TUUS_LOADING_COMPLETE,
+      });
+
+      setTimeout(
+        () =>
+          dispatch({
+            type: SNACKBAR_RESET,
+          }),
+        5000
+      );
+    } else {
+      value.message = "Oops! Looks like something went wrong. Please reload!";
+      value.type = "error";
+
+      dispatch({
+        type: ERROR_SNACKBAR,
+        payload: value,
+      });
+
+      dispatch({
+        type: NUMBER_OF_TUUS_LOADING_COMPLETE,
+      });
+
+      setTimeout(
+        () =>
+          dispatch({
+            type: SNACKBAR_RESET,
+          }),
+        5000
+      );
+    }
+  }
+};
+
+// Get avg duration of tuus per day - per month
+export const getNumberOfTuusCurrentMonth = () => async (dispatch) => {
+  let value = {
+    message: "1",
+    type: "info",
+  };
+
+  try {
+    dispatch({
+      type: NUMBER_OF_TUUS_LOADING,
+    });
+
+    const res = await api.get(
+      "/metrics/number-of-tuus-per-day-currentMonth"
+    );
+
+      let res2 = res.data.map((ele) => {
+        return switchMonth(ele)
+      })
+
+    dispatch({
+      type: NUMBER_OF_TUUS,
+      payload: res2,
+    });
+
+    dispatch({
+      type: NUMBER_OF_TUUS_LOADING_COMPLETE,
+    });
+  } catch (error) {
+    if (error.response.status === 500) {
+      value.message = "Oops! Something went wrong. Please reload!";
+      value.type = "error";
+
+      dispatch({
+        type: ERROR_SNACKBAR,
+        payload: value,
+      });
+
+      dispatch({
+        type: NUMBER_OF_TUUS_LOADING_COMPLETE,
+      });
+
+      setTimeout(
+        () =>
+          dispatch({
+            type: SNACKBAR_RESET,
+          }),
+        5000
+      );
+    } else if (error.response.status === 400) {
+      value.message = error.response.data.errors[0].msg;
+      value.type = "error";
+
+      dispatch({
+        type: ERROR_SNACKBAR,
+        payload: value,
+      });
+
+      dispatch({
+        type: NUMBER_OF_TUUS_LOADING_COMPLETE,
+      });
+
+      setTimeout(
+        () =>
+          dispatch({
+            type: SNACKBAR_RESET,
+          }),
+        5000
+      );
+    } else if (error.response.status === 401) {
+      value.message = "Your session has expired. Please login again.";
+      value.type = "error";
+
+      dispatch({
+        type: ERROR_SNACKBAR,
+        payload: value,
+      });
+
+      dispatch({
+        type: NUMBER_OF_TUUS_LOADING_COMPLETE,
+      });
+
+      setTimeout(
+        () =>
+          dispatch({
+            type: SNACKBAR_RESET,
+          }),
+        5000
+      );
+    } else {
+      value.message = "Oops! Looks like something went wrong. Please reload!";
+      value.type = "error";
+
+      dispatch({
+        type: ERROR_SNACKBAR,
+        payload: value,
+      });
+
+      dispatch({
+        type: NUMBER_OF_TUUS_LOADING_COMPLETE,
+      });
+
+      setTimeout(
+        () =>
+          dispatch({
+            type: SNACKBAR_RESET,
+          }),
+        5000
+      );
+    }
+  }
+};
+
+// Get avg duration of tuus per day - per year
+export const getNumberOfTuusYear = () => async (dispatch) => {
+  let value = {
+    message: "1",
+    type: "info",
+  };
+
+  try {
+    dispatch({
+      type: NUMBER_OF_TUUS_LOADING,
+    });
+
+    const res = await api.get("/metrics/number-of-tuus-per-day-year");
+
+      let res2 = res.data.map((ele) => {
+        return {
+          name: ele.date.date,
+          value: ele.count,
+        };
+      });
+
+    dispatch({
+      type: NUMBER_OF_TUUS,
+      payload: res2,
+    });
+
+    dispatch({
+      type: NUMBER_OF_TUUS_LOADING_COMPLETE,
+    });
+  } catch (error) {
+    if (error.response.status === 500) {
+      value.message = "Oops! Something went wrong. Please reload!";
+      value.type = "error";
+
+      dispatch({
+        type: ERROR_SNACKBAR,
+        payload: value,
+      });
+
+      dispatch({
+        type: NUMBER_OF_TUUS_LOADING_COMPLETE,
+      });
+
+      setTimeout(
+        () =>
+          dispatch({
+            type: SNACKBAR_RESET,
+          }),
+        5000
+      );
+    } else if (error.response.status === 400) {
+      value.message = error.response.data.errors[0].msg;
+      value.type = "error";
+
+      dispatch({
+        type: ERROR_SNACKBAR,
+        payload: value,
+      });
+
+      dispatch({
+        type: NUMBER_OF_TUUS_LOADING_COMPLETE,
+      });
+
+      setTimeout(
+        () =>
+          dispatch({
+            type: SNACKBAR_RESET,
+          }),
+        5000
+      );
+    } else if (error.response.status === 401) {
+      value.message = "Your session has expired. Please login again.";
+      value.type = "error";
+
+      dispatch({
+        type: ERROR_SNACKBAR,
+        payload: value,
+      });
+
+      dispatch({
+        type: NUMBER_OF_TUUS_LOADING_COMPLETE,
+      });
+
+      setTimeout(
+        () =>
+          dispatch({
+            type: SNACKBAR_RESET,
+          }),
+        5000
+      );
+    } else {
+      value.message = "Oops! Looks like something went wrong. Please reload!";
+      value.type = "error";
+
+      dispatch({
+        type: ERROR_SNACKBAR,
+        payload: value,
+      });
+
+      dispatch({
+        type: NUMBER_OF_TUUS_LOADING_COMPLETE,
+      });
+
+      setTimeout(
+        () =>
+          dispatch({
+            type: SNACKBAR_RESET,
+          }),
+        5000
+      );
+    }
+  }
+};
 
 // Get avg duration of tuus per day
 export const getAvgDurationOfTuusPerDay = () => async (dispatch) => {
@@ -55,7 +402,7 @@ export const getAvgDurationOfTuusPerDay = () => async (dispatch) => {
     let resMin = res2.reverse()
     let resHour = res3.reverse()
 
-    console.log(res.data, resMin, resHour)
+    // console.log(res.data, resMin, resHour)
 
     dispatch({
       type: AVG_DURATION_TUUS_PER_DAY,

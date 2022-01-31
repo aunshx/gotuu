@@ -12,6 +12,11 @@ import {
   AVG_DURATION_TUUS_PER_DAY,
   AVG_DURATION_TUUS_PER_DAY_LOADING,
   AVG_DURATION_TUUS_PER_DAY_LOADING_COMPLETE,
+
+  // Number of Tuus- Graph
+  NUMBER_OF_TUUS,
+  NUMBER_OF_TUUS_LOADING,
+  NUMBER_OF_TUUS_LOADING_COMPLETE,
 } from "../actions/types";
 
 const initialState = {
@@ -24,13 +29,34 @@ const initialState = {
 
   // Avg DUration Per Day
   avgDurationTuusPerDay: [],
-  avgDurationTuusPerDayLoading: false
+  avgDurationTuusPerDayLoading: false,
+
+  // Number of Tuus - Graph
+  numberOfTuusGraph: [],
+  numberOfTuusGraphLoading: []
 };
 
 function authReducer(state = initialState, action) {
   const { type, payload } = action;
 
   switch (type) {
+    //   Avg Duration of Tuus Per Day
+    case NUMBER_OF_TUUS:
+      return {
+        ...state,
+        numberOfTuusGraph: payload,
+      };
+    case NUMBER_OF_TUUS_LOADING:
+      return {
+        ...state,
+        numberOfTuusGraphLoading: true,
+      };
+    case NUMBER_OF_TUUS_LOADING_COMPLETE:
+      return {
+        ...state,
+        numberOfTuusGraphLoading: false,
+      };
+
     //   Avg Duration of Tuus Per Day
     case AVG_DURATION_TUUS_PER_DAY:
       return {

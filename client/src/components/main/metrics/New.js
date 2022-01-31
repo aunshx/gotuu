@@ -25,20 +25,22 @@ const New = ({
     totalCountTuus,
     avgDurationTuus,
     avgDurationTuusPerDay,
+    numberOfTuusGraph,
     avgDurationTuusLoading,
     totalCountTuusLoading,
     avgDurationTuusPerDayLoading,
+    numberOfTuusGraphLoading,
   },
   // Redux Actions
-  getTotalNumberOfTuus,
-  getAvgDurationOfTuus,
-  getAvgDurationOfTuusPerDay,
+  // getTotalNumberOfTuus,
+  // getAvgDurationOfTuus,
+  // getAvgDurationOfTuusPerDay,
 }) => {
-    useEffect(() => {
-        getTotalNumberOfTuus()
-      getAvgDurationOfTuus()
-    getAvgDurationOfTuusPerDay()
-  },[])
+  //   useEffect(() => {
+  //       getTotalNumberOfTuus()
+  //     getAvgDurationOfTuus()
+  //   getAvgDurationOfTuusPerDay()
+  // },[])
 
   return (
     <div className='metrics flex_middle' id='metrics'>
@@ -86,7 +88,10 @@ const New = ({
             </div>
           </div>
           <div className='metrics_details_three' data-aos='fade-up'>
-            <BlockThree />
+            <BlockThree
+              data={numberOfTuusGraph}
+              numberOfTuusGraphLoading={numberOfTuusGraphLoading}
+            />
           </div>
         </div>
       </div>

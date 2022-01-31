@@ -10,6 +10,159 @@ const mongoose = require('mongoose')
 const User = require("../../models/User");
 const Timeline = require("../../models/Timeline");
 
+// =============== NUMBER OF TUUS PER DAY =================
+
+// ---------- PER YEAR------------------
+// @route    POST api/metrics
+// @desc     Get average duration of tuus per day
+// @access   Private
+
+router.get("/number-of-tuus-per-day-year", auth, async (req, res) => {
+  let ans = {};
+  try {
+    ans = await Timeline.aggregate([
+      {
+        $match: {
+          $and: [
+            { userId: new mongoose.Types.ObjectId(req.user.id) },
+            { duration: { $ne: null } },
+          ],
+        },
+      },
+      {
+        $group: {
+          _id: {
+            date: {
+              $dateToString: {
+                date: "$createdAt",
+                format: "%Y",
+              },
+            },
+          },
+          count: { $sum: 1 },
+        },
+      },
+      {
+        $project: {
+          date: "$_id",
+          count: 1,
+          _id: 0,
+        },
+      },
+    ]).sort({ 'createdAt': 1 });
+
+    return res.status(200).send(ans);
+  } catch (error) {
+    console.error(error.message);
+    res.status(400).send("Something went wrong!");
+  }
+});
+
+
+// ---------- 7 DAYS ------------------
+// @route    POST api/metrics
+// @desc     Get average duration of tuus per day
+// @access   Private
+
+router.get("/number-of-tuus-per-day-sevendays", auth, async (req, res) => {
+
+  let ans = {};
+  try {
+    ans = await Timeline.aggregate([
+      {
+        $match: {
+          $and: [
+            { userId: new mongoose.Types.ObjectId(req.user.id) },
+            { duration: { $ne: null } },
+            {
+              updatedAt: {
+                $gte: new Date(new Date() - 7 * 60 * 60 * 24 * 1000),
+              },
+            },
+          ],
+        },
+      },
+      {
+        $group: {
+          _id: {
+            date: {
+              $dateToString: {
+                date: "$createdAt",
+                format: "%d/%m/%Y",
+              },
+            },
+          },
+          count: { $sum: 1 },
+        },
+      },
+      {
+        $project: {
+          date: "$_id",
+          count: 1,
+          _id: 0,
+        },
+      },
+    ]).sort({ 'date.date': 1 })
+
+    // console.log(new Date(new Date() - 8 * 60 * 60 * 24 * 1000));
+
+    return res.status(200).send(ans);
+  } catch (error) {
+    console.error(error.message);
+    res.status(400).send("Something went wrong!");
+  }
+});
+
+// ---------- Current Month ------------------
+// @route    POST api/metrics
+// @desc     Get number of tuus per month
+// @access   Private
+
+router.get("/number-of-tuus-per-day-currentMonth", auth, async (req, res) => {
+  let ans = {};
+
+  try {
+    ans = await Timeline.aggregate([
+      {
+        $match: {
+          $and: [
+            { userId: new mongoose.Types.ObjectId(req.user.id) },
+            { duration: { $ne: null } },
+            {},
+          ],
+        },
+      },
+      {
+        $group: {
+          _id: {
+            date: {
+              $dateToString: {
+                date: "$createdAt",
+                format: "%m",
+              },
+            },
+          },
+          count: { $sum: 1 },
+        },
+      },
+      {
+        $project: {
+          date: "$_id",
+          count: 1,
+          _id: 0,
+        },
+      },
+    ]).sort({ "date.date": 1 });
+
+    return res.status(200).send(ans);
+  } catch (error) {
+    console.error(error.message);
+    res.status(400).send("Something went wrong!");
+  }
+});
+
+// ----------------------------------------------------------------------------------
+
 // @route    POST api/metrics
 // @desc     Get average duration of tuus per day
 // @access   Private
@@ -48,6 +201,7 @@ router.get("/average-duration-tuus-per-day", auth, async (req, res) => {
     res.status(400).send("Something went wrong!");
   }
 });
+
 // @route    POST api/metrics
 // @desc     Get live streak
 // @access   Private

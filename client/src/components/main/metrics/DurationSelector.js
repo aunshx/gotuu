@@ -91,15 +91,6 @@ const DurationSelector = ({ duration, onChangeDuration }) => {
           >
             vs Year
           </MenuItem>
-          <MenuItem
-            value={"all"}
-            style={{
-              fontSize: "0.9em",
-              height: "20px",
-            }}
-          >
-            vs All Time
-          </MenuItem>
         </CssTextField>
       </FormControl>
     </div>
