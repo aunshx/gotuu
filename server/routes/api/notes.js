@@ -9,6 +9,28 @@ const Notes = require("../../models/Notes");
 const { getMonthInString } = require("../../middleware/getMonthInString");
 
 // @route    POST api/notes
+// @desc     Get note
+// @access   Private
+
+router.post(
+  "/get-note",
+  auth,
+  async (req, res) => {
+
+    const { eventId } = req.body;
+
+    try {
+      let event = await Notes.findOne({ eventId })
+
+      return res.status(200).send(event);
+    } catch (error) {
+      console.error(error.message);
+      res.status(400).send("Something went wrong!");
+    }
+  }
+);
+
+// @route    POST api/notes
 // @desc     Create a note
 // @access   Private
 

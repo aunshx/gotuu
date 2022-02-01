@@ -13,6 +13,96 @@ import {
 } from "./types";
 
 // Add note data body
+export const getNote = (eventId) => async (dispatch) => {
+  let value = {
+    message: "1",
+    type: "info",
+  };
+
+  let body = JSON.stringify({
+    eventId,
+  });
+
+  try {
+    console.log('RUNNNNNN')
+    const res = await api.post("/notes/get-note", body)
+
+    return res.data
+
+  } catch (error) {
+    if (error.response.status === 500) {
+      value.message = "Oops! Something went wrong. Please reload!";
+      value.type = "error";
+
+      dispatch({
+        type: ERROR_SNACKBAR,
+        payload: value,
+      });
+
+      setTimeout(
+        () =>
+          dispatch({
+            type: SNACKBAR_RESET,
+          }),
+        5000
+      );
+    } else if (error.response.status === 400) {
+      value.message = error.response.data.errors[0].msg;
+      value.type = "error";
+
+      dispatch({
+        type: ERROR_SNACKBAR,
+        payload: value,
+      });
+
+      dispatch({
+        type: ERROR_AUTH_SNACKBAR,
+      });
+
+      setTimeout(
+        () =>
+          dispatch({
+            type: SNACKBAR_RESET,
+          }),
+        5000
+      );
+    } else if (error.response.status === 401) {
+      value.message = "Your session has expired. Please login again.";
+      value.type = "error";
+
+      dispatch({
+        type: ERROR_SNACKBAR,
+        payload: value,
+      });
+
+      setTimeout(
+        () =>
+          dispatch({
+            type: SNACKBAR_RESET,
+          }),
+        5000
+      );
+    } else {
+      value.message = "Oops! Looks like something went wrong. Please reload!";
+      value.type = "error";
+
+      dispatch({
+        type: ERROR_SNACKBAR,
+        payload: value,
+      });
+
+      setTimeout(
+        () =>
+          dispatch({
+            type: SNACKBAR_RESET,
+          }),
+        5000
+      );
+    }
+  }
+};
+
+// Add note data body
 export const sendNoteDataBody = (noteId, body) => async (dispatch) => {
   let value = {
     message: "1",

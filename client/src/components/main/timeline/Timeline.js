@@ -144,28 +144,10 @@ const Timeline = ({
           <div className='line'>
             {timeline.length > 0 ? (
               timeline.map((event, index) => (
-                <div key={index}>
-                  {index % 2 === 0 ? (
-                    <div>
-                      <div className='flex_left'>
-                        <Element duration={event.duration} />
-                      </div>
-                      <div className='flex_middle'>
-                        <div className={`liner_mini_left cursor_pointer`}></div>
-                      </div>
-                    </div>
-                  ) : (
-                    <div>
-                      <div className='flex_right'>
-                        <Element duration={event.duration} />
-                      </div>
-                      <div className='flex_middle'>
-                        <div
-                          className={`liner_mini_right cursor_pointer`}
-                        ></div>
-                      </div>
-                    </div>
-                  )}
+                <div key={index} >
+                  <div className=''>
+                    <Element event={event} type={index} />
+                  </div>
                 </div>
               ))
             ) : (
