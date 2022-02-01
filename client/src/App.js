@@ -8,7 +8,7 @@ import { LOGOUT } from "./redux/actions/types";
 import Home from "./components/Home";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
-import About from "./components/layout/About";
+import About from "./components/about/About";
 import NotFound from "./components/layout/NotFound";
 import store from "./store";
 import setAuthToken from './utils/setAuthToken'
