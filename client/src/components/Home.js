@@ -58,7 +58,7 @@ const Home = ({
     }
     const options = {
       root: null,
-      threshold: 0,
+      threshold: 0.1,
     };
     checker2.current = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting) {

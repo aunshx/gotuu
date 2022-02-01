@@ -102,7 +102,7 @@ const SideNavbar = ({
         ) : (
           <div className='app'>
             <div className='flex_middle mrg-t-b-1'>
-              <a href='#timeline'>
+              <Link to="/about">
                 <div className='flex_middle navbar_option'>
                   <div>
                     <FontAwesomeIcon
@@ -113,7 +113,7 @@ const SideNavbar = ({
                   </div>
                   <div className='mrg-r-point-5 ft-bold link'>About</div>
                 </div>
-              </a>
+              </Link>
             </div>
             <div className='flex_middle mrg-t-b-1'>
               <Link to='/login'>

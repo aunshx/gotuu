@@ -8,6 +8,7 @@ import { LOGOUT } from "./redux/actions/types";
 import Home from "./components/Home";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
+import About from "./components/layout/About";
 import NotFound from "./components/layout/NotFound";
 import store from "./store";
 import setAuthToken from './utils/setAuthToken'
@@ -35,6 +36,7 @@ function App() {
             <Route exact path='/' component={Home} />
             <Route exact path='/register' component={Register} />
             <Route exact path='/login' component={Login} />
+            <Route exact path='/about' component={About} />
             <Route component={NotFound} />
           </Switch>
         </>
