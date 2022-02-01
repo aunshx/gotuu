@@ -15,10 +15,13 @@ import { Menu, MenuItem } from '@mui/material';
 import NothingToShow from '../NothingToShow'
 
 import { getTimelineEvent, getTimelineDatesCaptured } from '../../../redux/actions/timeline'
+import { useCallback } from 'react';
+import { useRef } from 'react';
 
 // sksksk
 
 const Timeline = ({
+  fixedContent,
   goToMain,
   // Redux States
   timeline: { timeline },
@@ -55,8 +58,7 @@ const Timeline = ({
 
   return (
     <>
-      <div className='timeline app' id='timeline'>
-        {" "}
+      <div className='timeline' id='timeline'>
         <div className='main'>
           <div className='title flex_evenly'>
             <div>
@@ -144,7 +146,7 @@ const Timeline = ({
           <div className='line'>
             {timeline.length > 0 ? (
               timeline.map((event, index) => (
-                <div key={index} >
+                <div key={index}>
                   <div className=''>
                     <Element event={event} type={index} />
                   </div>
@@ -162,18 +164,16 @@ const Timeline = ({
             )}
           </div>
         </div>
-        <div
-          id='go-up'
-          className='cursor_pointer animated bounce'
-          data-aos='fade-up-left'
-        >
+      </div>
+      {fixedContent && (
+        <div id='go-up' className='cursor_pointer' data-aos='fade-up-left'>
           <FontAwesomeIcon
             icon={faArrowCircleUp}
             style={{ fontSize: 35, color: "#7ed957" }}
             onClick={goToMain}
           />
         </div>
-      </div>
+      )}
     </>
   );
 };;

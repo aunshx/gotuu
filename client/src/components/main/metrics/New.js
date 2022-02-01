@@ -19,6 +19,7 @@ import {
 } from "../../../redux/actions/metrics";
 
 const New = ({
+  fixedContent2,
   goToMain,
   // Redux State
   metrics: {
@@ -100,13 +101,15 @@ const New = ({
           </div>
         </div>
       </div>
-      <div id='go-up' className='cursor_pointer' data-aos='fade-up-left'>
-        <FontAwesomeIcon
-          icon={faArrowCircleUp}
-          style={{ fontSize: 35, color: "#7ed957" }}
-          onClick={goToMain}
-        />
-      </div>
+      {fixedContent2 && (
+        <div id='go-up' className='cursor_pointer' data-aos='fade-up-left'>
+          <FontAwesomeIcon
+            icon={faArrowCircleUp}
+            style={{ fontSize: 35, color: "#7ed957" }}
+            onClick={goToMain}
+          />
+        </div>
+      )}
     </div>
   );
 };
