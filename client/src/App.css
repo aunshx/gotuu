@@ -1690,3 +1690,50 @@ padding: 0  0 2em 0;
     color: rgb(211, 159, 47)
 }
 
+/* ----------------------------- ABOUT ----------------------------- */
+.about {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  margin: 2em 0;
+  padding: 2em 0;
+}
+
+.about .main-about {
+  width: 60vw;
+  height:auto;
+overflow:visible;
+padding: 0  0 2em 0;
+}
+
+.about .main-about .image {
+  background-image: url('./resources/images/about.jpg');
+  background-size: contain;
+  width: 100%;
+  height: 35vh;
+  border-radius: 10px;
+  position: relative;
+}
+
+
+.about .main-about .image .title {
+  color: var(--light-color);
+  font-size: 4em;
+  font-weight: bold;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  position: absolute;
+  bottom: 40%;
+  left: 40%;
+}
+
+.about .main-about .image .credits {
+  color: var(--dark-font-color);
+  font-size: 0.75em;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  position: absolute;
+  bottom: -6%;
+  left: 40%;
+}
+
+/* ------------------------------------------------------------------ */
