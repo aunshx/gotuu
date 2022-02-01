@@ -68,7 +68,12 @@ const Timeline = ({
             <div>TUULINE</div>
             <div className='date cursor_pointer' onClick={handleClick}>
               {dateSelected ? (
-                <>{moment(dateSelected).format("DD/MM/YYYY")}</>
+                <>
+                  {moment(dateSelected).format("DD/MM/YYYY") ===
+                  moment(new Date()).format("DD/MM/YYYY")
+                    ? "Today"
+                    : moment(dateSelected).format("DD/MM/YYYY")}
+                </>
               ) : (
                 <>Today</>
               )}
@@ -165,11 +170,12 @@ const Timeline = ({
               ))
             ) : (
               <>
-                <NothingToShow 
-                primaryMessage={'Timeline is empty'} 
-                secondaryMessage={"Try starting and completing a new Tuu! Or click on 'today' to check previous Tuus!"} 
-
-        />
+                <NothingToShow
+                  primaryMessage={"Timeline is empty"}
+                  secondaryMessage={
+                    "Try starting and completing a new Tuu! Or click on 'today' to check previous Tuus!"
+                  }
+                />
               </>
             )}
           </div>

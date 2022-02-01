@@ -46,6 +46,11 @@ export const ADD_DATES_CAPTURED = "ADD_DATES_CAPTURED";
 export const LOADING_TIMELINE = "LOADING_TIMELINE";
 export const LOADING_TIMELINE_COMPLETE = "LOADING_TIMELINE_COMPLETE";
 
+// ----------------------- NOTES ------------------------------
+export const ADD_NEW_NOTE = "ADD_NEW_NOTE";
+export const ADD_NOTE_TITLE = "ADD_NOTE_TITLE";
+export const ADD_NOTE_BODY = "ADD_NOTE_BODY";
+
 // -------------------- METRICS ------------------------------
 export const TOTAL_COUNT_TUUS = "TOTAL_COUNT_TUUS";
 export const TOTAL_COUNT_TUUS_LOADING = "TOTAL_COUNT_TUUS_LOADING";

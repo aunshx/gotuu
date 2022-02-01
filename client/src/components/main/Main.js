@@ -10,85 +10,118 @@ import Alerts from '../layout/Alerts'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCompressAlt, faExpandAlt, faStickyNote } from '@fortawesome/free-solid-svg-icons';
-import { Tooltip } from '@mui/material';
+import { Tooltip, Modal, Fade, Box, Badge } from '@mui/material';
+import Note from './notes/Note';
+import { connect } from 'react-redux';
 
-const Main = ({ goMain, isActive, setIsActive }) => {
-    const [isHovering, setIsHovering] = useState(false)
-    const [isCounting, setIsCounting] = useState(false)
-    const [start, setStart] = useState(false)
-    const [isFull, setIsFull] = useState(false)
-    const [isComplete, setIsComplete] = useState(false)
-    const [toggleNote, setToggleNote] = useState(false)
-    const reffie = useRef()
-    const handle = useRef()
+import {
+  createNewNote
+} from '../../redux/actions/notes'
 
-    useEffect(() => document.title = "Gotuu | Track your time", [])
+const style = {
+  position: "fixed",
+  top: "50%",
+  left: "48%",
+  transform: "translate(-50%, -50%)",
+  bgcolor: "background.paper",
+  boxShadow: 24,
+  border: "none",
+  p: 4,
+};
 
-    const toggleFullScreen = () => {
-      setIsFull(true)
-     if (handle.current.requestFullscreen) {
-       console.log(handle.current)
-        handle.current.requestFullscreen();
-      } else if (handle.current.msRequestFullscreen) {
-        handle.current.msRequestFullscreen();
-      } else if (handle.current.mozRequestFullScreen) {
-        handle.current.mozRequestFullScreen();
-      } else if (handle.current.webkitRequestFullscreen) {
-        handle.current.webkitRequestFullscreen();
-      }
-    };
+const Main = ({
+  goMain,
+  isActive,
+  setIsActive,
+  // Redux State
+  timeline: { currentEventId },
+  notes: { noteId },
+  // Redux Actions
+  createNewNote,
+}) => {
+  const [isNoteOpen, setIsNoteOpen] = useState(false);
+  const [isHovering, setIsHovering] = useState(false);
+  const [isCounting, setIsCounting] = useState(false);
+  const [start, setStart] = useState(false);
+  const [isFull, setIsFull] = useState(false);
+  const [isComplete, setIsComplete] = useState(false);
+  const [toggleNote, setToggleNote] = useState(false);
+  const reffie = useRef();
+  const handle = useRef();
 
-    const stopFullScreen = () => {
-      setIsFull(false)
-     if (document.exitFullscreen) {
-       document.exitFullscreen();
-     } else if (document.msExitFullscreen) {
-       document.msExitFullscreen();
-     } else if (document.mozExitFullScreen) {
-       document.mozExitFullscreen();
-     } else if (document.webkitExitFullscreen) {
-       document.webkitExitFullscreen();
-     }
-    };
+  useEffect(() => (document.title = "Gotuu | Track your time"), []);
 
-    useEffect(() => {
-      if(start === true){
-        setTimeout(() => setStart(false), 1005)
-      }
+  const toggleFullScreen = () => {
+    setIsFull(true);
+    if (handle.current.requestFullscreen) {
+      console.log(handle.current);
+      handle.current.requestFullscreen();
+    } else if (handle.current.msRequestFullscreen) {
+      handle.current.msRequestFullscreen();
+    } else if (handle.current.mozRequestFullScreen) {
+      handle.current.mozRequestFullScreen();
+    } else if (handle.current.webkitRequestFullscreen) {
+      handle.current.webkitRequestFullscreen();
+    }
+  };
 
-      return () => clearTimeout()
-    })
+  const stopFullScreen = () => {
+    setIsFull(false);
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    } else if (document.msExitFullscreen) {
+      document.msExitFullscreen();
+    } else if (document.mozExitFullScreen) {
+      document.mozExitFullscreen();
+    } else if (document.webkitExitFullscreen) {
+      document.webkitExitFullscreen();
+    }
+  };
 
-    const isHoveringTrue = () => {
-        setIsHovering(true)
+  useEffect(() => {
+    if (start === true) {
+      setTimeout(() => setStart(false), 1005);
     }
 
-    const isHoveringFalse = () => {
-        setIsHovering(false)
-    }
+    return () => clearTimeout();
+  });
 
-    const startCountDown = () => {
-        setIsCounting(true)
-        setIsActive(true)
-    }
+  const isHoveringTrue = () => {
+    setIsHovering(true);
+  };
 
-    const stopCountDown = () => {
-        setIsCounting(false)
-        setIsActive(false)
-    }
+  const isHoveringFalse = () => {
+    setIsHovering(false);
+  };
 
-    const scrollSmoothHandler = () => {
-      setStart(true)
-      setTimeout(() => reffie.current.scrollIntoView({ behavior: "smooth" }), 1005);
-    }
+  const startCountDown = () => {
+    setIsCounting(true);
+    setIsActive(true);
+  };
 
-    const toggleNewNote = () => {
+  const stopCountDown = () => {
+    setIsCounting(false);
+    setIsActive(false);
+  };
 
-    }
+  const scrollSmoothHandler = () => {
+    setStart(true);
+    setTimeout(
+      () => reffie.current.scrollIntoView({ behavior: "smooth" }),
+      1005
+    );
+  };
 
-    const unToggleNewNote = () => {
-      
+  const toggleNewNote = (currentEventId, noteId) => {
+    setIsNoteOpen(true);
+    if(!noteId){
+      createNewNote(currentEventId);
     }
+  };
+
+  const unToggleNewNote = () => {
+    setIsNoteOpen(false);
+  };
   return (
     <div
       className={isActive ? "main-active flex_middle" : "main flex_middle"}
@@ -138,10 +171,19 @@ const Main = ({ goMain, isActive, setIsActive }) => {
                   </div>
                 </Tooltip>
                 <Tooltip title='Create Note' placement='top'>
-                  <div onClick={toggleNewNote} className='icons-right'>
+                  <div
+                    onClick={() => toggleNewNote(currentEventId, noteId)}
+                    className='icons-right'
+                  >
+                    {(noteId) && (
+                    <div className='notes-active-point'></div>
+                    )}
                     <FontAwesomeIcon
                       icon={faStickyNote}
-                      style={{ fontSize: 20, color: "gray" }}
+                      style={{
+                        fontSize: 20,
+                        color: "gray",
+                      }}
                     />
                   </div>
                 </Tooltip>
@@ -154,10 +196,40 @@ const Main = ({ goMain, isActive, setIsActive }) => {
           <Alerts />
         </div>
       </div>
+      <Modal
+        open={isNoteOpen}
+        onClose={!isNoteOpen}
+        closeAfterTransition
+        BackdropProps={{
+          timeout: 500,
+          style: {
+            backgroundColor: "rgba(0,0,0,0.8)",
+          },
+        }}
+      >
+        <Fade in={isNoteOpen}>
+          <Box style={style}>
+            <Note close={unToggleNewNote} />
+          </Box>
+        </Fade>
+      </Modal>
     </div>
   );
 };
 
-Main.propTypes = {};
+Main.propTypes = {
+  notes: PropTypes.object.isRequired,
+  timeline: PropTypes.object.isRequired,
+  createNewNote: PropTypes.func.isRequired,
+};
 
-export default Main;
+const mapStateToProps = (state) => ({
+  timeline: state.timeline,
+  notes: state.notes
+});
+
+const mapActionsToProps = {
+  createNewNote,
+};
+
+export default connect(mapStateToProps, mapActionsToProps)(Main);

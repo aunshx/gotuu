@@ -6,8 +6,12 @@ import { connect } from 'react-redux';
 
 import store from '../../../store'
 import {
-  ERROR_SNACKBAR, SNACKBAR_RESET
-} from '../../../redux/actions/types'
+  ERROR_SNACKBAR,
+  SNACKBAR_RESET,
+  ADD_NEW_NOTE,
+  ADD_NOTE_TITLE,
+  ADD_NOTE_BODY,
+} from "../../../redux/actions/types";
 import {
   addDurationToEventEnd
 } from '../../../redux/actions/timeline'
@@ -66,6 +70,20 @@ const Count = ({
       setTime(0);
       scrollSmoothHandler();
       addDurationToEventEnd(currentEventId, time);
+      store.dispatch({
+        type: ADD_NEW_NOTE,
+        payload: "",
+      });
+
+      store.dispatch({
+        type: ADD_NOTE_TITLE,
+        payload: "",
+      });
+
+      store.dispatch({
+        type: ADD_NOTE_BODY,
+        payload: "",
+      });
     }
     
   };

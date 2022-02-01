@@ -434,6 +434,21 @@ pre {
     margin-left: 50px;
   }
 
+  .main .expand-icon .icons-right {
+    position: relative;
+  }
+
+ .icons-right .notes-active-point {
+    position: absolute;
+    top: 0px;
+    right: -4px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    color: var(--dark-font-color);
+  }
+
 @keyframes getInExpandIcon {
   0% {
     opacity: 0;
@@ -1316,3 +1331,102 @@ pre {
      height: 55vh;
      border-radius: 10px;
    }
+
+   /* ----------------------------- NOTES ----------------------------- */
+   .single_note_1 {
+    width: 90%;
+    margin: 1em;
+    background-color: #fff;
+    color: var(--dark-font-color);
+    border-radius: 10px;
+    display: grid;
+    row-gap: 0;
+    white-space: pre-wrap;
+    width: 250px;
+    border: 2px solid var(--primary-color);
+    box-shadow: 0 4px 8px 0 var(--dark-font-color);
+}
+
+@keyframes singleNoteIn {
+    0% {
+        transform: scale(0.1);
+        opacity: 0.1;
+    }
+
+    50% {
+        transform: scale(0.6);
+        opacity: 0.6;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.single_note_1 .title {
+    margin: 0;
+}
+
+.single_note_1 .title input {
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid var(--primary-color);
+    outline: none;
+    width: 100%;
+    padding: 0.3em 0.5em 0.4em 1em;
+    font-weight: 600;
+    font-size: 0.9em;
+    color: var(--dark-font-color);
+}
+
+.single_note_1 .body textarea {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    width: 100%;
+    padding: 0.3em 0.5em 0.4em 0.9em;
+    font-size: 0.9em;
+    color: var(--dark-font-color);
+    resize: none;
+}
+
+.single_note_1 .body {
+    padding: 0;
+    margin: 0;
+    height: 280px;
+}
+
+
+.single_note_1 .note-footer,
+.single_note_1_pinned .note-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.9em;
+    padding: 0.5em;
+}
+
+.single_note_1 .note-footer .icons,
+.single_note_1_pinned .note-footer .icons {
+    cursor: pointer;
+    color: rgb(118, 117, 117);
+    margin-right: 0.5em;
+}
+
+.single_note_1 .note-footer .icons:hover,
+.single_note_1_pinned .note-footer .icons:hover {
+    color: rgb(182, 182, 182)
+}
+
+.single_note_1 .note-footer .icons_pinned,
+.single_note_1_pinned .note-footer .icons_pinned {
+    cursor: pointer;
+    color: rgb(211, 159, 47);
+    margin-right: 0.5em;
+}
+
+.single_note_1 .note-footer .icons_pinned:hover,
+.single_note_1_pinned .note-footer .icons_pinned:hover {
+    color: rgb(211, 159, 47)
+}
