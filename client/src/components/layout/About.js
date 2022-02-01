@@ -9,7 +9,7 @@ const About = (props) => {
       <Navbar />
       <div className='about'>
         <div className='main-about flex_middle'>
-          <div className='image'>
+          <div className='image flex_middle'>
             <div className='title'>About</div>
             <div className='credits'>
               Photo by{" "}

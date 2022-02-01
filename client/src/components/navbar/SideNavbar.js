@@ -23,7 +23,9 @@ const SideNavbar = ({
     <div className='side_navbar'>
       <div className='title triple_grid mrg-t-b-1'>
         <div />
-        <div className='center_everything'>Hi! {user !== null ? user.name : ''} </div>
+        <div className='center_everything'>
+          Hi! {user !== null ? user.name : ""}{" "}
+        </div>
         <div className='center_everything' style={{ marginTop: "0.2em" }}>
           <CloseIcon
             className='cancel cursor_pointer'
@@ -101,8 +103,24 @@ const SideNavbar = ({
           </div>
         ) : (
           <div className='app'>
+            <div>
+              <div className='flex_middle mrg-t-b-1'>
+                <Link to="/">
+                  <div className='flex_middle navbar_option'>
+                    <div>
+                      <FontAwesomeIcon
+                        icon={faHome}
+                        style={{ fontSize: 20 }}
+                        className='icon'
+                      />
+                    </div>
+                    <div className='mrg-r-point-5 ft-bold link'>Home</div>
+                  </div>
+                </Link>
+              </div>
+            </div>
             <div className='flex_middle mrg-t-b-1'>
-              <Link to="/about">
+              <Link to='/about'>
                 <div className='flex_middle navbar_option'>
                   <div>
                     <FontAwesomeIcon

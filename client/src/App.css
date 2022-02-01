@@ -1697,7 +1697,7 @@ padding: 0  0 2em 0;
   justify-content: center;
   position: relative;
   margin: 2em 0;
-  padding: 2em 0;
+  padding: 0em 0;
 }
 
 .about .main-about {
@@ -1722,9 +1722,6 @@ padding: 0  0 2em 0;
   font-size: 4em;
   font-weight: bold;
   font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  position: absolute;
-  bottom: 40%;
-  left: 40%;
 }
 
 .about .main-about .image .credits {
