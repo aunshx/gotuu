@@ -67,7 +67,7 @@ const New = ({
               loading={avgDurationTuusPerDayLoading}
             />
           </div>
-          <div className='metrics_details_two'>
+          <div className='metrics_details_two flex_middle'>
             <div className='app'>
               <div data-aos='fade-up'>
                 <LiveStreak data={liveStreak} loading={liveStreakLoading} />
