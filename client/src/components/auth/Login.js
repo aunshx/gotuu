@@ -39,7 +39,7 @@ const CssTextField = styled(TextField, {
 const loginIconButtonStyle = makeStyles({
   root: {
     color: "gray",
-    border: "1px solid grey",
+    border: "1px solid green",
     backgroundColor: "none",
     fontSize: "10px",
     "&:hover": {
@@ -66,6 +66,8 @@ const Login = ({
   login,
   auth: { isAuthenticated, loginLoading, errorSnackbar },
 }) => {
+  const iconButtonStyle = loginIconButtonStyle();
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -232,7 +234,7 @@ const Login = ({
                 }
                 variant='outlined'
                 onClick={onSubmit}
-                // className={loginStyle.root}
+                className={iconButtonStyle.root}
               >
                 <div
                   style={{

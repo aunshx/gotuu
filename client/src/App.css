@@ -380,9 +380,8 @@ pre {
     min-height: 400px;
     color: #f4f4f4;
     border: 2px solid var(--primary-color);
-    z-index: 1;
+    z-index: 100;
     font-family: 'PT Serif',serif;
-    /* opacity: 0.95; */
 }
 
   .login-back {
@@ -404,13 +403,14 @@ pre {
     color: var(--dark-font-color);
     font-size: 22px;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    margin-bottom:1em;
 }
 
 .login .card .errors {
   background-color: var(--count-color);
   color: white;
   border-radius: 10px;
-  margin: 0.5em 0 1em 0;
+  margin: 0em 0 1.5em 0;
   width: 90%;
 }
 
