@@ -2030,16 +2030,17 @@ padding: 0  0 2em 0;
 }
 
 .register .register_three .card .title {
-    color: var(--dark-font-color);
+    color: var(--grey-color);
     font-size: 22px;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    margin-bottom:1em;
 }
 
 .register .register_three .card .errors {
   background-color: var(--count-color);
   color: white;
   border-radius: 10px;
-  margin: 0.5em 0 1em 0;
+  margin: 0em 0 1.5em 0;
   width: 90%;
 }
 

@@ -16,7 +16,8 @@ import Alerts from "../layout/Alerts";
 
 import logo from "../../resources/images/gotuuLogo.png";
 import logoRes from "../../resources/images/registerBackground.png";
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 const CssTextField = styled(TextField, {
   shouldForwardProp: (props) => props !== "focusColor",
@@ -59,8 +60,12 @@ const textFieldStyle = {
   width: "230px",
 };
 
-const Register = (props) => {
+const Register = ({ 
+  // Redux State
+  snackbar: { errorSnackbar }, auth: { isAuthenticated } 
+}) => {
   const [formData, setFormData] = useState({
+    fullName: "",
     email: "",
     password: "",
     showPassword: false,
@@ -68,9 +73,10 @@ const Register = (props) => {
 
   const [showChangePassword, setShowChangePassword] = useState(false);
   const [passwordEmptyError, setPasswordEmptyError] = useState(false);
+  const [nameEmptyError, setNameEmptyError] = useState(false);
   const [emailEmptyError, setEmailEmptyError] = useState(false);
 
-  const { email, password, showPassword } = formData;
+  const { fullName, email, password, showPassword } = formData;
 
   const showChange = () => {
     setShowChangePassword(true);
@@ -95,20 +101,24 @@ const Register = (props) => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    // redux action dispatched
-    if (password.length === 0 || email.length === 0) {
-      setPasswordEmptyError(true);
+
+    if (fullName.length === 0) {
+      setNameEmptyError(true)
+      setTimeout(() => setNameEmptyError(false), 5000);
+    } else if (email.length === 0) {
       setEmailEmptyError(true);
       setTimeout(() => setEmailEmptyError(false), 5000);
+    } else if (password.length === 0) {
+      setPasswordEmptyError(true);
       setTimeout(() => setPasswordEmptyError(false), 5000);
     } else {
-      // login(formData);
+      console.log('Submitted')
     }
   };
 
-  // if (isAuthenticated) {
-  //   return <Redirect to='/' />;
-  // }
+  if (isAuthenticated) {
+    return <Redirect to='/' />;
+  }
 
   return (
     <>
@@ -133,16 +143,52 @@ const Register = (props) => {
               <img src={logo} alt='John' />
               <div className='title ft-bold'>Register</div>
               <div className='app'>
+                {(passwordEmptyError) && (
+                  <div className='errors'>
+                    Password cannot be empty
+                  </div>
+                )}
                 {(passwordEmptyError || emailEmptyError) && (
                   <div className='errors'>
-                    Password or email cannot be empty
+                    Email cannot be empty
+                  </div>
+                )}
+                {(nameEmptyError) && (
+                  <div className='errors'>
+                    Name cannot be empty
                   </div>
                 )}
               </div>
               <div style={{ paddingBottom: "1em" }}>
                 <div style={{ marginBottom: "1.3em" }}>
                   <CssTextField
-                    // error={errorSnackbar || emailEmptyError}
+                    error={errorSnackbar || nameEmptyError}
+                    label='Full Name'
+                    placeholder='Full Name'
+                    size='small'
+                    focusColor='#1686f0'
+                    InputLabelProps={{
+                      style: textFieldInputLabelStyle,
+                    }}
+                    inputProps={{
+                      style: textFieldStyle,
+                    }}
+                    FormHelperTextProps={{
+                      style: {
+                        margin: 0,
+                        padding: "0 0 0 5px",
+                        fontSize: 10,
+                      },
+                    }}
+                    name='fullName'
+                    value={fullName}
+                    onChange={onChange}
+                    required
+                  />
+                </div>
+                <div style={{ marginBottom: "1.3em" }}>
+                  <CssTextField
+                    error={errorSnackbar || emailEmptyError}
                     label='Email ID'
                     placeholder='Email ID'
                     size='small'
@@ -163,13 +209,14 @@ const Register = (props) => {
                     name='email'
                     value={email}
                     onChange={onChange}
+                    required
                   />
                 </div>
                 <div>
                   <div>
                     <div>
                       <CssTextField
-                        // error={passwordEmptyError || errorSnackbar}
+                        error={passwordEmptyError || errorSnackbar}
                         label='Password'
                         size='small'
                         variant='outlined'
@@ -282,6 +329,19 @@ const Register = (props) => {
   );
 };
 
-Register.propTypes = {};
+Register.propTypes = {
+  auth: PropTypes.object.isRequired,
+  snackbar: PropTypes.object.isRequired,
+  // login: PropTypes.func.isRequired,
+};
 
-export default Register;
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+  snackbar: state.snackbar
+});
+
+const mapStateToActions = {
+  // login,
+};
+
+export default connect(mapStateToProps, mapStateToActions)(Register);
