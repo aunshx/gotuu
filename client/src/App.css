@@ -260,8 +260,16 @@ pre {
         color: black;
     }
 
+.navbar .hamburger-login {
+        cursor: pointer;
+        animation: verticalToHorizontal 0.3s 1 linear;
+        color: white;
+    }
+
   .navbar .hamburger:hover,
-  .navbar .hamburger--tilted:hover {
+  .navbar .hamburger-login:hover,
+  .navbar .hamburger--tilted:hover,
+  .navbar .hamburger--tilted-login:hover {
       color: var(--primary-color);
   }
 
@@ -270,10 +278,15 @@ pre {
       transform: rotate(90deg);
       animation: horizontalToVertical 0.3s 1 linear;
       color: black;
+  }
 
+  .navbar .hamburger--tilted-login {
+      cursor: pointer;
+      transform: rotate(90deg);
+      animation: horizontalToVertical 0.3s 1 linear;
+      color: white;
   }
   
-
 @keyframes verticalToHorizontal {
         0% {
             transform: rotate(90deg);
@@ -1971,6 +1984,7 @@ padding: 0  0 2em 0;
 }
 
 .register {
+  position: relative;
   width: 60vw;
   display: grid;
   grid-template-areas: "register_one"
@@ -1978,7 +1992,6 @@ padding: 0  0 2em 0;
   height: 94vh;
   grid-template-columns: 1fr 0.5fr;
   grid-template-rows: 160px calc(94vh - 160px);
-  /* border: 1px solid red; */
 }
 
 .register .register_one {
@@ -1988,13 +2001,11 @@ padding: 0  0 2em 0;
 .register .register_two {
   grid-row: 2/3;
   grid-column: 1/2;
-    /* border: 1px solid red; */
 
 }
 .register .register_three {
   grid-row: 2/3;
   grid-column: 2/3;
-    /* border: 1px solid red; */
     margin-bottom: 3em;
 
 }
@@ -2007,7 +2018,7 @@ padding: 0  0 2em 0;
 }
 
 .register .register_three .card {
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    box-shadow: rgba(0, 0, 0, 0.885) 0px 10px 36px 0px, rgba(223, 223, 223, 0.06) 0px 0px 0px 1px;
     width: 300px;
     padding: 0.5 1em;
     margin: auto;
@@ -2018,9 +2029,9 @@ padding: 0  0 2em 0;
     min-height: 400px;
     color: #f4f4f4;
     border: 2px solid var(--primary-color);
-    z-index: 1;
+    z-index: 100;
     font-family: 'PT Serif',serif;
-    opacity: 0.95;
+    opacity: 1;
 }
 
 .register .register_three .card img {
@@ -2053,4 +2064,14 @@ padding: 0  0 2em 0;
 
 .register .register_three .card .sign_up_login .link:hover {
   color: var(--primary-color-darker);
+}
+
+.login-back {
+  position: fixed;
+     top: 0;
+     right: 0;
+      background: url('./resources/images/loginBackgroundOne2.jpg') no-repeat center center/cover;
+      height: 100vh;
+      width: 100vw;
+      z-index: -100;
 }

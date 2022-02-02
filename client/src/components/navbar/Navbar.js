@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-
+import { useHistory, useLocation } from "react-router-dom";
+import { connect } from "react-redux";
 import {
   Drawer
 } from '@mui/material'
@@ -9,10 +10,21 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { Tooltip } from "@mui/material";
 
-import logo from "../../resources/images/gotuuLogo.png";
 import SideNavbar from "./SideNavbar";
 
+import logo from "../../resources/images/gotuuLogo.png";
+import logoLogin from "../../resources/images/gotuuLogoLogin.png";
+
 const Navbar = ({ goMain, isActive }) => {
+  const [loginActive, setLoginActive] = useState(false)
+  const location = useLocation();
+
+  useEffect(() => {
+    if(location.pathname === '/login'){
+      setLoginActive(true)
+    }
+  }, []);
+
   const [menu, setMenu] = useState(false);
   const [drawer, setDrawer] = useState(false);
 
@@ -33,17 +45,16 @@ const Navbar = ({ goMain, isActive }) => {
         ref={goMain}
       >
         <div className='logo cursor_pointer'>
-          <img src={logo} alt='Go Tuu logo' />
+          <img src={loginActive ? logoLogin : logo} alt='Go Tuu logo' />
         </div>
         <div className=''>
           {menu ? (
             <FontAwesomeIcon
               icon={faBars}
-              className='hamburger--tilted'
+              className={
+                loginActive ? "hamburger--tilted-login" : "hamburger--tilted"
+              }
               onClick={normalMenu}
-              style={{
-                color: "#25c6f7",
-              }}
               style={{
                 fontSize: 20,
               }}
@@ -53,7 +64,7 @@ const Navbar = ({ goMain, isActive }) => {
               <div>
                 <FontAwesomeIcon
                   icon={faBars}
-                  className='hamburger'
+                  className={loginActive ? "hamburger-login" : "hamburger"}
                   onClick={verticalMenu}
                   style={{
                     fontSize: 20,
@@ -65,14 +76,20 @@ const Navbar = ({ goMain, isActive }) => {
         </div>
       </div>
       <Drawer anchor={"right"} open={drawer} onClose={verticalMenu}>
-        <SideNavbar
-          verticalMenu={verticalMenu}
-        />
+        <SideNavbar verticalMenu={verticalMenu} />
       </Drawer>
     </>
   );
 };
 
-Navbar.propTypes = {};
 
-export default Navbar;
+Navbar.propTypes = {
+};
+
+const mapStateToProps = (state) => ({
+});
+
+const mapStateToActions = {
+};
+
+export default connect(mapStateToProps, mapStateToActions)(Navbar);

@@ -19,6 +19,7 @@ import logoRes from "../../resources/images/registerBackground.png";
 import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+
 const CssTextField = styled(TextField, {
   shouldForwardProp: (props) => props !== "focusColor",
 })((p) => ({
@@ -278,7 +279,7 @@ const Register = ({
                       <ArrowForwardIosIcon
                         style={{
                           fontSize: 12,
-                          color: 'green'
+                          color: "green",
                         }}
                       />
                     }

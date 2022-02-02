@@ -17,6 +17,7 @@ import { makeStyles } from "@mui/styles";
 
 import logo from "../../resources/images/gotuuLogo.png";
 import Alerts from "../layout/Alerts";
+import Navbar from "../navbar/Navbar";
 
 const CssTextField = styled(TextField, {
   shouldForwardProp: (props) => props !== "focusColor",
@@ -115,7 +116,8 @@ const Login = ({
   }
 
   return (
-    <>
+    <div className="login-back">
+      <Navbar />
       <div className='login flex_middle'>
         <div className='card'>
           <img src={logo} alt='John' />
@@ -260,7 +262,7 @@ const Login = ({
       <div>
         <Alerts />
       </div>
-    </>
+    </div>
   );
 };
 
