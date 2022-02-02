@@ -19,14 +19,20 @@ const SideNavbar = ({
   logout,
 }) => {
   const [name, setName] = useState('')
-  useEffect(() => setName(user.name.split(' ')[0]),[])
+  useEffect(() => {
+    if(user !== null){
+      setName(user.name.split(" ")[0]);
+    } else {
+      setName('')
+    }
+  },[])
 
   return (
     <div className='side_navbar'>
       <div className='title triple_grid mrg-t-b-1'>
         <div />
         <div className='center_everything'>
-          Hi! {user !== null ? name : ""}{" "}
+          Hi! {name}
         </div>
         <div className='center_everything' style={{ marginTop: "0.2em" }}>
           <CloseIcon
