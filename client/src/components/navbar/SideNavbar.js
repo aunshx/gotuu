@@ -47,6 +47,22 @@ const SideNavbar = ({
           <div className='app'>
             <div>
               <div className='flex_middle mrg-t-b-1'>
+                <a href='#nav'>
+                  <div className='flex_middle navbar_option'>
+                    <div>
+                      <FontAwesomeIcon
+                        icon={faHome}
+                        style={{ fontSize: 20 }}
+                        className='icon'
+                      />
+                    </div>
+                    <div className='mrg-r-point-5 ft-bold link'>Home</div>
+                  </div>
+                </a>
+              </div>
+            </div>
+            <div>
+              <div className='flex_middle mrg-t-b-1'>
                 <a href='#timeline'>
                   <div className='flex_middle navbar_option'>
                     <div>
@@ -73,22 +89,6 @@ const SideNavbar = ({
                       />
                     </div>
                     <div className='mrg-r-point-5 ft-bold link'>Metrics</div>
-                  </div>
-                </a>
-              </div>
-            </div>
-            <div>
-              <div className='flex_middle mrg-t-b-1'>
-                <a href='#nav'>
-                  <div className='flex_middle navbar_option'>
-                    <div>
-                      <FontAwesomeIcon
-                        icon={faHome}
-                        style={{ fontSize: 20 }}
-                        className='icon'
-                      />
-                    </div>
-                    <div className='mrg-r-point-5 ft-bold link'>Home</div>
                   </div>
                 </a>
               </div>
