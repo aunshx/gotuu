@@ -64,13 +64,13 @@ const Element = ({
           <div className='app'>
             <div className={`element_${classy} flex_middle cursor_pointer`}>
               <Tooltip
-                title={showInHours ? "Hours" : "Minutes"}
+                title={showInHours ? "Minutes" : "Hours"}
                 placement='top'
               >
                 <div onClick={() => setShowInHours(!showInHours)}>
                   {showInHours
-                    ? (event.duration / 3600000).toFixed("2")
-                    : (event.duration / 60000).toFixed("2")}
+                    ? (event.duration / 60000).toFixed("2")
+                    : (event.duration / 3600000).toFixed("2")}
                 </div>
               </Tooltip>
               {noteDetails && (
@@ -110,13 +110,13 @@ const Element = ({
           <div className='app'>
             <div className={`element_${classy} flex_middle cursor_pointer`}>
               <Tooltip
-                title={showInHours ? "Hours" : "Minutes"}
+                title={showInHours ? "Minutes" : "Hours"}
                 placement='top'
               >
                 <div onClick={() => setShowInHours(!showInHours)}>
                   {showInHours
-                    ? (event.duration / 3600000).toFixed("2")
-                    : (event.duration / 60000).toFixed("2")}
+                    ? (event.duration / 60000).toFixed("2")
+                    : (event.duration / 3600000).toFixed("2")}
                 </div>
               </Tooltip>
               {noteDetails && (
