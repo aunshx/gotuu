@@ -51,9 +51,7 @@ const Navbar = ({ goMain, isActive }) => {
           {menu ? (
             <FontAwesomeIcon
               icon={faBars}
-              className={
-                "hamburger--tilted"
-              }
+              className={"hamburger--tilted"}
               onClick={normalMenu}
               style={{
                 fontSize: 20,
@@ -75,9 +73,26 @@ const Navbar = ({ goMain, isActive }) => {
           )}
         </div>
       </div>
-      <Drawer anchor={"right"} open={drawer} onClose={verticalMenu}>
-        <SideNavbar verticalMenu={verticalMenu} />
-      </Drawer>
+      <div>
+        <Drawer
+          anchor={"right"}
+          open={drawer}
+          onClose={verticalMenu}
+          className='sidebar_nav-right'
+        >
+          <SideNavbar verticalMenu={verticalMenu} />
+        </Drawer>
+      </div>
+      <div>
+        <Drawer
+          anchor={"top"}
+          open={drawer}
+          onClose={verticalMenu}
+          className='sidebar_nav-top'
+        >
+          <SideNavbar verticalMenu={verticalMenu} />
+        </Drawer>
+      </div>
     </>
   );
 };
