@@ -85,10 +85,13 @@ const New = ({
                 />
               </div>
               <div data-aos='fade-up'>
-                <AvgBreakTime />
+                <TotalPerformance
+                  data={avgDurationTuus}
+                  loading={avgDurationTuusLoading}
+                />
               </div>
               <div data-aos='fade-up'>
-                <TotalPerformance
+                <AvgBreakTime
                   data={avgDurationTuus}
                   loading={avgDurationTuusLoading}
                 />
