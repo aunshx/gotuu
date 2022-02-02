@@ -38,7 +38,7 @@ const CssTextField = styled(TextField, {
 const loginIconButtonStyle = makeStyles({
   root: {
     color: "gray",
-    border: "1px solid grey",
+    border: "1px solid green",
     backgroundColor: "none",
     fontSize: "10px",
     "&:hover": {
@@ -70,6 +70,8 @@ const Register = ({
     password: "",
     showPassword: false,
   });
+
+  const iconButtonStyle = loginIconButtonStyle()
 
   const [showChangePassword, setShowChangePassword] = useState(false);
   const [passwordEmptyError, setPasswordEmptyError] = useState(false);
@@ -143,20 +145,14 @@ const Register = ({
               <img src={logo} alt='John' />
               <div className='title ft-bold'>Register</div>
               <div className='app'>
-                {(passwordEmptyError) && (
-                  <div className='errors'>
-                    Password cannot be empty
-                  </div>
+                {passwordEmptyError && (
+                  <div className='errors'>Password cannot be empty</div>
                 )}
                 {(passwordEmptyError || emailEmptyError) && (
-                  <div className='errors'>
-                    Email cannot be empty
-                  </div>
+                  <div className='errors'>Email cannot be empty</div>
                 )}
-                {(nameEmptyError) && (
-                  <div className='errors'>
-                    Name cannot be empty
-                  </div>
+                {nameEmptyError && (
+                  <div className='errors'>Name cannot be empty</div>
                 )}
               </div>
               <div style={{ paddingBottom: "1em" }}>
@@ -261,7 +257,7 @@ const Register = ({
                     </div>
                     <div
                       style={{
-                        margin: "-0.2em 9.5em 1.5em 0.2em",
+                        margin: "-0.2em 9.5em 1em 0.2em",
                       }}
                     >
                       <div
@@ -282,12 +278,13 @@ const Register = ({
                       <ArrowForwardIosIcon
                         style={{
                           fontSize: 12,
+                          color: 'green'
                         }}
                       />
                     }
                     variant='outlined'
                     onClick={onSubmit}
-                    // className={loginStyle.root}
+                    className={iconButtonStyle.root}
                   >
                     <div
                       style={{
