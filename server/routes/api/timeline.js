@@ -109,7 +109,7 @@ let ans = {}
             }},
             {'duration': { $gt: 0 }}
           ]
-        });
+        }).sort({ 'updatedAt': -1 })
 
     } catch (error) {
         console.error(error)
@@ -137,7 +137,7 @@ let ans = {}
           {
             createdAt: 1,
           }
-        );
+        )
 
     } catch (error) {
         console.error(error)

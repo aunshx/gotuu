@@ -212,6 +212,8 @@ export const getTimelineDatesCaptured = () => async (dispatch) => {
 
     const res = await api.get("/timeline/get-dates-existing-events");
 
+    console.log(res.data)
+
     dispatch({
       type: CREATE_DATES_CAPTURED,
       payload: res.data,
