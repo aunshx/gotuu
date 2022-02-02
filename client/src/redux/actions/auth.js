@@ -12,6 +12,7 @@ import {
   getAvgDurationOfTuus,
   getTotalNumberOfTuus,
   getNumberOfTuusPerDay,
+  getLiveStreak,
 } from "./metrics";
 
 import {
@@ -54,6 +55,7 @@ export const loadUser = () => async (dispatch) => {
     dispatch(getNumberOfTuusPerDay());
     dispatch(getAvgDurationOfTuus());
     dispatch(getTotalNumberOfTuus());
+    dispatch(getLiveStreak());
 
   } catch (err) {
     dispatch({

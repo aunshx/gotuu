@@ -28,10 +28,12 @@ const New = ({
     avgDurationTuusPerDay,
     avgDurationTuusPerDayHours,
     numberOfTuusGraph,
+    liveStreak,
     avgDurationTuusLoading,
     totalCountTuusLoading,
     avgDurationTuusPerDayLoading,
     numberOfTuusGraphLoading,
+    liveStreakLoading,
   },
   // Redux Actions
   // getTotalNumberOfTuus,
@@ -68,7 +70,7 @@ const New = ({
           <div className='metrics_details_two'>
             <div className='app'>
               <div data-aos='fade-up'>
-                <LiveStreak />
+                <LiveStreak data={liveStreak} loading={liveStreakLoading} />
               </div>
               <div data-aos='fade-up'>
                 <TotalTuus
@@ -115,7 +117,7 @@ const New = ({
 };
 
 New.propTypes = {
-  New: PropTypes.object.isRequired,
+  metrics: PropTypes.object.isRequired,
   getAvgDurationOfTuusPerDay: PropTypes.func.isRequired,
   getTotalNumberOfTuus: PropTypes.func.isRequired,
   getAvgDurationOfTuus: PropTypes.func.isRequired,

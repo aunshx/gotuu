@@ -18,6 +18,11 @@ import {
   NUMBER_OF_TUUS,
   NUMBER_OF_TUUS_LOADING,
   NUMBER_OF_TUUS_LOADING_COMPLETE,
+
+  // Live Streak
+  LIVE_STREAK,
+  LIVE_STREAK_LOADING,
+  LIVE_STREAK_LOADING_COMPLETE,
 } from "../actions/types";
 
 const initialState = {
@@ -36,13 +41,34 @@ const initialState = {
 
   // Number of Tuus - GRAPH
   numberOfTuusGraph: [],
-  numberOfTuusGraphLoading: false
+  numberOfTuusGraphLoading: false,
+
+  // Live Streak 
+  liveStreak: 0,
+  liveStreakLoading: false
 };
 
 function authReducer(state = initialState, action) {
   const { type, payload } = action;
 
   switch (type) {
+    //   Live Streak
+    case LIVE_STREAK:
+      return {
+        ...state,
+        liveStreak: payload,
+      };
+    case LIVE_STREAK_LOADING:
+      return {
+        ...state,
+        liveStreakLoading: true,
+      };
+    case LIVE_STREAK_LOADING_COMPLETE:
+      return {
+        ...state,
+        liveStreakLoading: false,
+      };
+
     //   Avg Duration of Tuus Per Day
     case NUMBER_OF_TUUS:
       return {

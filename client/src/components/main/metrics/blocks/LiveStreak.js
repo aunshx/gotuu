@@ -9,12 +9,7 @@ import DurationSelector from "../DurationSelector";
 
 const message = "Number of continuos days of completing tuus";
 
-const LiveStreak = (props) => {
-  const [duration, setDuration] = useState("week");
-
-  const onChangeDuration = (e) => {
-    setDuration(e.target.value);
-  };
+const LiveStreak = ({ data, loading }) => {
 
   return (
     <div className='progress_blocks_main' style={{ marginTop: 0 }}>
@@ -23,14 +18,20 @@ const LiveStreak = (props) => {
         <QuestionMarkTrigger message={message} />
       </div>
       <div className=''>
-        <div className='flex_middle' style={{ marginBottom: '0.5em' }}>
-          <div style={{ marginRight: "10px" }}>
-            <FontAwesomeIcon
-              icon={faFire}
-              style={{ fontSize: 22, color: "orange" }}
-            />
-          </div>
-          <div>10</div>
+        <div className='flex_middle' style={{ marginBottom: "0.5em" }}>
+          {loading ? (
+            <div className='spinner-graph'></div>
+          ) : (
+            <>
+              <div style={{ marginRight: "10px" }}>
+                <FontAwesomeIcon
+                  icon={faFire}
+                  style={{ fontSize: 22, color: "orange" }}
+                />
+              </div>
+              <div>{data}</div>
+            </>
+          )}
         </div>
       </div>
     </div>

@@ -701,7 +701,12 @@ router.get("/live-streak", auth, async (req, res) => {
       { $inc: { count: 1 }, date: todayDate },
     );
 
-    return res.status(200).send(ans)
+    if(!ans){
+          return res.status(200).send('0');
+    } else {
+          return res.status(200).send(ans.count);
+    }
+
   } catch(error) {
     console.error(error.message);
     res.status(400).send("Something went wrong!");
