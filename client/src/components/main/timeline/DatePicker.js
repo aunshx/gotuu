@@ -26,14 +26,7 @@ const DatePicker = ({
             moment(ele.createdAt).format("DD/MM/YYYY")
         
       )),
-    // disabled: (dateSelected) =>
-    //   datesCaptured.some((ele) => (
-    
-    //       moment(dateSelected).format("DD/MM/YYYY") !==
-    //         moment(ele.createdAt).format("DD/MM/YYYY")
-        
-    //   ))
-    // Changes
+    disabled: (date) => date > moment()
   };
   return (
     <>

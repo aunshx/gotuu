@@ -75,10 +75,12 @@ const Element = ({
               </Tooltip>
               {noteDetails && (
                 <>
-                  <div
-                    className={`liner_horizontal_right cursor_pointer`}
-                  ></div>
-                  <div className=''>
+                  <div className={`liner_horizontal_right cursor_pointer`}>
+                    <div className='title-liner flex_middle'>
+                      {noteDetails.title}
+                    </div>
+                  </div>
+                  <div className='cursor_pointer'>
                     {showNote ? (
                       <ArrowCircleDownOutlinedIcon
                         className='liner_horizontal_right_icon_1'
@@ -121,7 +123,11 @@ const Element = ({
               </Tooltip>
               {noteDetails && (
                 <>
-                  <div className={`liner_horizontal_left`}></div>
+                  <div className={`liner_horizontal_left`}>
+                    <div className='title-liner flex_middle'>
+                      {noteDetails.title}
+                    </div>
+                  </div>
                   <div className='cursor_pointer'>
                     {showNote ? (
                       <ArrowCircleDownOutlinedIcon

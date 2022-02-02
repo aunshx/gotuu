@@ -9,7 +9,6 @@ import { makeStyles } from "@mui/styles";
 
 import DeleteIcon from "@mui/icons-material/Delete";
 import CloseIcon from "@mui/icons-material/Close";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 import {
   deleteNote,
@@ -33,13 +32,6 @@ const CssTextField = styled(TextField, {
   border: "transparent",
 }));
 
-const textFieldStyle = {
-  height: "10px",
-  fontSize: "0.9em",
-  color: "black",
-  fontWeight: "bold",
-  padding: 0,
-};
 
 const useStyles = makeStyles(() => ({
   noBorder: {
@@ -94,7 +86,7 @@ const TimelineNote = ({
         </div>
         <div className='note-footer'>
           <div style={{ fontSize: "0.8em" }}>
-            {moment(noteDetails.createdAt).format("hh:mm")}
+            {moment(noteDetails.createdAt).format("hh:mm a")}
           </div>
           <div style={{ fontSize: "0.9em" }}>
             {moment(noteDetails.createdAt).format("DD/MM/YYYY")}
