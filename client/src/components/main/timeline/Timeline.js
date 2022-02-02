@@ -11,6 +11,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import Element from './Element';
 import DatePicker from './DatePicker';
 import { Menu, MenuItem } from '@mui/material';
+import DoubleArrowIcon from "@mui/icons-material/DoubleArrow";
 
 import NothingToShow from '../NothingToShow'
 
@@ -144,7 +145,7 @@ const Timeline = ({
             {timeline.length > 0 ? (
               timeline.map((event, index) => (
                 <div key={index}>
-                  <div className=''>
+                  <div className='' data-aos='fade-in'>
                     <Element event={event} type={index} />
                   </div>
                 </div>

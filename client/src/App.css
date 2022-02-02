@@ -782,6 +782,13 @@ padding: 0  0 2em 0;
   padding-top: 80px;
 }
 
+.timeline-end-icon {
+    -ms-transform: rotate(90deg);
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
+  color: var(--light-color);
+}
+
 
 .timeline .main .line .liner_vertical {
    -ms-transform: rotate(90deg);
