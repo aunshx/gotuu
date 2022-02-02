@@ -262,10 +262,10 @@ const Register = (props) => {
                     }}
                   ></div>
                   <div className='sign_up_login'>
-                    Don't have an account?{" "}
-                    <Link to='/register' style={{ color: "grey" }}>
+                    Have an account?{" "}
+                    <Link to='/login' style={{ color: "grey" }}>
                       <span className='link cursor_pointer ft-bold'>
-                        Sign Up
+                        Log in
                       </span>
                     </Link>
                   </div>
