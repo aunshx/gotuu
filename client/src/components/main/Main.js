@@ -34,6 +34,7 @@ const Main = ({
   isActive,
   setIsActive,
   // Redux State
+  auth: { isAuthenticated },
   timeline: { currentEventId },
   notes: { noteId },
   // Redux Actions
@@ -161,32 +162,30 @@ const Main = ({
                 </div>
               </Tooltip>
             ) : (
-              <div className='expand-icon flex_evenly cursor_pointer'>
+              <div className='expand-icon  flex_middle cursor_pointer'>
                 <Tooltip title='Expand' placement='top'>
-                  <div onClick={toggleFullScreen} className='icons-left'>
+                  <div onClick={toggleFullScreen} className={isAuthenticated ? 'icons-left' : ''}>
                     <FontAwesomeIcon
                       icon={faExpandAlt}
                       style={{ fontSize: 20, color: "gray" }}
                     />
                   </div>
                 </Tooltip>
-                <Tooltip title='Create Note' placement='top'>
-                  <div
-                    onClick={() => toggleNewNote(currentEventId, noteId)}
-                    className='icons-right'
-                  >
-                    {(noteId) && (
-                    <div className='notes-active-point'></div>
-                    )}
-                    <FontAwesomeIcon
-                      icon={faStickyNote}
-                      style={{
-                        fontSize: 20,
-                        color: "gray",
-                      }}
-                    />
-                  </div>
-                </Tooltip>
+                  <Tooltip title='Create Note' placement='top'>
+                    <div
+                      onClick={() => toggleNewNote(currentEventId, noteId)}
+                      className={isAuthenticated ? "icons-right" : 'invisible'}
+                    >
+                      {noteId && <div className='notes-active-point'></div>}
+                      <FontAwesomeIcon
+                        icon={faStickyNote}
+                        style={{
+                          fontSize: 20,
+                          color: "gray",
+                        }}
+                      />
+                    </div>
+                  </Tooltip>
               </div>
             )}
           </>
@@ -218,12 +217,14 @@ const Main = ({
 };
 
 Main.propTypes = {
+  auth: PropTypes.object.isRequired,
   notes: PropTypes.object.isRequired,
   timeline: PropTypes.object.isRequired,
   createNewNote: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
+  auth: state.auth,
   timeline: state.timeline,
   notes: state.notes
 });

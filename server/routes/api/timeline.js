@@ -9,6 +9,7 @@ const moment = require("moment");
 
 const User = require("../../models/User");
 const Timeline = require("../../models/Timeline");
+const LiveCount = require("../../models/LiveCount");
 
 // @route    POST api/timeline
 // @desc     Add Event on BUtton Click
@@ -44,6 +45,8 @@ router.post("/add-details-event", auth, async (req, res) => {
 
     let intDuration = parseInt(duration)
 
+    let todayDate = moment().startOf('day')
+
 let ans = {}
   try {
 
@@ -56,6 +59,21 @@ let ans = {}
             upsert: true,
           }
         );
+
+        let ans3 = await LiveCount.findOneAndUpdate(
+          { userId: req.user.id },
+          { date: todayDate },
+        );
+
+        if(!ans3){
+          let ans2 = new LiveCount({
+            userId: req.user.id,
+            date: todayDate,
+          });
+
+          await ans2.save();
+        }
+
     } catch (error) {
         console.error(error)
         return res.status(400).send({ msg: [ 'Could not add details of event' ] })

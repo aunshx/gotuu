@@ -466,7 +466,7 @@ router.get("/average-duration-tuus-today", auth, async (req, res) => {
       {
         $group: {
           _id: "$userId",
-          totalSum: { $sum: "$duration" },
+          sum: { $sum: "$duration" },
         },
       },
     ]);
@@ -479,9 +479,14 @@ router.get("/average-duration-tuus-today", auth, async (req, res) => {
       ],
     }).count();
 
-    let complete = (ans[0].totalSum / ans2).toFixed("0");
+    if(ans.length < 1){
+      return res.status(200).send('0')
+    } else {
+        let complete = (ans[0].sum / ans2).toFixed("0");
 
-    return res.status(200).send(complete);
+        return res.status(200).send(complete);
+    }
+
   } catch (error) {
     console.error(error.message);
     res.status(400).send("Something went wrong!");
@@ -687,35 +692,13 @@ router.get("/average-duration-tuus-all-time", auth, async (req, res) => {
 // @access   Private
 router.get("/live-streak", auth, async (req, res) => {
   let ans = {};
+   let yestDate = moment().startOf("days").subtract(1, "days");
+   let todayDate = moment().startOf("days");
   try {
-    let date = new Date()
-    let dateISO = moment(date).toISOString()
-
-    ans = await Timeline.find(
-      {
-        $and: [
-          { userId: new mongoose.Types.ObjectId(req.user.id) },
-          { duration: { $ne: null } },
-        ],
-      },
-      { updatedAt: 1, _id: 0 }
-    )
-            let u = [];
-
-    if(ans.length > 0){
-      let k = 0;
-      u.push(ans[0].updatedAt);
-      for (let j = 1; j < ans.length - 1; j++) {
-        if (ans[j].updatedAt.getDate() !== ans[j+1].updatedAt.getDate()) {
-          u.push(ans[j+1].updatedAt);
-        }
-      }
-    }
-
-    console.log(
-      new Date(ans[0].updatedAt.setDate((ans[0].updatedAt).getDate() + 2)),
-      new Date(date.setDate(date.getDate() + 2)),
-      u[0].getDate()
+   
+    ans = await LiveCount.findOneAndUpdate({
+      $and: [ {userId: req.user.id}, {date: { $eq: yestDate }}]},
+      { $inc: { count: 1 }, date: todayDate },
     );
 
     return res.status(200).send(ans)

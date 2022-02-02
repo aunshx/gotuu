@@ -1,16 +1,12 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faTrophy,
-  faFire,
-  faArrowDown,
-  faClipboardList,
-  faGlobeAsia,
-  faBowlingBall,
-} from "@fortawesome/free-solid-svg-icons";
-import { Divider } from "@mui/material";
+import Intro from "./Intro";
+import Why from "./Why";
+import HowTo from "./HowTo";
+import Faqs from "./Faqs";
+import Future from "./Future";
+
 
 const ProfileDetails = ({ fixedContent }) => {
   const [showAll, setShowAll] = useState(true);
@@ -75,40 +71,50 @@ const ProfileDetails = ({ fixedContent }) => {
                 <div className='flex_middle'>
                   <div style={{ marginRight: "0.8em" }}>
                     <ul>
-                      <li
-                        className={showAll ? "active" : ""}
-                        onClick={shiftToAll}
-                      >
-                        1.
-                        <span>Intro</span>
+                      <li style={{ padding: "0.4em 0" }} onClick={shiftToAll}>
+                        <a
+                          href='#intro-about'
+                          className={showAll ? "link-active" : "link"}
+                        >
+                          1.
+                          <span>Intro</span>
+                        </a>
                       </li>
                       <li
-                        className={showChallengesOnly ? "active" : ""}
-                        onClick={shiftToChallengesOnly}
-                      >
-                        2.
-                        <span>Why?</span>
-                      </li>
-                      <li
-                        className={showQuestionsOnly ? "active" : ""}
-                        onClick={shiftToQuestionsOnly}
-                      >
-                        3.
-                        <span>How To</span>
-                      </li>
-                      <li
-                        className={showDualsOnly ? "active" : ""}
-                        onClick={shiftToDualsOnly}
-                      >
-                        4.
-                        <span>FAQs</span>
-                      </li>
-                      <li
-                        className={showEventsOnly ? "active" : ""}
+                        style={{ padding: "0.4em 0" }}
                         onClick={shiftToEventsOnly}
                       >
-                        5.
-                        <span>Future</span>
+                        <a
+                          href='#why-about'
+                          className={showEventsOnly ? "link-active" : "link"}
+                        >
+                          2.
+                          <span>Walkthrough</span>
+                        </a>
+                      </li>
+                      <li
+                        style={{ padding: "0.4em 0" }}
+                        onClick={shiftToQuestionsOnly}
+                      >
+                        <a
+                          href='#faqs-about'
+                          className={showQuestionsOnly ? "link-active" : "link"}
+                        >
+                          3.
+                          <span>FAQs</span>
+                        </a>
+                      </li>
+                      <li
+                        style={{ padding: "0.4em 0" }}
+                        onClick={shiftToDualsOnly}
+                      >
+                        <a
+                          href='#future-about'
+                          className={showDualsOnly ? "link-active" : "link"}
+                        >
+                          4.
+                          <span>Future</span>
+                        </a>
                       </li>
                     </ul>
                   </div>
@@ -118,93 +124,10 @@ const ProfileDetails = ({ fixedContent }) => {
           </nav>
         </div>
         <div className='details'>
-            <div>s</div>
-            <div>s</div>
-            <div>s</div>
-            <div>s</div>
-            <div>s</div>
-            <div>s</div>
-            <div>s</div>
-            <div>s</div>
-            <div>s</div>
-            <div>s</div>
-            <div>s</div>
-            <div>s</div>
-            <div>s</div>
-            <div>s</div>
-            <div>s</div>
-            <div>s</div>
-            <div>s</div>
-            <div>s</div>
-            <div>s</div>
-            <div>s</div>
-            <div>s</div>
-            <div>s</div>
-            <div>s</div>
-            <div>s</div>
-            <div>s</div>
-            <div>s</div>
-            <div>s</div>
-            <div>s</div>
-            <div>s</div>
-            <div>s</div>
-            <div>s</div>
-            <div>s</div>
-            <div>s</div>
-            <div>s</div>
-            <div>s</div>
-            <div>s</div>
-            <div>s</div>
-            <div>s</div>
-            <div>s</div>
-            <div>s</div>
-            <div>s</div>
-            <div>s</div>
-            <div>s</div>
-            <div>s</div>
-            <div>s</div>
-            <div>s</div>
-            <div>s</div>
-            <div>s</div>
-            <div>s</div>
-            <div>s</div>
-            <div>s</div>
-            <div>s</div>
-            <div>s</div>
-            <div>s</div>
-            <div>s</div>
-            <div>s</div>
-            <div>s</div>
-            <div>s</div>
-            <div>s</div>
-            <div>s</div>
-            <div>s</div>
-            <div>s</div>
-            <div>s</div>
-            <div>s</div>
-            <div>s</div>
-            <div>s</div>
-            <div>s</div>
-            <div>s</div>
-            <div>s</div>
-            <div>s</div>
-            <div>s</div>
-            <div>s</div>
-            <div>s</div>
-            <div>s</div>
-            <div>s</div>
-            <div>s</div>
-            <div>s</div>
-            <div>s</div>
-            <div>s</div>
-            <div>s</div>
-            <div>s</div>
-            <div>s</div>
-            <div>s</div>
-            <div>s</div>
-            <div>s</div>
-            <div>s</div>
-            <div>s</div>
+          <Intro />
+          <HowTo />
+          <Faqs />
+          <Future />
         </div>
       </div>
     </div>

@@ -37,9 +37,6 @@ const Timeline = ({
     if (isDatePickerOpened) {
       getTimelineEvent(moment(dateSelected).toISOString());
       getTimelineDatesCaptured()
-    } else {
-      getTimelineEvent(moment(date).toISOString());
-      getTimelineDatesCaptured()
     }
   }, [dateSelected]);
 

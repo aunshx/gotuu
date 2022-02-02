@@ -11,16 +11,20 @@ const Go = ({
   isHoveringTrue,
   isHoveringFalse,
   startCountDown,
+  // Redux States
+  auth: { isAuthenticated },
   // Redux Actions
   createNewEvent,
 }) => {
   const createNewTuu = () => {
     startCountDown()
-    createNewEvent()
+    if(isAuthenticated){
+      createNewEvent();
+    }
   };
 
   return (
-    <div
+    <div 
       className={"button flex_middle cursor_pointer"}
       onMouseEnter={isHoveringTrue}
       onMouseLeave={isHoveringFalse}
@@ -33,10 +37,12 @@ const Go = ({
 
 
 Go.propTypes = {
+  auth: PropTypes.object.isRequired,
   createNewEvent: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
+  auth: state.auth,
 });
 
 const mapActionsToProps = {
