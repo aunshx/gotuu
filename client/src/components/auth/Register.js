@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+
+import { Link, Redirect } from "react-router-dom";
+import { connect } from "react-redux";
+
 import LoadingButton from "@mui/lab/LoadingButton";
 import IconButton from "@mui/material/IconButton";
 import InputAdornment from "@mui/material/InputAdornment";
@@ -8,7 +12,6 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { styled } from "@mui/material/styles";
-import Divider from "@mui/material/Divider";
 import { makeStyles } from "@mui/styles";
 
 import Navbar from "../navbar/Navbar";
@@ -16,8 +19,10 @@ import Alerts from "../layout/Alerts";
 
 import logo from "../../resources/images/gotuuLogo.png";
 import logoRes from "../../resources/images/registerBackground.png";
-import { Link, Redirect } from 'react-router-dom';
-import { connect } from 'react-redux';
+
+import {
+  register
+} from '../../redux/actions/auth'
 
 
 const CssTextField = styled(TextField, {
@@ -61,32 +66,31 @@ const textFieldStyle = {
   width: "230px",
 };
 
-const Register = ({ 
+const Register = ({
+  // Redux Actions
+  register,
   // Redux State
-  snackbar: { errorSnackbar }, auth: { isAuthenticated } 
+  snackbar: { errorSnackbar },
+  auth: { isAuthenticated, loginLoading },
 }) => {
   const [formData, setFormData] = useState({
-    fullName: "",
+    name: "",
     email: "",
     password: "",
     showPassword: false,
   });
 
-  const iconButtonStyle = loginIconButtonStyle()
+  const iconButtonStyle = loginIconButtonStyle();
 
   const [showChangePassword, setShowChangePassword] = useState(false);
   const [passwordEmptyError, setPasswordEmptyError] = useState(false);
   const [nameEmptyError, setNameEmptyError] = useState(false);
   const [emailEmptyError, setEmailEmptyError] = useState(false);
 
-  const { fullName, email, password, showPassword } = formData;
+  const { name, email, password, showPassword } = formData;
 
   const showChange = () => {
     setShowChangePassword(true);
-  };
-
-  const revertChange = () => {
-    setShowChangePassword(false);
   };
 
   const handleClickShowPassword = () => {
@@ -105,8 +109,8 @@ const Register = ({
   const onSubmit = async (e) => {
     e.preventDefault();
 
-    if (fullName.length === 0) {
-      setNameEmptyError(true)
+    if (name.length === 0) {
+      setNameEmptyError(true);
       setTimeout(() => setNameEmptyError(false), 5000);
     } else if (email.length === 0) {
       setEmailEmptyError(true);
@@ -115,7 +119,7 @@ const Register = ({
       setPasswordEmptyError(true);
       setTimeout(() => setPasswordEmptyError(false), 5000);
     } else {
-      console.log('Submitted')
+      register(name, email, password);
     }
   };
 
@@ -177,8 +181,8 @@ const Register = ({
                         fontSize: 10,
                       },
                     }}
-                    name='fullName'
-                    value={fullName}
+                    name='name'
+                    value={name}
                     onChange={onChange}
                     required
                   />
@@ -273,7 +277,7 @@ const Register = ({
                 <div>
                   <LoadingButton
                     size='small'
-                    // loading={loginLoading}
+                    loading={loginLoading}
                     loadingPosition='end'
                     endIcon={
                       <ArrowForwardIosIcon
@@ -294,7 +298,7 @@ const Register = ({
                         borderColor: "green",
                       }}
                     >
-                      Login
+                      Register
                     </div>
                   </LoadingButton>
                 </div>
@@ -330,7 +334,7 @@ const Register = ({
 Register.propTypes = {
   auth: PropTypes.object.isRequired,
   snackbar: PropTypes.object.isRequired,
-  // login: PropTypes.func.isRequired,
+  register: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -339,7 +343,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapStateToActions = {
-  // login,
+  register,
 };
 
 export default connect(mapStateToProps, mapStateToActions)(Register);

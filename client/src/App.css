@@ -400,7 +400,7 @@ pre {
 }
 
 .login .card .title {
-    color: var(--dark-font-color);
+    color: var(--grey-color);
     font-size: 22px;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     margin-bottom:1em;

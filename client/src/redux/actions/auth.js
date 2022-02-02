@@ -66,24 +66,136 @@ export const loadUser = () => async (dispatch) => {
 
 // Register User kk
 export const register =
-  ({ name, email, password }) =>
+  ( name, email, password ) =>
   async (dispatch) => {
+    const value = {}
+
+          console.log(name, email, password);
+
+
     const body = JSON.stringify({ name, email, password });
 
     try {
+
+      dispatch({
+        type: LOGIN_LOADING,
+      });
+
       const res = await api.post("/auth/register", body);
 
       dispatch({
         type: REGISTER_SUCCESS,
         payload: res.data,
       });
-      dispatch(loadUser());
-    } catch (error) {
-      const errors = error.response.data.errors;
 
-      dispatch({
-        type: REGISTER_FAIL,
-      });
+        dispatch({
+          type: LOGIN_LOADING_COMPLETE,
+        });
+
+      dispatch(loadUser());
+      
+    } catch (error) {
+     if (error.response.status === 500) {
+        value.message = "Oops! Something went wrong. Please reload!";
+        value.type = "error";
+
+        dispatch({
+          type: ERROR_SNACKBAR,
+          payload: value,
+        });
+
+        dispatch({
+          type: LOGIN_LOADING_COMPLETE,
+        });
+
+        dispatch({
+          type: REGISTER_FAIL,
+        });
+
+        setTimeout(
+          () =>
+            dispatch({
+              type: SNACKBAR_RESET,
+            }),
+          5000
+        );
+      } else if (error.response.status === 400) {
+        value.message = error.response.data.errors[0].msg;
+        value.type = "error";
+
+        dispatch({
+          type: ERROR_SNACKBAR,
+          payload: value,
+        });
+
+        dispatch({
+          type: ERROR_AUTH_SNACKBAR,
+        });
+
+        dispatch({
+          type: LOGIN_LOADING_COMPLETE,
+        });
+
+        dispatch({
+          type: REGISTER_FAIL,
+        });
+
+        setTimeout(
+          () =>
+            dispatch({
+              type: SNACKBAR_RESET,
+            }),
+          5000
+        );
+      } else if (error.response.status === 401) {
+        value.message = 'Your session has expired. Please login again.';
+        value.type = "error";
+
+        dispatch({
+          type: ERROR_SNACKBAR,
+          payload: value,
+        });
+
+        dispatch({
+          type: LOGIN_LOADING_COMPLETE,
+        });
+
+        dispatch({
+          type: REGISTER_FAIL,
+        });
+
+        setTimeout(
+          () =>
+            dispatch({
+              type: SNACKBAR_RESET,
+            }),
+          5000
+        );
+      } else {
+        value.message = "Oops! Looks like something went wrong. Please reload!";
+        value.type = "error";
+
+        dispatch({
+          type: ERROR_SNACKBAR,
+          payload: value,
+        });
+
+        dispatch({
+          type: LOGIN_LOADING_COMPLETE,
+        });
+
+        dispatch({
+          type: REGISTER_FAIL,
+        });
+
+        setTimeout(
+          () =>
+            dispatch({
+              type: SNACKBAR_RESET,
+            }),
+          5000
+        );
+      }
     }
   };
 
@@ -220,9 +332,6 @@ export const login =
       }
       dispatch({
         type: LOGIN_FAIL,
-      });
-      dispatch({
-        type: LOGIN_LOADING_COMPLETE,
       });
 
     }

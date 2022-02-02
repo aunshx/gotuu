@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from "react-redux";   
 import { Link } from "react-router-dom";
@@ -18,13 +18,15 @@ const SideNavbar = ({
   // Redux Actions
   logout,
 }) => {
-  // TODO: Connect this to redux
+  const [name, setName] = useState('')
+  useEffect(() => setName(user.name.split(' ')[0]),[])
+
   return (
     <div className='side_navbar'>
       <div className='title triple_grid mrg-t-b-1'>
         <div />
         <div className='center_everything'>
-          Hi! {user !== null ? user.name : ""}{" "}
+          Hi! {user !== null ? name : ""}{" "}
         </div>
         <div className='center_everything' style={{ marginTop: "0.2em" }}>
           <CloseIcon
@@ -105,7 +107,7 @@ const SideNavbar = ({
           <div className='app'>
             <div>
               <div className='flex_middle mrg-t-b-1'>
-                <Link to="/">
+                <Link to='/'>
                   <div className='flex_middle navbar_option'>
                     <div>
                       <FontAwesomeIcon

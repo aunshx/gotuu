@@ -35,7 +35,6 @@ function authReducer(state = initialState, action) {
         ...state,
         loginLoading: false,
       };
-    
       
     case USER_LOADED:
       return {

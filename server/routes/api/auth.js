@@ -90,8 +90,8 @@ router.post(
   check("email", "Please include a valid email").isEmail(),
   check(
     "password",
-    "Please enter a password with 3 or more characters"
-  ).isLength({ min: 3 }),
+    "Please enter a password with 6 or more characters"
+  ).isLength({ min: 6 }),
 
   async (req, res) => {
     const errors = validationResult(req);
