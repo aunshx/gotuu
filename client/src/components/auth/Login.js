@@ -16,7 +16,6 @@ import Divider from "@mui/material/Divider";
 import { makeStyles } from "@mui/styles";
 
 import logo from "../../resources/images/gotuuLogo.png";
-import Alert from "../layout/Alerts";
 import Alerts from "../layout/Alerts";
 
 const CssTextField = styled(TextField, {
@@ -70,7 +69,6 @@ const Login = ({
     password: "",
     showPassword: false,
   });
-  // const loginStyle = loginIconButtonStyle()
 
   const [showChangePassword, setShowChangePassword] = useState(false);
   const [passwordEmptyError, setPasswordEmptyError] = useState(false);

@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 import CloseIcon from '@mui/icons-material/Close';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faBookOpen, faChartBar, faHome, faProjectDiagram, faSignInAlt, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faBookOpen, faChartBar, faDoorOpen, faHome, faProjectDiagram, faSignInAlt, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 import { Tooltip } from "@mui/material";
 
 import { logout } from "../../redux/actions/auth";
@@ -130,6 +130,20 @@ const SideNavbar = ({
                     />
                   </div>
                   <div className='mrg-r-point-5 ft-bold link'>About</div>
+                </div>
+              </Link>
+            </div>
+            <div className='flex_middle mrg-t-b-1'>
+              <Link to='/register'>
+                <div className='flex_middle navbar_option'>
+                  <div>
+                    <FontAwesomeIcon
+                      icon={faDoorOpen}
+                      style={{ fontSize: 20 }}
+                      className='icon'
+                    />
+                  </div>
+                  <div className='mrg-r-point-5 ft-bold link'>Register</div>
                 </div>
               </Link>
             </div>
