@@ -16,6 +16,7 @@ import Divider from "@mui/material/Divider";
 import { makeStyles } from "@mui/styles";
 
 import logo from "../../resources/images/gotuuLogo.png";
+import loginBack from '../../resources/images/bigLogo.png'
 import Alerts from "../layout/Alerts";
 import Navbar from "../navbar/Navbar";
 
@@ -116,9 +117,12 @@ const Login = ({
   }
 
   return (
-    <div className="login-back">
+    <>
       <Navbar />
       <div className='login flex_middle'>
+        <div className='login-back'>
+          <img src={loginBack} alt='login background' />
+        </div>
         <div className='card'>
           <img src={logo} alt='John' />
           <div className='title ft-bold'>Login</div>
@@ -233,8 +237,8 @@ const Login = ({
                 <div
                   style={{
                     margin: "0em 0.5em 0em 0em",
-                    color: 'green',
-                    borderColor: 'green'
+                    color: "green",
+                    borderColor: "green",
                   }}
                 >
                   Login
@@ -251,7 +255,7 @@ const Login = ({
               ></div>
               <div className='sign_up_login'>
                 Don't have an account?{" "}
-                <Link to='/register' style={{ color: 'grey' }}>
+                <Link to='/register' style={{ color: "grey" }}>
                   <span className='link cursor_pointer ft-bold'>Sign Up</span>
                 </Link>
               </div>
@@ -262,7 +266,7 @@ const Login = ({
       <div>
         <Alerts />
       </div>
-    </div>
+    </>
   );
 };
 

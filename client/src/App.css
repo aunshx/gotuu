@@ -272,7 +272,6 @@ pre {
   .navbar .hamburger--tilted-login:hover {
       color: var(--primary-color);
   }
-
   .navbar .hamburger--tilted {
       cursor: pointer;
       transform: rotate(90deg);
@@ -364,8 +363,9 @@ pre {
 
 /* ----------------------- LOGIN ------------------------- */
 .login {
-  height: 100vh;
+  height: calc(100vh - 50px);
   width: 100vw;
+  position: relative;
 }
 
 .login .card {
@@ -382,8 +382,17 @@ pre {
     border: 2px solid var(--primary-color);
     z-index: 1;
     font-family: 'PT Serif',serif;
-    opacity: 0.95;
+    /* opacity: 0.95; */
 }
+
+  .login-back {
+    width: 45vw;
+    height: 40vh;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
 .login .card img {
   object-fit: contain;
@@ -2064,14 +2073,4 @@ padding: 0  0 2em 0;
 
 .register .register_three .card .sign_up_login .link:hover {
   color: var(--primary-color-darker);
-}
-
-.login-back {
-  position: fixed;
-     top: 0;
-     right: 0;
-      background: url('./resources/images/loginBackgroundOne2.jpg') no-repeat center center/cover;
-      height: 100vh;
-      width: 100vw;
-      z-index: -100;
 }

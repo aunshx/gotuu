@@ -45,14 +45,14 @@ const Navbar = ({ goMain, isActive }) => {
         ref={goMain}
       >
         <div className='logo cursor_pointer'>
-          <img src={loginActive ? logoLogin : logo} alt='Go Tuu logo' />
+          <img src={logo} alt='Go Tuu logo' />
         </div>
         <div className=''>
           {menu ? (
             <FontAwesomeIcon
               icon={faBars}
               className={
-                loginActive ? "hamburger--tilted-login" : "hamburger--tilted"
+                "hamburger--tilted"
               }
               onClick={normalMenu}
               style={{
@@ -64,7 +64,7 @@ const Navbar = ({ goMain, isActive }) => {
               <div>
                 <FontAwesomeIcon
                   icon={faBars}
-                  className={loginActive ? "hamburger-login" : "hamburger"}
+                  className={"hamburger"}
                   onClick={verticalMenu}
                   style={{
                     fontSize: 20,
