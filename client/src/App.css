@@ -747,6 +747,24 @@ padding: 0  0 2em 0;
  position: relative;
 }
 
+.timeline .main .timeline-icon--tilted {
+  -ms-transform: rotate(90deg);
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
+  animation: horizontalToVertical 0.3s 1 linear;
+  color: var(--count-color);
+  margin-top: 0.6em;
+}
+
+.timeline .main .timeline-icon {
+  -ms-transform: rotate(0deg);
+  -webkit-transform: rotate(0deg);
+  transform: rotate(0deg);
+  animation: verticalToHorizontal 0.3s 1 linear;
+  color: var(--primary-color);
+  margin-top: 0.6em;
+}
+
 .timeline .main .title {
   text-transform: uppercase;
   font-weight: 1000;

@@ -15,7 +15,7 @@ import DoubleArrowIcon from "@mui/icons-material/DoubleArrow";
 
 import NothingToShow from '../NothingToShow'
 
-import { getTimelineEvent, getTimelineDatesCaptured } from '../../../redux/actions/timeline'
+import { getTimelineEvent, getTimelineEventAsc, getTimelineDatesCaptured } from '../../../redux/actions/timeline'
 import { useCallback } from 'react';
 import { useRef } from 'react';
 
@@ -28,13 +28,14 @@ const Timeline = ({
   timeline: { timeline },
   // Redux Actions
   getTimelineEvent,
+  getTimelineEventAsc,
   getTimelineDatesCaptured,
 }) => {
   const [dateSelected, setDateSelected] = useState();
   const [isDatePickerOpened, setIsDatePickerOpened] = useState(false);
+  const [isTilted, setIsTilted] = useState(false);
 
   useEffect(() => {
-    const date = new Date();
     if (isDatePickerOpened) {
       getTimelineEvent(moment(dateSelected).toISOString());
       getTimelineDatesCaptured()
@@ -54,15 +55,30 @@ const Timeline = ({
     setIsDatePickerOpened(false);
   };
 
+  const handleTilt = (tilt, date) => {
+    if(tilt){
+      setIsTilted(false)
+      getTimelineEvent(date)
+    } else {
+      setIsTilted(true)
+      getTimelineEventAsc(date)
+    }
+  }
+
   return (
     <>
       <div className='timeline' id='timeline'>
         <div className='main'>
           <div className='title flex_evenly'>
-            <div>
+            <div className='timeline-icon'>
               <TimelineIcon
-                className='mrg-r-point-5'
+                className={
+                  isTilted
+                    ? "timeline-icon--tilted mrg-r-point-5 cursor_pointer"
+                    : "timeline-icon mrg-r-point-5 cursor_pointer"
+                }
                 style={{ fontSize: 30 }}
+                onClick={() => handleTilt(isTilted, dateSelected)}
               />
             </div>
             <div>TUULINE</div>
@@ -179,6 +195,7 @@ const Timeline = ({
 Timeline.propTypes = {
   timeline: PropTypes.object.isRequired,
   getTimelineEvent: PropTypes.func.isRequired,
+  getTimelineEventAsc: PropTypes.func.isRequired,
   getTimelineDatesCaptured: PropTypes.func.isRequired
 };
 
@@ -189,6 +206,7 @@ const mapStateToProps = state => ({
 const mapActionsToProps = {
   getTimelineEvent,
   getTimelineDatesCaptured,
+  getTimelineEventAsc
 };
 
 export default connect(mapStateToProps, mapActionsToProps)(Timeline);
