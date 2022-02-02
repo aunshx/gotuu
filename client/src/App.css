@@ -753,7 +753,6 @@ padding: 0  0 2em 0;
   transform: rotate(90deg);
   animation: horizontalToVertical 0.3s 1 linear;
   color: var(--count-color);
-  margin-top: 0.6em;
 }
 
 .timeline .main .timeline-icon {
@@ -762,7 +761,6 @@ padding: 0  0 2em 0;
   transform: rotate(0deg);
   animation: verticalToHorizontal 0.3s 1 linear;
   color: var(--primary-color);
-  margin-top: 0.6em;
 }
 
 .timeline .main .title {

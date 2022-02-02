@@ -10,7 +10,7 @@ import TimelineIcon from "@mui/icons-material/Timeline";
 import CloseIcon from "@mui/icons-material/Close"; 
 import Element from './Element';
 import DatePicker from './DatePicker';
-import { Menu, MenuItem } from '@mui/material';
+import { Menu, MenuItem, Tooltip } from '@mui/material';
 import DoubleArrowIcon from "@mui/icons-material/DoubleArrow";
 
 import NothingToShow from '../NothingToShow'
@@ -70,17 +70,23 @@ const Timeline = ({
       <div className='timeline' id='timeline'>
         <div className='main'>
           <div className='title flex_evenly'>
-            <div className='timeline-icon'>
-              <TimelineIcon
-                className={
-                  isTilted
-                    ? "timeline-icon--tilted mrg-r-point-5 cursor_pointer"
-                    : "timeline-icon mrg-r-point-5 cursor_pointer"
-                }
-                style={{ fontSize: 30 }}
-                onClick={() => handleTilt(isTilted, dateSelected)}
-              />
-            </div>
+            <Tooltip
+              title={
+                isTilted ? "Oldest Tuus Displayed" : "Latest Tuus Displayed"
+              }
+            >
+              <div className='timeline-icon'>
+                <TimelineIcon
+                  className={
+                    isTilted
+                      ? "timeline-icon--tilted mrg-r-point-5 cursor_pointer"
+                      : "timeline-icon mrg-r-point-5 cursor_pointer"
+                  }
+                  style={{ fontSize: 30 }}
+                  onClick={() => handleTilt(isTilted, dateSelected)}
+                />
+              </div>
+            </Tooltip>
             <div>TUULINE</div>
             <div className='date cursor_pointer' onClick={handleClick}>
               {dateSelected ? (
