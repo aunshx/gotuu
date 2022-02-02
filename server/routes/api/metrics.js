@@ -38,6 +38,9 @@ router.get("/number-of-tuus-per-day-year", auth, async (req, res) => {
                 format: "%Y",
               },
             },
+            year: {
+              $year: { date: "$createdAt" },
+            },
           },
           count: { $sum: 1 },
         },
@@ -49,7 +52,7 @@ router.get("/number-of-tuus-per-day-year", auth, async (req, res) => {
           _id: 0,
         },
       },
-    ]).sort({ 'createdAt': 1 });
+    ]).sort({ 'date.year': 1 });
 
     return res.status(200).send(ans);
   } catch (error) {
@@ -91,6 +94,15 @@ router.get("/number-of-tuus-per-day-sevendays", auth, async (req, res) => {
                 format: "%d/%m/%Y",
               },
             },
+            month: {
+              $month: { date: "$createdAt" },
+            },
+            day: {
+              $dayOfMonth: { date: "$createdAt" },
+            },
+            year: {
+              $year: { date: "$createdAt" },
+            },
           },
           count: { $sum: 1 },
         },
@@ -102,7 +114,7 @@ router.get("/number-of-tuus-per-day-sevendays", auth, async (req, res) => {
           _id: 0,
         },
       },
-    ]).sort({ 'date.date': 1 })
+    ]).sort({ "date.year": 1, "date.month": 1, "date.day": 1 });
 
     return res.status(200).send(ans);
   } catch (error) {
@@ -138,6 +150,9 @@ router.get("/number-of-tuus-per-day-currentMonth", auth, async (req, res) => {
                 format: "%m",
               },
             },
+            month: {
+              $month: { date: "$createdAt" },
+            },
           },
           count: { $sum: 1 },
         },
@@ -149,7 +164,7 @@ router.get("/number-of-tuus-per-day-currentMonth", auth, async (req, res) => {
           _id: 0,
         },
       },
-    ]).sort({ "date.date": 1 });
+    ]).sort({ "date.month": 1 });
 
     return res.status(200).send(ans);
   } catch (error) {
@@ -192,6 +207,15 @@ router.get("/average-duration-tuus-per-day-sevendays", auth, async (req, res) =>
                 format: "%d/%m/%Y",
               },
             },
+            month: {
+              $month: { date: "$createdAt" },
+            },
+            day: {
+              $dayOfMonth: { date: "$createdAt" },
+            },
+            year: {
+              $year: { date: "$createdAt" },
+            },
           },
           sum: { $sum: "$duration" },
         },
@@ -203,7 +227,7 @@ router.get("/average-duration-tuus-per-day-sevendays", auth, async (req, res) =>
           _id: 0,
         },
       },
-    ]).sort({ "date.date": 1 });
+    ]).sort({ "date.year": 1, "date.month": 1, "date.day": 1 });
 
     return res.status(200).send(ans);
   } catch (error) {
@@ -237,6 +261,9 @@ router.get("/average-duration-tuus-per-day-monthly", auth, async (req, res) => {
                 format: "%m",
               },
             },
+            month: {
+              $month: { date: "$createdAt" },
+            },
           },
           sum: { $sum: "$duration" },
         },
@@ -248,7 +275,7 @@ router.get("/average-duration-tuus-per-day-monthly", auth, async (req, res) => {
           _id: 0,
         },
       },
-    ]).sort({ "date.date": 1 });
+    ]).sort({ "date.month": 1 });
 
     return res.status(200).send(ans);
   } catch (error) {
@@ -283,6 +310,9 @@ router.get("/average-duration-tuus-per-day-yearly", auth, async (req, res) => {
                 format: "%Y",
               },
             },
+            year: {
+              $year: { date: "$createdAt" },
+            },
           },
           sum: { $sum: "$duration" },
         },
@@ -294,7 +324,7 @@ router.get("/average-duration-tuus-per-day-yearly", auth, async (req, res) => {
           _id: 0,
         },
       },
-    ]).sort({ "date.date": 1 });
+    ]).sort({ "date.year": 1 });
 
     return res.status(200).send(ans);
   } catch (error) {
