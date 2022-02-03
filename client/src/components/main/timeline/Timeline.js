@@ -72,7 +72,7 @@ const Timeline = ({
     <>
       <div className='timeline' id='timeline'>
         <div className='main'>
-          <div className='title flex_evenly'>
+          <div className='title triple_grid'>
             <Tooltip
               title={
                 isTilted ? "Oldest Tuus Displayed" : "Latest Tuus Displayed"
