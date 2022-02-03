@@ -21,6 +21,8 @@ import {
 import { connect } from "react-redux";
 import NothingToShow from "../../NothingToShow";
 
+import windowSize from '../../../../utils/windowSize'
+
 const BlockThree = ({
   data,
   numberOfTuusGraphLoading,
@@ -29,6 +31,7 @@ const BlockThree = ({
   getNumberOfTuusPerDay,
   getNumberOfTuusYear,
 }) => {
+  const { width, height } = windowSize()
   const [duration, setDuration] = useState("week");
 
   const onChangeDuration = (e) => {
@@ -67,7 +70,7 @@ const BlockThree = ({
         ) : (
           <>
             {data.length > 0 ? (
-              <ResponsiveContainer width='100%' height='100%'>
+              <ResponsiveContainer width='100%' height={width < 480 ? 240 : '100%'}>
                 <BarChart
                   data={data}
                   margin={{

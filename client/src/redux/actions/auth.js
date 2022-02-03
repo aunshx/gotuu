@@ -70,9 +70,6 @@ export const register =
   async (dispatch) => {
     const value = {}
 
-          console.log(name, email, password);
-
-
     const body = JSON.stringify({ name, email, password });
 
     try {

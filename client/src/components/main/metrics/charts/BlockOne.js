@@ -14,6 +14,8 @@ import {
   getAvgDurationOfTuusPerDay,
 } from "../../../../redux/actions/metrics";
 
+import windowSize from "../../../../utils/windowSize";
+
 const BlockOne = ({
   data,
   dataHours,
@@ -24,7 +26,7 @@ const BlockOne = ({
   getAvgDurationOfTuusPerDay,
 }) => {
 
-  
+  const { width, height } = windowSize();
   const [duration, setDuration] = useState("week");
 
   const [showHours, setShowHours] = useState(false);
@@ -76,7 +78,7 @@ const BlockOne = ({
       </div>
       <div
         style={{
-          width: "100%",
+          width: "99%",
           height: "80%",
         }}
         className='flex_middle'
@@ -86,7 +88,10 @@ const BlockOne = ({
         ) : (
           <>
             {data.length > 0 ? (
-              <ResponsiveContainer width='100%' height='100%'>
+              <ResponsiveContainer
+                width='100%'
+                height={width < 480 ? 240 : "100%"}
+              >
                 <AreaChart
                   data={showHours ? dataHours : data}
                   margin={{
