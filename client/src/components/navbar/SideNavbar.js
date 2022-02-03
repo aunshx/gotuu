@@ -105,37 +105,39 @@ const SideNavbar = ({
             </div>
             <div>
               <div className='flex_middle mrg-t-b-1'>
-                <a href='#metrics'>
-                  <div className='flex_middle navbar_option'>
-                    {sound ? (
-                      <div onClick={soundOff}>
-                        <div>
-                          <FontAwesomeIcon
-                            icon={faVolumeUp}
-                            style={{ fontSize: 20 }}
-                            className='icon'
-                          />
-                        </div>
-                        <div className='mrg-r-point-5 ft-bold link'>
-                          Sound On
-                        </div>
+                <div className='flex_middle navbar_option'>
+                  {sound ? (
+                    <div
+                      onClick={soundOff}
+                      className='flex_middle cursor_pointer'
+                    >
+                      <div>
+                        <FontAwesomeIcon
+                          icon={faVolumeUp}
+                          style={{ fontSize: 18 }}
+                          className='icon'
+                        />
                       </div>
-                    ) : (
-                      <div onClick={soundOn}>
-                        <div>
-                          <FontAwesomeIcon
-                            icon={faVolumeMute}
-                            style={{ fontSize: 20 }}
-                            className='icon'
-                          />
-                        </div>
-                        <div className='mrg-r-point-5 ft-bold link'>
-                          Sound Off
-                        </div>
+                      <div className='mrg-r-point-5 ft-bold link'>Sound On</div>
+                    </div>
+                  ) : (
+                    <div
+                      onClick={soundOn}
+                      className='flex_middle cursor_pointer'
+                    >
+                      <div>
+                        <FontAwesomeIcon
+                          icon={faVolumeMute}
+                          style={{ fontSize: 18 }}
+                          className='icon'
+                        />
                       </div>
-                    )}
-                  </div>
-                </a>
+                      <div className='mrg-r-point-5 ft-bold link'>
+                        Sound Off
+                      </div>
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
             <div className='flex_middle mrg-t-b-1'>
