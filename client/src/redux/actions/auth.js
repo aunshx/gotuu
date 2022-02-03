@@ -16,6 +16,10 @@ import {
 } from "./metrics";
 
 import {
+  getSoundStatus
+} from './settings'
+
+import {
   // Snackbar
   ERROR_SNACKBAR,
   SNACKBAR_RESET,
@@ -56,7 +60,7 @@ export const loadUser = () => async (dispatch) => {
     dispatch(getAvgDurationOfTuus());
     dispatch(getTotalNumberOfTuus());
     dispatch(getLiveStreak());
-
+    dispatch(getSoundStatus());
   } catch (err) {
     dispatch({
       type: AUTH_ERROR,
