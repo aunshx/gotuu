@@ -2738,3 +2738,49 @@ align-items: center;
 }
 
 }
+/*  ----------------------------- POPUP ------------------------ */
+.popup {
+  width: 250px;
+  height: 50px;
+  background-color: rgb(250, 250, 250);
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  position: fixed;
+  bottom: 30px;
+  border-radius: 10px;
+  border: 1px solid orange;
+  margin-left: 0.8em;
+  /* animation: goUpPopup 0.4s 1 ease-in; */
+}
+
+.popup .dual_grid {
+  display: grid ;
+  grid-template-columns: 1fr 6fr;
+}
+
+.popup .icon {
+  padding: 0.5em 0.5em 0.5em 1em;
+}
+
+.popup .popup-details {
+  font-size: 0.9em;
+  color: var(--grey-color);
+  padding: 0.5em;
+}
+
+@keyframes goUpPopup {
+  0%{
+    opacity: 0;
+  }
+  25% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+  75% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}

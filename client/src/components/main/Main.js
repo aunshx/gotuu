@@ -7,6 +7,7 @@ import Count from './count/Count';
 import Go from './Go';
 import Timeline from './timeline/Timeline';
 import Alerts from '../layout/Alerts'
+import Reminder from '../popup/Reminder';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCompressAlt, faExpandAlt, faStickyNote } from '@fortawesome/free-solid-svg-icons';
@@ -164,28 +165,31 @@ const Main = ({
             ) : (
               <div className='expand-icon  flex_middle cursor_pointer'>
                 <Tooltip title='Expand' placement='top'>
-                  <div onClick={toggleFullScreen} className={isAuthenticated ? 'icons-left' : ''}>
+                  <div
+                    onClick={toggleFullScreen}
+                    className={isAuthenticated ? "icons-left" : ""}
+                  >
                     <FontAwesomeIcon
                       icon={faExpandAlt}
                       style={{ fontSize: 20, color: "gray" }}
                     />
                   </div>
                 </Tooltip>
-                  <Tooltip title='Create Note' placement='top'>
-                    <div
-                      onClick={() => toggleNewNote(currentEventId, noteId)}
-                      className={isAuthenticated ? "icons-right" : 'invisible'}
-                    >
-                      {noteId && <div className='notes-active-point'></div>}
-                      <FontAwesomeIcon
-                        icon={faStickyNote}
-                        style={{
-                          fontSize: 20,
-                          color: "gray",
-                        }}
-                      />
-                    </div>
-                  </Tooltip>
+                <Tooltip title='Create Note' placement='top'>
+                  <div
+                    onClick={() => toggleNewNote(currentEventId, noteId)}
+                    className={isAuthenticated ? "icons-right" : "invisible"}
+                  >
+                    {noteId && <div className='notes-active-point'></div>}
+                    <FontAwesomeIcon
+                      icon={faStickyNote}
+                      style={{
+                        fontSize: 20,
+                        color: "gray",
+                      }}
+                    />
+                  </div>
+                </Tooltip>
               </div>
             )}
           </>
@@ -193,6 +197,12 @@ const Main = ({
         {start && <div className='go-down' ref={reffie}></div>}
         <div>
           <Alerts />
+        </div>
+        <div
+          className='flex_middle'
+          id='#example-anchor'
+        >
+          <Reminder />
         </div>
       </div>
       <Modal
