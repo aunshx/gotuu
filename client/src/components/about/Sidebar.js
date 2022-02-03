@@ -66,7 +66,6 @@ const ProfileDetails = ({ fixedContent }) => {
               <div className='title flex_middle'>Contents</div>
             </div>
             <div className='list'>
-              <div className='upperlist'></div>
               <div className=''>
                 <div className='flex_middle'>
                   <div style={{ marginRight: "0.8em" }}>
@@ -76,7 +75,7 @@ const ProfileDetails = ({ fixedContent }) => {
                           href='#intro-about'
                           className={showAll ? "link-active" : "link"}
                         >
-                          1.
+                          <span className='number'>1.</span>
                           <span>Intro</span>
                         </a>
                       </li>
@@ -88,7 +87,7 @@ const ProfileDetails = ({ fixedContent }) => {
                           href='#why-about'
                           className={showEventsOnly ? "link-active" : "link"}
                         >
-                          2.
+                          <span className='number'>2.</span>
                           <span>Walkthrough</span>
                         </a>
                       </li>
@@ -100,7 +99,7 @@ const ProfileDetails = ({ fixedContent }) => {
                           href='#faqs-about'
                           className={showQuestionsOnly ? "link-active" : "link"}
                         >
-                          3.
+                          <span className='number'>3.</span>
                           <span>FAQs</span>
                         </a>
                       </li>
@@ -112,7 +111,7 @@ const ProfileDetails = ({ fixedContent }) => {
                           href='#future-about'
                           className={showDualsOnly ? "link-active" : "link"}
                         >
-                          4.
+                          <span className='number'>4.</span>
                           <span>Future</span>
                         </a>
                       </li>
