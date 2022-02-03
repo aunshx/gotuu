@@ -13,12 +13,20 @@ function authReducer(state = initialState, action) {
   const { type, payload } = action;
 
   switch (type) {
+    // Get Sound Status
+    case SOUND_STATUS:
+      return {
+        ...state,
+        sound: payload,
+      };
+
     // Sound change
     case SOUND_OFF:
       return {
         ...state,
         sound: payload,
       };
+      
     case SOUND_ON:
       return {
         ...state,

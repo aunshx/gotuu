@@ -17,12 +17,14 @@ export const getSoundStatus = () => async (dispatch) => {
   const value = {};
 
   try {
-    dispatch({
-      type: SOUND_STATUS,
-      payload: res.data,
-    });
 
     const res = await api.get("/settings/get-sound-status");
+
+    dispatch({
+        type: SOUND_STATUS,
+        payload: res.data,
+    });
+
   } catch (error) {
     if (error.response.status === 500) {
       value.message = "Oops! Something went wrong. Please reload!";
@@ -31,11 +33,6 @@ export const getSoundStatus = () => async (dispatch) => {
       dispatch({
         type: ERROR_SNACKBAR,
         payload: value,
-      });
-
-      dispatch({
-        type: SOUND_ON,
-        payload: false,
       });
 
       setTimeout(
@@ -54,11 +51,6 @@ export const getSoundStatus = () => async (dispatch) => {
         payload: value,
       });
 
-      dispatch({
-        type: SOUND_ON,
-        payload: false,
-      });
-
       setTimeout(
         () =>
           dispatch({
@@ -75,11 +67,6 @@ export const getSoundStatus = () => async (dispatch) => {
         payload: value,
       });
 
-      dispatch({
-        type: SOUND_ON,
-        payload: false,
-      });
-
       setTimeout(
         () =>
           dispatch({
@@ -94,11 +81,6 @@ export const getSoundStatus = () => async (dispatch) => {
       dispatch({
         type: ERROR_SNACKBAR,
         payload: value,
-      });
-
-      dispatch({
-        type: SOUND_ON,
-        payload: false,
       });
 
       setTimeout(
