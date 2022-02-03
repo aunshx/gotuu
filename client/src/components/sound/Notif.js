@@ -1,9 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
 import useSound from "use-sound";
 import beep from "../../resources/sounds/reminderBell.mp3";
+import { Button } from "@mui/material";
+import { useCallback } from "react";
 
 let map = new Map([
   ['soundState', false]
@@ -13,19 +15,22 @@ const Notif = ({
   // Redux State
   settings: { sound }
  }) => {
-  const [play] = useSound(beep, { interrupt: true });
-  const [soundState, setSoundState] = useState(false)
+  const inputRef = useRef(null)
 
-  useEffect(() => map.set('soundState', sound), [])
+  const [play] = useSound(beep, { volume: 1 });
 
   useEffect(() => {
-    if(map.get('soundState')){
-      play();
-      console.log('FIRE')
-    }
-    console.log('NOT FIRED')
-  }, [play]);
-  return null;
+      inputRef.current.click()
+  })
+
+  const playSound = () => {
+    play()
+  }
+
+  const dontPlaySound = () =>{
+  }
+
+  return <Button onClick={sound ? playSound : dontPlaySound} ref={inputRef} />
 }
 
 Notif.propTypes = {
