@@ -1644,6 +1644,8 @@ export const getAvgDurationOfTuusSevenDays = () => async (dispatch) => {
     }
   }
 };
+
+// Test
   
 // ---------------------------------- MONTH ------------------------------------
 
