@@ -9,14 +9,18 @@ import { faBars, faBookOpen, faChartBar, faDoorOpen, faHome, faProjectDiagram, f
 import { Tooltip } from "@mui/material";
 
 import { logout } from "../../redux/actions/auth";
+import { setSoundOn, setSoundOff } from "../../redux/actions/settings";
 
 
 const SideNavbar = ({
   verticalMenu,
   // Redux States
   auth: { isAuthenticated, user },
+  settings: { sound },
   // Redux Actions
   logout,
+  setSoundOn,
+  setSoundOff
 }) => {
   const [name, setName] = useState('')
   useEffect(() => {
@@ -28,20 +32,18 @@ const SideNavbar = ({
   },[])
 
   const soundOn = () => {
-    
+    setSoundOn()
   }
 
   const soundOff = () => {
-
+    setSoundOff()
   }
 
   return (
     <div className='side_navbar'>
       <div className='title triple_grid mrg-t-b-1'>
         <div />
-        <div className='center_everything'>
-          Hi! {name}
-        </div>
+        <div className='center_everything'>Hi! {name}</div>
         <div className='center_everything' style={{ marginTop: "0.2em" }}>
           <CloseIcon
             className='cancel cursor_pointer'
@@ -105,32 +107,33 @@ const SideNavbar = ({
               <div className='flex_middle mrg-t-b-1'>
                 <a href='#metrics'>
                   <div className='flex_middle navbar_option'>
-                    <div>
-                      <FontAwesomeIcon
-                        icon={faVolumeUp}
-                        style={{ fontSize: 20 }}
-                        className='icon'
-                        onClick={soundOff}
-                      />
-                    </div>
-                    <div className='mrg-r-point-5 ft-bold link'>Sound On</div>
-                  </div>
-                </a>
-              </div>
-            </div>
-            <div>
-              <div className='flex_middle mrg-t-b-1'>
-                <a href='#metrics'>
-                  <div className='flex_middle navbar_option'>
-                    <div>
-                      <FontAwesomeIcon
-                        icon={faVolumeMute}
-                        style={{ fontSize: 20 }}
-                        className='icon'
-                        onClick={soundOn}
-                      />
-                    </div>
-                    <div className='mrg-r-point-5 ft-bold link'>Sound Off</div>
+                    {sound ? (
+                      <div onClick={soundOff}>
+                        <div>
+                          <FontAwesomeIcon
+                            icon={faVolumeUp}
+                            style={{ fontSize: 20 }}
+                            className='icon'
+                          />
+                        </div>
+                        <div className='mrg-r-point-5 ft-bold link'>
+                          Sound On
+                        </div>
+                      </div>
+                    ) : (
+                      <div onClick={soundOn}>
+                        <div>
+                          <FontAwesomeIcon
+                            icon={faVolumeMute}
+                            style={{ fontSize: 20 }}
+                            className='icon'
+                          />
+                        </div>
+                        <div className='mrg-r-point-5 ft-bold link'>
+                          Sound Off
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </a>
               </div>
@@ -220,14 +223,20 @@ const SideNavbar = ({
 
 SideNavbar.propTypes = {
   auth: PropTypes.object.isRequired,
-  logout: PropTypes.func.isRequired
+  settings: PropTypes.object.isRequired,
+  logout: PropTypes.func.isRequired,
+  setSoundOn: PropTypes.func.isRequired,
+  setSoundOff: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
+  settings: state.settings,
   auth: state.auth
 })
 
 const mapActionsToProps = {
+  setSoundOn,
+  setSoundOff,
   logout
 }
 
