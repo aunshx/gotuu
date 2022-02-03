@@ -47,7 +47,7 @@ const BlockThree = ({
     }
   };
   return (
-    <div className='charts'>
+    <div className='charts'> 
       <div className='triple_grid'>
         <div></div>
         <div className='title'>No. of Tuus Completed</div>

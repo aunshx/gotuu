@@ -165,7 +165,7 @@ pre {
   grid-template-columns: repeat(3, 1fr);
 }
 
-@media only screen and (min-width: 320px) and (max-width: 479px) {
+@media only screen and (max-width: 479px) {
   .triple_grid {
     display: flex;
     flex-direction: column;
@@ -377,7 +377,7 @@ pre {
   color: var(--grey-color);
 }
 
-@media only screen and (min-width: 320px) and (max-width: 479px){ 
+@media only screen and (max-width: 479px){ 
 
   .sidebar_nav-right {
     display: none;
@@ -503,6 +503,39 @@ pre {
 
 .login .card .sign_up_login .link:hover {
   color: var(--primary-color-darker);
+}
+
+@media only screen and (max-width: 479px) {
+  .login-back {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    width: 100%;
+height: 90%;  
+background-image: linear-gradient(to right top, #051937, #004d7a, #008793, #00bf72, #a8eb12);
+}
+
+  .login-back img {
+    display: none;
+  }
+
+  .login .card {
+    box-shadow: none;
+    width: 90%;
+    padding: 0.5 1em;
+    margin: auto;
+    text-align: center;
+    font-family: arial;
+    border-radius: 10px;
+    background-color: var(--login-card-background);
+    min-height: 400px;
+    color: #f4f4f4;
+    border: 2px solid var(--primary-color);
+    z-index: 100;
+    font-family: 'PT Serif',serif;
+}
 }
 
     /* ------------------------- MAIN -------------------------- */
@@ -1001,7 +1034,7 @@ padding: 0  0 2em 0;
   top: 23px;
 }
 
-@media only screen and (min-width: 320px) and (max-width: 479px) {
+@media only screen and (max-width: 479px) {
   .timeline .main .line  .element_mini {
   width: 80px;
   height: 60px;
@@ -1124,7 +1157,7 @@ padding: 0  0 2em 0;
   top: 23px;
 }
 
-@media only screen and (min-width: 320px) and (max-width: 479px) {
+@media only screen and (max-width: 479px) {
   .timeline .main .line  .element_tiny {
   width: 100px;
   height: 60px;
@@ -1244,7 +1277,7 @@ padding: 0  0 2em 0;
   top: 54px;
 }
 
-@media only screen and (min-width: 320px) and (max-width: 479px) {
+@media only screen and (max-width: 479px) {
 .timeline .main .line .element_extra-small {
   width: 120px;
   height: 70px;
@@ -1371,7 +1404,7 @@ padding: 0  0 2em 0;
   top: 54px;
 }
 
-@media only screen and (min-width: 320px) and (max-width: 479px) {
+@media only screen and (max-width: 479px) {
 .timeline .main .line .element_small {
    width: 140px;
   height: 70px;
@@ -1496,7 +1529,7 @@ padding: 0  0 2em 0;
   top: 54px;
 }
 
-@media only screen and (min-width: 320px) and (max-width: 479px) {
+@media only screen and (max-width: 479px) {
 .timeline .main .line .element_medium {
  width: 160px;
   height: 70px;
@@ -1618,7 +1651,7 @@ padding: 0  0 2em 0;
   top: 54px;
 }
 
-@media only screen and (min-width: 320px) and (max-width: 479px) {
+@media only screen and (max-width: 479px) {
 .timeline .main .line .element_large {
  width: 180px;
   height: 70px;
@@ -1744,7 +1777,7 @@ padding: 0  0 2em 0;
   top: 53px;
 }
 
-@media only screen and (min-width: 320px) and (max-width: 479px) {
+@media only screen and (max-width: 479px) {
 .timeline .main .line .element_humongous {
  width: 200px;
   height: 70px;
@@ -1808,7 +1841,7 @@ padding: 0  0 2em 0;
   animation: goUpIcon 0.4s 1 linear;
 }
 
-@media only screen and (min-width: 320px) and (max-width: 479px) {
+@media only screen and (max-width: 479px) {
   #go-up {
   position: fixed;
   bottom: 10vh;
@@ -2043,7 +2076,7 @@ padding: 0  0 2em 0;
   transform: translateY(4px);
 }
 
-@media only screen and (min-width: 320px) and (max-width: 479px){
+@media only screen and (max-width: 479px){
     .metrics .main {
   width: 100%;
   margin: 0 0 3em 0;
