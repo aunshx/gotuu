@@ -10,7 +10,75 @@ import {
   SOUND_STATUS,
   SOUND_OFF,
   SOUND_ON,
+
+  // Alerts
+  TEN_MIN_ALERT,
+  THIRTY_MIN_ALERT,
+  ONE_HOUR_ALERT,
+  TWO_HOUR_ALERT,
+  THREE_HOUR_ALERT,
+  REMINDER_ALERT_RESET,
 } from "./types";
+
+// 10 Min Alert 
+export const setTenMinAlert = () => async (dispatch) => {
+   dispatch({
+     type: TEN_MIN_ALERT,
+   });
+
+   setTimeout(() =>
+     dispatch({
+       type: REMINDER_ALERT_RESET
+     }), 3000)
+}
+
+// 30 Min Alert 
+export const setThirtyMinAlert = () => async (dispatch) => {
+   dispatch({
+     type: THIRTY_MIN_ALERT,
+   });
+
+   setTimeout(() =>
+     dispatch({
+       type: REMINDER_ALERT_RESET
+     }), 3000)
+}
+
+// 1 Hour Alert 
+export const setOneHourAlert = () => async (dispatch) => {
+   dispatch({
+     type: ONE_HOUR_ALERT,
+   });
+
+   setTimeout(() =>
+     dispatch({
+       type: REMINDER_ALERT_RESET
+     }), 3000)
+}
+
+// 2 Hour Alert 
+export const setTwoHourAlert = () => async (dispatch) => {
+   dispatch({
+     type: TWO_HOUR_ALERT,
+   });
+
+   setTimeout(() =>
+     dispatch({
+       type: REMINDER_ALERT_RESET
+     }), 3000)
+}
+
+// 3 Hour Alert 
+export const setThreeHourAlert = () => async (dispatch) => {
+   dispatch({
+     type: THREE_HOUR_ALERT,
+   });
+
+   setTimeout(() =>
+     dispatch({
+       type: REMINDER_ALERT_RESET
+     }), 3000)
+}
 
 // Get SOund Status
 export const getSoundStatus = () => async (dispatch) => {

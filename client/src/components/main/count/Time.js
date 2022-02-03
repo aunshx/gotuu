@@ -1,7 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 const Time = ({ time }) => {
+  useEffect(() => {
+    if(time === 3000){
+      console.log('yoooo')
+    }
+  })
   return (
     <div>
       <span className='digits'>

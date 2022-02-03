@@ -1,15 +1,10 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
 import useSound from "use-sound";
 import beep from "../../resources/sounds/reminderBell.mp3";
 import { Button } from "@mui/material";
-import { useCallback } from "react";
-
-let map = new Map([
-  ['soundState', false]
-])
 
 const Notif = ({ 
   // Redux State

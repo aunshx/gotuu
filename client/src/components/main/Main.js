@@ -199,9 +199,11 @@ const Main = ({
         <div>
           <Alerts />
         </div>
-        <div className='flex_middle' id='#example-anchor'>
-          {yesSound && <Reminder />}
-        </div>
+        {yesSound && (
+          <div className='flex_middle' id='#example-anchor'>
+            <Reminder />
+          </div>
+        )}
       </div>
       <Modal
         open={isNoteOpen}
