@@ -98,17 +98,13 @@ export const getSoundStatus = () => async (dispatch) => {
 export const setSoundOn = () => async (dispatch) => {
   const value = {};
 
-  const body = JSON.stringify({
-    sound: true,
-  });
-
   try {
     dispatch({
       type: SOUND_ON,
       payload: true,
     });
 
-    const res = await api.post("/settings/set-sound-on", body);
+    const res = await api.post("/settings/set-sound-on");
   } catch (error) {
     if (error.response.status === 500) {
       value.message = "Oops! Something went wrong. Please reload!";
@@ -202,17 +198,13 @@ export const setSoundOn = () => async (dispatch) => {
 export const setSoundOff = () => async (dispatch) => {
   const value = {};
 
-  const body = JSON.stringify({
-    sound: false,
-  });
-
   try {
     dispatch({
       type: SOUND_OFF,
       payload: false,
     });
 
-    const res = await api.post("/settings/set-sound-off", body);
+    const res = await api.post("/settings/set-sound-off");
   } catch (error) {
     if (error.response.status === 500) {
       value.message = "Oops! Something went wrong. Please reload!";
