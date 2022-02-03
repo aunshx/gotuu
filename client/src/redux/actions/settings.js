@@ -80,7 +80,7 @@ export const setThreeHourAlert = () => async (dispatch) => {
      }), 3000)
 }
 
-// Get SOund Status
+// Get Sound Status
 export const getSoundStatus = () => async (dispatch) => {
   const value = {};
 

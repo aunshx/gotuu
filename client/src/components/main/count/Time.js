@@ -1,12 +1,50 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
-const Time = ({ time }) => {
+import {
+  setTenMinAlert,
+  setThirtyMinAlert,
+  setOneHourAlert,
+  setTwoHourAlert,
+  setThreeHourAlert,
+} from "../../../redux/actions/settings";
+
+const Time = ({
+  time,
+  // Redux Actions
+  setTenMinAlert,
+  setThirtyMinAlert,
+  setOneHourAlert,
+  setTwoHourAlert,
+  setThreeHourAlert,
+}) => {
   useEffect(() => {
-    if(time === 3000){
-      console.log('yoooo')
+    switch (true) {
+      case time === 600000:
+        setTenMinAlert();
+        break;
+
+      case time === 1800000:
+        setThirtyMinAlert();
+        break;
+
+      case time === 3600000:
+        setOneHourAlert();
+        break;
+
+      case time === 7200000:
+        setTwoHourAlert();
+        break;
+
+      case time === 10800000:
+        setThreeHourAlert();
+        break;
+
+      default:
+        return null;
     }
-  })
+  });
   return (
     <div>
       <span className='digits'>
@@ -22,6 +60,20 @@ const Time = ({ time }) => {
   );
 };
 
-Time.propTypes = {};
+Time.propTypes = {
+  addDurationToEventEnd: PropTypes.func.isRequired,
+};
 
-export default Time;
+const mapStateToProps = (state) => ({
+});
+
+const mapActionsToProps = {
+  setTenMinAlert,
+  setThirtyMinAlert,
+  setOneHourAlert,
+  setTwoHourAlert,
+  setThreeHourAlert,
+};
+
+export default connect(mapStateToProps, mapActionsToProps)(Time);
+
