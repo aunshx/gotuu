@@ -161,6 +161,14 @@ pre {
   grid-template-columns: repeat(3, 1fr);
 }
 
+@media only screen and (min-width: 320px) and (max-width: 479px) {
+  .triple_grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
 .ft-bold {
   font-weight: bold;
 }
@@ -1428,6 +1436,14 @@ padding: 0  0 2em 0;
   animation: goUpIcon 0.4s 1 linear;
 }
 
+@media only screen and (min-width: 320px) and (max-width: 479px) {
+  #go-up {
+  position: fixed;
+  bottom: 10vh;
+  right: 10px;
+}
+}
+
 @keyframes goUpIcon {
   0% {
     transform: translateY(0px);
@@ -1655,7 +1671,45 @@ padding: 0  0 2em 0;
   transform: translateY(4px);
 }
 
-  /* ------ */
+@media only screen and (min-width: 320px) and (max-width: 479px){
+    .metrics .main {
+  width: 100%;
+  margin: 0 0 3em 0;
+}
+  .metrics .main .details {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  /* display: grid;
+  grid-template-columns: 1fr; */
+  width: 100%;
+  /* height: 100%; */
+}
+
+.main .charts {
+  width: 100%;
+  height: 95%;
+  animation: goUpAnimate 0.4s 1 ease-in;
+}
+
+.metrics_details_one {
+  width: 100%  ;
+  margin-bottom: 2em;
+}
+
+.metrics_details_three {
+  width: 100%  ;
+  margin-bottom: 3em;
+}
+
+@keyframes goUpAnimate {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+}
 
    /* ------------------------ NOT FOUND ----------------------- */
 

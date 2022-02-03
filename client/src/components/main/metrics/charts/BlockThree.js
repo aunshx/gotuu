@@ -60,45 +60,47 @@ const BlockThree = ({
           width: "100%",
           height: "80%",
         }}
-        className="flex_middle"
+        className='flex_middle'
       >
-        {numberOfTuusGraphLoading? (
-          <div className="spinner-graph">
-
-          </div>
+        {numberOfTuusGraphLoading ? (
+          <div className='spinner-graph'></div>
         ) : (
           <>
             {data.length > 0 ? (
               <ResponsiveContainer width='100%' height='100%'>
-          <BarChart
-            width={500}
-            height={300}
-            data={data}
-            margin={{
-              top: 5,
-              right: 30,
-              left: 20,
-              bottom: 0,
-            }}
-            barSize={15}
-          >
-            <XAxis
-              dataKey='name'
-              scale='point'
-              padding={{ left: 20, right: 20 }}
-              stroke='#44af16'
-              tick={{ fontSize: "0.85em" }}
-            />
-            <YAxis stroke='#44af16' />
-            <Tooltip />
-            <CartesianGrid strokeDasharray='3 3' />
-            <Bar dataKey='value' fill='#b0df9c' background={{ fill: "#eee" }} />
-          </BarChart>
-        </ResponsiveContainer>
+                <BarChart
+                  data={data}
+                  margin={{
+                    top: 5,
+                    right: 40,
+                    left: 0,
+                    bottom: 0,
+                  }}
+                  barSize={15}
+                >
+                  <XAxis
+                    dataKey='name'
+                    scale='point'
+                    padding={{ left: 20, right: 20 }}
+                    stroke='#44af16'
+                    tick={{ fontSize: "0.7em" }}
+                  />
+                  <YAxis stroke='#44af16' tick={{ fontSize: "0.7em" }} />
+                  <Tooltip />
+                  <CartesianGrid strokeDasharray='3 3' />
+                  <Bar
+                    dataKey='value'
+                    fill='#b0df9c'
+                    background={{ fill: "#eee" }}
+                  />
+                </BarChart>
+              </ResponsiveContainer>
             ) : (
-              <NothingToShow 
-                primaryMessage={'Graph is empty'} 
-                secondaryMessage={"Try starting and completing a new Tuu! Or click on 'today' to check previous Tuus!"} 
+              <NothingToShow
+                primaryMessage={"Graph is empty"}
+                secondaryMessage={
+                  "Try starting and completing a new Tuu! Or click on 'today' to check previous Tuus!"
+                }
               />
             )}
           </>

@@ -23,6 +23,8 @@ const BlockOne = ({
   getAvgDurationOfTuusPerDayPerMonth,
   getAvgDurationOfTuusPerDay,
 }) => {
+
+  
   const [duration, setDuration] = useState("week");
 
   const [showHours, setShowHours] = useState(false);
@@ -40,8 +42,12 @@ const BlockOne = ({
     }
   };
 
-  const showTime = () => {
-    setShowHours(!showHours);
+  const showTime = (showHours) => {
+    if(showHours){
+      setShowHours(false)
+    } else {
+      setShowHours(true);
+    }
   };
   return (
     <div className='charts animate__animated animate__bounce'>
@@ -53,7 +59,7 @@ const BlockOne = ({
                 ? "button_switch-2 flex_middle ft-bold"
                 : "button_switch flex_middle ft-bold"
             }
-            onClick={showTime}
+            onClick={() => showTime(showHours)}
           >
             {showHours ? "h" : "m"}
           </div>
@@ -82,12 +88,10 @@ const BlockOne = ({
             {data.length > 0 ? (
               <ResponsiveContainer width='100%' height='100%'>
                 <AreaChart
-                  width={500}
-                  height={400}
                   data={showHours ? dataHours : data}
                   margin={{
                     top: 10,
-                    right: 30,
+                    right: 50,
                     left: 0,
                     bottom: 0,
                   }}
@@ -96,7 +100,7 @@ const BlockOne = ({
                   <XAxis
                     dataKey='name'
                     stroke='#44af16'
-                    tick={{ fontSize: "0.85em" }}
+                    tick={{ fontSize: "0.7em" }}
                   />
                   <YAxis stroke='#44af16' tick={{ fontSize: "0.7em" }} />
                   <Tooltip />

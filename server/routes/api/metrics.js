@@ -734,7 +734,7 @@ router.get("/live-streak", auth, async (req, res) => {
     if(!ans){
           return res.status(200).send('0');
     } else {
-          return res.status(200).send(ans.count);
+          return res.status(200).send(ans.count.toString());
     }
 
   } catch(error) {

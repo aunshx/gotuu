@@ -18,6 +18,9 @@ import {
   getAvgDurationOfTuusPerDay,
 } from "../../../redux/actions/metrics";
 
+import windowSize from "../../../utils/windowSize";
+
+
 const New = ({
   fixedContent2,
   goToMain,
@@ -45,6 +48,8 @@ const New = ({
   //     getAvgDurationOfTuus()
   //   getAvgDurationOfTuusPerDay()
   // },[])
+      const { width, height } = windowSize();
+
 
   return (
     <div className='metrics flex_middle' id='metrics'>
@@ -60,7 +65,10 @@ const New = ({
           <div>Metrics</div>
         </div>
         <div className='details'>
-          <div className='metrics_details_one' data-aos='fade-up'>
+          <div
+            className='metrics_details_one'
+            data-aos={width < 360 ? "" : "fade-up"}
+          >
             <BlockOne
               data={avgDurationTuusPerDay}
               dataHours={avgDurationTuusPerDayHours}
@@ -69,28 +77,28 @@ const New = ({
           </div>
           <div className='metrics_details_two flex_middle'>
             <div className='app'>
-              <div data-aos='fade-up'>
+              <div data-aos={width < 360 ? "" : "fade-up"}>
                 <LiveStreak data={liveStreak} loading={liveStreakLoading} />
               </div>
-              <div data-aos='fade-up'>
+              <div data-aos={width < 360 ? "" : "fade-up"}>
                 <TotalTuus
                   data={totalCountTuus}
                   loading={totalCountTuusLoading}
                 />
               </div>
-              <div data-aos='fade-up'>
+              <div data-aos={width < 360 ? "" : "fade-up"}>
                 <CommonTime
                   data={avgDurationTuus}
                   loading={avgDurationTuusLoading}
                 />
               </div>
-              <div data-aos='fade-up'>
+              <div data-aos={width < 360 ? "" : "fade-up"}>
                 <TotalPerformance
                   data={avgDurationTuus}
                   loading={avgDurationTuusLoading}
                 />
               </div>
-              <div data-aos='fade-up'>
+              <div data-aos={width < 360 ? "" : "fade-up"}>
                 <AvgBreakTime
                   data={avgDurationTuus}
                   loading={avgDurationTuusLoading}
@@ -98,7 +106,10 @@ const New = ({
               </div>
             </div>
           </div>
-          <div className='metrics_details_three' data-aos='fade-up'>
+          <div
+            className='metrics_details_three'
+            data-aos={width < 360 ? "" : "fade-up"}
+          >
             <BlockThree
               data={numberOfTuusGraph}
               loading={numberOfTuusGraphLoading}
@@ -110,7 +121,7 @@ const New = ({
         <div id='go-up' className='cursor_pointer' data-aos='fade-up-left'>
           <FontAwesomeIcon
             icon={faArrowCircleUp}
-            style={{ fontSize: 35, color: "#7ed957" }}
+            style={{ fontSize: 30, color: "#7ed957" }}
             onClick={goToMain}
           />
         </div>

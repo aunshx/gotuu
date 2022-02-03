@@ -15,6 +15,8 @@ import DoubleArrowIcon from "@mui/icons-material/DoubleArrow";
 
 import NothingToShow from '../NothingToShow'
 
+import windowSize from '../../../utils/windowSize'
+
 import { getTimelineEvent, getTimelineEventAsc, getTimelineDatesCaptured } from '../../../redux/actions/timeline'
 import { useCallback } from 'react';
 import { useRef } from 'react';
@@ -31,6 +33,7 @@ const Timeline = ({
   getTimelineEventAsc,
   getTimelineDatesCaptured,
 }) => {
+  const { width, height } = windowSize();
   const [dateSelected, setDateSelected] = useState();
   const [isDatePickerOpened, setIsDatePickerOpened] = useState(false);
   const [isTilted, setIsTilted] = useState(false);
@@ -167,7 +170,7 @@ const Timeline = ({
             {timeline.length > 0 ? (
               timeline.map((event, index) => (
                 <div key={index}>
-                  <div className='' data-aos='fade-in'>
+                  <div className='' data-aos={width < 360 ? "" : "fade-in"}>
                     <Element event={event} type={index} />
                   </div>
                 </div>
@@ -189,7 +192,7 @@ const Timeline = ({
         <div id='go-up' className='cursor_pointer' data-aos='fade-up-left'>
           <FontAwesomeIcon
             icon={faArrowCircleUp}
-            style={{ fontSize: 35, color: "#7ed957" }}
+            style={{ fontSize: 30, color: "#7ed957" }}
             onClick={goToMain}
           />
         </div>
