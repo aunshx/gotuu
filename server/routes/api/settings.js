@@ -28,15 +28,32 @@ router.get("/get-sound-status", auth, async (req, res) => {
 // @desc     Post sound status change to true
 // @access   Private
 router.post("/set-sound-on", auth, async (req, res) => {
-    const { sound } = req.body
-
+    let ans = {}
   try {
+    console.log('Sound On')
 
-    let ans = await Settings.findOneAndUpdate({
+    let settingsExist = await Settings.findOne({
         userId: req.user.id
-    }, { sound: sound })
-    
-    return res.status(200).send(ans)
+    })
+
+    if(!settingsExist){
+        let newSoundSetting = new Settings({
+            userId: req.user.id,
+            sound: true
+        })
+
+        await newSoundSetting.save()
+        return res.status(200).send(newSoundSetting);
+    } else {
+        ans = await Settings.updateOne(
+        { userId: req.user.id },
+        { $set: { sound: true } },
+        {
+            new: true,
+        }
+        );
+        return res.status(200).send(ans);
+    }    
 
   } catch (err) {
     return res.status(400).send({ errors: [{ msg: "Cannot change sound status" }] });
