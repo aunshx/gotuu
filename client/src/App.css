@@ -2598,3 +2598,35 @@ padding: 0  0 2em 0;
 .register .register_three .card .sign_up_login .link:hover {
   color: var(--primary-color-darker);
 }
+
+@media only screen and (max-width: 479px) {
+  .register {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+
+  }
+
+  .register .register_two {
+    display: none;
+  }
+
+  .register .register_three {
+    margin: 2em 0em 2em 0em;
+  }
+
+  .register_welcome {
+  color: var(--grey-color);
+  font-size: 1.5em;
+  font-weight: bold;
+  width: 100%;
+  margin-top: 1em;
+}
+
+.register_welcome_title {
+    color: var(--grey-color);
+  font-size: 1.2em;
+  font-weight: bold;
+}
+}
