@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Intro from "./Intro";
@@ -6,9 +6,11 @@ import Why from "./Why";
 import HowTo from "./HowTo";
 import Faqs from "./Faqs";
 import Future from "./Future";
+import { NavLink } from "react-router-dom";
 
 
 const ProfileDetails = ({ fixedContent }) => {
+
   const [showAll, setShowAll] = useState(true);
   const [showEventsOnly, setShowEventsOnly] = useState(false);
   const [showChallengesOnly, setShowChallengesOnly] = useState(false);
@@ -84,7 +86,7 @@ const ProfileDetails = ({ fixedContent }) => {
                         onClick={shiftToEventsOnly}
                       >
                         <a
-                          href='#why-about'
+                          href='#walkthrough-about'
                           className={showEventsOnly ? "link-active" : "link"}
                         >
                           <span className='number'>2.</span>

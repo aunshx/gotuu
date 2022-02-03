@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const HowTo = (props) => {
   return (
-    <div className='pages' id='howto-about'>
+    <div className='pages' id='walkthrough-about'>
       <div className='title flex_middle'>Walkthrough</div>
         <div className='flex_middle mini-title' >
           I. Using Go without login
