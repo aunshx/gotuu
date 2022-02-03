@@ -11,17 +11,31 @@ const Settings = require("../../models/Settings");
 // @desc     Get sound status
 // @access   Private
 router.get("/get-sound-status", auth, async (req, res) => {
-  try {
+    let ans = {};
+    try {
+      let settingsExist = await Settings.findOne({
+        userId: req.user.id,
+      });
 
-    let ans = await Settings.find({
-        userId: req.user.id
-    })
-    
-    return res.status(200).send(ans)
+      if (!settingsExist) {
+        let newSoundSetting = new Settings({
+          userId: req.user.id,
+        });
 
-  } catch (err) {
-    return res.status(400).send({ errors: [{ msg: "Cannot fetch sound status" }] });
-  }
+        await newSoundSetting.save();
+        return res.status(200).send(newSoundSetting);
+      } else {
+        ans = await Settings.find({
+          userId: req.user.id,
+        });
+
+        return res.status(200).send(ans[0].sound);
+      }
+    } catch (err) {
+      return res
+        .status(400)
+        .send({ errors: [{ msg: "Cannot fetch sound status" }] });
+    }
 });
 
 // @route    POST api/settings
@@ -30,7 +44,6 @@ router.get("/get-sound-status", auth, async (req, res) => {
 router.post("/set-sound-on", auth, async (req, res) => {
     let ans = {}
   try {
-    console.log('Sound On')
 
     let settingsExist = await Settings.findOne({
         userId: req.user.id
@@ -66,7 +79,6 @@ router.post("/set-sound-on", auth, async (req, res) => {
 router.post("/set-sound-off", auth, async (req, res) => {
     let ans = {};
     try {
-      console.log("Sound Off");
 
       let settingsExist = await Settings.findOne({
         userId: req.user.id,
