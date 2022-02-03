@@ -11,9 +11,6 @@ import {
   LOGIN_LOADING,
   LOGIN_LOADING_COMPLETE,
 
-  // Sound
-  SOUND_OFF,
-  SOUND_ON,
 } from "../actions/types";
 
 const initialState = {
@@ -22,24 +19,13 @@ const initialState = {
   loading: true,
   user: null,
   loginLoading: false,
-  sound: true
 };
 
 function authReducer(state = initialState, action) {
   const { type, payload } = action;
 
   switch (type) {
-    // Sound change
-    case SOUND_OFF:
-      return {
-        ...state,
-        sound: payload,
-      };
-    case SOUND_ON:
-      return {
-        ...state,
-        sound: payload,
-      };
+
     // Login Loading
     case LOGIN_LOADING:
       return {

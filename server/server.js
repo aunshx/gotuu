@@ -27,6 +27,7 @@ app.use("/api/auth", require("./routes/api/auth"));
 app.use("/api/timeline", require("./routes/api/timeline"));
 app.use("/api/metrics", require("./routes/api/metrics"));
 app.use("/api/notes", require("./routes/api/notes"));
+app.use("/api/settings", require("./routes/api/settings"));
 
 // Serve static assets in production
 if (process.env.NODE_ENV === "production") {
