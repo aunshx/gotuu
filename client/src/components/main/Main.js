@@ -38,20 +38,18 @@ const Main = ({
   auth: { isAuthenticated },
   timeline: { currentEventId },
   notes: { noteId },
+  settings: { sound },
   // Redux Actions
   createNewNote,
 }) => {
+  const reffie = useRef();
+  const handle = useRef();
 
   const [isNoteOpen, setIsNoteOpen] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
   const [isCounting, setIsCounting] = useState(false);
   const [start, setStart] = useState(false);
   const [isFull, setIsFull] = useState(false);
-  const [isComplete, setIsComplete] = useState(false);
-  const [toggleNote, setToggleNote] = useState(false);
-  const [yesSound, setYesSound] = useState(false)
-  const reffie = useRef();
-  const handle = useRef();
 
   useEffect(() => (document.title = "Gotuu | Track your time"), []);
 
@@ -200,7 +198,7 @@ const Main = ({
         <div>
           <Alerts />
         </div>
-        {yesSound && (
+        {sound && (
           <div className='flex_middle' id='#example-anchor'>
             <Reminder />
           </div>
@@ -228,6 +226,7 @@ const Main = ({
 };
 
 Main.propTypes = {
+  settings: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
   notes: PropTypes.object.isRequired,
   timeline: PropTypes.object.isRequired,
@@ -235,6 +234,7 @@ Main.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
+  settings: state.settings,
   auth: state.auth,
   timeline: state.timeline,
   notes: state.notes
