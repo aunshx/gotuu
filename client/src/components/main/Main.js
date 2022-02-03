@@ -38,7 +38,6 @@ const Main = ({
   auth: { isAuthenticated },
   timeline: { currentEventId },
   notes: { noteId },
-  settings: { sound },
   // Redux Actions
   createNewNote,
 }) => {
@@ -48,8 +47,8 @@ const Main = ({
   const [isCounting, setIsCounting] = useState(false);
   const [start, setStart] = useState(false);
   const [isFull, setIsFull] = useState(false);
-  const [yesSound, setYesSound] = useState(false)
-  
+  const [yesSound, setYesSound] = useState(true)
+
   const reffie = useRef();
   const handle = useRef();
 
@@ -228,7 +227,6 @@ const Main = ({
 };
 
 Main.propTypes = {
-  settings: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
   notes: PropTypes.object.isRequired,
   timeline: PropTypes.object.isRequired,
@@ -236,7 +234,6 @@ Main.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  settings: state.settings,
   auth: state.auth,
   timeline: state.timeline,
   notes: state.notes

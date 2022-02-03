@@ -18,10 +18,10 @@ const Reminder = ({
   const [play, { stop }] = useSound(reminderSound, { volume: 1 });
 
   useEffect(() => {
-    if(sound){
+    // if(sound){
       play();
       setTimeout(() => stop(), 3000);
-    }
+    // }
   }, []);
 
   return (
