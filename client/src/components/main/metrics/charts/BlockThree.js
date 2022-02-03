@@ -51,7 +51,11 @@ const BlockThree = ({
       <div className='triple_grid'>
         <div></div>
         <div className='title'>No. of Tuus Completed</div>
-        <div className='flex_right mrg-r-one'>
+        <div
+          className={
+            width < 480 ? "flex_middle mrg-b-1" : "flex_right mrg-r-one"
+          }
+        >
           <DurationSelector
             duration={duration}
             onChangeDuration={onChangeDuration}
@@ -70,7 +74,10 @@ const BlockThree = ({
         ) : (
           <>
             {data.length > 0 ? (
-              <ResponsiveContainer width='100%' height={width < 480 ? 240 : '100%'}>
+              <ResponsiveContainer
+                width='100%'
+                height={width < 480 ? 240 : "100%"}
+              >
                 <BarChart
                   data={data}
                   margin={{

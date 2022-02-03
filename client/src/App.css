@@ -80,6 +80,10 @@ pre {
   margin-top: 1em;
 }
 
+.mrg-b-1 {
+  margin-bottom: 1em;
+}
+
 .mrg-t-b-1 {
   margin: 1em 0;
 }

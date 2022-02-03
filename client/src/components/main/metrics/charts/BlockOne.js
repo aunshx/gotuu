@@ -69,7 +69,11 @@ const BlockOne = ({
         <div className='title'>
           Avg duration of Tuus - <span> {showHours ? "hrs" : "min"} </span>
         </div>
-        <div className='flex_right mrg-r-one'>
+        <div
+          className={
+            width < 480 ? "flex_middle mrg-b-1" : "flex_right mrg-r-one"
+          }
+        >
           <DurationSelector
             duration={duration}
             onChangeDuration={onChangeDuration}
