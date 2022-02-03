@@ -10,6 +10,10 @@ export const LOGIN_FAIL = "LOGIN_FAIL";
 
 export const LOGOUT = "LOGOUT";
 
+// Sound
+export const SOUND_ON = "SOUND_ON";
+export const SOUND_OFF = "SOUND_OFF";
+
 // Different Errors for the snackbar
 export const SNACKBAR_RESET = "SNACKBAR_RESET";
 export const ERROR_SNACKBAR = "ERROR_SNACKBAR";

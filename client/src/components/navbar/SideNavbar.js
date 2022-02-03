@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 import CloseIcon from '@mui/icons-material/Close';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faBookOpen, faChartBar, faDoorOpen, faHome, faProjectDiagram, faSignInAlt, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faBookOpen, faChartBar, faDoorOpen, faHome, faProjectDiagram, faSignInAlt, faVolumeMute, faVolumeUp } from "@fortawesome/free-solid-svg-icons";
 import { Tooltip } from "@mui/material";
 
 import { logout } from "../../redux/actions/auth";
@@ -26,6 +26,14 @@ const SideNavbar = ({
       setName('')
     }
   },[])
+
+  const soundOn = () => {
+    
+  }
+
+  const soundOff = () => {
+
+  }
 
   return (
     <div className='side_navbar'>
@@ -89,6 +97,40 @@ const SideNavbar = ({
                       />
                     </div>
                     <div className='mrg-r-point-5 ft-bold link'>Metrics</div>
+                  </div>
+                </a>
+              </div>
+            </div>
+            <div>
+              <div className='flex_middle mrg-t-b-1'>
+                <a href='#metrics'>
+                  <div className='flex_middle navbar_option'>
+                    <div>
+                      <FontAwesomeIcon
+                        icon={faVolumeUp}
+                        style={{ fontSize: 20 }}
+                        className='icon'
+                        onClick={soundOff}
+                      />
+                    </div>
+                    <div className='mrg-r-point-5 ft-bold link'>Sound On</div>
+                  </div>
+                </a>
+              </div>
+            </div>
+            <div>
+              <div className='flex_middle mrg-t-b-1'>
+                <a href='#metrics'>
+                  <div className='flex_middle navbar_option'>
+                    <div>
+                      <FontAwesomeIcon
+                        icon={faVolumeMute}
+                        style={{ fontSize: 20 }}
+                        className='icon'
+                        onClick={soundOn}
+                      />
+                    </div>
+                    <div className='mrg-r-point-5 ft-bold link'>Sound Off</div>
                   </div>
                 </a>
               </div>
