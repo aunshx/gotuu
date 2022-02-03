@@ -42,14 +42,16 @@ const Main = ({
   // Redux Actions
   createNewNote,
 }) => {
-  const reffie = useRef();
-  const handle = useRef();
 
   const [isNoteOpen, setIsNoteOpen] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
   const [isCounting, setIsCounting] = useState(false);
   const [start, setStart] = useState(false);
   const [isFull, setIsFull] = useState(false);
+  const [yesSound, setYesSound] = useState(false)
+  
+  const reffie = useRef();
+  const handle = useRef();
 
   useEffect(() => (document.title = "Gotuu | Track your time"), []);
 
@@ -198,7 +200,7 @@ const Main = ({
         <div>
           <Alerts />
         </div>
-        {sound && (
+        {yesSound && (
           <div className='flex_middle' id='#example-anchor'>
             <Reminder />
           </div>
