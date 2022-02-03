@@ -11,6 +11,8 @@ import { styled } from "@mui/material/styles";
 import { getNote } from '../../../redux/actions/notes';
 import TimelineNote from '../notes/TimelineNote';
 
+import windowSize from '../../../utils/windowSize';
+
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
@@ -30,6 +32,7 @@ const Element = ({
   // Redux Actions
   getNote,
 }) => {
+  const {  width, height} = windowSize()
   const [classy, setClassy] = useState("");
   const [showInHours, setShowInHours] = useState(false);
   const [noteDetails, setNoteDetails] = useState({});
@@ -81,12 +84,22 @@ const [expanded, setExpanded] = useState(false);
       {type % 2 === 0 ? (
         <div className='left-note'>
           <div className='app'>
-            <div className={`element_${classy} triple_grid cursor_pointer`}>
+            <div
+              className={
+                noteDetails
+                  ? `element_${classy} triple_grid cursor_pointer element_padding_${classy}`
+                  : `element_${classy} triple_grid cursor_pointer`
+              }
+            >
+              <div></div>
               <Tooltip
                 title={showInHours ? "Minutes" : "Hours"}
                 placement='top'
               >
-                <div onClick={() => setShowInHours(!showInHours)}>
+                <div
+                  onClick={() => setShowInHours(!showInHours)}
+                  className='flex_middle'
+                >
                   {showInHours ? (
                     <>
                       {(event.duration / 60000).toFixed("2")}
@@ -100,34 +113,41 @@ const [expanded, setExpanded] = useState(false);
                   )}
                 </div>
               </Tooltip>
-              <div >
-                <ExpandMore
-                  expand={expanded}
-                  onClick={handleExpandClick}
-                  aria-expanded={expanded}
-                  aria-label='show more'
-                >
-                  <ExpandMoreIcon
-                    style={{
-                      fontSize: 28,
-                    }}
-                  />
-                </ExpandMore>
-              </div>
-              <div className=''>
-                <Collapse
-                  in={expanded}
-                  timeout='auto'
-                  unmountOnExit
-                  style={{
-                    padding: 0,
-                  }}
-                >
-                  <div>
-                    <TimelineNote noteDetails={noteDetails} close={closeNote} />
+              {width < 480 && (
+                <>
+                  <div className=''>
+                    <ExpandMore
+                      expand={expanded}
+                      onClick={handleExpandClick}
+                      aria-expanded={expanded}
+                      aria-label='show more'
+                    >
+                      <ExpandMoreIcon
+                        style={{
+                          fontSize: 28,
+                        }}
+                      />
+                    </ExpandMore>
                   </div>
-                </Collapse>
-              </div>
+                  <div className=''>
+                    <Collapse
+                      in={expanded}
+                      timeout='auto'
+                      unmountOnExit
+                      style={{
+                        padding: 0,
+                      }}
+                    >
+                      <div>
+                        <TimelineNote
+                          noteDetails={noteDetails}
+                          close={closeNote}
+                        />
+                      </div>
+                    </Collapse>
+                  </div>
+                </>
+              )}
               {noteDetails && (
                 <>
                   <div className={`liner_horizontal_right cursor_pointer`}>
