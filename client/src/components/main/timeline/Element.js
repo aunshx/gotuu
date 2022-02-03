@@ -1,13 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Tooltip } from '@mui/material';
+import { Tooltip, Collapse, IconButton } from "@mui/material";
 import { connect } from "react-redux";
 
 import ArrowCircleUpOutlinedIcon from "@mui/icons-material/ArrowCircleUpOutlined";
 import ArrowCircleDownOutlinedIcon from "@mui/icons-material/ArrowCircleDownOutlined";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { styled } from "@mui/material/styles";
 
 import { getNote } from '../../../redux/actions/notes';
 import TimelineNote from '../notes/TimelineNote';
+
+const ExpandMore = styled((props) => {
+  const { expand, ...other } = props;
+  return <IconButton {...other} />;
+})(({ theme, expand }) => ({
+  transform: !expand ? "rotate(0deg)" : "rotate(180deg)",
+  width: "1em",
+  height: "1em",
+  color: "white",
+  transition: theme.transitions.create("transform", {
+    duration: theme.transitions.duration.shortest,
+  }),
+}));
 
 const Element = ({
   event,
@@ -19,7 +34,7 @@ const Element = ({
   const [showInHours, setShowInHours] = useState(false);
   const [noteDetails, setNoteDetails] = useState({});
   const [showNote, setShowNote] = useState(false)
-
+const [expanded, setExpanded] = useState(false);
 
   useEffect(() => {
     let ans = getNote(event._id)
@@ -57,22 +72,62 @@ const Element = ({
     setShowNote(false)
   };
 
+  const handleExpandClick = () => {
+    setExpanded(!expanded);
+  };
+
   return (
     <>
       {type % 2 === 0 ? (
         <div className='left-note'>
           <div className='app'>
-            <div className={`element_${classy} flex_middle cursor_pointer`}>
+            <div className={`element_${classy} triple_grid cursor_pointer`}>
               <Tooltip
                 title={showInHours ? "Minutes" : "Hours"}
                 placement='top'
               >
                 <div onClick={() => setShowInHours(!showInHours)}>
-                  {showInHours
-                    ? (event.duration / 60000).toFixed("2")
-                    : (event.duration / 3600000).toFixed("2")}
+                  {showInHours ? (
+                    <>
+                      {(event.duration / 60000).toFixed("2")}
+                      <span style={{ marginLeft: "0.2em" }}>m</span>
+                    </>
+                  ) : (
+                    <>
+                      {(event.duration / 3600000).toFixed("2")}{" "}
+                      <span style={{ marginLeft: "0.2em" }}>h</span>
+                    </>
+                  )}
                 </div>
               </Tooltip>
+              <div >
+                <ExpandMore
+                  expand={expanded}
+                  onClick={handleExpandClick}
+                  aria-expanded={expanded}
+                  aria-label='show more'
+                >
+                  <ExpandMoreIcon
+                    style={{
+                      fontSize: 28,
+                    }}
+                  />
+                </ExpandMore>
+              </div>
+              <div className=''>
+                <Collapse
+                  in={expanded}
+                  timeout='auto'
+                  unmountOnExit
+                  style={{
+                    padding: 0,
+                  }}
+                >
+                  <div>
+                    <TimelineNote noteDetails={noteDetails} close={closeNote} />
+                  </div>
+                </Collapse>
+              </div>
               {noteDetails && (
                 <>
                   <div className={`liner_horizontal_right cursor_pointer`}>
