@@ -42,7 +42,7 @@ const [expanded, setExpanded] = useState(false);
   useEffect(() => {
     let ans = getNote(event._id)
     ans.then((data) => {
-          setNoteDetails(data)
+      setNoteDetails(data)
     })
 
     if (event.duration) {
@@ -77,6 +77,7 @@ const [expanded, setExpanded] = useState(false);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
+    console.log('OPENNED')
   };
 
   return (
@@ -98,7 +99,7 @@ const [expanded, setExpanded] = useState(false);
               >
                 <div
                   onClick={() => setShowInHours(!showInHours)}
-                  className='flex_middle'
+                  className={noteDetails ? "flex_middle" : `time_${classy}`}
                 >
                   {showInHours ? (
                     <>
@@ -113,12 +114,11 @@ const [expanded, setExpanded] = useState(false);
                   )}
                 </div>
               </Tooltip>
-              {width < 480 && (
+              {width < 480 && noteDetails && (
                 <>
-                  <div className=''>
+                  <div className='' onClick={handleExpandClick}>
                     <ExpandMore
                       expand={expanded}
-                      onClick={handleExpandClick}
                       aria-expanded={expanded}
                       aria-label='show more'
                     >
@@ -126,6 +126,7 @@ const [expanded, setExpanded] = useState(false);
                         style={{
                           fontSize: 28,
                         }}
+                        onClick={handleExpandClick}
                       />
                     </ExpandMore>
                   </div>
@@ -199,7 +200,7 @@ const [expanded, setExpanded] = useState(false);
               >
                 <div
                   onClick={() => setShowInHours(!showInHours)}
-                  className='flex_middle'
+                  className={noteDetails ? "flex_middle" : `time_${classy}`}
                 >
                   {showInHours ? (
                     <>
@@ -214,9 +215,9 @@ const [expanded, setExpanded] = useState(false);
                   )}
                 </div>
               </Tooltip>
-              {width < 480 && (
+              {width < 480 && noteDetails && (
                 <>
-                  <div className=''>
+                  <div className='' onClick={handleExpandClick}>
                     <ExpandMore
                       expand={expanded}
                       onClick={handleExpandClick}
@@ -227,6 +228,7 @@ const [expanded, setExpanded] = useState(false);
                         style={{
                           fontSize: 28,
                         }}
+                        onClick={handleExpandClick}
                       />
                     </ExpandMore>
                   </div>
