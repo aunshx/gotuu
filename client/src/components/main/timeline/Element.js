@@ -185,17 +185,70 @@ const [expanded, setExpanded] = useState(false);
       ) : (
         <div className='right-note'>
           <div className='app'>
-            <div className={`element_${classy} flex_middle cursor_pointer`}>
+            <div
+              className={
+                noteDetails
+                  ? `element_${classy} triple_grid cursor_pointer element_padding_${classy}`
+                  : `element_${classy} triple_grid cursor_pointer`
+              }
+            >
+              <div></div>
               <Tooltip
                 title={showInHours ? "Minutes" : "Hours"}
                 placement='top'
               >
-                <div onClick={() => setShowInHours(!showInHours)}>
-                  {showInHours
-                    ? (event.duration / 60000).toFixed("2")
-                    : (event.duration / 3600000).toFixed("2")}
+                <div
+                  onClick={() => setShowInHours(!showInHours)}
+                  className='flex_middle'
+                >
+                  {showInHours ? (
+                    <>
+                      {(event.duration / 60000).toFixed("2")}
+                      <span style={{ marginLeft: "0.2em" }}>m</span>
+                    </>
+                  ) : (
+                    <>
+                      {(event.duration / 3600000).toFixed("2")}{" "}
+                      <span style={{ marginLeft: "0.2em" }}>h</span>
+                    </>
+                  )}
                 </div>
               </Tooltip>
+              {width < 480 && (
+                <>
+                  <div className=''>
+                    <ExpandMore
+                      expand={expanded}
+                      onClick={handleExpandClick}
+                      aria-expanded={expanded}
+                      aria-label='show more'
+                    >
+                      <ExpandMoreIcon
+                        style={{
+                          fontSize: 28,
+                        }}
+                      />
+                    </ExpandMore>
+                  </div>
+                  <div className=''>
+                    <Collapse
+                      in={expanded}
+                      timeout='auto'
+                      unmountOnExit
+                      style={{
+                        padding: 0,
+                      }}
+                    >
+                      <div>
+                        <TimelineNote
+                          noteDetails={noteDetails}
+                          close={closeNote}
+                        />
+                      </div>
+                    </Collapse>
+                  </div>
+                </>
+              )}
               {noteDetails && (
                 <>
                   <div className={`liner_horizontal_left`}>
