@@ -142,7 +142,7 @@ const [expanded, setExpanded] = useState(false);
                       <div>
                         <TimelineNote
                           noteDetails={noteDetails}
-                          close={closeNote}
+                          close={handleExpandClick}
                         />
                       </div>
                     </Collapse>
@@ -244,7 +244,7 @@ const [expanded, setExpanded] = useState(false);
                       <div>
                         <TimelineNote
                           noteDetails={noteDetails}
-                          close={closeNote}
+                          close={handleExpandClick}
                         />
                       </div>
                     </Collapse>
