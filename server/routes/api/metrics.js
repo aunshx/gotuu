@@ -718,7 +718,7 @@ router.get("/average-duration-tuus-all-time", auth, async (req, res) => {
 // -------------------------------- LIVE STREAK - BLOCK -----------------------
 
 // @route    POST api/metrics
-// @desc     Get live streak
+// @desc     Increment live streak
 // @access   Private
 router.get("/live-streak", auth, async (req, res) => {
   let ans = {};
@@ -726,15 +726,24 @@ router.get("/live-streak", auth, async (req, res) => {
    let todayDate = moment().startOf("days");
   try {
    
-    ans = await LiveCount.findOneAndUpdate({
-      $and: [ {userId: req.user.id}, {date: { $eq: yestDate }}]},
+    ans = await LiveCount.findOneAndUpdate(
+      {
+        $and: [{ userId: req.user.id }, { date: { $eq: yestDate } }],
+      },
       { $inc: { count: 1 }, date: todayDate },
+      {
+        returnOriginal: false,
+      }
     );
 
-    if(!ans){
+    let ans2 = await LiveCount.find(
+        { userId: req.user.id }
+    ).select({ count: 1, _id: 0 })
+
+    if(!ans2){
           return res.status(200).send('0');
     } else {
-          return res.status(200).send(ans.count.toString());
+          return res.status(200).send(ans2[0].count.toString());
     }
 
   } catch(error) {
