@@ -11,6 +11,7 @@ export const LOGIN_FAIL = "LOGIN_FAIL";
 export const LOGOUT = "LOGOUT";
 
 // Sound
+export const SOUND_STATUS = "SOUND_STATUS";
 export const SOUND_ON = "SOUND_ON";
 export const SOUND_OFF = "SOUND_OFF";
 

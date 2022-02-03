@@ -1,5 +1,6 @@
 import {
   // Sound
+  SOUND_STATUS,
   SOUND_OFF,
   SOUND_ON,
 } from "../actions/types";
