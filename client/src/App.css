@@ -2749,7 +2749,6 @@ align-items: center;
   border-radius: 10px;
   border: 1px solid orange;
   margin-left: 0.8em;
-  /* animation: goUpPopup 0.4s 1 ease-in; */
 }
 
 .popup .dual_grid {

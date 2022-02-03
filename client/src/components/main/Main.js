@@ -1,19 +1,19 @@
 import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from "react-redux";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faCompressAlt,
+  faExpandAlt,
+  faStickyNote,
+} from "@fortawesome/free-solid-svg-icons";
+import { Tooltip, Modal, Fade, Box } from "@mui/material";
 
-import GetTime from '../../utils/GetTime'
-import Time from './count/Time'
 import Count from './count/Count';
 import Go from './Go';
-import Timeline from './timeline/Timeline';
 import Alerts from '../layout/Alerts'
 import Reminder from '../popup/Reminder';
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCompressAlt, faExpandAlt, faStickyNote } from '@fortawesome/free-solid-svg-icons';
-import { Tooltip, Modal, Fade, Box, Badge } from '@mui/material';
 import Note from './notes/Note';
-import { connect } from 'react-redux';
 
 import {
   createNewNote
@@ -41,6 +41,7 @@ const Main = ({
   // Redux Actions
   createNewNote,
 }) => {
+
   const [isNoteOpen, setIsNoteOpen] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
   const [isCounting, setIsCounting] = useState(false);
@@ -48,6 +49,7 @@ const Main = ({
   const [isFull, setIsFull] = useState(false);
   const [isComplete, setIsComplete] = useState(false);
   const [toggleNote, setToggleNote] = useState(false);
+  const [yesSound, setYesSound] = useState(false)
   const reffie = useRef();
   const handle = useRef();
 
@@ -198,12 +200,11 @@ const Main = ({
         <div>
           <Alerts />
         </div>
-        <div
-          className='flex_middle'
-          id='#example-anchor'
-        >
-          <Reminder />
-        </div>
+        {yesSound && (
+          <div className='flex_middle' id='#example-anchor'>
+            <Reminder />
+          </div>
+        )}
       </div>
       <Modal
         open={isNoteOpen}

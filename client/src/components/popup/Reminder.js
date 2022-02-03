@@ -1,14 +1,28 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
+import useSound from "use-sound";
+
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBell
 } from "@fortawesome/free-solid-svg-icons";
+import { Button } from '@mui/material';
+
+import reminderSound from  "../../resources/sounds/reminderBell.mp3";
+
 
 const Reminder = () => {
+  const [play, { stop }] = useSound(reminderSound, { volume: 1 });
+
+       useEffect(() => {
+         play();
+         setTimeout(() => stop(), 3000);
+       }, []);
+
+ 
   return (
-    <div className='popup' data-aos='fade-up' data-aos-anchor='#example-anchor'>
+    <div className='popup'  data-aos-anchor='#example-anchor'>
       <div className='dual_grid'>
         <div className='icon'>
           <FontAwesomeIcon
