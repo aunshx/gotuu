@@ -101,7 +101,6 @@ const BlockThree = ({
                   <Bar
                     dataKey='value'
                     fill='#b0df9c'
-                    background={{ fill: "#eee" }}
                   />
                 </BarChart>
               </ResponsiveContainer>

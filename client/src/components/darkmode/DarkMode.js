@@ -1,5 +1,5 @@
 import "./DarkMode.css";
-import react from "react";
+import react, { useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
@@ -7,6 +7,9 @@ import {
      toggleLightMode,
     toggleDarkMode
 } from '../../redux/actions/settings'
+import useSound from "use-sound";
+
+import toggle from '../../resources/sounds/toggle.mp3'
 
 const setDark = () => {
   localStorage.setItem("theme", "dark");
@@ -23,13 +26,17 @@ const DarkMode = ({
     toggleLightMode,
     toggleDarkMode
 }) => {
+    const [playOn] = useSound(toggle, { volume: 1 });
+
     const toggleTheme = (e) => {
         if (e.target.checked) {
         setDark();
         toggleDarkMode()
+        playOn()
         } else {
         setLight();
         toggleLightMode()
+        playOn();
         }
 };
   return (

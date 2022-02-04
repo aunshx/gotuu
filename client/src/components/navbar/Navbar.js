@@ -50,7 +50,7 @@ const Navbar = ({ goMain, isActive }) => {
         </div>
         <div className=''>
           {menu ? (
-            <>
+            <div className='flex_middle'>
               <Tooltip title='Toggle' placement='left'>
                 <div>
                   <DarkMode />
@@ -64,9 +64,9 @@ const Navbar = ({ goMain, isActive }) => {
                   fontSize: 20,
                 }}
               />
-            </>
+            </div>
           ) : (
-            <>
+            <div className='flex_middle'>
               <Tooltip title='Toggle' placement='left'>
                 <div>
                   <DarkMode />
@@ -84,7 +84,7 @@ const Navbar = ({ goMain, isActive }) => {
                   />
                 </div>
               </Tooltip>
-            </>
+            </div>
           )}
         </div>
       </div>
