@@ -30,7 +30,7 @@ router.get("/get-reminder-status", auth, async (req, res) => {
           userId: req.user.id,
         });
 
-        return res.status(200).send(ans[0].reminder);
+        return res.status(200).send(ans[0]);
       }
     } catch (err) {
       return res
@@ -108,6 +108,216 @@ router.post("/set-reminder-off", auth, async (req, res) => {
         .status(400)
         .send({ errors: [{ msg: "Cannot change reminder status" }] });
     }
+});
+
+// ---------------------------- 15 Min ------------------------------
+// @route    POST api/settings
+// @desc     Post reminder status change to true
+// @access   Private
+router.post("/set-reminder-fifteen-min-on", auth, async (req, res) => {
+    let ans = {}
+  try {
+        ans = await Settings.updateOne(
+        { userId: req.user.id },
+        { $set: { reminderFifteenMin: true } },
+        {
+            new: true,
+        }
+        );
+        return res.status(200).send(ans);
+
+  } catch (err) {
+    return res.status(400).send({ errors: [{ msg: "Cannot change 15 min status" }] });
+  }
+});
+
+// @route    POST api/settings
+// @desc     Post reminder status change to false
+// @access   Private
+router.post("/set-reminder-fifteen-min-off", auth, async (req, res) => {
+      let ans = {};
+      try {
+        ans = await Settings.updateOne(
+          { userId: req.user.id },
+          { $set: { reminderFifteenMin: false } },
+          {
+            new: true,
+          }
+        );
+        return res.status(200).send(ans);
+      } catch (err) {
+        return res
+          .status(400)
+          .send({ errors: [{ msg: "Cannot change 15 min status" }] });
+      }
+});
+
+// ---------------------------- 30 Min ------------------------------
+// @route    POST api/settings
+// @desc     Post reminder status change to true
+// @access   Private
+router.post("/set-reminder-thirty-min-on", auth, async (req, res) => {
+    let ans = {}
+  try {
+        ans = await Settings.updateOne(
+          { userId: req.user.id },
+          { $set: { reminderThirtyMin: true } },
+          {
+            new: true,
+          }
+        );
+        return res.status(200).send(ans);
+
+  } catch (err) {
+    return res.status(400).send({ errors: [{ msg: "Cannot change 30 min status" }] });
+  }
+});
+
+// @route    POST api/settings
+// @desc     Post reminder status change to false
+// @access   Private
+router.post("/set-reminder-thirty-min-off", auth, async (req, res) => {
+      let ans = {};
+      try {
+        ans = await Settings.updateOne(
+          { userId: req.user.id },
+          { $set: { reminderThirtyMin: false } },
+          {
+            new: true,
+          }
+        );
+        return res.status(200).send(ans);
+      } catch (err) {
+        return res
+          .status(400)
+          .send({ errors: [{ msg: "Cannot change 30 min status" }] });
+      }
+});
+
+// ---------------------------- 1 Hour ------------------------------
+// @route    POST api/settings
+// @desc     Post reminder status change to true
+// @access   Private
+router.post("/set-reminder-one-hour-on", auth, async (req, res) => {
+    let ans = {}
+  try {
+        ans = await Settings.updateOne(
+          { userId: req.user.id },
+          { $set: { reminderOneHour: true } },
+          {
+            new: true,
+          }
+        );
+        return res.status(200).send(ans);
+
+  } catch (err) {
+    return res.status(400).send({ errors: [{ msg: "Cannot change 1 hour status" }] });
+  }
+});
+
+// @route    POST api/settings
+// @desc     Post reminder status change to false
+// @access   Private
+router.post("/set-reminder-one-hour-off", auth, async (req, res) => {
+      let ans = {};
+      try {
+        ans = await Settings.updateOne(
+          { userId: req.user.id },
+          { $set: { reminderOneHour: false } },
+          {
+            new: true,
+          }
+        );
+        return res.status(200).send(ans);
+      } catch (err) {
+        return res
+          .status(400)
+          .send({ errors: [{ msg: "Cannot change 1 hour status" }] });
+      }
+});
+
+// ---------------------------- 2 Hours ------------------------------
+// @route    POST api/settings
+// @desc     Post reminder status change to true
+// @access   Private
+router.post("/set-reminder-two-hour-on", auth, async (req, res) => {
+    let ans = {}
+  try {
+        ans = await Settings.updateOne(
+          { userId: req.user.id },
+          { $set: { reminderTwoHours: true } },
+          {
+            new: true,
+          }
+        );
+        return res.status(200).send(ans);
+
+  } catch (err) {
+    return res.status(400).send({ errors: [{ msg: "Cannot change 2 hours status" }] });
+  }
+});
+
+// @route    POST api/settings
+// @desc     Post reminder status change to false
+// @access   Private
+router.post("/set-reminder-two-hour-off", auth, async (req, res) => {
+      let ans = {};
+      try {
+        ans = await Settings.updateOne(
+          { userId: req.user.id },
+          { $set: { reminderTwoHours: false } },
+          {
+            new: true,
+          }
+        );
+        return res.status(200).send(ans);
+      } catch (err) {
+        return res
+          .status(400)
+          .send({ errors: [{ msg: "Cannot change 2 hours status" }] });
+      }
+});
+
+// ---------------------------- 3 Hours ------------------------------
+// @route    POST api/settings
+// @desc     Post reminder status change to true
+// @access   Private
+router.post("/set-reminder-three-hour-on", auth, async (req, res) => {
+    let ans = {}
+  try {
+        ans = await Settings.updateOne(
+          { userId: req.user.id },
+          { $set: { reminderThreeHours: true } },
+          {
+            new: true,
+          }
+        );
+        return res.status(200).send(ans);
+
+  } catch (err) {
+    return res.status(400).send({ errors: [{ msg: "Cannot change 3 hours status" }] });
+  }
+});
+
+// @route    POST api/settings
+// @desc     Post reminder status change to false
+// @access   Private
+router.post("/set-reminder-three-hour-off", auth, async (req, res) => {
+      let ans = {};
+      try {
+        ans = await Settings.updateOne(
+          { userId: req.user.id },
+          { $set: { reminderThreeHours: false } },
+          {
+            new: true,
+          }
+        );
+        return res.status(200).send(ans);
+      } catch (err) {
+        return res
+          .status(400)
+          .send({ errors: [{ msg: "Cannot change 3 hours status" }] });
+      }
 });
 
 

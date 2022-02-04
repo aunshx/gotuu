@@ -17,7 +17,27 @@ const SettingsSchema = new mongoose.Schema(
     reminder: {
       type: Boolean,
       default: true
-    }
+    },
+    reminderFifteenMin: {
+      type: Boolean,
+      default: true
+    },
+    reminderThirtyMin: {
+      type: Boolean,
+      default: true
+    },
+    reminderOneHour: {
+      type: Boolean,
+      default: true
+    },
+    reminderTwoHours: {
+      type: Boolean,
+      default: true
+    },
+    reminderThreeHours: {
+      type: Boolean,
+      default: true
+    },
   },
   {
     timestamps: {
