@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBell,
@@ -47,6 +50,72 @@ const NavRem = ({}) => {
           </div>
         </div>
       )}
+      <div className='mrg-r-point-5 ft-bold link' style={{ marginBottom: '0.4em', fontSize: '1em' }} >Reminder Times</div>
+      <div>
+        <FormControlLabel
+          control={
+            <Checkbox
+              defaultChecked
+              sx={{ "& .MuiSvgIcon-root": { fontSize: 18 } }}
+              color='success'
+            />
+          }
+          label='15 mins'
+          style={{ color: "grey" }}
+        />
+      </div>
+      <div>
+        <FormControlLabel
+          control={
+            <Checkbox
+              defaultChecked
+              sx={{ "& .MuiSvgIcon-root": { fontSize: 18 } }}
+              color='success'
+            />
+          }
+          label='30 mins'
+          style={{ color: "grey" }}
+        />
+      </div>
+      <div>
+        <FormControlLabel
+          control={
+            <Checkbox
+              defaultChecked
+              sx={{ "& .MuiSvgIcon-root": { fontSize: 18 } }}
+              color='success'
+            />
+          }
+          label='1 hour'
+          style={{ color: "grey" }}
+        />
+      </div>
+      <div>
+        <FormControlLabel
+          control={
+            <Checkbox
+              defaultChecked
+              sx={{ "& .MuiSvgIcon-root": { fontSize: 18 } }}
+              color='success'
+            />
+          }
+          label='2 hours'
+          style={{ color: "grey" }}
+        />
+      </div>
+      <div>
+        <FormControlLabel
+          control={
+            <Checkbox
+              defaultChecked
+              sx={{ "& .MuiSvgIcon-root": { fontSize: 18 } }}
+              color='success'
+            />
+          }
+          label='3 hours'
+          style={{ color: "grey" }}
+        />
+      </div>
     </div>
   );
 };
