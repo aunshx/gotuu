@@ -10,6 +10,7 @@ import New from './main/metrics/New';
 
 import { getAvgDurationOfTuus, getAvgDurationOfTuusPerDay, getTotalNumberOfTuus } from '../redux/actions/metrics';
 import { useCallback } from 'react';
+import Footer from './layout/Footer';
 
 const Home = ({
   auth: { isAuthenticated },
@@ -96,6 +97,7 @@ const Home = ({
           </div>
         )}
       </div>
+      <Footer />
     </>
   );
 };

@@ -28,6 +28,7 @@ const Timeline = ({
   goToMain,
   // Redux States
   timeline: { timeline },
+  settings: { displayMode },
   // Redux Actions
   getTimelineEvent,
   getTimelineEventAsc,
@@ -182,13 +183,15 @@ const Timeline = ({
 
 Timeline.propTypes = {
   timeline: PropTypes.object.isRequired,
+  settings: PropTypes.object.isRequired,
   getTimelineEvent: PropTypes.func.isRequired,
   getTimelineEventAsc: PropTypes.func.isRequired,
   getTimelineDatesCaptured: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
-  timeline: state.timeline
+  timeline: state.timeline,
+  settings: state.settings
 })
 
 const mapActionsToProps = {
