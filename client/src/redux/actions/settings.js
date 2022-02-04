@@ -12,13 +12,45 @@ import {
   SOUND_ON,
 
   // Alerts
+  TEN_SEC_ALERT,
   TEN_MIN_ALERT,
   THIRTY_MIN_ALERT,
   ONE_HOUR_ALERT,
   TWO_HOUR_ALERT,
   THREE_HOUR_ALERT,
   REMINDER_ALERT_RESET,
+
+  // DISPLAY PREFERENCE
+  LIGHT_MODE,
+  DARK_MODE
 } from "./types";
+
+// Light Mode Toggle 
+export const toggleLightMode = () => async (dispatch) => {
+  dispatch({
+    type: LIGHT_MODE
+  })
+}
+
+// Dark Mode Toggle
+export const toggleDarkMode = () => async (dispatch) => {
+  dispatch({
+    type: DARK_MODE
+  })
+}
+
+// 10 sec Alert 
+export const setTenSecAlert = () => async (dispatch) => {
+  console.log('TEN SEC ACTION')
+   dispatch({
+     type: TEN_SEC_ALERT,
+   });
+
+   setTimeout(() =>
+     dispatch({
+       type: REMINDER_ALERT_RESET
+     }), 5000)
+}
 
 // 10 Min Alert 
 export const setTenMinAlert = () => async (dispatch) => {
@@ -29,7 +61,7 @@ export const setTenMinAlert = () => async (dispatch) => {
    setTimeout(() =>
      dispatch({
        type: REMINDER_ALERT_RESET
-     }), 3000)
+     }), 5000)
 }
 
 // 30 Min Alert 
@@ -41,7 +73,7 @@ export const setThirtyMinAlert = () => async (dispatch) => {
    setTimeout(() =>
      dispatch({
        type: REMINDER_ALERT_RESET
-     }), 3000)
+     }), 5000)
 }
 
 // 1 Hour Alert 
@@ -53,7 +85,7 @@ export const setOneHourAlert = () => async (dispatch) => {
    setTimeout(() =>
      dispatch({
        type: REMINDER_ALERT_RESET
-     }), 3000)
+     }), 5000)
 }
 
 // 2 Hour Alert 
@@ -65,7 +97,7 @@ export const setTwoHourAlert = () => async (dispatch) => {
    setTimeout(() =>
      dispatch({
        type: REMINDER_ALERT_RESET
-     }), 3000)
+     }), 5000)
 }
 
 // 3 Hour Alert 
@@ -77,7 +109,7 @@ export const setThreeHourAlert = () => async (dispatch) => {
    setTimeout(() =>
      dispatch({
        type: REMINDER_ALERT_RESET
-     }), 3000)
+     }), 5000)
 }
 
 // Get Sound Status
@@ -173,6 +205,7 @@ export const setSoundOn = () => async (dispatch) => {
     });
 
     const res = await api.post("/settings/set-sound-on");
+
   } catch (error) {
     if (error.response.status === 500) {
       value.message = "Oops! Something went wrong. Please reload!";
@@ -273,6 +306,7 @@ export const setSoundOff = () => async (dispatch) => {
     });
 
     const res = await api.post("/settings/set-sound-off");
+
   } catch (error) {
     if (error.response.status === 500) {
       value.message = "Oops! Something went wrong. Please reload!";

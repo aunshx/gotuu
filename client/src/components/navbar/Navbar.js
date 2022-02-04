@@ -11,6 +11,7 @@ import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { Tooltip } from "@mui/material";
 
 import SideNavbar from "./SideNavbar";
+import DarkMode from '../darkmode/DarkMode'
 
 import logo from "../../resources/images/gotuuLogo.png";
 import logoLogin from "../../resources/images/gotuuLogoLogin.png";
@@ -49,27 +50,41 @@ const Navbar = ({ goMain, isActive }) => {
         </div>
         <div className=''>
           {menu ? (
-            <FontAwesomeIcon
-              icon={faBars}
-              className={"hamburger--tilted"}
-              onClick={normalMenu}
-              style={{
-                fontSize: 20,
-              }}
-            />
+            <>
+              <Tooltip title='Toggle' placement='left'>
+                <div>
+                  <DarkMode />
+                </div>
+              </Tooltip>
+              <FontAwesomeIcon
+                icon={faBars}
+                className={"hamburger--tilted"}
+                onClick={normalMenu}
+                style={{
+                  fontSize: 20,
+                }}
+              />
+            </>
           ) : (
-            <Tooltip title='Menu' placement='left'>
-              <div>
-                <FontAwesomeIcon
-                  icon={faBars}
-                  className={"hamburger"}
-                  onClick={verticalMenu}
-                  style={{
-                    fontSize: 20,
-                  }}
-                />
-              </div>
-            </Tooltip>
+            <>
+              <Tooltip title='Toggle' placement='left'>
+                <div>
+                  <DarkMode />
+                </div>
+              </Tooltip>
+              <Tooltip title='Menu' placement='left'>
+                <div>
+                  <FontAwesomeIcon
+                    icon={faBars}
+                    className={"hamburger"}
+                    onClick={verticalMenu}
+                    style={{
+                      fontSize: 20,
+                    }}
+                  />
+                </div>
+              </Tooltip>
+            </>
           )}
         </div>
       </div>

@@ -6,7 +6,6 @@
     --primary-color-darker: #44af16;
     --primary-hover-color: #2EE59D;
     --count-color: #e8544a;
-    --count-hover-color: #C;
     --count-box-shadow-color: rgba(229, 80, 46, 0.4);
     --line-mini-color: #2ee543;
     --line-tiny-color: #9fe52e;
@@ -21,7 +20,23 @@
     --login-card-background: rgb(250, 250, 250);
     --dark-font-color: rgb(31, 31, 31);
     --light-color: white;
+    --background-color: white;
     --single-note-timeline-color: rgb(201, 201, 201);
+    --black-color: black;
+    --light-color-border-element: rgb(186,186,186);
+    --all-card-background: white;
+    --progress-block-border: none;
+}
+
+[data-theme="dark"] {
+  --login-card-background: rgb(5, 5, 5);
+  --all-card-background: rgb(5, 5, 5);
+  --dark-font-color: rgb(250, 250, 250);
+  --background-color: rgb(0, 0, 0);
+  --single-note-timeline-color: rgb(201, 201, 201);
+  --black-color: rgb(255, 255, 255);
+  --light-color-border-element: rgb(186,186,186);
+  --progress-block-border: #7ed957;
 }
 
 * {
@@ -32,9 +47,9 @@
 
 body {
     font-family: 'Lato', sans-serif;
-    color: #fff;
+    color: var(--light-color);
     line-height: 1.6;
-    /* background-color: #e7fafa; */
+    background-color: var(--background-color);
 }
 
 ul {
@@ -43,7 +58,7 @@ ul {
 
 a {
     text-decoration: none;
-    color: rgb(255, 255, 255);
+    color: var(--light-color);
 }
 
 h1,
@@ -64,7 +79,7 @@ img {
 code,
 pre {
     background: #333;
-    color: #fff;
+    color: var(--light-color);
     padding: 10px;
 }
 
@@ -269,13 +284,13 @@ pre {
 .navbar .hamburger {
         cursor: pointer;
         animation: verticalToHorizontal 0.3s 1 linear;
-        color: black;
+        color: var(--black-color);
     }
 
 .navbar .hamburger-login {
         cursor: pointer;
         animation: verticalToHorizontal 0.3s 1 linear;
-        color: white;
+        color: var(--light-color);
     }
 
   .navbar .hamburger:hover,
@@ -288,14 +303,14 @@ pre {
       cursor: pointer;
       transform: rotate(90deg);
       animation: horizontalToVertical 0.3s 1 linear;
-      color: black;
+      color: var(--black-color);
   }
 
   .navbar .hamburger--tilted-login {
       cursor: pointer;
       transform: rotate(90deg);
       animation: horizontalToVertical 0.3s 1 linear;
-      color: white;
+      color: var(--light-color);
   }
   
 @keyframes verticalToHorizontal {
@@ -328,7 +343,7 @@ pre {
 
 .side_navbar {
   width: 15vw;
-  background-color: rgb(255, 255, 255);
+  background-color: var(--light-color);
 }
 
 .side_navbar .title {
@@ -389,7 +404,7 @@ pre {
 
   .side_navbar {
   width: 100vw;
-  background-color: rgb(255, 255, 255);
+  background-color: var(--light-color);
 }
 
 .side_navbar .title {
@@ -488,7 +503,7 @@ pre {
 
 .login .card .errors {
   background-color: var(--count-color);
-  color: white;
+  color: var(--light-color);
   border-radius: 10px;
   margin: 0em 0 1.5em 0;
   width: 90%;
@@ -723,7 +738,7 @@ background-image: linear-gradient(to right top, #051937, #004d7a, #008793, #00bf
 .main .button,
 .main-active  .button {
       border-radius: 50%;
-      color: #fff;
+      color: var(--light-color);
       background-color: var(--primary-color);
       width: 100px;
       height: 100px;
@@ -742,7 +757,7 @@ background-image: linear-gradient(to right top, #051937, #004d7a, #008793, #00bf
   font-weight: bold;
   background-color: var(--count-color);
   box-shadow: 0px 15px 20px var( --count-box-shadow-color);
-  color: #fff;
+  color: var(--light-color);
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   animation: convertToCount 0.3s 1 linear;
 
@@ -758,12 +773,12 @@ background-image: linear-gradient(to right top, #051937, #004d7a, #008793, #00bf
     font-weight: bold;
     background-color: var(--count-color);
     box-shadow: 0px 15px 20px var( --count-box-shadow-color);
-    color: #fff;
+    color: var(--light-color);
     font-family: Verdana, Geneva, Tahoma, sans-serif;
   }
     25% {
     border-radius: 10%;
-      color: #fff;
+      color: var(--light-color);
       background-color: #a86032;
       width: 175px;
       height: 115px;
@@ -773,7 +788,7 @@ background-image: linear-gradient(to right top, #051937, #004d7a, #008793, #00bf
   }
     50% {
     border-radius: 15%;
-      color: #fff;
+      color: var(--light-color);
       background-color: #a89732;
       width: 150px;
       height: 110px;
@@ -784,7 +799,7 @@ background-image: linear-gradient(to right top, #051937, #004d7a, #008793, #00bf
   
   75% {
       border-radius: 35%;
-      color: #fff;
+      color: var(--light-color);
       background-color: #6da832;
       width: 125px;
       height: 105px;
@@ -795,7 +810,7 @@ background-image: linear-gradient(to right top, #051937, #004d7a, #008793, #00bf
 
     100% {
     border-radius: 50%;
-      color: #fff;
+      color: var(--light-color);
       background-color: var(--primary-color);
       width: 100px;
       height: 100px;
@@ -809,7 +824,7 @@ background-image: linear-gradient(to right top, #051937, #004d7a, #008793, #00bf
 @keyframes convertToCount {
   0% {
     border-radius: 50%;
-      color: #fff;
+      color: var(--light-color);
       background-color: var(--primary-color);
       width: 100px;
       height: 100px;
@@ -820,7 +835,7 @@ background-image: linear-gradient(to right top, #051937, #004d7a, #008793, #00bf
 
   25% {
       border-radius: 35%;
-      color: #fff;
+      color: var(--light-color);
       background-color: #6da832;
       width: 125px;
       height: 105px;
@@ -831,7 +846,7 @@ background-image: linear-gradient(to right top, #051937, #004d7a, #008793, #00bf
 
   50% {
     border-radius: 15%;
-      color: #fff;
+      color: var(--light-color);
       background-color: #a89732;
       width: 150px;
       height: 110px;
@@ -842,7 +857,7 @@ background-image: linear-gradient(to right top, #051937, #004d7a, #008793, #00bf
 
   75% {
     border-radius: 10%;
-      color: #fff;
+      color: var(--light-color);
       background-color: #a86032;
       width: 175px;
       height: 115px;
@@ -859,7 +874,7 @@ background-image: linear-gradient(to right top, #051937, #004d7a, #008793, #00bf
     font-weight: bold;
     background-color: var(--count-color);
     box-shadow: 0px 15px 20px var( --count-box-shadow-color);
-    color: #fff;
+    color: var(--light-color);
     font-family: Verdana, Geneva, Tahoma, sans-serif;
   }
 }
@@ -976,7 +991,7 @@ padding: 0  0 2em 0;
 }
 
 .timeline .main .line .element_mini .liner_horizontal_right {
-  border-bottom: 1px dotted rgb(186, 186, 186);
+  border-bottom: 1px dotted var(--light-color-border-element);
   width: 300px;
   z-index: -1;
   position: absolute;
@@ -1006,7 +1021,7 @@ padding: 0  0 2em 0;
 }
 
 .timeline .main .line .element_mini .liner_horizontal_left {
-  border-bottom: 1px dotted rgb(186, 186, 186);
+  border-bottom: 1px dotted var(--light-color-border-element);
   width: 300px;
   z-index: -1;
   position: absolute;
@@ -1099,7 +1114,7 @@ padding: 0  0 2em 0;
 }
 
 .timeline .main .line .element_tiny .liner_horizontal_right {
-  border-bottom: 1px dotted rgb(186, 186, 186);
+  border-bottom: 1px dotted var(--light-color-border-element);
   width: 300px;
   z-index: -1;
   position: absolute;
@@ -1129,7 +1144,7 @@ padding: 0  0 2em 0;
 }
 
 .timeline .main .line .element_tiny .liner_horizontal_left {
-  border-bottom: 1px dotted rgb(186, 186, 186);
+  border-bottom: 1px dotted var(--light-color-border-element);
   width: 300px;
   z-index: -1;
   position: absolute;
@@ -1219,7 +1234,7 @@ padding: 0  0 2em 0;
 }
 
 .timeline .main .line .element_extra-small .liner_horizontal_right {
-  border-bottom: 1px dotted rgb(186, 186, 186);
+  border-bottom: 1px dotted var(--light-color-border-element);
   width: 300px;
   z-index: -1;
   position: absolute;
@@ -1249,7 +1264,7 @@ padding: 0  0 2em 0;
 }
 
 .timeline .main .line .element_extra-small .liner_horizontal_left {
-  border-bottom: 1px dotted rgb(186, 186, 186);
+  border-bottom: 1px dotted var(--light-color-border-element);
   width: 300px;
   z-index: -1;
   position: absolute;
@@ -1345,7 +1360,7 @@ padding: 0  0 2em 0;
 }
 
 .timeline .main .line .element_small .liner_horizontal_right {
-  border-bottom: 1px dotted rgb(186, 186, 186);
+  border-bottom: 1px dotted var(--light-color-border-element);
   width: 300px;
   z-index: -1;
   position: absolute;
@@ -1376,7 +1391,7 @@ padding: 0  0 2em 0;
 }
 
 .timeline .main .line .element_small .liner_horizontal_left {
-  border-bottom: 1px dotted rgb(186, 186, 186);
+  border-bottom: 1px dotted var(--light-color-border-element);
   width: 300px;
   z-index: -1;
   position: absolute;
@@ -1471,7 +1486,7 @@ padding: 0  0 2em 0;
 }
 
 .timeline .main .line .element_medium .liner_horizontal_right {
-  border-bottom: 1px dotted rgb(186, 186, 186);
+  border-bottom: 1px dotted var(--light-color-border-element);
   width: 300px;
   z-index: -1;
   position: absolute;
@@ -1501,7 +1516,7 @@ padding: 0  0 2em 0;
 }
 
 .timeline .main .line .element_medium .liner_horizontal_left {
-  border-bottom: 1px dotted rgb(186, 186, 186);
+  border-bottom: 1px dotted var(--light-color-border-element);
   width: 300px;
   z-index: -1;
   position: absolute;
@@ -1594,7 +1609,7 @@ padding: 0  0 2em 0;
   position: relative;
 }
 .timeline .main .line .element_large .liner_horizontal_right {
-  border-bottom: 1px dotted rgb(186, 186, 186);
+  border-bottom: 1px dotted var(--light-color-border-element);
   width: 300px;
   z-index: -1;
   position: absolute;
@@ -1623,7 +1638,7 @@ padding: 0  0 2em 0;
 }
 
 .timeline .main .line .element_large .liner_horizontal_left {
-  border-bottom: 1px dotted rgb(186, 186, 186);
+  border-bottom: 1px dotted var(--light-color-border-element);
   width: 300px;
   z-index: -1;
   position: absolute;
@@ -1719,7 +1734,7 @@ padding: 0  0 2em 0;
   position: relative;
 }
 .timeline .main .line .element_humongous .liner_horizontal_right {
-  border-bottom: 1px dotted rgb(186, 186, 186);
+  border-bottom: 1px dotted var(--light-color-border-element);
   width: 300px;
   z-index: -1;
   position: absolute;
@@ -1749,7 +1764,7 @@ padding: 0  0 2em 0;
 }
 
 .timeline .main .line .element_humongous .liner_horizontal_left {
-  border-bottom: 1px dotted rgb(186, 186, 186);
+  border-bottom: 1px dotted var(--light-color-border-element);
   width: 300px;
   position: absolute;
   right: 30px;
@@ -2003,13 +2018,14 @@ padding: 0  0 2em 0;
     .progress_blocks_main {
         display: flex;
         flex-direction: column;
-        background-color: white;
+        background-color: var(--all-card-background);
         border-radius: 10px;
         box-shadow: 0px 0px 6px -3px rgba(15, 15, 15, 0.75);
         padding: 0em 0em 0em 0em;
         width: 200px;
         color: var(--dark-font-color);
         margin: 1em 0.5em;
+        border: 1px solid var(--progress-block-border);
     }
 
     .progress_blocks_main img {
@@ -2037,7 +2053,7 @@ padding: 0  0 2em 0;
   cursor: pointer;
   font-size: 0.7em;
   outline: none;
-  color: #fff;
+  color: var(--light-color);
   background-color: var(--primary-color);
   border: none;
   border-radius: 50%;
@@ -2059,7 +2075,7 @@ padding: 0  0 2em 0;
   cursor: pointer;
   font-size: 0.7em;
   outline: none;
-  color: #fff;
+  color: var(--light-color);
   background-color: var(--count-color);
   border: none;
   border-radius: 50%;
@@ -2143,7 +2159,7 @@ padding: 0  0 2em 0;
    .not_found .inputButton {
      border: 2px solid var(--primary-color);
      border-radius: 10px;
-     background-color: white;
+     background-color: var(--light-color);
      font-size: 0.9em;
      color: var(--grey-color);
      font-weight: bold;
@@ -2168,7 +2184,7 @@ padding: 0  0 2em 0;
    .single_note_1 {
     width: 90%;
     margin: 1em;
-    background-color: #fff;
+    background-color: var(--all-card-background);
     color: var(--dark-font-color);
     border-radius: 10px;
     display: grid;
@@ -2267,7 +2283,7 @@ padding: 0  0 2em 0;
 /* --------------------------------------------- FOR TIMELINE ----------------------- */
    .single_note_1_timeline {
     margin: 1.5em 1em 1em 1em;
-    background-color: #fff;
+    background-color: var(--all-card-background);
     color: var(--dark-font-color);
     border-radius: 10px;
     display: grid;
@@ -2560,7 +2576,7 @@ align-items: center;
   z-index: 1;
   position: fixed;
   top: 0px;
-  background-color: rgb(255, 255, 255);
+  background-color: var(--light-color);
   width: 100%;
       box-shadow: 0 2px 2px -2px rgba(0,0,0,.2);
 
@@ -2739,13 +2755,17 @@ align-items: center;
 
 }
 /*  ----------------------------- POPUP ------------------------ */
+.popup_main {
+  position: fixed;
+  bottom: 30px;
+  /* left: 5px */
+}
+
 .popup {
-  width: 250px;
+  width: 300px;
   height: 50px;
   background-color: rgb(250, 250, 250);
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-  position: fixed;
-  bottom: 30px;
   border-radius: 10px;
   border: 1px solid orange;
   margin-left: 0.8em;

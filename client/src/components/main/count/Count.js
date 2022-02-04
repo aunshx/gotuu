@@ -50,21 +50,23 @@ const Count = ({
   }, [isCounting]);
 
   const stopCount = (currentEventId, time) => {
-    if(time < 60000){
+    if (time < 60000) {
       let value = {
-        message: 'Cannot stop before 1 min is complete',
-        type: 'info'
-      }
+        message: "Cannot stop before 1 min is complete",
+        type: "info",
+      };
       store.dispatch({
         type: ERROR_SNACKBAR,
-        payload: value
+        payload: value,
       });
 
-      setTimeout(() => (
-        store.dispatch({
-          type: SNACKBAR_RESET
-        })
-      ), 5000)
+      setTimeout(
+        () =>
+          store.dispatch({
+            type: SNACKBAR_RESET,
+          }),
+        5000
+      );
     } else {
       stopCountDown();
       setTime(0);
@@ -114,7 +116,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapActionsToProps = {
-  addDurationToEventEnd,
+  addDurationToEventEnd
 };
 
 export default connect(mapStateToProps, mapActionsToProps)(Count);

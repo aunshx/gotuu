@@ -8,6 +8,7 @@ import {
   setOneHourAlert,
   setTwoHourAlert,
   setThreeHourAlert,
+  setTenSecAlert,
 } from "../../../redux/actions/settings";
 
 const Time = ({
@@ -18,9 +19,14 @@ const Time = ({
   setOneHourAlert,
   setTwoHourAlert,
   setThreeHourAlert,
+  setTenSecAlert,
 }) => {
   useEffect(() => {
     switch (true) {
+      // case time === 5000:
+      //   setTenSecAlert();
+      //   break;
+
       case time === 600000:
         setTenMinAlert();
         break;
@@ -73,6 +79,7 @@ const mapActionsToProps = {
   setOneHourAlert,
   setTwoHourAlert,
   setThreeHourAlert,
+  setTenSecAlert,
 };
 
 export default connect(mapStateToProps, mapActionsToProps)(Time);

@@ -15,7 +15,7 @@ const Notif = ({
   const [play] = useSound(beep, { volume: 1 });
 
   useEffect(() => {
-      inputRef.current.click()
+      setTimeout(() => inputRef.current.click(), 1300);
   })
 
   const playSound = () => {

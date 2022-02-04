@@ -9,11 +9,10 @@ import {
 
 import Notif from '../sound/Notif'
 
-const Reminder = ({
-}) => {
+const Reminder = ({ message, type }) => {
 
   return (
-    <div className='popup' data-aos-anchor='#example-anchor'>
+    <div className='popup' data-aos-anchor='#example-anchor' data-aos='fade-up'>
       <div className='dual_grid'>
         <div className='icon'>
           <FontAwesomeIcon
@@ -21,11 +20,9 @@ const Reminder = ({
             style={{ color: "orange", fontSize: 25, marginTop: "0.2em" }}
           />
         </div>
-        <div className='popup-details flex_middle ft-bold'>
-          30 mins done! Rock on!
-        </div>
+        <div className='popup-details flex_middle ft-bold'>{message}</div>
       </div>
-      <Notif />
+      <Notif type={type} />
     </div>
   );
 };

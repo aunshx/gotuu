@@ -5,12 +5,17 @@ import {
   SOUND_ON,
 
   // Alerts
+  TEN_SEC_ALERT,
   TEN_MIN_ALERT,
   THIRTY_MIN_ALERT,
   ONE_HOUR_ALERT,
   TWO_HOUR_ALERT,
   THREE_HOUR_ALERT,
   REMINDER_ALERT_RESET,
+
+  // DISPLAY PREFERENCE
+  LIGHT_MODE,
+  DARK_MODE,
 } from "../actions/types";
 
 const initialState = {
@@ -19,14 +24,33 @@ const initialState = {
   thirtyMinAlert: false,
   oneHourAlert: false,
   twoHourAlert: false,
-  threeHourAlert: false
+  threeHourAlert: false,
+  tenSec: false,
+  displayMode: true
 };
 
 function authReducer(state = initialState, action) {
   const { type, payload } = action;
 
   switch (type) {
+    // Display Toggle
+    case LIGHT_MODE:
+      return {
+        ...state,
+        displayMode: true,
+      };
+
+    case DARK_MODE:
+      return {
+        ...state,
+        displayMode: false,
+      };
     // Sound Alerts
+    case TEN_SEC_ALERT:
+      return {
+        ...state,
+        tenSec: true,
+      };
     case TEN_MIN_ALERT:
       return {
         ...state,
@@ -55,12 +79,12 @@ function authReducer(state = initialState, action) {
     case REMINDER_ALERT_RESET:
       return {
         ...state,
-        sound: true,
         tenMinAlert: false,
         thirtyMinAlert: false,
         oneHourAlert: false,
         twoHourAlert: false,
         threeHourAlert: false,
+        tenSec: false,
       };
 
     // Get Sound Status

@@ -38,16 +38,23 @@ const Main = ({
   auth: { isAuthenticated },
   timeline: { currentEventId },
   notes: { noteId },
+  settings: {
+    tenMinAlert,
+    thirtyMinAlert,
+    oneHourAlert,
+    twoHourAlert,
+    threeHourAlert,
+    tenSec,
+  },
   // Redux Actions
   createNewNote,
 }) => {
-
   const [isNoteOpen, setIsNoteOpen] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
   const [isCounting, setIsCounting] = useState(false);
   const [start, setStart] = useState(false);
   const [isFull, setIsFull] = useState(false);
-  const [yesSound, setYesSound] = useState(true)
+  const [yesSound, setYesSound] = useState(true);
 
   const reffie = useRef();
   const handle = useRef();
@@ -117,7 +124,7 @@ const Main = ({
 
   const toggleNewNote = (currentEventId, noteId) => {
     setIsNoteOpen(true);
-    if(!noteId){
+    if (!noteId) {
       createNewNote(currentEventId);
     }
   };
@@ -195,15 +202,33 @@ const Main = ({
             )}
           </>
         )}
+        <div className='flex_middle popup_main' id='#example-anchor'>
+          {tenMinAlert && (
+            <Reminder message={"10 Mins Completed"} type={"10"} />
+          )}
+          {thirtyMinAlert && (
+            <Reminder message={"30 Mins Done! Rock on!"} type={"30"} />
+          )}
+          {oneHourAlert && (
+            <Reminder message={"It's a whole hour! Leggoooo"} type={"60"} />
+          )}
+          {twoHourAlert && (
+            <Reminder message={"Wow 2 hours?! You're on FIREEE"} type={"120"} />
+          )}
+          {threeHourAlert && (
+            <Reminder
+              message={"3 hours! That's it. You're the BEST."}
+              type={"180"}
+            />
+          )}
+          {tenSec && (
+            <Reminder message={"10 secooonndssss oooooo"} type={"180"} />
+          )}
+        </div>
         {start && <div className='go-down' ref={reffie}></div>}
         <div>
           <Alerts />
         </div>
-        {yesSound && (
-          <div className='flex_middle' id='#example-anchor'>
-            <Reminder />
-          </div>
-        )}
       </div>
       <Modal
         open={isNoteOpen}
@@ -228,6 +253,7 @@ const Main = ({
 
 Main.propTypes = {
   auth: PropTypes.object.isRequired,
+  settings: PropTypes.object.isRequired,
   notes: PropTypes.object.isRequired,
   timeline: PropTypes.object.isRequired,
   createNewNote: PropTypes.func.isRequired,
@@ -235,6 +261,7 @@ Main.propTypes = {
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
+  settings: state.settings,
   timeline: state.timeline,
   notes: state.notes
 });
