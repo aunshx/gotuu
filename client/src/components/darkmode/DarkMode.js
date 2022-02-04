@@ -22,7 +22,7 @@ const setLight = () => {
 
 const DarkMode = ({
     // Redux State
-    settings: { displayMode },
+    settings: { displayMode, sound },
     // Redux Actions
     toggleLightMode,
     toggleDarkMode
@@ -30,15 +30,19 @@ const DarkMode = ({
     const [playOn] = useSound(toggle, { volume: 1 });
 
     const toggleTheme = (e) => {
-        if (displayMode) {
+    if (displayMode) {
         setDark();
         toggleDarkMode()
-        playOn()
-        } else {
+        if(sound){
+            playOn();
+        }
+    } else {
         setLight();
         toggleLightMode()
-        playOn();
+        if(sound){
+            playOn();
         }
+    }
 };
   return (
     <div className='display_mode'>
