@@ -15,9 +15,7 @@ import {
   getLiveStreak,
 } from "./metrics";
 
-import {
-  getSoundStatus
-} from './settings'
+import { getSoundStatus, getReminderStatus } from "./settings";
 
 import {
   // Snackbar
@@ -61,6 +59,7 @@ export const loadUser = () => async (dispatch) => {
     dispatch(getTotalNumberOfTuus());
     dispatch(getLiveStreak());
     dispatch(getSoundStatus());
+    dispatch(getReminderStatus());
   } catch (err) {
     dispatch({
       type: AUTH_ERROR,
