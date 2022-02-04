@@ -12,9 +12,19 @@ import {
 import { connect } from 'react-redux';
 
 import {
-    setReminderOn,
+  setReminderOn,
   setReminderOff,
-} from '../../redux/actions/settings'
+  setReminderFifteenMinOn,
+  setReminderFifteenMinOff,
+  setReminderThirtyMinOn,
+  setReminderThirtyMinOff,
+  setReminderOneHourOn,
+  setReminderOneHourOff,
+  setReminderTwoHourOn,
+  setReminderTwoHourOff,
+  setReminderThreeHourOn,
+  setReminderThreeHourOff,
+} from "../../redux/actions/settings";
 
 const NavRem = ({
   // Redux State
@@ -195,9 +205,19 @@ const NavRem = ({
 };
 
 NavRem.propTypes = {
-settings: PropTypes.object.isRequired,
+  settings: PropTypes.object.isRequired,
   setReminderOn: PropTypes.func.isRequired,
   setReminderOff: PropTypes.func.isRequired,
+  setReminderFifteenMinOn: PropTypes.func.isRequired,
+  setReminderFifteenMinOff: PropTypes.func.isRequired,
+  setReminderThirtyMinOn: PropTypes.func.isRequired,
+  setReminderThirtyMinOff: PropTypes.func.isRequired,
+  setReminderOneHourOn: PropTypes.func.isRequired,
+  setReminderOneHourOff: PropTypes.func.isRequired,
+  setReminderTwoHourOn: PropTypes.func.isRequired,
+  setReminderTwoHourOff: PropTypes.func.isRequired,
+  setReminderThreeHourOn: PropTypes.func.isRequired,
+  setReminderThreeHourOff: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -207,6 +227,16 @@ const mapStateToProps = (state) => ({
 const mapActionsToProps = {
   setReminderOn,
   setReminderOff,
+  setReminderFifteenMinOn,
+  setReminderFifteenMinOff,
+  setReminderThirtyMinOn,
+  setReminderThirtyMinOff,
+  setReminderOneHourOn,
+  setReminderOneHourOff,
+  setReminderTwoHourOn,
+  setReminderTwoHourOff,
+  setReminderThreeHourOn,
+  setReminderThreeHourOff,
 };
 
 export default connect(mapStateToProps, mapActionsToProps)(NavRem);

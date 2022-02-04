@@ -60,13 +60,24 @@ router.post("/set-reminder-on", auth, async (req, res) => {
         return res.status(200).send(newReminderSetting);
     } else {
         ans = await Settings.updateOne(
-        { userId: req.user.id },
-        { $set: { reminder: true } },
-        {
-            new: true,
-        }
+          { userId: req.user.id },
+          {
+            $set: {
+              reminder: true,
+              reminderFifteenMin: true,
+              reminderThirtyMin: true,
+              reminderOneHour: true,
+              reminderTwoHour: true,
+              reminderThreeHour: true,
+            },
+          }
         );
-        return res.status(200).send(ans);
+
+        let ans2 = await Settings.find({
+          userId: req.user.id
+        })
+
+        return res.status(200).send(ans2);
     }    
 
   } catch (err) {
@@ -96,12 +107,23 @@ router.post("/set-reminder-off", auth, async (req, res) => {
       } else {
         ans = await Settings.updateOne(
           { userId: req.user.id },
-          { $set: { reminder: false } },
           {
-            new: true,
+            $set: {
+              reminder: false,
+              reminderFifteenMin: false,
+              reminderThirtyMin: false,
+              reminderOneHour: false,
+              reminderTwoHour: false,
+              reminderThreeHour: false,
+            },
           }
         );
-        return res.status(200).send(ans);
+
+        let ans2 = await Settings.find({
+          userId: req.user.id,
+        });
+
+        return res.status(200).send(ans2);
       }
     } catch (err) {
       return res
