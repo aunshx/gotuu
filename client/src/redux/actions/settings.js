@@ -158,8 +158,53 @@ export const setReminderOn = () => async (dispatch) => {
       type: REMINDER_ON,
       payload: true,
     });
+    dispatch({
+      type: REMINDER_FIFTEEN_MIN_ON,
+      payload: true,
+    });
+    dispatch({
+      type: REMINDER_THIRTY_MIN_ON,
+      payload: true,
+    });
+    dispatch({
+      type: REMINDER_ONE_HOUR_ON,
+      payload: true,
+    });
+    dispatch({
+      type: REMINDER_TWO_HOUR_ON,
+      payload: true,
+    });
+    dispatch({
+      type: REMINDER_THREE_HOUR_ON,
+      payload: true,
+    });
 
     const res = await api.post("/settings/set-reminder-on");
+
+    dispatch({
+      type: REMINDER_STATUS,
+      payload: res.data.reminder,
+    });
+    dispatch({
+      type: REMINDER_FIFTEEN_MIN_STATUS,
+      payload: res.data.reminderFifteenMin,
+    });
+    dispatch({
+      type: REMINDER_THIRTY_MIN_STATUS,
+      payload: res.data.reminderThirtyMin,
+    });
+    dispatch({
+      type: REMINDER_ONE_HOUR_STATUS,
+      payload: res.data.reminderOneHour,
+    });
+    dispatch({
+      type: REMINDER_TWO_HOUR_STATUS,
+      payload: res.data.reminderTwoHour,
+    });
+    dispatch({
+      type: REMINDER_THREE_HOUR_STATUS,
+      payload: res.data.reminderThreeHour,
+    });
 
   } catch (error) {
     if (error.response.status === 500) {
@@ -255,10 +300,30 @@ export const setReminderOff = () => async (dispatch) => {
   const value = {};
 
   try {
-    dispatch({
-      type: REMINDER_OFF,
-      payload: false,
-    });
+        dispatch({
+          type: REMINDER_OFF,
+          payload: false,
+        });
+        dispatch({
+          type: REMINDER_FIFTEEN_MIN_OFF,
+          payload: false,
+        });
+        dispatch({
+          type: REMINDER_THIRTY_MIN_OFF,
+          payload: false,
+        });
+        dispatch({
+          type: REMINDER_ONE_HOUR_OFF,
+          payload: false,
+        });
+        dispatch({
+          type: REMINDER_TWO_HOUR_OFF,
+          payload: false,
+        });
+        dispatch({
+          type: REMINDER_THREE_HOUR_OFF,
+          payload: false,
+        });
 
     const res = await api.post("/settings/set-reminder-off");
 
