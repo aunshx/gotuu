@@ -124,8 +124,8 @@ const NavRem = ({
         <FormControlLabel
           control={
             <Checkbox
-              value={reminderFifteenMin}
-              onClick={setReminderFifteenMin}
+              checked={reminderFifteenMin}
+              onChange={setReminderFifteenMin}
               sx={{ "& .MuiSvgIcon-root": { fontSize: 18 } }}
               color='success'
             />
@@ -138,8 +138,8 @@ const NavRem = ({
         <FormControlLabel
           control={
             <Checkbox
-              value={reminderThirtyMin}
-              onClick={setReminderThirtyMin}
+              checked={reminderThirtyMin}
+              onChange={setReminderThirtyMin}
               sx={{ "& .MuiSvgIcon-root": { fontSize: 18 } }}
               color='success'
             />
@@ -152,8 +152,8 @@ const NavRem = ({
         <FormControlLabel
           control={
             <Checkbox
-              value={reminderOneHour}
-              onClick={setReminderOneHour}
+              checked={reminderOneHour}
+              onChange={setReminderOneHour}
               sx={{ "& .MuiSvgIcon-root": { fontSize: 18 } }}
               color='success'
             />
@@ -166,8 +166,8 @@ const NavRem = ({
         <FormControlLabel
           control={
             <Checkbox
-              value={reminderTwoHour}
-              onClick={setReminderTwoHour}
+              checked={reminderTwoHour}
+              onChange={setReminderTwoHour}
               sx={{ "& .MuiSvgIcon-root": { fontSize: 18 } }}
               color='success'
             />
@@ -180,8 +180,8 @@ const NavRem = ({
         <FormControlLabel
           control={
             <Checkbox
-              value={reminderThreeHour}
-              onClick={setReminderThreeHour}
+              checked={reminderThreeHour}
+              onChange={setReminderThreeHour}
               sx={{ "& .MuiSvgIcon-root": { fontSize: 18 } }}
               color='success'
             />
