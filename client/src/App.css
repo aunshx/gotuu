@@ -486,6 +486,15 @@ pre {
     font-family: 'PT Serif',serif;
 }
 
+.login .card .forgot_password_login_main {
+  font-size: 0.85em;
+  cursor: pointer;
+  color: gray;
+}
+.login .card .forgot_password_login_main:hover {
+  color: var(--count-color);
+}
+
   .login-back {
     width: 45vw;
     height: 40vh;

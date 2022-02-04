@@ -17,6 +17,7 @@ import { makeStyles } from "@mui/styles";
 
 import logo from "../../resources/images/gotuuLogo.png";
 import loginBack from '../../resources/images/bigLogo.png'
+import logoDark from '../../resources/images/gotuuLogoLogin.png'
 import Alerts from "../layout/Alerts";
 import Navbar from "../navbar/Navbar";
 
@@ -55,8 +56,6 @@ const CssTextFieldDark = styled(TextField, {
     "&:hover fieldset": {
       borderColor: "white",
     },
-    // color: "white",
-    // borderColor: "#44af16",
   },
 }));
 
@@ -158,7 +157,7 @@ const Login = ({
           <img src={loginBack} alt='login background' />
         </div>
         <div className='card'>
-          <img src={logo} alt='John' />
+          <img src={displayMode ? logo : logoDark} alt='John' />
           <div className='title ft-bold'>Login</div>
           <div className='app'>
             {(passwordEmptyError || emailEmptyError) && (
@@ -242,7 +241,7 @@ const Login = ({
                     </div>
                     <div
                       style={{
-                        margin: "-0.2em 9.5em 1.5em 0.2em",
+                        margin: "0.2em 9.5em 1.5em 0.2em",
                       }}
                     >
                       <div
