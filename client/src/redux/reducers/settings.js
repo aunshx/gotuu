@@ -21,7 +21,7 @@ import {
   REMINDER_STATUS,
   REMINDER_ON,
   REMINDER_OFF,
-  
+
   // Individual Reminders
   REMINDER_THREE_HOUR_ON,
   REMINDER_TWO_HOUR_ON,
@@ -33,10 +33,18 @@ import {
   REMINDER_ONE_HOUR_OFF,
   REMINDER_FIFTEEN_MIN_OFF,
   REMINDER_THIRTY_MIN_OFF,
+  REMINDER_THIRTY_MIN_STATUS,
+  REMINDER_FIFTEEN_MIN_STATUS,
+  REMINDER_ONE_HOUR_STATUS,
+  REMINDER_TWO_HOUR_STATUS,
+  REMINDER_THREE_HOUR_STATUS,
 } from "../actions/types";
 
 const initialState = {
+  // Sound
   sound: true,
+
+  // Alerts
   tenMinAlert: false,
   thirtyMinAlert: false,
   oneHourAlert: false,
@@ -44,13 +52,135 @@ const initialState = {
   threeHourAlert: false,
   tenSec: false,
   displayMode: true,
-  reminder: true
+
+  // Reminders
+  reminder: true,
+  reminderFifteenMin: false,
+  reminderThirtyMin: false,
+  reminderOneHour: false,
+  reminderTwoHour: false,
+  reminderThreeHour: false,
 };
 
 function authReducer(state = initialState, action) {
   const { type, payload } = action;
 
   switch (type) {
+    // Get Reminder Status
+    case REMINDER_STATUS:
+      return {
+        ...state,
+        reminder: payload,
+      };
+
+    // Reminder change
+    case REMINDER_OFF:
+      return {
+        ...state,
+        reminder: payload,
+      };
+
+    case REMINDER_ON:
+      return {
+        ...state,
+        reminder: payload,
+      };
+
+    // 15 Min
+    case REMINDER_FIFTEEN_MIN_STATUS:
+      return {
+        ...state,
+        reminderFifteenMin: payload,
+      };
+
+    case REMINDER_FIFTEEN_MIN_ON:
+      return {
+        ...state,
+        reminderFifteenMin: payload,
+      };
+
+    case REMINDER_FIFTEEN_MIN_OFF:
+      return {
+        ...state,
+        reminderFifteenMin: payload,
+      };
+
+    // 30 Min
+    case REMINDER_THIRTY_MIN_STATUS:
+      return {
+        ...state,
+        reminderThirtyMin: payload,
+      };
+
+    case REMINDER_THIRTY_MIN_ON:
+      return {
+        ...state,
+        reminderThirtyMin: payload,
+      };
+
+    case REMINDER_THIRTY_MIN_OFF:
+      return {
+        ...state,
+        reminderThirtyMin: payload,
+      };
+
+    // 1 Hour
+    case REMINDER_ONE_HOUR_STATUS:
+      return {
+        ...state,
+        reminderOneHour: payload,
+      };
+
+    case REMINDER_ONE_HOUR_ON:
+      return {
+        ...state,
+        reminderOneHour: payload,
+      };
+
+    case REMINDER_ONE_HOUR_OFF:
+      return {
+        ...state,
+        reminderOneHour: payload,
+      };
+
+    // 2 Hour
+    case REMINDER_TWO_HOUR_STATUS:
+      return {
+        ...state,
+        reminderTwoHour: payload,
+      };
+
+    case REMINDER_TWO_HOUR_ON:
+      return {
+        ...state,
+        reminderTwoHour: payload,
+      };
+
+    case REMINDER_TWO_HOUR_OFF:
+      return {
+        ...state,
+        reminderTwoHour: payload,
+      };
+
+    // 3 Hour
+    case REMINDER_THREE_HOUR_STATUS:
+      return {
+        ...state,
+        reminderThreeHour: payload,
+      };
+
+    case REMINDER_THREE_HOUR_ON:
+      return {
+        ...state,
+        reminderThreeHour: payload,
+      };
+
+    case REMINDER_THREE_HOUR_OFF:
+      return {
+        ...state,
+        reminderThreeHour: payload,
+      };
+
     // Display Toggle
     case LIGHT_MODE:
       return {
@@ -104,26 +234,6 @@ function authReducer(state = initialState, action) {
         twoHourAlert: false,
         threeHourAlert: false,
         tenSec: false,
-      };
-
-    // Get Reminder Status
-    case REMINDER_STATUS:
-      return {
-        ...state,
-        reminder: payload,
-      };
-
-    // Reminder change
-    case REMINDER_OFF:
-      return {
-        ...state,
-        reminder: payload,
-      };
-
-    case REMINDER_ON:
-      return {
-        ...state,
-        reminder: payload,
       };
 
     // Get Sound Status
