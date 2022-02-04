@@ -9,7 +9,7 @@ const Settings = require("../../models/Settings");
 
 // ----------------------------- REMINDER --------------------------------
 // @route    GET api/settings
-// @desc     Get sound status
+// @desc     Get reminder status
 // @access   Private
 router.get("/get-reminder-status", auth, async (req, res) => {
     let ans = {};
@@ -38,6 +38,78 @@ router.get("/get-reminder-status", auth, async (req, res) => {
         .send({ errors: [{ msg: "Cannot fetch reminder status" }] });
     }
 });
+
+// @route    POST api/settings
+// @desc     Post reminder status change to true
+// @access   Private
+router.post("/set-reminder-on", auth, async (req, res) => {
+    let ans = {}
+  try {
+
+    let settingsExist = await Settings.findOne({
+        userId: req.user.id
+    })
+
+    if(!settingsExist){
+        let newReminderSetting = new Settings({
+            userId: req.user.id,
+            reminder: true
+        })
+
+        await newReminderSetting.save()
+        return res.status(200).send(newReminderSetting);
+    } else {
+        ans = await Settings.updateOne(
+        { userId: req.user.id },
+        { $set: { reminder: true } },
+        {
+            new: true,
+        }
+        );
+        return res.status(200).send(ans);
+    }    
+
+  } catch (err) {
+    return res.status(400).send({ errors: [{ msg: "Cannot change reminder status" }] });
+  }
+});
+
+// @route    POST api/settings
+// @desc     Post reminder status change to false
+// @access   Private
+router.post("/set-reminder-off", auth, async (req, res) => {
+    let ans = {};
+    try {
+
+      let settingsExist = await Settings.findOne({
+        userId: req.user.id,
+      });
+
+      if (!settingsExist) {
+        let newReminderSetting = new Settings({
+          userId: req.user.id,
+          reminder: false,
+        });
+
+        await newReminderSetting.save();
+        return res.status(200).send(newReminderSetting);
+      } else {
+        ans = await Settings.updateOne(
+          { userId: req.user.id },
+          { $set: { reminder: false } },
+          {
+            new: true,
+          }
+        );
+        return res.status(200).send(ans);
+      }
+    } catch (err) {
+      return res
+        .status(400)
+        .send({ errors: [{ msg: "Cannot change reminder status" }] });
+    }
+});
+
 
 // ----------------------------- SOUND ------------------------------------
 // @route    GET api/settings
