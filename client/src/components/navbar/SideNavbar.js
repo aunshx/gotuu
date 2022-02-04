@@ -140,6 +140,22 @@ const SideNavbar = ({
                 </div>
               </div>
             </div>
+            <div>
+              <div className='flex_middle mrg-t-b-1'>
+                <a href='#metrics'>
+                  <div className='flex_middle navbar_option'>
+                    <div>
+                      <FontAwesomeIcon
+                        icon={faChartBar}
+                        style={{ fontSize: 20 }}
+                        className='icon'
+                      />
+                    </div>
+                    <div className='mrg-r-point-5 ft-bold link'>Metrics</div>
+                  </div>
+                </a>
+              </div>
+            </div>
             <div className='flex_middle mrg-t-b-1'>
               <div
                 className='flex_middle navbar_option cursor_pointer'

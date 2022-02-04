@@ -12,6 +12,9 @@ import { getAvgDurationOfTuus, getAvgDurationOfTuusPerDay, getTotalNumberOfTuus 
 import { useCallback } from 'react';
 import Footer from './layout/Footer';
 
+import store from "../store";
+import { DARK_MODE, LIGHT_MODE } from "../redux/actions/types";
+
 const Home = ({
   auth: { isAuthenticated },
   // Redux Actions
@@ -19,11 +22,24 @@ const Home = ({
   getAvgDurationOfTuusPerDay,
   getTotalNumberOfTuus,
 }) => {
-  //   useEffect(() => {
-  //       getTotalNumberOfTuus()
-  //     getAvgDurationOfTuus()
-  //   getAvgDurationOfTuusPerDay()
-  // },[])
+  useEffect(() => {
+      if (localStorage.theme === "dark") {
+        console.log(localStorage.theme)
+        store.dispatch({
+          type: DARK_MODE,
+        });
+        localStorage.setItem("theme", "dark");
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+
+      if (localStorage.theme === "light") {
+        store.dispatch({
+          type: LIGHT_MODE,
+        });
+        localStorage.setItem("theme", "light");
+        document.documentElement.setAttribute("data-theme", "light");
+      }
+  }, [])
 
   const [isActive, setIsActive] = useState(false);
 

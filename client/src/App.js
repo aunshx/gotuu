@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Provider } from "react-redux";
 
 import { loadUser } from "./redux/actions/auth";
-import { LOGOUT } from "./redux/actions/types";
+import { DARK_MODE, LIGHT_MODE, LOGOUT } from "./redux/actions/types";
 
 import Home from "./components/Home";
 import Register from "./components/auth/Register";
@@ -22,7 +22,6 @@ function App() {
         setAuthToken(localStorage.token);
       }
       store.dispatch(loadUser());
-
       // log user out from all tabs if they log out in one tab
       window.addEventListener("storage", () => {
         if (!localStorage.token) store.dispatch({ type: LOGOUT });

@@ -37,11 +37,13 @@ const DarkMode = ({
             playOn();
         }
     } else {
+    if(!displayMode){
         setLight();
-        toggleLightMode()
-        if(sound){
+        toggleLightMode();
+        if (sound) {
             playOn();
         }
+    }
     }
 };
   return (

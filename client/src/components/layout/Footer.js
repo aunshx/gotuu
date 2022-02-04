@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const Footer = (props) => {
   return (
-    <div className='footer flex_middle'>Made with ❤️ by the GoTuu Team.</div>
+    <div className='footer flex_middle'>Made with ❤️ by Aunsh B.</div>
   );
 };
 
