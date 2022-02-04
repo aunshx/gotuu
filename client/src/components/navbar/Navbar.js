@@ -16,7 +16,10 @@ import DarkMode from '../darkmode/DarkMode'
 import logo from "../../resources/images/gotuuLogo.png";
 import logoLogin from "../../resources/images/gotuuLogoLogin.png";
 
-const Navbar = ({ goMain, isActive }) => {
+const Navbar = ({ goMain, isActive,
+  // Redux State 
+  settings: { displayMode }
+}) => {
   const [loginActive, setLoginActive] = useState(false)
   const location = useLocation();
 
@@ -46,7 +49,7 @@ const Navbar = ({ goMain, isActive }) => {
         ref={goMain}
       >
         <div className='logo cursor_pointer'>
-          <img src={logo} alt='Go Tuu logo' />
+          <img src={displayMode ? logo : logoLogin} alt='Go Tuu logo' />
         </div>
         <div className=''>
           {menu ? (
@@ -114,9 +117,11 @@ const Navbar = ({ goMain, isActive }) => {
 
 
 Navbar.propTypes = {
+  settings: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
+  settings: state.settings,
 });
 
 const mapStateToActions = {
