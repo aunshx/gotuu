@@ -12,8 +12,7 @@ import {
   SOUND_ON,
 
   // Alerts
-  TEN_SEC_ALERT,
-  TEN_MIN_ALERT,
+  FIFTEEN_MIN_ALERT,
   THIRTY_MIN_ALERT,
   ONE_HOUR_ALERT,
   TWO_HOUR_ALERT,
@@ -1416,23 +1415,10 @@ export const toggleDarkMode = () => async (dispatch) => {
   })
 }
 
-// 10 sec Alert 
-export const setTenSecAlert = () => async (dispatch) => {
-  console.log('TEN SEC ACTION')
-   dispatch({
-     type: TEN_SEC_ALERT,
-   });
-
-   setTimeout(() =>
-     dispatch({
-       type: REMINDER_ALERT_RESET
-     }), 5000)
-}
-
 // 10 Min Alert 
-export const setTenMinAlert = () => async (dispatch) => {
+export const setFifteenMinAlert = () => async (dispatch) => {
    dispatch({
-     type: TEN_MIN_ALERT,
+     type: FIFTEEN_MIN_ALERT,
    });
 
    setTimeout(() =>

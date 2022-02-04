@@ -39,12 +39,16 @@ const Main = ({
   timeline: { currentEventId },
   notes: { noteId },
   settings: {
-    tenMinAlert,
+    fifteenMinAlert,
     thirtyMinAlert,
     oneHourAlert,
     twoHourAlert,
     threeHourAlert,
-    tenSec,
+    reminderFifteenMin,
+    reminderThirtyMin,
+    reminderOneHour,
+    reminderTwoHour,
+    reminderThreeHour,
   },
   // Redux Actions
   createNewNote,
@@ -54,7 +58,6 @@ const Main = ({
   const [isCounting, setIsCounting] = useState(false);
   const [start, setStart] = useState(false);
   const [isFull, setIsFull] = useState(false);
-  const [yesSound, setYesSound] = useState(true);
 
   const reffie = useRef();
   const handle = useRef();
@@ -203,26 +206,23 @@ const Main = ({
           </>
         )}
         <div className='flex_middle popup_main' id='#example-anchor'>
-          {tenMinAlert && (
+          {fifteenMinAlert && reminderFifteenMin && (
             <Reminder message={"10 Mins Completed"} type={"10"} />
           )}
-          {thirtyMinAlert && (
+          {thirtyMinAlert && reminderThirtyMin && (
             <Reminder message={"30 Mins Done! Rock on!"} type={"30"} />
           )}
-          {oneHourAlert && (
+          {oneHourAlert && reminderOneHour && (
             <Reminder message={"It's a whole hour! Leggoooo"} type={"60"} />
           )}
-          {twoHourAlert && (
+          {twoHourAlert && reminderTwoHour && (
             <Reminder message={"Wow 2 hours?! You're on FIREEE"} type={"120"} />
           )}
-          {threeHourAlert && (
+          {threeHourAlert && reminderThreeHour && (
             <Reminder
               message={"3 hours! That's it. You're the BEST."}
               type={"180"}
             />
-          )}
-          {tenSec && (
-            <Reminder message={"10 secooonndssss oooooo"} type={"180"} />
           )}
         </div>
         {start && <div className='go-down' ref={reffie}></div>}

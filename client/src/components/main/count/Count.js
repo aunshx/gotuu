@@ -50,7 +50,7 @@ const Count = ({
   }, [isCounting]);
 
   const stopCount = (currentEventId, time) => {
-    if (time < 60000) {
+    if (time < 6000) {
       let value = {
         message: "Cannot stop before 1 min is complete",
         type: "info",

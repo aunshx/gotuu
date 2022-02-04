@@ -40,12 +40,11 @@ export const REMINDER_THREE_HOUR_STATUS = "REMINDER_THREE_HOUR_STATUS";
 export const SOUND_STATUS = "SOUND_STATUS";
 export const SOUND_ON = "SOUND_ON";
 export const SOUND_OFF = "SOUND_OFF";
-export const TEN_MIN_ALERT = "TEN_MIN_ALERT";
+export const FIFTEEN_MIN_ALERT = "FIFTEEN_MIN_ALERT";
 export const THIRTY_MIN_ALERT = "THIRTY_MIN_ALERT";
 export const ONE_HOUR_ALERT = "ONE_HOUR_ALERT";
 export const TWO_HOUR_ALERT = "TWO_HOUR_ALERT";
 export const THREE_HOUR_ALERT = "THREE_HOUR_ALERT";
-export const TEN_SEC_ALERT = "TEN_SEC_ALERT";
 export const REMINDER_ALERT_RESET = "REMINDER_ALERT_RESET";
 
 // Different Errors for the snackbar

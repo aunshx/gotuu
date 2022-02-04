@@ -3,32 +3,26 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import {
-  setTenMinAlert,
+  setFifteenMinAlert,
   setThirtyMinAlert,
   setOneHourAlert,
   setTwoHourAlert,
   setThreeHourAlert,
-  setTenSecAlert,
 } from "../../../redux/actions/settings";
 
 const Time = ({
   time,
   // Redux Actions
-  setTenMinAlert,
+  setFifteenMinAlert,
   setThirtyMinAlert,
   setOneHourAlert,
   setTwoHourAlert,
   setThreeHourAlert,
-  setTenSecAlert,
 }) => {
   useEffect(() => {
     switch (true) {
-      // case time === 5000:
-      //   setTenSecAlert();
-      //   break;
-
-      case time === 600000:
-        setTenMinAlert();
+      case time === 900000:
+        setFifteenMinAlert();
         break;
 
       case time === 1800000:
@@ -74,12 +68,11 @@ const mapStateToProps = (state) => ({
 });
 
 const mapActionsToProps = {
-  setTenMinAlert,
+  setFifteenMinAlert,
   setThirtyMinAlert,
   setOneHourAlert,
   setTwoHourAlert,
   setThreeHourAlert,
-  setTenSecAlert,
 };
 
 export default connect(mapStateToProps, mapActionsToProps)(Time);

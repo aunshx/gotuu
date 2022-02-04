@@ -5,8 +5,7 @@ import {
   SOUND_ON,
 
   // Alerts
-  TEN_SEC_ALERT,
-  TEN_MIN_ALERT,
+  FIFTEEN_MIN_ALERT,
   THIRTY_MIN_ALERT,
   ONE_HOUR_ALERT,
   TWO_HOUR_ALERT,
@@ -45,12 +44,11 @@ const initialState = {
   sound: true,
 
   // Alerts
-  tenMinAlert: false,
+  fifteenMinAlert: false,
   thirtyMinAlert: false,
   oneHourAlert: false,
   twoHourAlert: false,
   threeHourAlert: false,
-  tenSec: false,
   displayMode: true,
 
   // Reminders
@@ -194,15 +192,10 @@ function authReducer(state = initialState, action) {
       };
 
     // Sound Alerts
-    case TEN_SEC_ALERT:
+    case FIFTEEN_MIN_ALERT:
       return {
         ...state,
-        tenSec: true,
-      };
-    case TEN_MIN_ALERT:
-      return {
-        ...state,
-        tenMinAlert: true,
+        fifteenMinAlert: true,
       };
     case THIRTY_MIN_ALERT:
       return {
@@ -227,12 +220,11 @@ function authReducer(state = initialState, action) {
     case REMINDER_ALERT_RESET:
       return {
         ...state,
-        tenMinAlert: false,
+        fifteenMinAlert: false,
         thirtyMinAlert: false,
         oneHourAlert: false,
         twoHourAlert: false,
         threeHourAlert: false,
-        tenSec: false,
       };
 
     // Get Sound Status
