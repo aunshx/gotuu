@@ -47,7 +47,7 @@ const DarkMode = ({
           ☀️
         </div>
       ) : (
-        <div className='icons  cursor_pointer' onClick={toggleTheme}>
+        <div className='icons-dark  cursor_pointer' onClick={toggleTheme}>
           🌒
         </div>
       )}

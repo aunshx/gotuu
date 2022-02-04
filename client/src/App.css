@@ -50,6 +50,7 @@ body {
     color: var(--light-color);
     line-height: 1.6;
     background-color: var(--background-color);
+    transition: background-color 1s;
 }
 
 ul {
@@ -2807,9 +2808,55 @@ align-items: center;
 /* -------------------- DISPLAY MODE -------------------------------- */
 .display_mode .icons {
   margin: 0 1em 0.2em 0;
+    -moz-animation: spinToEntry 1s ease-in;
+    -webkit-animation: spinToEntry 1s ease-in;
+    animation: spinToEntry 1s 1 linear;
 }
 
+.display_mode .icons-dark {
+  margin: 0 1em 0.2em 0;
+    -moz-animation: spinToEntry 1s ease-in;
+    -webkit-animation: spinToEntry 1s ease-in;
+    animation: spinToEntry 1s 1 linear;
+}
 
+@keyframes spinToEntry {
+  0% {
+    opacity: 0;
+    transform: rotate(359deg);
+    -ms-transform: rotate(359deg);
+    -moz-transform: rotate(359deg);
+    -webkit-transform: rotate(359deg);
+  }
+  25% {
+    opacity: 0.5;
+    transform: rotate(287deg);
+    -ms-transform: rotate(287deg);
+    -moz-transform: rotate(287deg);
+    -webkit-transform: rotate(287deg);
+  }
+50% {
+    opacity: 1;
+    transform: rotate(215deg);
+    -ms-transform: rotate(215deg);
+    -moz-transform: rotate(215deg);
+    -webkit-transform: rotate(215deg);
+  }
+  75% {
+    opacity: 1;
+    transform: rotate(130deg);
+    -ms-transform: rotate(130deg);
+    -moz-transform: rotate(130deg);
+    -webkit-transform: rotate(130deg);
+  }
+  100% {
+    opacity: 1;
+    transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+  }
+}
 
 /* --------------------------- FOOTER ----------------------------- */
 .footer {
