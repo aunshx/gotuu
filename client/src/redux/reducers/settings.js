@@ -73,7 +73,6 @@ function authReducer(state = initialState, action) {
         reminder: payload,
       };
 
-    // Reminder change
     case REMINDER_OFF:
       return {
         ...state,

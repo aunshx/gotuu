@@ -30,11 +30,11 @@ const SettingsSchema = new mongoose.Schema(
       type: Boolean,
       default: true
     },
-    reminderTwoHours: {
+    reminderTwoHour: {
       type: Boolean,
       default: true
     },
-    reminderThreeHours: {
+    reminderThreeHour: {
       type: Boolean,
       default: true
     },

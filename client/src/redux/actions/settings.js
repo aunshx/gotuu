@@ -40,6 +40,11 @@ import {
   REMINDER_ONE_HOUR_OFF,
   REMINDER_FIFTEEN_MIN_OFF,
   REMINDER_THIRTY_MIN_OFF,
+  REMINDER_THIRTY_MIN_STATUS,
+  REMINDER_FIFTEEN_MIN_STATUS,
+  REMINDER_ONE_HOUR_STATUS,
+  REMINDER_TWO_HOUR_STATUS,
+  REMINDER_THREE_HOUR_STATUS,
 } from "./types";
 
 // Get Reminder Status
@@ -52,7 +57,27 @@ export const getReminderStatus = () => async (dispatch) => {
 
     dispatch({
         type: REMINDER_STATUS,
-        payload: res.data,
+        payload: res.data.reminder,
+    });
+    dispatch({
+      type: REMINDER_FIFTEEN_MIN_STATUS,
+      payload: res.data.reminderFifteenMin,
+    });
+    dispatch({
+      type: REMINDER_THIRTY_MIN_STATUS,
+      payload: res.data.reminderThirtyMin,
+    });
+    dispatch({
+      type: REMINDER_ONE_HOUR_STATUS,
+      payload: res.data.reminderOneHour,
+    });
+    dispatch({
+      type: REMINDER_TWO_HOUR_STATUS,
+      payload: res.data.reminderTwoHour,
+    });
+    dispatch({
+      type: REMINDER_THREE_HOUR_STATUS,
+      payload: res.data.reminderThreeHour,
     });
 
   } catch (error) {
