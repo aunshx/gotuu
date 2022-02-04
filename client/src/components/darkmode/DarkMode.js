@@ -1,4 +1,3 @@
-import "./DarkMode.css";
 import react, { useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
@@ -22,6 +21,8 @@ const setLight = () => {
 };
 
 const DarkMode = ({
+    // Redux State
+    settings: { displayMode },
     // Redux Actions
     toggleLightMode,
     toggleDarkMode
@@ -29,7 +30,7 @@ const DarkMode = ({
     const [playOn] = useSound(toggle, { volume: 1 });
 
     const toggleTheme = (e) => {
-        if (e.target.checked) {
+        if (displayMode) {
         setDark();
         toggleDarkMode()
         playOn()
@@ -40,29 +41,29 @@ const DarkMode = ({
         }
 };
   return (
-    <div className='toggle-theme-wrapper'>
-      <span>☀️</span>
-      <label className='toggle-theme' htmlFor='checkbox'>
-        <input
-          type='checkbox'
-          id='checkbox'
-          // 6
-          onChange={toggleTheme}
-          defaultChecked={setLight}
-        />
-        <div className='slider round'></div>
-      </label>
-      <span>🌒</span>
+    <div className='display_mode'>
+      {displayMode ? (
+        <div className='icons cursor_pointer' onClick={toggleTheme}>
+          ☀️
+        </div>
+      ) : (
+        <div className='icons  cursor_pointer' onClick={toggleTheme}>
+          🌒
+        </div>
+      )}
     </div>
   );
 };
 
 DarkMode.propTypes = {
+settings: PropTypes.object.isRequired,
   toggleLightMode: PropTypes.func.isRequired,
   toggleDarkMode: PropTypes.func.isRequired
 };
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({
+    settings: state.settings
+});
 
 const mapStateToActions = {
   toggleLightMode,
