@@ -207,7 +207,7 @@ const Main = ({
         )}
         <div className='flex_middle popup_main' id='#example-anchor'>
           {fifteenMinAlert && reminderFifteenMin && (
-            <Reminder message={"10 Mins Completed"} type={"10"} />
+            <Reminder message={"15 Mins Completed"} type={"15"} />
           )}
           {thirtyMinAlert && reminderThirtyMin && (
             <Reminder message={"30 Mins Done! Rock on!"} type={"30"} />
