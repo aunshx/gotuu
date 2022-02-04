@@ -17,20 +17,73 @@ import {
 } from '../../redux/actions/settings'
 
 const NavRem = ({
-    // Redux State
-    settings: { reminder },
-    // Redux Actions 
-    setReminderOn,
-    setReminderOff
+  // Redux State
+  settings: {
+    reminder,
+    reminderFifteenMin,
+    reminderThirtyMin,
+    reminderOneHour,
+    reminderTwoHour,
+    reminderThreeHour,
+  },
+  // Redux Actions
+  setReminderOn,
+  setReminderOff,
+  setReminderFifteenMinOn,
+  setReminderFifteenMinOff,
+  setReminderThirtyMinOn,
+  setReminderThirtyMinOff,
+  setReminderOneHourOn,
+  setReminderOneHourOff,
+  setReminderTwoHourOn,
+  setReminderTwoHourOff,
+  setReminderThreeHourOn,
+  setReminderThreeHourOff,
+
 }) => {
+  const reminderOn = () => {
+    setReminderOn();
+  };
 
-     const reminderOn = () => {
-       setReminderOn();
-     };
+  const reminderOff = () => {
+    setReminderOff();
+  };
 
-     const reminderOff = () => {
-       setReminderOff();
-     };
+  const setReminderFifteenMin = () => {
+    if(reminderFifteenMin){
+      setReminderFifteenMinOff()
+    } else {
+      setReminderFifteenMinOn()
+    }
+  }
+  const setReminderThirtyMin = () => {
+    if(reminderThirtyMin){
+      setReminderThirtyMinOff()
+    } else {
+      setReminderThirtyMinOn()
+    }
+  }
+  const setReminderOneHour = () => {
+    if(reminderOneHour){
+      setReminderOneHourOff()
+    } else {
+      setReminderOneHourOn()
+    }
+  }
+  const setReminderTwoHour = () => {
+    if(reminderTwoHour){
+      setReminderTwoHourOff()
+    } else {
+      setReminderTwoHourOn()
+    }
+  }
+  const setReminderThreeHour = () => {
+    if(reminderThreeHour){
+      setReminderThreeHourOff()
+    } else {
+      setReminderThreeHourOn()
+    }
+  }
 
   return (
     <div className='app popup_nav'>
@@ -71,7 +124,8 @@ const NavRem = ({
         <FormControlLabel
           control={
             <Checkbox
-              defaultChecked
+              value={reminderFifteenMin}
+              onClick={setReminderFifteenMin}
               sx={{ "& .MuiSvgIcon-root": { fontSize: 18 } }}
               color='success'
             />
@@ -84,7 +138,8 @@ const NavRem = ({
         <FormControlLabel
           control={
             <Checkbox
-              defaultChecked
+              value={reminderThirtyMin}
+              onClick={setReminderThirtyMin}
               sx={{ "& .MuiSvgIcon-root": { fontSize: 18 } }}
               color='success'
             />
@@ -97,7 +152,8 @@ const NavRem = ({
         <FormControlLabel
           control={
             <Checkbox
-              defaultChecked
+              value={reminderOneHour}
+              onClick={setReminderOneHour}
               sx={{ "& .MuiSvgIcon-root": { fontSize: 18 } }}
               color='success'
             />
@@ -110,7 +166,8 @@ const NavRem = ({
         <FormControlLabel
           control={
             <Checkbox
-              defaultChecked
+              value={reminderTwoHour}
+              onClick={setReminderTwoHour}
               sx={{ "& .MuiSvgIcon-root": { fontSize: 18 } }}
               color='success'
             />
@@ -123,7 +180,8 @@ const NavRem = ({
         <FormControlLabel
           control={
             <Checkbox
-              defaultChecked
+              value={reminderThreeHour}
+              onClick={setReminderThreeHour}
               sx={{ "& .MuiSvgIcon-root": { fontSize: 18 } }}
               color='success'
             />
