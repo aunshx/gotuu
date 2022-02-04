@@ -36,6 +36,30 @@ const CssTextField = styled(TextField, {
   },
 }));
 
+const CssTextFieldDark = styled(TextField, {
+  shouldForwardProp: (props) => props !== "focusColor",
+})((p) => ({
+  // input label when focused
+  "& label.Mui-focused": {
+    color: "#44af16",
+  },
+  // focused color for input with variant='outlined'
+  "& .MuiOutlinedInput-root": {
+    "&.Mui-focused fieldset": {
+      borderColor: "white",
+      fontSize: "0.9em",
+    },
+    "& fieldset": {
+      borderColor: "white",
+    },
+    "&:hover fieldset": {
+      borderColor: "white",
+    },
+    // color: "white",
+    // borderColor: "#44af16",
+  },
+}));
+
 const loginIconButtonStyle = makeStyles({
   root: {
     color: "gray",
@@ -56,6 +80,13 @@ const textFieldInputLabelStyle = {
   justifySelf: "center",
 };
 
+const textFieldInputLabelStyleDark = {
+  fontSize: "0.9em",
+  alignSelf: "center",
+  justifySelf: "center",
+  color: 'gray'
+};
+
 const textFieldStyle = {
   height: "20px",
   width: "230px",
@@ -65,6 +96,7 @@ const textFieldStyle = {
 const Login = ({
   login,
   auth: { isAuthenticated, loginLoading, errorSnackbar },
+  settings: { displayMode }
 }) => {
   const iconButtonStyle = loginIconButtonStyle();
 
@@ -134,92 +166,185 @@ const Login = ({
             )}
           </div>
           <div style={{ paddingBottom: "1em" }}>
-            <div style={{ marginBottom: "1.3em" }}>
-              <CssTextField
-                error={errorSnackbar || emailEmptyError}
-                label='Email ID'
-                placeholder='Email ID'
-                size='small'
-                focusColor='#1686f0'
-                InputLabelProps={{
-                  style: textFieldInputLabelStyle,
-                }}
-                inputProps={{
-                  style: textFieldStyle,
-                }}
-                FormHelperTextProps={{
-                  style: {
-                    margin: 0,
-                    padding: "0 0 0 5px",
-                    fontSize: 10,
-                  },
-                }}
-                name='email'
-                value={email}
-                onChange={onChange}
-              />
-            </div>
-            <div>
-              <div>
-                <div>
-                  <CssTextField
-                    error={passwordEmptyError || errorSnackbar}
-                    label='Password'
+            {!displayMode ? (
+              <>
+                <div style={{ marginBottom: "1.3em" }}>
+                  <CssTextFieldDark
+                    error={errorSnackbar || emailEmptyError}
+                    label='Email ID'
+                    placeholder='Email ID'
                     size='small'
-                    variant='outlined'
-                    type={showPassword ? "text" : "password"}
+                    focusColor='#1686f0'
+                    InputLabelProps={{
+                      style: textFieldInputLabelStyleDark,
+                    }}
+                    inputProps={{
+                      style: textFieldStyle,
+                    }}
+                    FormHelperTextProps={{
+                      style: {
+                        margin: 0,
+                        padding: "0 0 0 5px",
+                        fontSize: 10,
+                      },
+                    }}
+                    name='email'
+                    value={email}
+                    onChange={onChange}
+                  />
+                </div>
+                <div>
+                  <div>
+                    <div>
+                      <CssTextFieldDark
+                        error={passwordEmptyError || errorSnackbar}
+                        label='Password'
+                        size='small'
+                        variant='outlined'
+                        type={showPassword ? "text" : "password"}
+                        InputLabelProps={{
+                          style: textFieldInputLabelStyleDark,
+                        }}
+                        inputProps={{
+                          style: {
+                            height: "20px",
+                            width: "186px",
+                          },
+                        }}
+                        name='password'
+                        value={password}
+                        onChange={onChange}
+                        InputProps={{
+                          endAdornment: (
+                            <InputAdornment position='end'>
+                              <IconButton
+                                aria-label='toggle password visibility'
+                                onClick={handleClickShowPassword}
+                              >
+                                {showPassword ? (
+                                  <Visibility
+                                    style={{
+                                      fontSize: 18,
+                                    }}
+                                  />
+                                ) : (
+                                  <VisibilityOff
+                                    style={{
+                                      fontSize: 18,
+                                    }}
+                                  />
+                                )}
+                              </IconButton>
+                            </InputAdornment>
+                          ),
+                        }}
+                      />
+                    </div>
+                    <div
+                      style={{
+                        margin: "-0.2em 9.5em 1.5em 0.2em",
+                      }}
+                    >
+                      <div
+                        onClick={showChange}
+                        className='forgot_password_login_main'
+                      >
+                        <i> Forgot Password?</i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </>
+            ) : (
+              <>
+                <div style={{ marginBottom: "1.3em" }}>
+                  <CssTextField
+                    error={errorSnackbar || emailEmptyError}
+                    label='Email ID'
+                    placeholder='Email ID'
+                    size='small'
+                    focusColor='#1686f0'
                     InputLabelProps={{
                       style: textFieldInputLabelStyle,
                     }}
                     inputProps={{
+                      style: textFieldStyle,
+                    }}
+                    FormHelperTextProps={{
                       style: {
-                        height: "20px",
-                        width: "186px",
+                        margin: 0,
+                        padding: "0 0 0 5px",
+                        fontSize: 10,
                       },
                     }}
-                    name='password'
-                    value={password}
+                    name='email'
+                    value={email}
                     onChange={onChange}
-                    InputProps={{
-                      endAdornment: (
-                        <InputAdornment position='end'>
-                          <IconButton
-                            aria-label='toggle password visibility'
-                            onClick={handleClickShowPassword}
-                          >
-                            {showPassword ? (
-                              <Visibility
-                                style={{
-                                  fontSize: 18,
-                                }}
-                              />
-                            ) : (
-                              <VisibilityOff
-                                style={{
-                                  fontSize: 18,
-                                }}
-                              />
-                            )}
-                          </IconButton>
-                        </InputAdornment>
-                      ),
-                    }}
                   />
                 </div>
-                <div
-                  style={{
-                    margin: "-0.2em 9.5em 1.5em 0.2em",
-                  }}
-                >
-                  <div
-                    onClick={showChange}
-                    className='forgot_password_login_main'
-                  >
-                    <i> Forgot Password?</i>
+                <div>
+                  <div>
+                    <div>
+                      <CssTextField
+                        error={passwordEmptyError || errorSnackbar}
+                        label='Password'
+                        size='small'
+                        variant='outlined'
+                        type={showPassword ? "text" : "password"}
+                        InputLabelProps={{
+                          style: textFieldInputLabelStyle,
+                        }}
+                        inputProps={{
+                          style: {
+                            height: "20px",
+                            width: "186px",
+                          },
+                        }}
+                        name='password'
+                        value={password}
+                        onChange={onChange}
+                        InputProps={{
+                          endAdornment: (
+                            <InputAdornment position='end'>
+                              <IconButton
+                                aria-label='toggle password visibility'
+                                onClick={handleClickShowPassword}
+                              >
+                                {showPassword ? (
+                                  <Visibility
+                                    style={{
+                                      fontSize: 18,
+                                    }}
+                                  />
+                                ) : (
+                                  <VisibilityOff
+                                    style={{
+                                      fontSize: 18,
+                                    }}
+                                  />
+                                )}
+                              </IconButton>
+                            </InputAdornment>
+                          ),
+                        }}
+                      />
+                    </div>
+                    <div
+                      style={{
+                        margin: "-0.2em 9.5em 1.5em 0.2em",
+                      }}
+                    >
+                      <div
+                        onClick={showChange}
+                        className='forgot_password_login_main'
+                      >
+                        <i> Forgot Password?</i>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </div>
+              </>
+            )}
             <div>
               <LoadingButton
                 size='small'
@@ -274,11 +399,13 @@ const Login = ({
 
 Login.propTypes = {
   auth: PropTypes.object.isRequired,
+  settings: PropTypes.object.isRequired,
   login: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
+  settings: state.settings,
 })
 
 const mapStateToActions = {
