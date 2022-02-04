@@ -3,10 +3,14 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 const auth = require("../../middleware/auth");
 const jwt = require("jsonwebtoken");
+const random = require("random");
 const config = require("config");
 const { check, validationResult } = require("express-validator")
 
+const {sendEmail} = require('../../middleware/sendEmail')
+
 const User = require("../../models/User");
+const Security = require("../../models/Security");
 
 // @route    GET api/auth
 // @desc     Get user by token
@@ -158,5 +162,46 @@ router.get("/get-data", auth, async (req, res) => {
     res.status(500).send("Server Error");
   }
 });
+
+// @route    POST api/users
+// @desc     Send security code
+// @access   Public
+router.post(
+  "/send-security-code",
+  check("email", "Please include a valid email").isEmail().notEmpty(),
+  async (req, res) => {
+
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).send({ errors: errors.array() });
+    }
+
+    const { email } = req.body;
+
+    try {
+      let user = await User.findOne({ email });
+
+      if (user) {
+        const securityCode = await random.int(1000000, 9999999); 
+
+        let ans = await Security.create({
+          email,
+          securityCode,
+        });
+
+        await sendEmail(email, securityCode)
+
+        return res.status(200).send({
+          msg: "Security code sent to registered email ID",
+        });
+
+      }
+
+    } catch (err) {
+      console.log(err.message);
+      res.status(500).send("Server error");
+    }
+  }
+);
 
 module.exports = router;

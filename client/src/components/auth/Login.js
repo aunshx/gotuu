@@ -56,6 +56,7 @@ const CssTextFieldDark = styled(TextField, {
     "&:hover fieldset": {
       borderColor: "white",
     },
+    color: 'white'
   },
 }));
 
@@ -93,7 +94,10 @@ const textFieldStyle = {
 
 
 const Login = ({
+  goLoginToChangePass,
+  // Redux Actions
   login,
+  // Redux State
   auth: { isAuthenticated, loginLoading, errorSnackbar },
   settings: { displayMode }
 }) => {
@@ -113,10 +117,6 @@ const Login = ({
 
   const showChange = () => {
     setShowChangePassword(true);
-  };
-
-  const revertChange = () => {
-    setShowChangePassword(false);
   };
 
   const handleClickShowPassword = () => {
@@ -245,7 +245,7 @@ const Login = ({
                       }}
                     >
                       <div
-                        onClick={showChange}
+                        onClick={goLoginToChangePass}
                         className='forgot_password_login_main'
                       >
                         <i> Forgot Password?</i>
@@ -408,7 +408,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapStateToActions = {
-    login
+  login,
 }
 
 export default connect(mapStateToProps, mapStateToActions)(Login);

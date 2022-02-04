@@ -10,6 +10,11 @@ export const LOGIN_FAIL = "LOGIN_FAIL";
 
 export const LOGOUT = "LOGOUT";
 
+// Forgot Password
+export const SECURITY_CODE_SUCCESS = "SECURITY_CODE_SUCCESS";
+export const SECURITY_CODE_LOADING = "SECURITY_CODE_LOADING";
+export const SECURITY_CODE_LOADING_COMPLETE = "SECURITY_CODE_LOADING_COMPLETE";
+
 // Display
 export const LIGHT_MODE = "LIGHT_MODE";
 export const DARK_MODE = "DARK_MODE";

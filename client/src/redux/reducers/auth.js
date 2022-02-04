@@ -11,6 +11,10 @@ import {
   LOGIN_LOADING,
   LOGIN_LOADING_COMPLETE,
 
+  // Forgot Password
+  SECURITY_CODE_LOADING,
+  SECURITY_CODE_LOADING_COMPLETE,
+  SECURITY_CODE_SUCCESS,
 } from "../actions/types";
 
 const initialState = {
@@ -19,12 +23,33 @@ const initialState = {
   loading: true,
   user: null,
   loginLoading: false,
+  securityCodeLoading: false,
+  securityCodeSuccess: false
 };
 
 function authReducer(state = initialState, action) {
   const { type, payload } = action;
 
   switch (type) {
+    // Security Code
+    case SECURITY_CODE_SUCCESS:
+      return {
+        ...state,
+        securityCodeSuccess: true,
+      };
+
+    case SECURITY_CODE_LOADING:
+      return {
+        ...state,
+        securityCodeLoading: true,
+      };
+
+    case SECURITY_CODE_LOADING_COMPLETE:
+      return {
+        ...state,
+        securityCodeLoading: true,
+        securityCodeSuccess: false
+      };
 
     // Login Loading
     case LOGIN_LOADING:

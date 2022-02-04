@@ -19,6 +19,7 @@ import { getSoundStatus, getReminderStatus } from "./settings";
 
 import {
   // Snackbar
+  SUCCESS_200,
   ERROR_SNACKBAR,
   SNACKBAR_RESET,
   ERROR_AUTH_SNACKBAR,
@@ -34,7 +35,133 @@ import {
   LOGIN_LOADING,
   LOGIN_LOADING_COMPLETE,
 
+  // Forgot Password
+  SECURITY_CODE_LOADING,
+  SECURITY_CODE_LOADING_COMPLETE,
+  SECURITY_CODE_SUCCESS
 } from "./types";
+
+// Send Security Code 
+export const sendSecurityCode = (email) => async (dispatch) => {
+  const value = {};
+
+  const body = JSON.stringify({ email });
+
+  try {
+    dispatch({
+      type: SECURITY_CODE_LOADING,
+    });
+
+    const res = await api.post("/auth/send-security-code", body);
+
+    dispatch({
+      type: SECURITY_CODE_SUCCESS,
+    });
+
+    value.message = "Reset code sent";
+    value.type = "success";
+
+    dispatch({
+      type: SUCCESS_200,
+      payload: value,
+    });
+
+    setTimeout(
+      () =>
+        dispatch({
+          type: SNACKBAR_RESET,
+        }),
+      5000
+    );
+
+  } catch (error) {
+    if (error.response.status === 500) {
+      value.message = "Oops! Something went wrong. Please reload!";
+      value.type = "error";
+
+      dispatch({
+        type: ERROR_SNACKBAR,
+        payload: value,
+      });
+
+      dispatch({
+        type: SECURITY_CODE_LOADING_COMPLETE,
+      });
+
+      setTimeout(
+        () =>
+          dispatch({
+            type: SNACKBAR_RESET,
+          }),
+        5000
+      );
+    } else if (error.response.status === 400) {
+      value.message = error.response.data.errors[0].msg;
+      value.type = "error";
+
+      dispatch({
+        type: ERROR_SNACKBAR,
+        payload: value,
+      });
+
+      dispatch({
+        type: ERROR_AUTH_SNACKBAR,
+      });
+
+      dispatch({
+        type: SECURITY_CODE_LOADING_COMPLETE,
+      });
+
+      setTimeout(
+        () =>
+          dispatch({
+            type: SNACKBAR_RESET,
+          }),
+        5000
+      );
+    } else if (error.response.status === 401) {
+      value.message = "Your session has expired. Please login again.";
+      value.type = "error";
+
+      dispatch({
+        type: ERROR_SNACKBAR,
+        payload: value,
+      });
+
+      dispatch({
+        type: SECURITY_CODE_LOADING_COMPLETE,
+      });
+
+      setTimeout(
+        () =>
+          dispatch({
+            type: SNACKBAR_RESET,
+          }),
+        5000
+      );
+    } else {
+      value.message = "Oops! Looks like something went wrong. Please reload!";
+      value.type = "error";
+
+      dispatch({
+        type: ERROR_SNACKBAR,
+        payload: value,
+      });
+
+      dispatch({
+        type: SECURITY_CODE_LOADING_COMPLETE,
+      });
+
+      setTimeout(
+        () =>
+          dispatch({
+            type: SNACKBAR_RESET,
+          }),
+        5000
+      );
+    }
+  }
+}
 
 // Load User
 export const loadUser = () => async (dispatch) => {

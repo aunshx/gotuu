@@ -7,7 +7,7 @@ import { DARK_MODE, LIGHT_MODE, LOGOUT } from "./redux/actions/types";
 
 import Home from "./components/Home";
 import Register from "./components/auth/Register";
-import Login from "./components/auth/Login";
+import Main from "./components/auth/Main";
 import About from "./components/about/About";
 import NotFound from "./components/layout/NotFound";
 import store from "./store";
@@ -34,7 +34,7 @@ function App() {
           <Switch>
             <Route exact path='/' component={Home} />
             <Route exact path='/register' component={Register} />
-            <Route exact path='/login' component={Login} />
+            <Route exact path='/login' component={Main} />
             <Route exact path='/about' component={About} />
             <Route component={NotFound} />
           </Switch>
