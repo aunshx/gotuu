@@ -181,31 +181,6 @@ export const setReminderOn = () => async (dispatch) => {
 
     const res = await api.post("/settings/set-reminder-on");
 
-    dispatch({
-      type: REMINDER_STATUS,
-      payload: res.data.reminder,
-    });
-    dispatch({
-      type: REMINDER_FIFTEEN_MIN_STATUS,
-      payload: res.data.reminderFifteenMin,
-    });
-    dispatch({
-      type: REMINDER_THIRTY_MIN_STATUS,
-      payload: res.data.reminderThirtyMin,
-    });
-    dispatch({
-      type: REMINDER_ONE_HOUR_STATUS,
-      payload: res.data.reminderOneHour,
-    });
-    dispatch({
-      type: REMINDER_TWO_HOUR_STATUS,
-      payload: res.data.reminderTwoHour,
-    });
-    dispatch({
-      type: REMINDER_THREE_HOUR_STATUS,
-      payload: res.data.reminderThreeHour,
-    });
-
   } catch (error) {
     if (error.response.status === 500) {
       value.message = "Oops! Something went wrong. Please reload!";
@@ -326,6 +301,7 @@ export const setReminderOff = () => async (dispatch) => {
         });
 
     const res = await api.post("/settings/set-reminder-off");
+    
 
   } catch (error) {
     if (error.response.status === 500) {

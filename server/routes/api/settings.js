@@ -267,7 +267,7 @@ router.post("/set-reminder-two-hour-on", auth, async (req, res) => {
   try {
         ans = await Settings.updateOne(
           { userId: req.user.id },
-          { $set: { reminderTwoHours: true } },
+          { $set: { reminderTwoHour: true } },
           {
             new: true,
           }
@@ -287,7 +287,7 @@ router.post("/set-reminder-two-hour-off", auth, async (req, res) => {
       try {
         ans = await Settings.updateOne(
           { userId: req.user.id },
-          { $set: { reminderTwoHours: false } },
+          { $set: { reminderTwoHour: false } },
           {
             new: true,
           }
@@ -309,7 +309,7 @@ router.post("/set-reminder-three-hour-on", auth, async (req, res) => {
   try {
         ans = await Settings.updateOne(
           { userId: req.user.id },
-          { $set: { reminderThreeHours: true } },
+          { $set: { reminderThreeHour: true } },
           {
             new: true,
           }
@@ -329,7 +329,7 @@ router.post("/set-reminder-three-hour-off", auth, async (req, res) => {
       try {
         ans = await Settings.updateOne(
           { userId: req.user.id },
-          { $set: { reminderThreeHours: false } },
+          { $set: { reminderThreeHour: false } },
           {
             new: true,
           }

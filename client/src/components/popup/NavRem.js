@@ -83,8 +83,12 @@ const NavRem = ({
   const setReminderTwoHour = () => {
     if(reminderTwoHour){
       setReminderTwoHourOff()
+            console.log("KK");
+
     } else {
       setReminderTwoHourOn()
+            console.log("KKw");
+
     }
   }
   const setReminderThreeHour = () => {
@@ -138,6 +142,7 @@ const NavRem = ({
               onChange={setReminderFifteenMin}
               sx={{ "& .MuiSvgIcon-root": { fontSize: 18 } }}
               color='success'
+              disabled={!reminder}
             />
           }
           label='15 mins'
@@ -152,6 +157,7 @@ const NavRem = ({
               onChange={setReminderThirtyMin}
               sx={{ "& .MuiSvgIcon-root": { fontSize: 18 } }}
               color='success'
+              disabled={!reminder}
             />
           }
           label='30 mins'
@@ -166,6 +172,7 @@ const NavRem = ({
               onChange={setReminderOneHour}
               sx={{ "& .MuiSvgIcon-root": { fontSize: 18 } }}
               color='success'
+              disabled={!reminder}
             />
           }
           label='1 hour'
@@ -180,6 +187,7 @@ const NavRem = ({
               onChange={setReminderTwoHour}
               sx={{ "& .MuiSvgIcon-root": { fontSize: 18 } }}
               color='success'
+              disabled={!reminder}
             />
           }
           label='2 hours'
@@ -194,6 +202,7 @@ const NavRem = ({
               onChange={setReminderThreeHour}
               sx={{ "& .MuiSvgIcon-root": { fontSize: 18 } }}
               color='success'
+              disabled={!reminder}
             />
           }
           label='3 hours'
