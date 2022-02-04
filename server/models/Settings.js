@@ -13,6 +13,10 @@ const SettingsSchema = new mongoose.Schema(
     mode: {
         type: Boolean,
         default: false
+    },
+    reminder: {
+      type: Boolean,
+      default: true
     }
   },
   {

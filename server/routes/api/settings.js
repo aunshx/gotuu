@@ -7,6 +7,39 @@ const config = require("config");
 
 const Settings = require("../../models/Settings");
 
+// ----------------------------- REMINDER --------------------------------
+// @route    GET api/settings
+// @desc     Get sound status
+// @access   Private
+router.get("/get-reminder-status", auth, async (req, res) => {
+    let ans = {};
+    try {
+      let settingsExist = await Settings.findOne({
+        userId: req.user.id,
+      });
+
+      if (!settingsExist) {
+        let newReminderSetting = new Settings({
+          userId: req.user.id,
+        });
+
+        await newReminderSetting.save();
+        return res.status(200).send(newReminderSetting);
+      } else {
+        ans = await Settings.find({
+          userId: req.user.id,
+        });
+
+        return res.status(200).send(ans[0].reminder);
+      }
+    } catch (err) {
+      return res
+        .status(400)
+        .send({ errors: [{ msg: "Cannot fetch reminder status" }] });
+    }
+});
+
+// ----------------------------- SOUND ------------------------------------
 // @route    GET api/settings
 // @desc     Get sound status
 // @access   Private

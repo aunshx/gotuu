@@ -14,6 +14,11 @@ export const LOGOUT = "LOGOUT";
 export const LIGHT_MODE = "LIGHT_MODE";
 export const DARK_MODE = "DARK_MODE";
 
+// Reminders 
+export const REMINDER_STATUS = "REMINDER_STATUS";
+export const REMINDER_ON = "REMINDER_ON";
+export const REMINDER_OFF = "REMINDER_OFF";
+
 // Sound
 export const SOUND_STATUS = "SOUND_STATUS";
 export const SOUND_ON = "SOUND_ON";

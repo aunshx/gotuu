@@ -16,6 +16,11 @@ import {
   // DISPLAY PREFERENCE
   LIGHT_MODE,
   DARK_MODE,
+
+  // Reminders
+  REMINDER_STATUS,
+  REMINDER_ON,
+  REMINDER_OFF,
 } from "../actions/types";
 
 const initialState = {
@@ -26,7 +31,8 @@ const initialState = {
   twoHourAlert: false,
   threeHourAlert: false,
   tenSec: false,
-  displayMode: true
+  displayMode: true,
+  reminder: true
 };
 
 function authReducer(state = initialState, action) {
@@ -45,6 +51,7 @@ function authReducer(state = initialState, action) {
         ...state,
         displayMode: false,
       };
+
     // Sound Alerts
     case TEN_SEC_ALERT:
       return {
@@ -85,6 +92,26 @@ function authReducer(state = initialState, action) {
         twoHourAlert: false,
         threeHourAlert: false,
         tenSec: false,
+      };
+
+    // Get Reminder Status
+    case REMINDER_STATUS:
+      return {
+        ...state,
+        reminder: payload,
+      };
+
+    // Reminder change
+    case REMINDER_OFF:
+      return {
+        ...state,
+        reminder: payload,
+      };
+
+    case REMINDER_ON:
+      return {
+        ...state,
+        reminder: payload,
       };
 
     // Get Sound Status

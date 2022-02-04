@@ -9,21 +9,32 @@ import {
   faBell,
   faBellSlash
 } from "@fortawesome/free-solid-svg-icons";
+import { connect } from 'react-redux';
 
-const NavRem = ({}) => {
+import {
+    setReminderOn,
+  setReminderOff,
+} from '../../redux/actions/settings'
 
-    const [rem, setRem] = useState(false)
+const NavRem = ({
+    // Redux State
+    settings: { reminder },
+    // Redux Actions 
+    setReminderOn,
+    setReminderOff
+}) => {
 
-    const reminderOn = () => {
-        setRem(true)
-    }
+     const reminderOn = () => {
+       setReminderOn();
+     };
 
-    const reminderOff = () => {
-        setRem(false)
-    }
+     const reminderOff = () => {
+       setReminderOff();
+     };
+
   return (
     <div className='app popup_nav'>
-      {rem ? (
+      {reminder ? (
         <div className='flex_middle mrg-t-b-1'>
           <div className='flex_middle cursor_pointer' onClick={reminderOff}>
             <div>
@@ -50,7 +61,12 @@ const NavRem = ({}) => {
           </div>
         </div>
       )}
-      <div className='mrg-r-point-5 ft-bold link' style={{ marginBottom: '0.4em', fontSize: '1em' }} >Reminder Times</div>
+      <div
+        className='mrg-r-point-5 ft-bold link'
+        style={{ marginBottom: "0.4em", fontSize: "1em" }}
+      >
+        Reminder Times
+      </div>
       <div>
         <FormControlLabel
           control={
@@ -120,6 +136,19 @@ const NavRem = ({}) => {
   );
 };
 
-NavRem.propTypes = {};
+NavRem.propTypes = {
+settings: PropTypes.object.isRequired,
+  setReminderOn: PropTypes.func.isRequired,
+  setReminderOff: PropTypes.func.isRequired,
+};
 
-export default NavRem;
+const mapStateToProps = (state) => ({
+    settings: state.settings
+});
+
+const mapActionsToProps = {
+  setReminderOn,
+  setReminderOff,
+};
+
+export default connect(mapStateToProps, mapActionsToProps)(NavRem);

@@ -22,8 +22,297 @@ import {
 
   // DISPLAY PREFERENCE
   LIGHT_MODE,
-  DARK_MODE
+  DARK_MODE,
+
+  // Reminders
+  REMINDER_STATUS,
+  REMINDER_ON,
+  REMINDER_OFF
 } from "./types";
+
+// Get Reminder Status
+export const getReminderStatus = () => async (dispatch) => {
+  const value = {};
+
+  try {
+
+    const res = await api.get("/settings/get-reminder-status");
+
+    dispatch({
+        type: REMINDER_STATUS,
+        payload: res.data,
+    });
+
+  } catch (error) {
+    if (error.response.status === 500) {
+      value.message = "Oops! Something went wrong. Please reload!";
+      value.type = "error";
+
+      dispatch({
+        type: ERROR_SNACKBAR,
+        payload: value,
+      });
+
+      setTimeout(
+        () =>
+          dispatch({
+            type: SNACKBAR_RESET,
+          }),
+        5000
+      );
+    } else if (error.response.status === 400) {
+      value.message = error.response.data.errors[0].msg;
+      value.type = "error";
+
+      dispatch({
+        type: ERROR_SNACKBAR,
+        payload: value,
+      });
+
+      setTimeout(
+        () =>
+          dispatch({
+            type: SNACKBAR_RESET,
+          }),
+        5000
+      );
+    } else if (error.response.status === 401) {
+      value.message = "Your session has expired. Please login again.";
+      value.type = "error";
+
+      dispatch({
+        type: ERROR_SNACKBAR,
+        payload: value,
+      });
+
+      setTimeout(
+        () =>
+          dispatch({
+            type: SNACKBAR_RESET,
+          }),
+        5000
+      );
+    } else {
+      value.message = "Oops! Looks like something went wrong. Please reload!";
+      value.type = "error";
+
+      dispatch({
+        type: ERROR_SNACKBAR,
+        payload: value,
+      });
+
+      setTimeout(
+        () =>
+          dispatch({
+            type: SNACKBAR_RESET,
+          }),
+        5000
+      );
+    }
+  }
+}
+
+// Reminder On
+export const setReminderOn = () => async (dispatch) => {
+  const value = {};
+
+  try {
+    dispatch({
+      type: REMINDER_ON,
+      payload: true,
+    });
+
+    const res = await api.post("/settings/set-reminder-on");
+
+  } catch (error) {
+    if (error.response.status === 500) {
+      value.message = "Oops! Something went wrong. Please reload!";
+      value.type = "error";
+
+      dispatch({
+        type: ERROR_SNACKBAR,
+        payload: value,
+      });
+
+      dispatch({
+        type: REMINDER_ON,
+        payload: false,
+      });
+
+      setTimeout(
+        () =>
+          dispatch({
+            type: SNACKBAR_RESET,
+          }),
+        5000
+      );
+    } else if (error.response.status === 400) {
+      value.message = error.response.data.errors[0].msg;
+      value.type = "error";
+
+      dispatch({
+        type: ERROR_SNACKBAR,
+        payload: value,
+      });
+
+      dispatch({
+        type: REMINDER_ON,
+        payload: false,
+      });
+
+      setTimeout(
+        () =>
+          dispatch({
+            type: SNACKBAR_RESET,
+          }),
+        5000
+      );
+    } else if (error.response.status === 401) {
+      value.message = "Your session has expired. Please login again.";
+      value.type = "error";
+
+      dispatch({
+        type: ERROR_SNACKBAR,
+        payload: value,
+      });
+
+      dispatch({
+        type: REMINDER_ON,
+        payload: false,
+      });
+
+      setTimeout(
+        () =>
+          dispatch({
+            type: SNACKBAR_RESET,
+          }),
+        5000
+      );
+    } else {
+      value.message = "Oops! Looks like something went wrong. Please reload!";
+      value.type = "error";
+
+      dispatch({
+        type: ERROR_SNACKBAR,
+        payload: value,
+      });
+
+      dispatch({
+        type: REMINDER_ON,
+        payload: false,
+      });
+
+      setTimeout(
+        () =>
+          dispatch({
+            type: SNACKBAR_RESET,
+          }),
+        5000
+      );
+    }
+  }
+};
+
+// Reminder Off
+export const setReminderOff = () => async (dispatch) => {
+  const value = {};
+
+  try {
+    dispatch({
+      type: REMINDER_OFF,
+      payload: false,
+    });
+
+    const res = await api.post("/settings/set-reminder-off");
+
+  } catch (error) {
+    if (error.response.status === 500) {
+      value.message = "Oops! Something went wrong. Please reload!";
+      value.type = "error";
+
+      dispatch({
+        type: ERROR_SNACKBAR,
+        payload: value,
+      });
+
+      dispatch({
+        type: REMINDER_OFF,
+        payload: true,
+      });
+
+      setTimeout(
+        () =>
+          dispatch({
+            type: SNACKBAR_RESET,
+          }),
+        5000
+      );
+    } else if (error.response.status === 400) {
+      value.message = error.response.data.errors[0].msg;
+      value.type = "error";
+
+      dispatch({
+        type: ERROR_SNACKBAR,
+        payload: value,
+      });
+
+      dispatch({
+        type: REMINDER_OFF,
+        payload: true,
+      });
+
+      setTimeout(
+        () =>
+          dispatch({
+            type: SNACKBAR_RESET,
+          }),
+        5000
+      );
+    } else if (error.response.status === 401) {
+      value.message = "Your session has expired. Please login again.";
+      value.type = "error";
+
+      dispatch({
+        type: ERROR_SNACKBAR,
+        payload: value,
+      });
+
+      dispatch({
+        type: REMINDER_OFF,
+        payload: true,
+      });
+
+      setTimeout(
+        () =>
+          dispatch({
+            type: SNACKBAR_RESET,
+          }),
+        5000
+      );
+    } else {
+      value.message = "Oops! Looks like something went wrong. Please reload!";
+      value.type = "error";
+
+      dispatch({
+        type: ERROR_SNACKBAR,
+        payload: value,
+      });
+
+      dispatch({
+        type: REMINDER_OFF,
+        payload: true,
+      });
+
+      setTimeout(
+        () =>
+          dispatch({
+            type: SNACKBAR_RESET,
+          }),
+        5000
+      );
+    }
+  }
+};
 
 // Light Mode Toggle 
 export const toggleLightMode = () => async (dispatch) => {
