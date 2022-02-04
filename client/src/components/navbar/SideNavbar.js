@@ -5,11 +5,26 @@ import { Link } from "react-router-dom";
 
 import CloseIcon from '@mui/icons-material/Close';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faBookOpen, faChartBar, faDoorOpen, faHome, faProjectDiagram, faSignInAlt, faVolumeMute, faVolumeUp } from "@fortawesome/free-solid-svg-icons";
-import { Tooltip } from "@mui/material";
+import { faBell, faBookOpen, faChartBar, faDoorOpen, faHome, faProjectDiagram, faSignInAlt, faVolumeMute, faVolumeUp } from "@fortawesome/free-solid-svg-icons";
+import { Collapse, IconButton, Tooltip } from "@mui/material";
+import { styled } from "@mui/material/styles";
 
 import { logout } from "../../redux/actions/auth";
 import { setSoundOn, setSoundOff } from "../../redux/actions/settings";
+import NavRem from '../popup/NavRem';
+
+const ExpandMore = styled((props) => {
+  const { expand, ...other } = props;
+  return <IconButton {...other} />;
+})(({ theme, expand }) => ({
+  transform: !expand ? "rotate(0deg)" : "rotate(180deg)",
+  width: "1em",
+  height: "1em",
+  color: "white",
+  transition: theme.transitions.create("transform", {
+    duration: theme.transitions.duration.shortest,
+  }),
+}));
 
 
 const SideNavbar = ({
@@ -23,6 +38,8 @@ const SideNavbar = ({
   setSoundOff
 }) => {
   const [name, setName] = useState('')
+  const [expanded, setExpanded] = useState(false);
+
   useEffect(() => {
     if(user !== null){
       setName(user.name.split(" ")[0]);
@@ -38,6 +55,10 @@ const SideNavbar = ({
   const soundOff = () => {
     setSoundOff()
   }
+
+  const handleExpandClick = () => {
+    setExpanded(!expanded);
+  };
 
   return (
     <div className='side_navbar'>
@@ -142,19 +163,34 @@ const SideNavbar = ({
             </div>
             <div>
               <div className='flex_middle mrg-t-b-1'>
-                <a href='#metrics'>
-                  <div className='flex_middle navbar_option'>
-                    <div>
-                      <FontAwesomeIcon
-                        icon={faChartBar}
-                        style={{ fontSize: 20 }}
-                        className='icon'
-                      />
-                    </div>
-                    <div className='mrg-r-point-5 ft-bold link'>Metrics</div>
+                <div
+                  className='flex_middle navbar_option cursor_pointer'
+                  onClick={handleExpandClick}
+                >
+                  <div>
+                    <FontAwesomeIcon
+                      icon={faBell}
+                      style={{ fontSize: 20 }}
+                      className='icon'
+                    />
                   </div>
-                </a>
+                  <div className='mrg-r-point-5 ft-bold link'>Reminders</div>
+                </div>
               </div>
+            </div>
+            <div className=''>
+              <Collapse
+                in={expanded}
+                timeout='auto'
+                unmountOnExit
+                style={{
+                  padding: 0,
+                }}
+              >
+                <div>
+                  <NavRem />
+                </div>
+              </Collapse>
             </div>
             <div className='flex_middle mrg-t-b-1'>
               <div
