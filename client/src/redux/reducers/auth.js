@@ -20,6 +20,11 @@ import {
   SECURITY_CODE_CHECK_LOADING,
   SECURITY_CODE_CHECK_LOADING_COMPLETE,
   SECURITY_CODE_CHECK_SUCCESS,
+
+  // Password Change
+  PASSWORD_CHANGE_SUCCESS,
+  PASSWORD_CHANGE_COMPLETE,
+  PASSWORD_CHANGE_LOADING,
 } from "../actions/types";
 
 const initialState = {
@@ -34,13 +39,34 @@ const initialState = {
   securityCodeSuccess: false,
   securityCodeCheckSuccess: false,
   securityCodeCheckLoading: false,
-  forgotPasswordEmail: ''
+  forgotPasswordEmail: '',
+  forgotPasswordLoading: false,
+  forgotPasswordChange: false
 };
 
 function authReducer(state = initialState, action) {
   const { type, payload } = action;
 
   switch (type) {
+    // Password Change
+    case PASSWORD_CHANGE_SUCCESS:
+      return {
+        ...state,
+        forgotPasswordChange: true,
+      };
+
+    case PASSWORD_CHANGE_LOADING:
+      return {
+        ...state,
+        forgotPasswordLoading: false,
+      };
+
+    case PASSWORD_CHANGE_COMPLETE:
+      return {
+        ...state,
+        forgotPasswordChange: false,
+        forgotPasswordLoading: false,
+      };
     // Security Code
     case SECURITY_CODE_CHECK_SUCCESS:
       return {
@@ -80,7 +106,7 @@ function authReducer(state = initialState, action) {
         ...state,
         securityCodeLoading: false,
         securityCodeSuccess: false,
-        forgotPasswordEmail: ''
+        forgotPasswordEmail: "",
       };
 
     // Login Loading

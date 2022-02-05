@@ -153,13 +153,7 @@ const ChangePassword = ({
             </div>
           </div>
           <div style={{ paddingBottom: "1em" }}>
-            <div
-              style={{
-                padding: "0.5em 0.8em 1em 0.8em",
-                fontFamily: "Arial, Helvetica, sans-serif",
-                fontSize: "0.9em",
-              }}
-            >
+            <div className='forgot_password_title'>
               Enter your registered email ID to receive the security code.
             </div>
             {!displayMode ? (
@@ -356,7 +350,9 @@ const ChangePassword = ({
                         />
                       }
                       variant='outlined'
-                      onClick={() => checkSecurityCode(securityCode, email)}
+                      onClick={() =>
+                        checkSecurityCode(securityCode, forgotPasswordEmail)
+                      }
                       className={iconButtonStyle.root}
                       style={{
                         border: "1px solid green",
@@ -386,7 +382,9 @@ const ChangePassword = ({
                         />
                       }
                       variant='outlined'
-                      onClick={() => checkSecurityCode(securityCode, email)}
+                      onClick={() =>
+                        checkSecurityCode(securityCode, forgotPasswordEmail)
+                      }
                       className={iconButtonStyle.root}
                     >
                       <div

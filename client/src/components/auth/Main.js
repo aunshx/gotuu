@@ -49,6 +49,22 @@ const Main = (props) => {
 
     const goChangePass2ToChangePass = () => {
         setCount(1)
+         store.dispatch({
+            type: SECURITY_CODE_CHECK_LOADING_COMPLETE,
+          });
+          store.dispatch({
+            type: SECURITY_CODE_LOADING_COMPLETE,
+          });
+    }
+
+    const goChangePass2ToLogin = () => {
+      setCount(0)
+      store.dispatch({
+        type: SECURITY_CODE_CHECK_LOADING_COMPLETE,
+      });
+      store.dispatch({
+        type: SECURITY_CODE_LOADING_COMPLETE,
+      });
     }
 
   return (
@@ -63,6 +79,8 @@ const Main = (props) => {
       {count === 2 && (
         <ChangePassword2
           goChangePass2ToChangePass={goChangePass2ToChangePass}
+          goChangePass2ToLogin={goChangePass2ToLogin}
+          setCount={setCount}
         />
       )}
     </div>

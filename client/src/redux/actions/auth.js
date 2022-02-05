@@ -44,7 +44,144 @@ import {
   SECURITY_CODE_CHECK_LOADING,
   SECURITY_CODE_CHECK_LOADING_COMPLETE,
   SECURITY_CODE_CHECK_SUCCESS,
+
+  // Password Change
+  PASSWORD_CHANGE_SUCCESS,
+  PASSWORD_CHANGE_COMPLETE,
+  PASSWORD_CHANGE_LOADING,
 } from "./types";
+
+// Reset Change Password Settings 
+export const resetChangePassword = () => async (dispatch) => {
+  dispatch({
+    type: PASSWORD_CHANGE_COMPLETE
+  })
+}
+
+// Reset Security Code Settings 
+export const resetSecurityCodePassword = () => async (dispatch) => {
+  dispatch({
+    type: SECURITY_CODE_CHECK_LOADING_COMPLETE,
+  });
+}
+
+// Change Password
+export const changePasswordUser =
+  (password, email) => async (dispatch) => {
+    const value = {};
+
+    const body = JSON.stringify({ password, email });
+
+    try {
+      dispatch({
+        type: PASSWORD_CHANGE_LOADING,
+      });
+
+      const res = await api.post("/auth/change-password", body);
+
+      dispatch({
+        type: PASSWORD_CHANGE_SUCCESS
+      })
+
+      value.message = "Password Changes Successfully!";
+      value.type = "success";
+
+      dispatch({
+        type: SUCCESS_200,
+        payload: value,
+      });
+
+      setTimeout(
+        () =>
+          dispatch({
+            type: SNACKBAR_RESET,
+          }),
+        5000
+      );
+    } catch (error) {
+      if (error.response.status === 500) {
+        value.message = "Oops! Something went wrong. Please reload!";
+        value.type = "error";
+
+        dispatch({
+          type: ERROR_SNACKBAR,
+          payload: value,
+        });
+
+        dispatch({
+          type: PASSWORD_CHANGE_COMPLETE,
+        });
+
+        setTimeout(
+          () =>
+            dispatch({
+              type: SNACKBAR_RESET,
+            }),
+          5000
+        );
+      } else if (error.response.status === 400) {
+        value.message = error.response.data.errors[0].msg;
+        value.type = "error";
+
+        dispatch({
+          type: ERROR_SNACKBAR,
+          payload: value,
+        });
+
+        dispatch({
+          type: PASSWORD_CHANGE_COMPLETE,
+        });
+
+        setTimeout(
+          () =>
+            dispatch({
+              type: SNACKBAR_RESET,
+            }),
+          5000
+        );
+      } else if (error.response.status === 401) {
+        value.message = "Your session has expired. Please login again.";
+        value.type = "error";
+
+        dispatch({
+          type: ERROR_SNACKBAR,
+          payload: value,
+        });
+
+        dispatch({
+          type: PASSWORD_CHANGE_COMPLETE,
+        });
+
+        setTimeout(
+          () =>
+            dispatch({
+              type: SNACKBAR_RESET,
+            }),
+          5000
+        );
+      } else {
+        value.message = "Oops! Looks like something went wrong. Please reload!";
+        value.type = "error";
+
+        dispatch({
+          type: ERROR_SNACKBAR,
+          payload: value,
+        });
+
+        dispatch({
+          type: PASSWORD_CHANGE_COMPLETE,
+        });
+
+        setTimeout(
+          () =>
+            dispatch({
+              type: SNACKBAR_RESET,
+            }),
+          5000
+        );
+      }
+    }
+  };
 
 // Send Security Code 
 export const checkSecurityCode =

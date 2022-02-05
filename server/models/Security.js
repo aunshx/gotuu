@@ -7,7 +7,7 @@ const SecuritySchema = new mongoose.Schema(
       required: true,
     },
     securityCode: { 
-      type: String,
+      type: Number,
     },
   },
   {

@@ -226,8 +226,6 @@ router.post(
           $and: [{ securityCode: securityCode }, { email: email }, {createdAt: { $gte: date.getTime() - (1000 * 60 * 10) }}],
         }).select({ _id: 1 }).limit(1)
 
-          console.log(ans)
-
         if(ans){
           await ans.deleteOne({ _id: ans._id })
           return res.status(200).send({
@@ -239,6 +237,47 @@ router.post(
             .send({ errors: [{ msg: "Invalid Security Code" }] });
         }
 
+    } catch (err) {
+      console.log(err.message);
+      res.status(500).send("Server error");
+    }
+  }
+);
+
+// @route    POST api/users
+// @desc     Change password
+// @access   Public
+router.post(
+  "/change-password",
+  check("password", "Password should be at least 6 digits").isLength({
+    min: 6,
+  }),
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).send({ errors: errors.array() });
+    }
+
+    const { password, email } = req.body;
+
+    try {
+      const salt = await bcrypt.genSalt(10);
+
+      let newPassword = await bcrypt.hash(password, salt);
+
+      let ans = await User.updateOne({ 'email': email }, { $set: { 'password': newPassword } });
+
+      console.log(ans);
+
+      if (ans) {
+        return res.status(200).send({
+          msg: "Password Changed Successfully",
+        });
+      } else {
+        return res
+          .status(400)
+          .send({ errors: [{ msg: "Could not change password" }] });
+      }
     } catch (err) {
       console.log(err.message);
       res.status(500).send("Server error");
