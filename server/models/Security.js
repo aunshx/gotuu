@@ -9,6 +9,9 @@ const SecuritySchema = new mongoose.Schema(
     securityCode: { 
       type: Number,
     },
+    verificationToken: {
+      type: String
+    }
   },
   {
     timestamps: {

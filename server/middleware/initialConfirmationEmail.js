@@ -1,4 +1,26 @@
-
+const moment = require("moment");
+const sendInitialConfirmationEmail = (email, name, verifyLink) => {
+  const mailjet = require("node-mailjet").connect(
+    "6899d8eca2c5adbab6c3b06b5e5e151a",
+    "1758d2cffa591f6d9ed0ef8a81c428c6"
+  );
+  const request = mailjet.post("send", { version: "v3.1" }).request({
+    Messages: [
+      {
+        From: {
+          Email: "gotuu.app@gmail.com",
+          Name: "Gotuu",
+        },
+        To: [
+          {
+            Email: email,
+            Name: name,
+          },
+        ],
+        Subject: "Reset Password",
+        TextPart: "Greetings from Mailjet!",
+        HTMLPart: `
+        
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office">
 <head>
@@ -35,8 +57,8 @@
               <table role="presentation" style="width:100%;border-collapse:collapse;border:0;border-spacing:0;">
                 <tr>
                   <td style="padding:0 0 20px 0;color:#153643;" align="center">
-                    <h1 style="font-size:18px;margin:0 0 20px 0;font-family:Arial,sans-serif; color: gray;">Hi name and a warm welcome to Gotuu!</h1>
-                    <h2 style="font-size:14px;margin:0 0 20px 0;font-family:Arial,sans-serif; color: rgb(64, 64, 64);"><a href="link" target="_blank"  style="cursor:pointer" rel="noreferrer nofollow">Click here</a> to confirm your account!</h2>
+                    <h1 style="font-size:18px;margin:0 0 20px 0;font-family:Arial,sans-serif; color: gray;">Hi ${name} and a warm welcome to Gotuu!</h1>
+                    <h2 style="font-size:14px;margin:0 0 20px 0;font-family:Arial,sans-serif; color: rgb(64, 64, 64);"><a href=${verifyLink} target="_blank"  style="cursor:pointer" rel="noreferrer nofollow">Click here</a> to confirm your account!</h2>
                   </td>
                 </tr>
                 <tr>
@@ -47,16 +69,14 @@
                 <tr>
                   <td style="padding:0 0 20px 0;color:#153643;" align="center">
                     <h4 style="font-size:12px;margin:0 0 20px 0;font-family:Arial,sans-serif; color: rgb(93, 92, 92);">If the link does not work, copy paste the link below in your browser</h4>
-                    <p style="margin:0 0 20px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif; color: rgb(62, 171, 208);">link</p>
+                    <p style="margin:0 0 20px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif; color: rgb(62, 171, 208);">${verifyLink}</p>
                   </td>
                 </tr>
                 <tr>
                   <td>
                     <p style="margin:0 0 20px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif; color: gray;">Date: ${moment().format(
                       "DD/MM/YYYY"
-                    )} | Time: ${moment().format(
-      "hh:mm a"
-    )}</p>
+                    )} | Time: ${moment().format("hh:mm a")}</p>
                   </td>
                 </tr>
                 <tr>
@@ -95,3 +115,19 @@
   </table>
 </body>
 </html>
+        `,
+      },
+    ],
+  });
+  request
+    .then((result) => {
+      console.log("Email Sent");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+module.exports = {
+  sendInitialConfirmationEmail,
+};

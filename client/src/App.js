@@ -10,6 +10,7 @@ import Register from "./components/auth/Register";
 import Main from "./components/auth/Main";
 import About from "./components/about/About";
 import NotFound from "./components/layout/NotFound";
+import VerifyEmail from "./components/layout/VerifyEmail";
 import store from "./store";
 import setAuthToken from './utils/setAuthToken'
 
@@ -36,6 +37,7 @@ function App() {
             <Route exact path='/register' component={Register} />
             <Route exact path='/login' component={Main} />
             <Route exact path='/about' component={About} />
+            <Route path='/auth' component={VerifyEmail} />
             <Route component={NotFound} />
           </Switch>
         </>

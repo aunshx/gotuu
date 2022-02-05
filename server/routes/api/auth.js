@@ -7,11 +7,15 @@ const random = require("random");
 const config = require("config");
 const { check, validationResult } = require("express-validator")
 
-const {sendEmail} = require('../../middleware/sendEmail')
-const {sendEmailToo} = require('../../middleware/sendEmailToo')
+// const {sendEmail} = require('../../middleware/sendEmail')
+const { sendEmail } = require("../../middleware/forgotPasswordResetEmail");
+const {
+  sendInitialConfirmationEmail,
+} = require("../../middleware/initialConfirmationEmail");
 
 const User = require("../../models/User");
 const Security = require("../../models/Security");
+const { verify } = require("crypto");
 
 // @route    GET api/auth
 // @desc     Get user by token
@@ -87,7 +91,7 @@ router.post(
 
 
 // @route    POST api/users
-// @desc     Register user
+// @desc     Register user and send verification email
 // @access   Public
 router.post(
   "/register",
@@ -127,6 +131,22 @@ router.post(
 
       await user.save();
 
+      const verifySalt = await bcrypt.genSalt(12)
+
+      let verificationToken = await bcrypt.hash(user.id, verifySalt);
+
+      let verify = new Security({
+        email,
+        verificationToken
+      })
+
+      await verify.save()
+
+      let verifyLink =
+        `http://localhost:3000/auth/register/verify/${verificationToken}`
+
+        await sendInitialConfirmationEmail(email, name, verifyLink);
+
       // Return jsonwebtoken
       const payload = {
         user: {
@@ -143,6 +163,36 @@ router.post(
           res.send({ token });
         }
       );
+    } catch (err) {
+      console.log(err);
+      res.status(500).send("Server error");
+    }
+  }
+);
+
+// @route    POST api/users
+// @desc     Authenticate User
+// @access   Public
+router.post(
+  "/register/verify/:token",
+  async (req, res) => {
+
+    try {
+      let ans = await Security.findOne({ verificationToken: req.params.token })
+
+      if(ans){
+        let user = await User.updateOne(
+          { _id: req.params.token },
+          { $set: { verified: true } }
+        );
+
+        await Security.deleteOne({ verificationToken: req.params.id })
+
+        return res.status(200).send("Email has been verified");
+      } else {
+        return res.status(400).send({ errors: [{ msg: 'Token has expired resend email' }] });
+      }
+
     } catch (err) {
       console.log(err.message);
       res.status(500).send("Server error");
@@ -190,8 +240,7 @@ router.post(
           securityCode,
         });
 
-        // await sendEmail(email, securityCode)
-        await sendEmailToo(email, securityCode)
+        await sendEmail(email, securityCode);
 
         return res.status(200).send({
           msg: "Security code sent to registered email ID",

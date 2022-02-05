@@ -1,5 +1,5 @@
-const moment = require('moment');
-const sendEmailToo = (email, securityCode) => {
+const moment = require("moment");
+const sendInitialConfirmationEmail = (email, securityCode) => {
   const mailjet = require("node-mailjet").connect(
     "6899d8eca2c5adbab6c3b06b5e5e151a",
     "1758d2cffa591f6d9ed0ef8a81c428c6"
@@ -14,7 +14,7 @@ const sendEmailToo = (email, securityCode) => {
         To: [
           {
             Email: email,
-            Name: 'Aunsh',
+            Name: "Aunsh",
           },
         ],
         Subject: "Reset Password",
@@ -110,13 +110,13 @@ const sendEmailToo = (email, securityCode) => {
   });
   request
     .then((result) => {
-      console.log('Email Sent');
+      console.log("Email Sent");
     })
     .catch((err) => {
       console.log(err.statusCode);
     });
-}
+};
 
 module.exports = {
-  sendEmailToo
-}
+  sendInitialConfirmationEmail,
+};
