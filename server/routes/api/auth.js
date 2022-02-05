@@ -8,6 +8,7 @@ const config = require("config");
 const { check, validationResult } = require("express-validator")
 
 const {sendEmail} = require('../../middleware/sendEmail')
+const {sendEmailToo} = require('../../middleware/sendEmailToo')
 
 const User = require("../../models/User");
 const Security = require("../../models/Security");
@@ -189,7 +190,8 @@ router.post(
           securityCode,
         });
 
-        await sendEmail(email, securityCode)
+        // await sendEmail(email, securityCode)
+        await sendEmailToo(email, securityCode)
 
         return res.status(200).send({
           msg: "Security code sent to registered email ID",

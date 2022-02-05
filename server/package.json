@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "start": "node server",
-    "server": "nodemon server"
+    "server": "nodemon server",
+    "test": "node sendEmailToo"
   },
   "author": "Aunsh B",
   "license": "ISC",
@@ -39,6 +40,7 @@
     "random": "^3.0.6",
     "react-csv": "^2.2.1",
     "react-whatsapp": "^0.2.1",
+    "sendpulse-api": "^1.1.5",
     "tinyurl": "^1.1.7"
   },
   "devDependencies": {

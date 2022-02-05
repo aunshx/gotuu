@@ -1,17 +1,25 @@
-const config = require("config");
-const sgMail = require("@sendgrid/mail");
 const moment = require('moment');
-
-const sendGridAPIKeyEmail = config.get("sendGridAPIKeyEmail");
-
-const sendEmail = (email, securityCode) => {
-  sgMail.setApiKey(sendGridAPIKeyEmail);
-
-  const msg = {
-    to: email,
-    from: "gotuu.app@gmail.com", // your email
-    subject: "Reset password requested",
-    html: `
+const sendEmailToo = (email, securityCode) => {
+  const mailjet = require("node-mailjet").connect(
+    "6899d8eca2c5adbab6c3b06b5e5e151a",
+    "1758d2cffa591f6d9ed0ef8a81c428c6"
+  );
+  const request = mailjet.post("send", { version: "v3.1" }).request({
+    Messages: [
+      {
+        From: {
+          Email: "gotuu.app@gmail.com",
+          Name: "Gotuu",
+        },
+        To: [
+          {
+            Email: email,
+            Name: 'Aunsh',
+          },
+        ],
+        Subject: "Reset Password",
+        TextPart: "Greetings from Mailjet!",
+        HTMLPart: `
         <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office">
 <head>
@@ -53,8 +61,8 @@ const sendEmail = (email, securityCode) => {
                     <p style="margin:0 0 20px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif; color: gray;">Date: ${moment().format(
                       "DD/MM/YYYY"
                     )} | Time: ${moment().format(
-      "hh:mm a"
-    )} | Reset Code Validity:10 minutes.</p>
+          "hh:mm a"
+        )} | Reset Code Validity:10 minutes.</p>
                   </td>
                 </tr>
                 <tr>
@@ -97,18 +105,18 @@ const sendEmail = (email, securityCode) => {
 </body>
 </html>
         `,
-  };
-
-  sgMail
-    .send(msg)
-    .then(() => {
-      console.log("Email sent");
+      },
+    ],
+  });
+  request
+    .then((result) => {
+      console.log('Email Sent');
     })
-    .catch((error) => {
-      console.error(error);
+    .catch((err) => {
+      console.log(err.statusCode);
     });
-};
+}
 
 module.exports = {
-    sendEmail
+  sendEmailToo
 }
