@@ -23,9 +23,7 @@ import logoDark from "../../resources/images/gotuuLogoLogin.png";
 import Alerts from "../layout/Alerts";
 import Navbar from "../navbar/Navbar";
 
-import {
-    sendSecurityCode
-} from '../../redux/actions/auth'
+import { sendSecurityCode, checkSecurityCode } from "../../redux/actions/auth";
 
 const CssTextField = styled(TextField, {
   shouldForwardProp: (props) => props !== "focusColor",
@@ -103,21 +101,21 @@ const ChangePassword = ({
   goChangePassToChangePass2,
   // Redux Actions
   sendSecurityCode,
+  checkSecurityCode,
   //   Redux States
-  auth: { isAuthenticated, securityCodeLoading, securityCodeSuccess, errorSnackbar },
+  auth: { isAuthenticated, securityCodeLoading, securityCodeSuccess, securityCodeCheckSuccess, securityCodeCheckLoading, forgotPasswordEmail, errorSnackbar },
   settings: { displayMode },
 }) => {
   const iconButtonStyle = loginIconButtonStyle();
 
   const [formData, setFormData] = useState({
     email: "",
-    password: "",
-    showPassword: false,
+    securityCode: "",
   });
 
   const [emailEmptyError, setEmailEmptyError] = useState(false);
 
-  const { email } = formData;
+  const { email, securityCode } = formData;
 
   const onChange = (e) =>
     setFormData({
@@ -130,6 +128,7 @@ const ChangePassword = ({
     setEmailEmptyError(true);
     setTimeout(() => setEmailEmptyError(false), 5000);
     } else {
+        console.log(email)
     sendSecurityCode(email);
     }
   }
@@ -220,49 +219,196 @@ const ChangePassword = ({
                 </div>
               </>
             )}
-            <div>
-              <LoadingButton
-                size='small'
-                loading={securityCodeLoading}
-                loadingPosition='end'
-                loadingIndicator={
-                  <CircularProgress color='inherit' size={16} />
-                }
-                endIcon={
-                  securityCodeSuccess ? (
+            <div style={{ marginBottom: "1.5em" }}>
+              {securityCodeSuccess ? (
+                <Button
+                  size='small'
+                  loading={securityCodeLoading}
+                  disabled={securityCodeSuccess}
+                  loadingPosition='end'
+                  endIcon={
                     <CheckIcon
                       style={{
                         fontSize: 12,
                         color: "green",
                       }}
                     />
-                  ) : (
+                  }
+                  variant='outlined'
+                  onClick={submitEmailId}
+                  className={iconButtonStyle.root}
+                  style={{
+                    border: "1px solid green",
+                  }}
+                >
+                  <div
+                    style={{
+                      margin: "0em 0.5em 0em 0em",
+                      color: "green",
+                      borderColor: "green",
+                      fontSize: "11px",
+                    }}
+                  >
+                    Sent
+                  </div>
+                </Button>
+              ) : (
+                <LoadingButton
+                  size='small'
+                  loading={securityCodeLoading}
+                  loadingPosition='end'
+                  endIcon={
                     <DoubleArrowIcon
                       style={{
                         fontSize: 12,
                       }}
                     />
-                  )
-                }
-                variant='outlined'
-                onClick={submitEmailId}
-                className={iconButtonStyle.root}
-              >
-                <div
-                  style={{
-                    margin: "0em 0.5em 0em 0em",
-                    color: "green",
-                    borderColor: "green",
-                    fontSize: "11px",
-                  }}
+                  }
+                  variant='outlined'
+                  onClick={submitEmailId}
+                  className={iconButtonStyle.root}
                 >
-                  {securityCodeSuccess && "Sent"}
-                  {!securityCodeSuccess && "Send"}
-                </div>
-              </LoadingButton>
+                  <div
+                    style={{
+                      margin: "0em 0.5em 0em 0em",
+                      color: "green",
+                      borderColor: "green",
+                      fontSize: "11px",
+                    }}
+                  >
+                    Send
+                  </div>
+                </LoadingButton>
+              )}
             </div>
+            {securityCodeSuccess && (
+              <>
+                {!displayMode ? (
+                  <>
+                    <div style={{ marginBottom: "1.3em" }}>
+                      <CssTextFieldDark
+                        error={errorSnackbar || emailEmptyError}
+                        label='Security Code'
+                        placeholder='Security Code'
+                        size='small'
+                        focusColor='#1686f0'
+                        InputLabelProps={{
+                          style: textFieldInputLabelStyleDark,
+                        }}
+                        inputProps={{
+                          style: textFieldStyle,
+                        }}
+                        FormHelperTextProps={{
+                          style: {
+                            margin: 0,
+                            padding: "0 0 0 5px",
+                            fontSize: 10,
+                          },
+                        }}
+                        name='securityCode'
+                        value={securityCode}
+                        onChange={onChange}
+                      />
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div style={{ marginBottom: "1.3em" }}>
+                      <CssTextField
+                        error={errorSnackbar || emailEmptyError}
+                        label='Security Code'
+                        placeholder='Security Code'
+                        size='small'
+                        focusColor='#1686f0'
+                        InputLabelProps={{
+                          style: textFieldInputLabelStyle,
+                        }}
+                        inputProps={{
+                          style: textFieldStyle,
+                        }}
+                        FormHelperTextProps={{
+                          style: {
+                            margin: 0,
+                            padding: "0 0 0 5px",
+                            fontSize: 10,
+                          },
+                        }}
+                        name='securityCode'
+                        value={securityCode}
+                        onChange={onChange}
+                      />
+                    </div>
+                  </>
+                )}
+                <div>
+                  {securityCodeCheckSuccess ? (
+                    <Button
+                      size='small'
+                      loading={securityCodeCheckLoading}
+                      disabled={securityCodeCheckSuccess}
+                      loadingPosition='end'
+                      endIcon={
+                        <CheckIcon
+                          style={{
+                            fontSize: 12,
+                            color: "green",
+                          }}
+                        />
+                      }
+                      variant='outlined'
+                      onClick={() => checkSecurityCode(securityCode, email)}
+                      className={iconButtonStyle.root}
+                      style={{
+                        border: "1px solid green",
+                      }}
+                    >
+                      <div
+                        style={{
+                          margin: "0em 0.5em 0em 0em",
+                          color: "green",
+                          borderColor: "green",
+                          fontSize: "11px",
+                        }}
+                      >
+                        Checked
+                      </div>
+                    </Button>
+                  ) : (
+                    <LoadingButton
+                      size='small'
+                      loading={securityCodeCheckLoading}
+                      loadingPosition='end'
+                      endIcon={
+                        <DoubleArrowIcon
+                          style={{
+                            fontSize: 12,
+                          }}
+                        />
+                      }
+                      variant='outlined'
+                      onClick={() => checkSecurityCode(securityCode, email)}
+                      className={iconButtonStyle.root}
+                    >
+                      <div
+                        style={{
+                          margin: "0em 0.5em 0em 0em",
+                          color: "green",
+                          borderColor: "green",
+                          fontSize: "11px",
+                        }}
+                      >
+                        Check
+                      </div>
+                    </LoadingButton>
+                  )}
+                </div>
+              </>
+            )}
           </div>
-          <div className='flex_evenly' style={{ marginTop: "3em" }}>
+          <div
+            className='flex_evenly'
+            style={{ marginTop: "2em", marginBottom: "2em" }}
+          >
             <div>
               <div>
                 <Button
@@ -295,7 +441,7 @@ const ChangePassword = ({
             <div>
               <Button
                 size='small'
-                loadingPosition='end'
+                disabled={!securityCodeCheckSuccess}
                 endIcon={
                   <ArrowForwardIosIcon
                     style={{
@@ -310,7 +456,6 @@ const ChangePassword = ({
                 <div
                   style={{
                     margin: "0em 0.5em 0em 0em",
-                    color: "green",
                     borderColor: "green",
                     fontSize: "11px",
                   }}
@@ -333,6 +478,7 @@ ChangePassword.propTypes = {
   auth: PropTypes.object.isRequired,
   settings: PropTypes.object.isRequired,
   sendSecurityCode: PropTypes.func.isRequired,
+  checkSecurityCode: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -342,6 +488,7 @@ const mapStateToProps = (state) => ({
 
 const mapStateToActions = {
   sendSecurityCode,
+  checkSecurityCode,
 };
 
 export default connect(mapStateToProps, mapStateToActions)(ChangePassword);

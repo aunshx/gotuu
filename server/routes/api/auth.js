@@ -168,7 +168,7 @@ router.get("/get-data", auth, async (req, res) => {
 // @access   Public
 router.post(
   "/send-security-code",
-  check("email", "Please include a valid email").isEmail().notEmpty(),
+  check("email", "Please include a valid email").isEmail(),
   async (req, res) => {
 
     const errors = validationResult(req);
@@ -196,6 +196,48 @@ router.post(
         });
 
       }
+
+    } catch (err) {
+      console.log(err.message);
+      res.status(500).send("Server error");
+    }
+  }
+);
+
+// @route    POST api/users
+// @desc     Validate security code
+// @access   Public
+router.post(
+  "/check-security-code",
+  check("securityCode", "Security code should be 6 digits").isLength({ min: 6 }),
+  async (req, res) => {
+
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).send({ errors: errors.array() });
+    }
+
+    const { securityCode, email } = req.body;
+    let date = new Date()
+
+    try {
+
+        let ans = await Security.findOne({
+          $and: [{ securityCode: securityCode }, { email: email }, {createdAt: { $gte: date.getTime() - (1000 * 60 * 10) }}],
+        }).select({ _id: 1 }).limit(1)
+
+          console.log(ans)
+
+        if(ans){
+          await ans.deleteOne({ _id: ans._id })
+          return res.status(200).send({
+            msg: "Validation Success",
+          });
+        } else {
+          return res
+            .status(400)
+            .send({ errors: [{ msg: "Invalid Security Code" }] });
+        }
 
     } catch (err) {
       console.log(err.message);

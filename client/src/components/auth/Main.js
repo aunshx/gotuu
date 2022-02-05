@@ -4,7 +4,7 @@ import ChangePassword from './ChangePassword';
 import Login from './Login';
 import ChangePassword2 from './ChangePassword2';
 import store from '../../store';
-import { DARK_MODE, LIGHT_MODE } from '../../redux/actions/types';
+import { DARK_MODE, LIGHT_MODE, SECURITY_CODE_CHECK_LOADING_COMPLETE, SECURITY_CODE_LOADING_COMPLETE } from '../../redux/actions/types';
 
 const Main = (props) => {
     const [count, setCount] = useState(0)
@@ -35,6 +35,12 @@ const Main = (props) => {
 
     const goChangePassToLogin = () => {
         setCount(0)
+        store.dispatch({
+          type: SECURITY_CODE_CHECK_LOADING_COMPLETE,
+        });
+        store.dispatch({
+          type: SECURITY_CODE_LOADING_COMPLETE,
+        });
     }
 
     const goChangePassToChangePass2 = () => {
