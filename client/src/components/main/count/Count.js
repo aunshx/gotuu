@@ -52,7 +52,7 @@ const Count = ({
   const stopCount = (currentEventId, time) => {
     if (time < 60000) {
       let value = {
-        message: "Cannot stop before 1 min is complete",
+        message: "Cannot stop before 1 min is over",
         type: "info",
       };
       store.dispatch({
