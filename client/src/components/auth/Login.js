@@ -153,8 +153,7 @@ const Login = ({
     <>
       <Navbar />
       <div className='login flex_middle'>
-        <div className='login-back'>
-        </div>
+        <div className='login-back'></div>
         <div className='card'>
           <img src={displayMode ? logo : logoDark} alt='John' />
           <div className='title ft-bold'>Login</div>
@@ -333,7 +332,7 @@ const Login = ({
                       }}
                     >
                       <div
-                        onClick={showChange}
+                        onClick={goLoginToChangePass}
                         className='forgot_password_login_main'
                       >
                         <i> Forgot Password?</i>
