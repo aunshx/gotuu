@@ -138,7 +138,6 @@ const ChangePassword = ({
       <Navbar />
       <div className='login flex_middle'>
         <div className='login-back'>
-          <img src={loginBack} alt='login background' />
         </div>
         <div className='card '>
           <div>
