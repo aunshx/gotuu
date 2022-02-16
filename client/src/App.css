@@ -2463,7 +2463,7 @@ margin: 0 2em;
 .about_sidebar .contents-fixed {
   position: fixed;
   top: 8vh;
-  left: 20%;
+  left: 3.1%;
   width: 120px;
   border: 1px solid var(--grey-color);
   border-radius: 10px;
