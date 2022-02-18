@@ -8,7 +8,7 @@ const config = require("config");
 const { check, validationResult } = require("express-validator")
 
 // const {sendEmail} = require('../../middleware/sendEmail')
-const { sendEmail } = require("../../middleware/forgotPasswordResetEmail");
+// const { sendEmail } = require("../../middleware/forgotPasswordResetEmail");
 const {
   sendInitialConfirmationEmail,
 } = require("../../middleware/initialConfirmationEmail");
@@ -240,7 +240,7 @@ router.post(
           securityCode,
         });
 
-        await sendEmail(email, securityCode);
+        // await sendEmail(email, securityCode);
 
         return res.status(200).send({
           msg: "Security code sent to registered email ID",

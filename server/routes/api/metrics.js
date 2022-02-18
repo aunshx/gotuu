@@ -734,7 +734,19 @@ router.get("/live-streak", auth, async (req, res) => {
       {
         returnOriginal: false,
       }
-    );
+    )
+
+    if(!ans){
+       let ans3 = await LiveCount.findOneAndUpdate(
+      {
+        userId: req.user.id
+      },
+      { count: 0 },
+      {
+        returnOriginal: false,
+      }
+    )
+    }
 
     let ans2 = await LiveCount.find(
         { userId: req.user.id }
