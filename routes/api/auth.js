@@ -91,7 +91,16 @@ router.post(
 router.post(
   "/register",
   check("name", "Name is required").notEmpty(),
-  check("email", "Please include a valid email").isEmail(),
+  check("securityQuestionOne", "Security question is required").notEmpty(),
+  check("securityQuestionTwo", "Security question is required").notEmpty(),
+  check("securityQuestionThree", "Security question is required").notEmpty(),
+  check("securityQuestionOneAnswer", "Security question answer is required").notEmpty(),
+  check("securityQuestionTwoAnswer", "Security question answer is required").notEmpty(),
+  check("securityQuestionThreeAnswer", "Security question answer is required").notEmpty(),
+  check(
+    "email",
+    "Please include a valid email"
+  ).isEmail(),
   check(
     "password",
     "Please enter a password with 6 or more characters"
@@ -103,7 +112,17 @@ router.post(
       return res.status(400).send({ errors: errors.array() });
     }
 
-    const { name, email, password } = req.body;
+    const {
+      name,
+      email,
+      password,
+      securityQuestionOne,
+      securityQuestionTwo,
+      securityQuestionThree,
+      securityQuestionOneAnswer,
+      securityQuestionTwoAnswer,
+      securityQuestionThreeAnswer,
+    } = req.body;
 
     try {
       let user = await User.findOne({ email });
@@ -118,29 +137,31 @@ router.post(
         name,
         email,
         password,
+        securityQuestionOne,
+        securityQuestionTwo,
+        securityQuestionThree,
+        securityQuestionOneAnswer,
+        securityQuestionTwoAnswer,
+        securityQuestionThreeAnswer,
       });
 
       const salt = await bcrypt.genSalt(10);
 
       user.password = await bcrypt.hash(password, salt);
+      user.securityQuestionOneAnswer = await bcrypt.hash(
+        securityQuestionOneAnswer,
+        salt
+      );
+      user.securityQuestionTwoAnswer = await bcrypt.hash(
+        securityQuestionTwoAnswer,
+        salt
+      );
+      user.securityQuestionThreeAnswer = await bcrypt.hash(
+        securityQuestionThreeAnswer,
+        salt
+      );
 
       await user.save();
-
-      const verifySalt = await bcrypt.genSalt(12)
-
-      let verificationToken = await bcrypt.hash(user.id, verifySalt);
-
-      let verify = new Security({
-        email,
-        verificationToken
-      })
-
-      await verify.save()
-
-      let verifyLink =
-        `http://localhost:3000/auth/register/verify/${verificationToken}`
-
-        await sendInitialConfirmationEmail(email, name, verifyLink);
 
       // Return jsonwebtoken
       const payload = {

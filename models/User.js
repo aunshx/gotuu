@@ -18,6 +18,30 @@ const UserSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  securityQuestionOne: {
+    type: String,
+    required: true
+  },
+  securityQuestionOneAnswer: {
+    type: String,
+    required: true
+  },
+  securityQuestionTwo: {
+    type: String,
+    required: true
+  },
+  securityQuestionTwoAnswer: {
+    type: String,
+    required: true
+  },
+  securityQuestionThree: {
+    type: String,
+    required: true
+  },
+  securityQuestionThreeAnswer: {
+    type: String,
+    required: true
+  }
 },
   {
     timestamps: {

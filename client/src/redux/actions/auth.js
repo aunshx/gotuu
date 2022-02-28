@@ -424,30 +424,30 @@ export const sendSecurityCode = (email) => async (dispatch) => {
 export const loadUser = () => async (dispatch) => {
   if (localStorage.token) {
     setAuthToken(localStorage.token);
-  }
-  try {
-    const res = await api.get("/auth/get-data");
+     try {
+       const res = await api.get("/auth/get-data");
 
-    dispatch({
-      type: USER_LOADED,
-      payload: res.data,
-    });
+       dispatch({
+         type: USER_LOADED,
+         payload: res.data,
+       });
 
-    let date = new Date()
+       let date = new Date();
 
-    dispatch(getTimelineDatesCaptured());
-    dispatch(getTimelineEvent(moment(date).toISOString()));
-    dispatch(getAvgDurationOfTuusPerDay());
-    dispatch(getNumberOfTuusPerDay());
-    dispatch(getAvgDurationOfTuus());
-    dispatch(getTotalNumberOfTuus());
-    dispatch(getLiveStreak());
-    dispatch(getSoundStatus());
-    dispatch(getReminderStatus());
-  } catch (err) {
-    dispatch({
-      type: AUTH_ERROR,
-    });
+       dispatch(getTimelineDatesCaptured());
+       dispatch(getTimelineEvent(moment(date).toISOString()));
+       dispatch(getAvgDurationOfTuusPerDay());
+       dispatch(getNumberOfTuusPerDay());
+       dispatch(getAvgDurationOfTuus());
+       dispatch(getTotalNumberOfTuus());
+       dispatch(getLiveStreak());
+       dispatch(getSoundStatus());
+       dispatch(getReminderStatus());
+     } catch (err) {
+       dispatch({
+         type: AUTH_ERROR,
+       });
+     }
   }
 };
 

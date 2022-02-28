@@ -6,7 +6,7 @@ import { loadUser } from "./redux/actions/auth";
 import { DARK_MODE, LIGHT_MODE, LOGOUT } from "./redux/actions/types";
 
 import Home from "./components/Home";
-import Register from "./components/auth/Register";
+import Register from "./components/auth/register/Register";
 import Main from "./components/auth/Main";
 import About from "./components/about/About";
 import NotFound from "./components/layout/NotFound";

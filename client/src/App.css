@@ -537,6 +537,14 @@ height: 90%;
   width: 90%;
 }
 
+.login .card .errors-hidden {
+  background-color: var(--count-color);
+  color: var(--light-color);
+  border-radius: 10px;
+  margin: 0em 0 1.5em 0;
+  width: 90%;
+}
+
 .login .card .sign_up_login {
   color: var(--grey-color);
   font-size: 1em;
@@ -2714,15 +2722,65 @@ margin: 0 0.5em;
     color: var(--grey-color);
     font-size: 22px;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    margin-bottom:1em;
+    margin-bottom:0em;
+}
+
+.register .register_three .card .details {
+    color: var(--grey-color);
+    font-size: 12px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    margin-bottom:0em;
 }
 
 .register .register_three .card .errors {
   background-color: var(--count-color);
   color: white;
   border-radius: 10px;
-  margin: 0em 0 1.5em 0;
+  margin: 0em 0 1em 0;
   width: 90%;
+}
+
+.register .register_three .card .errors-security {
+  background-color: var(--count-color);
+  color: white;
+  border-radius: 10px;
+  margin: 0.5em 0 0.5em 0;
+  width: 90%;
+  font-size: 0.8em;
+}
+
+.register .register_three .card .errors-hidden {
+  color: var(--login-card-background);
+  border-radius: 10px;
+  margin: 0em 0 1em 0;
+  width: 90%;
+  cursor: context-menu;
+}
+
+.register .register_three .card .errors-hidden-security {
+  color: var(--login-card-background);
+  border-radius: 10px;
+  margin: 0.5em 0 0.5em 0;
+  width: 90%;
+  font-size: 0.8em;
+  cursor: context-menu;
+}
+
+.register .register_three .card .security-question-answer {
+  animation: appearSecurity 0.4s 1 linear;
+}
+
+.register .register_three .card .security-question {
+  animation: appearSecurity 0.4s 1 linear;
+}
+
+@keyframes appearSecurity {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .register .register_three .card .sign_up_login {
