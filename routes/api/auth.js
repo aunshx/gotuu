@@ -7,11 +7,6 @@ const random = require("random");
 const config = require("config");
 const { check, validationResult } = require("express-validator")
 
-// const {sendEmail} = require('../../middleware/sendEmail')
-// const { sendEmail } = require("../../middleware/forgotPasswordResetEmail");
-const {
-  sendInitialConfirmationEmail,
-} = require("../../middleware/initialConfirmationEmail");
 
 const User = require("../../models/User");
 const Security = require("../../models/Security");
@@ -76,7 +71,7 @@ router.post(
       jwt.sign(
         payload,
         config.get("jwtSecret"),
-        { expiresIn: "5 days" },
+        { expiresIn: "1d" },
         (err, token) => {
           if (err) throw err;
           res.send({ token });
