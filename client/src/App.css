@@ -2300,7 +2300,7 @@ padding: 0  0 2em 0;
 .single_note_1 .body {
     padding: 0;
     margin: 0;
-    height: 280px;
+    min-height: 280px;
 }
 
 
@@ -2349,6 +2349,7 @@ padding: 0  0 2em 0;
     row-gap: 0;
     white-space: pre-wrap;
     width: 250px;
+    height: auto;
     border: 1px solid var(--single-note-border-color);
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     z-index: 10;
@@ -2401,7 +2402,7 @@ padding: 0  0 2em 0;
     padding: 0;
     border-bottom: 1px solid var(--single-note-timeline-color);
     margin: 0;
-    height: 230px;
+    min-height: 230px;
 }
 
 

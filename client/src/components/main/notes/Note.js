@@ -28,7 +28,7 @@ const CssTextField = styled(TextField, {
   // focused color for input with variant='outlined'
   "& .MuiOutlinedInput-root": {
     "&.Mui-focused fieldset": {
-      borderColor: "none",
+      border: "1px solid red",
       fontSize: "0.9em",
     },
   },
@@ -76,9 +76,6 @@ const Note = ({ close,
     }
     if (e.target.name === "noteBody") {
       bodyContent = e.target.value;
-      // console.log(e.target.value)/
-      // map.set("element", e.target.value)
-      // setCheckingList(e.target.value);
       sendNoteDataBody(noteId, bodyContent);
     }
   };
@@ -133,7 +130,6 @@ const Note = ({ close,
             name='noteBody'
             value={noteBody}
             onChange={(e) => onChange(noteId, e)}
-            // onKeyUp={(e) => handleSpace(e)}
             error={noteBody.length > CHARACTER_LIMIT - 1}
           />
         </div>
