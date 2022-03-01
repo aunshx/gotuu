@@ -75,6 +75,16 @@ const Register = ({
 
   const decreaseStep = () => {
     setStep(0)
+    setFormData({
+      ...formData,
+      password: "",
+      securityQuestionOne: "",
+      securityQuestionTwo: "",
+      securityQuestionThree: "",
+      securityQuestionOneAnswer: "",
+      securityQuestionTwoAnswer: "",
+      securityQuestionThreeAnswer: "",
+    });
   }
 
   const handleClickShowPassword = () => {
@@ -125,22 +135,33 @@ const Register = ({
         securityQuestionTwoAnswer,
         securityQuestionThreeAnswer
       );
+      console.log(
+        name,
+        email,
+        password,
+        securityQuestionOne,
+        securityQuestionTwo,
+        securityQuestionThree,
+        securityQuestionOneAnswer,
+        securityQuestionTwoAnswer,
+        securityQuestionThreeAnswer
+      );
     }
   };
 
   const increaseStep = () => {
-      // if (name.length === 0) {
-      //   setNameEmptyError(true);
-      //   setTimeout(() => setNameEmptyError(false), 5000);
-      // } else if (email.length === 0) {
-      //   setEmailEmptyError(true);
-      //   setTimeout(() => setEmailEmptyError(false), 5000);
-      // } else if (password.length === 0) {
-      //   setPasswordEmptyError(true);
-      //   setTimeout(() => setPasswordEmptyError(false), 5000);
-      // } else {
+      if (name.length === 0) {
+        setNameEmptyError(true);
+        setTimeout(() => setNameEmptyError(false), 5000);
+      } else if (email.length === 0) {
+        setEmailEmptyError(true);
+        setTimeout(() => setEmailEmptyError(false), 5000);
+      } else if (password.length === 0) {
+        setPasswordEmptyError(true);
+        setTimeout(() => setPasswordEmptyError(false), 5000);
+      } else {
             setStep(1);
-      // }
+      }
   };
 
   if (isAuthenticated) {

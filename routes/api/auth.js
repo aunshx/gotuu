@@ -91,21 +91,34 @@ router.post(
 router.post(
   "/register",
   check("name", "Name is required").notEmpty(),
-  check("securityQuestionOne", "Security question is required").notEmpty(),
-  check("securityQuestionTwo", "Security question is required").notEmpty(),
-  check("securityQuestionThree", "Security question is required").notEmpty(),
-  check("securityQuestionOneAnswer", "Security question answer is required").notEmpty(),
-  check("securityQuestionTwoAnswer", "Security question answer is required").notEmpty(),
-  check("securityQuestionThreeAnswer", "Security question answer is required").notEmpty(),
-  check(
-    "email",
-    "Please include a valid email"
-  ).isEmail(),
+  check("name", "Name should be 2 letters or more").isLength({ min: 2 }),
+  check("email", "Please include a valid email").isEmail(),
   check(
     "password",
     "Please enter a password with 6 or more characters"
   ).isLength({ min: 6 }),
-
+  check("securityQuestionOne", "Security question is required").notEmpty(),
+  check("securityQuestionTwo", "Security question is required").notEmpty(),
+  check("securityQuestionThree", "Security question is required").notEmpty(),
+  check(
+    "securityQuestionOneAnswer",
+    "Security question answer is required"
+  ).notEmpty(),
+  check("securityQuestionOneAnswer", "Answer minimum length is 3").isLength({
+    min: 3,
+  }),
+  check("securityQuestionTwoAnswer", "Answer minimum length is 3").notEmpty(),
+  check("securityQuestionTwoAnswer", "Answer minimum length is 3").isLength({
+    min: 3,
+  }),
+  check(
+    "securityQuestionThreeAnswer",
+    "Security question answer is required"
+  ).notEmpty(),
+  check(
+    "securityQuestionThreeAnswer",
+    "Security question answer is required"
+  ).isLength({ min: 3 }),
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {

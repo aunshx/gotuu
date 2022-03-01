@@ -389,8 +389,6 @@ const RegisterSecond = ({
             <div>
               <LoadingButton
                 size='small'
-                loading={loginLoading}
-                loadingPosition='end'
                 startIcon={
                   <ArrowBackIosIcon
                     style={{

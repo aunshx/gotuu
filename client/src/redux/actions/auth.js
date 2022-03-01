@@ -453,11 +453,29 @@ export const loadUser = () => async (dispatch) => {
 
 // Register User kk
 export const register =
-  ( name, email, password ) =>
+  ( name,
+        email,
+        password,
+        securityQuestionOne,
+        securityQuestionTwo,
+        securityQuestionThree,
+        securityQuestionOneAnswer,
+        securityQuestionTwoAnswer,
+        securityQuestionThreeAnswer
+         ) =>
   async (dispatch) => {
     const value = {}
 
-    const body = JSON.stringify({ name, email, password });
+    const body = JSON.stringify({ name,
+        email,
+        password,
+        securityQuestionOne,
+        securityQuestionTwo,
+        securityQuestionThree,
+        securityQuestionOneAnswer,
+        securityQuestionTwoAnswer,
+        securityQuestionThreeAnswer
+       });
 
     try {
 

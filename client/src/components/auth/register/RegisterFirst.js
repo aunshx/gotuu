@@ -87,7 +87,7 @@ const RegisterFirst = ({
           {passwordEmptyError && (
             <div className='errors'>Password cannot be empty</div>
           )}
-          {(passwordEmptyError || emailEmptyError) && (
+          {(emailEmptyError) && (
             <div className='errors'>Email cannot be empty</div>
           )}
           {nameEmptyError && <div className='errors'>Name cannot be empty</div>}
