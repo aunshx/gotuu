@@ -176,6 +176,12 @@ router.post(
 
       await user.save();
 
+      let ans2 = new LiveCount({
+        userId: user.id,
+      });
+
+      await ans2.save();
+
       // Return jsonwebtoken
       const payload = {
         user: {

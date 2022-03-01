@@ -746,6 +746,7 @@ router.get("/live-streak", auth, async (req, res) => {
         returnOriginal: false,
       }
     )
+
     }
 
     let ans2 = await LiveCount.find(
@@ -759,7 +760,7 @@ router.get("/live-streak", auth, async (req, res) => {
     }
 
   } catch(error) {
-    console.error(error.message);
+    console.error(error);
     res.status(400).send("Something went wrong!");
   }
 });
