@@ -27,6 +27,7 @@ const Count = ({
   timeline: {
     currentEventId
   },
+  auth: { isAuthenticated },
 
   // Redux Actions
   addDurationToEventEnd,
@@ -71,7 +72,9 @@ const Count = ({
       stopCountDown();
       setTime(0);
       scrollSmoothHandler();
-      addDurationToEventEnd(currentEventId, time);
+      if(isAuthenticated) {
+        addDurationToEventEnd(currentEventId, time);
+      }
       store.dispatch({
         type: ADD_NEW_NOTE,
         payload: "",
@@ -108,11 +111,13 @@ const Count = ({
 
 Count.propTypes = {
   timeline: PropTypes.object.isRequired,
+  auth: PropTypes.object.isRequired,
   addDurationToEventEnd: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   timeline: state.timeline,
+  auth: state.auth,
 });
 
 const mapActionsToProps = {
