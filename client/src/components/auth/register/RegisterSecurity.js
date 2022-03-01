@@ -26,16 +26,45 @@ const CssTextField = styled(TextField, {
   },
 }));
 
+const CssTextFieldDark = styled(TextField, {
+  shouldForwardProp: (props) => props !== "focusColor",
+})((p) => ({
+  // input label when focused
+  "& label.Mui-focused": {
+    color: "#44af16",
+  },
+  // focused color for input with variant='outlined'
+  "& .MuiOutlinedInput-root": {
+    "&.Mui-focused fieldset": {
+      borderColor: "white",
+      fontSize: "0.9em",
+    },
+    "& fieldset": {
+      borderColor: "white",
+    },
+    "&:hover fieldset": {
+      borderColor: "white",
+    },
+    color: "white",
+  },
+}));
+
 const textFieldInputLabelStyle = {
   fontSize: "0.9em",
   alignSelf: "center",
   justifySelf: "center",
 };
 
+const textFieldInputLabelStyleDark = {
+  fontSize: "0.9em",
+  alignSelf: "center",
+  justifySelf: "center",
+  color: "gray",
+};
+
 const textFieldStyle = {
   height: "20px",
   width: "230px",
-  fontsize: '10px'
 };
 
 const loginIconButtonStyle = makeStyles({
@@ -53,10 +82,8 @@ const loginIconButtonStyle = makeStyles({
 });
 
 const useStyles = makeStyles({
-  customTextField: {
-    "& input::placeholder": {
-      color: "grey",
-    },
+  icon: {
+    fill: "grey",
   },
 });
 
@@ -78,8 +105,8 @@ const RegisterSecond = ({
   securityQuestionThreeEmptyError,
   //   Redux States
   snackbar: { errorSnackbar },
-  //   Redux Actions
   auth: { loginLoading },
+  settings: { displayMode }
 }) => {
   const iconButtonStyle = loginIconButtonStyle();
   const classes = useStyles();
@@ -114,60 +141,148 @@ const RegisterSecond = ({
         <div style={{ marginBottom: "1em" }}>
           <div style={{ marginBottom: "2em" }}>
             <div style={{ marginBottom: "1.5em" }}>
-              <FormControl>
-                <CssTextField
-                  defaultValue={securityQuestionOne}
-                  select
-                  placeholder='Question One'
-                  name='securityQuestionOne'
-                  value={securityQuestionOne}
-                  onChange={onChange}
-                  size='small'
-                  focusColor='#1686f0'
-                  classes={{ input: classes.customTextField }}
-                  InputLabelProps={{
-                    style: textFieldInputLabelStyle,
-                  }}
-                  InputProps={{
-                    style: {
-                      fontSize: "0.8em",
-                      padding: "0 0 0.2em 0",
-                      color: "#636362",
-                    },
-                    disableUnderline: true,
-                  }}
-                  sx={{
-                    height: "20px",
-                    width: "257px",
-                  }}
-                >
-                  {securityQuestions.length > 0 &&
-                    securityQuestions.map((element, index) => (
-                      <MenuItem
-                        style={{
-                          fontSize: "0.8em",
-                          height: "20px",
-                          margin: "0.3em",
-                          color: "grey",
-                        }}
-                        disbaled={
-                          element === securityQuestionTwo ||
-                          element === securityQuestionThree
-                        }
-                        value={element}
-                        key={index}
-                      >
-                        {element}
-                      </MenuItem>
-                    ))}
-                </CssTextField>
-              </FormControl>
+              {!displayMode ? (
+                <FormControl>
+                  <CssTextFieldDark
+                    defaultValue={securityQuestionOne}
+                    select
+                    placeholder='Question One'
+                    name='securityQuestionOne'
+                    value={securityQuestionOne}
+                    onChange={onChange}
+                    size='small'
+                    focusColor='#1686f0'
+                    classes={{ input: classes.customTextField }}
+                    InputLabelProps={{
+                      style: textFieldInputLabelStyleDark,
+                    }}
+                    InputProps={{
+                      style: {
+                        fontSize: "0.8em",
+                        padding: "0 0 0.2em 0",
+                        color: "#636362",
+                      },
+                      disableUnderline: true,
+                    }}
+                    inputProps={{
+                      classes: {
+                        icon: classes.icon,
+                      },
+                    }}
+                    sx={{
+                      height: "20px",
+                      width: "257px",
+                    }}
+                  >
+                    {securityQuestions.length > 0 &&
+                      securityQuestions.map((element, index) => (
+                        <MenuItem
+                          style={{
+                            fontSize: "0.8em",
+                            height: "20px",
+                            margin: "0.3em",
+                            color: "grey",
+                          }}
+                          disbaled={
+                            element === securityQuestionTwo ||
+                            element === securityQuestionThree
+                          }
+                          value={element}
+                          key={index}
+                        >
+                          {element}
+                        </MenuItem>
+                      ))}
+                  </CssTextFieldDark>
+                </FormControl>
+              ) : (
+                <FormControl>
+                  <CssTextField
+                    defaultValue={securityQuestionOne}
+                    select
+                    placeholder='Question One'
+                    name='securityQuestionOne'
+                    value={securityQuestionOne}
+                    onChange={onChange}
+                    size='small'
+                    focusColor='#1686f0'
+                    classes={{ input: classes.customTextField }}
+                    InputLabelProps={{
+                      style: textFieldInputLabelStyle,
+                    }}
+                    InputProps={{
+                      style: {
+                        fontSize: "0.8em",
+                        padding: "0 0 0.2em 0",
+                        color: "#636362",
+                      },
+                      disableUnderline: true,
+                    }}
+                    sx={{
+                      height: "20px",
+                      width: "257px",
+                    }}
+                  >
+                    {securityQuestions.length > 0 &&
+                      securityQuestions.map((element, index) => (
+                        <MenuItem
+                          style={{
+                            fontSize: "0.8em",
+                            height: "20px",
+                            margin: "0.3em",
+                            color: "grey",
+                          }}
+                          disbaled={
+                            element === securityQuestionTwo ||
+                            element === securityQuestionThree
+                          }
+                          value={element}
+                          key={index}
+                        >
+                          {element}
+                        </MenuItem>
+                      ))}
+                  </CssTextField>
+                </FormControl>
+              )}
             </div>
             {securityQuestionOne.length !== 0 && (
-                <div
-                  style={{ marginBottom: "1.3em" }}
-                  className='security-question-answer'
-                >
+              <div
+                style={{ marginBottom: "1.3em" }}
+                className='security-question-answer'
+              >
+                {!displayMode ? (
+                  <CssTextFieldDark
+                    error={errorSnackbar || securityQuestionOneAnswerEmptyError}
+                    label='Answer One'
+                    placeholder='Answer One'
+                    size='small'
+                    focusColor='#1686f0'
+                    InputLabelProps={{
+                      style: textFieldInputLabelStyleDark,
+                    }}
+                    inputProps={{
+                      style: textFieldStyle,
+                    }}
+                    InputProps={{
+                      style: {
+                        fontSize: "0.9em",
+                        color: "#636362",
+                      },
+                    }}
+                    FormHelperTextProps={{
+                      style: {
+                        margin: 0,
+                        padding: "0 0 0 5px",
+                        fontSize: 10,
+                      },
+                    }}
+                    name='securityQuestionOneAnswer'
+                    value={securityQuestionOneAnswer}
+                    onChange={onChange}
+                    required
+                  />
+                ) : (
                   <CssTextField
                     error={errorSnackbar || securityQuestionOneAnswerEmptyError}
                     label='Answer One'
@@ -198,8 +313,9 @@ const RegisterSecond = ({
                     onChange={onChange}
                     required
                   />
-                </div>
-              )}
+                )}
+              </div>
+            )}
           </div>
           {securityQuestionOneAnswer.length !== 0 && (
             <div style={{ marginBottom: "2em" }}>
@@ -207,88 +323,179 @@ const RegisterSecond = ({
                 style={{ marginBottom: "1.5em" }}
                 className='security-question'
               >
-                <FormControl>
-                  <CssTextField
-                    select
-                    placeholder='Question One'
-                    name='securityQuestionTwo'
-                    value={securityQuestionTwo}
-                    onChange={onChange}
-                    size='small'
-                    focusColor='#1686f0'
-                    InputLabelProps={{
-                      style: textFieldInputLabelStyle,
-                    }}
-                    InputProps={{
-                      style: {
-                        fontSize: "0.8em",
-                        padding: "0 0 0.2em 0",
-                        color: "#636362",
-                      },
-                      disableUnderline: true,
-                    }}
-                    sx={{
-                      height: "20px",
-                      width: "257px",
-                    }}
-                  >
-                    {securityQuestions.length > 0 &&
-                      securityQuestions.map((element, index) => (
-                        <MenuItem
-                          style={{
-                            fontSize: "0.8em",
-                            height: "20px",
-                            margin: "0.3em",
-                            color: "grey",
-                          }}
-                          value={element}
-                          key={index}
-                          disabled={
-                            element === securityQuestionOne ||
-                            element === securityQuestionThree
-                          }
-                        >
-                          {element}
-                        </MenuItem>
-                      ))}
-                  </CssTextField>
-                </FormControl>
+                {!displayMode ? (
+                  <FormControl>
+                    <CssTextFieldDark
+                      select
+                      placeholder='Question One'
+                      name='securityQuestionTwo'
+                      value={securityQuestionTwo}
+                      onChange={onChange}
+                      size='small'
+                      focusColor='#1686f0'
+                      InputLabelProps={{
+                        style: textFieldInputLabelStyleDark,
+                      }}
+                      InputProps={{
+                        style: {
+                          fontSize: "0.8em",
+                          padding: "0 0 0.2em 0",
+                          color: "#636362",
+                        },
+                        disableUnderline: true,
+                      }}
+                      inputProps={{
+                        classes: {
+                          icon: classes.icon,
+                        },
+                      }}
+                      sx={{
+                        height: "20px",
+                        width: "257px",
+                      }}
+                    >
+                      {securityQuestions.length > 0 &&
+                        securityQuestions.map((element, index) => (
+                          <MenuItem
+                            style={{
+                              fontSize: "0.8em",
+                              height: "20px",
+                              margin: "0.3em",
+                              color: "grey",
+                            }}
+                            value={element}
+                            key={index}
+                            disabled={
+                              element === securityQuestionOne ||
+                              element === securityQuestionThree
+                            }
+                          >
+                            {element}
+                          </MenuItem>
+                        ))}
+                    </CssTextFieldDark>
+                  </FormControl>
+                ) : (
+                  <FormControl>
+                    <CssTextField
+                      select
+                      placeholder='Question One'
+                      name='securityQuestionTwo'
+                      value={securityQuestionTwo}
+                      onChange={onChange}
+                      size='small'
+                      focusColor='#1686f0'
+                      InputLabelProps={{
+                        style: textFieldInputLabelStyle,
+                      }}
+                      InputProps={{
+                        style: {
+                          fontSize: "0.8em",
+                          padding: "0 0 0.2em 0",
+                          color: "#636362",
+                        },
+                        disableUnderline: true,
+                      }}
+                      sx={{
+                        height: "20px",
+                        width: "257px",
+                      }}
+                    >
+                      {securityQuestions.length > 0 &&
+                        securityQuestions.map((element, index) => (
+                          <MenuItem
+                            style={{
+                              fontSize: "0.8em",
+                              height: "20px",
+                              margin: "0.3em",
+                              color: "grey",
+                            }}
+                            value={element}
+                            key={index}
+                            disabled={
+                              element === securityQuestionOne ||
+                              element === securityQuestionThree
+                            }
+                          >
+                            {element}
+                          </MenuItem>
+                        ))}
+                    </CssTextField>
+                  </FormControl>
+                )}
               </div>
-              {(securityQuestionTwo.length !== 0) && (
+              {securityQuestionTwo.length !== 0 && (
                 <div
                   style={{ marginBottom: "1.3em" }}
                   className='security-question-answer'
                 >
-                  <CssTextField
-                    error={errorSnackbar || securityQuestionOneAnswerEmptyError}
-                    label='Answer Two'
-                    placeholder='Answer Two'
-                    size='small'
-                    focusColor='#1686f0'
-                    InputLabelProps={{
-                      style: textFieldInputLabelStyle,
-                    }}
-                    inputProps={{
-                      style: textFieldStyle,
-                    }}
-                    FormHelperTextProps={{
-                      style: {
-                        margin: 0,
-                        padding: "0 0 0 5px",
-                        fontSize: 10,
-                      },
-                    }}
-                    InputProps={{
-                      style: {
-                        fontSize: "0.9em",
-                        color: "#636362",
-                      },
-                    }}
-                    name='securityQuestionTwoAnswer'
-                    value={securityQuestionTwoAnswer}
-                    onChange={onChange}
-                    required
-                  />
+                  {!displayMode ? (
+                    <CssTextFieldDark
+                      error={
+                        errorSnackbar || securityQuestionOneAnswerEmptyError
+                      }
+                      label='Answer Two'
+                      placeholder='Answer Two'
+                      size='small'
+                      focusColor='#1686f0'
+                      InputLabelProps={{
+                        style: textFieldInputLabelStyleDark,
+                      }}
+                      inputProps={{
+                        style: textFieldStyle,
+                      }}
+                      FormHelperTextProps={{
+                        style: {
+                          margin: 0,
+                          padding: "0 0 0 5px",
+                          fontSize: 10,
+                        },
+                      }}
+                      InputProps={{
+                        style: {
+                          fontSize: "0.9em",
+                          color: "#636362",
+                        },
+                      }}
+                      name='securityQuestionTwoAnswer'
+                      value={securityQuestionTwoAnswer}
+                      onChange={onChange}
+                      required
+                    />
+                  ) : (
+                    <CssTextField
+                      error={
+                        errorSnackbar || securityQuestionOneAnswerEmptyError
+                      }
+                      label='Answer Two'
+                      placeholder='Answer Two'
+                      size='small'
+                      focusColor='#1686f0'
+                      InputLabelProps={{
+                        style: textFieldInputLabelStyle,
+                      }}
+                      inputProps={{
+                        style: textFieldStyle,
+                      }}
+                      FormHelperTextProps={{
+                        style: {
+                          margin: 0,
+                          padding: "0 0 0 5px",
+                          fontSize: 10,
+                        },
+                      }}
+                      InputProps={{
+                        style: {
+                          fontSize: "0.9em",
+                          color: "#636362",
+                        },
+                      }}
+                      name='securityQuestionTwoAnswer'
+                      value={securityQuestionTwoAnswer}
+                      onChange={onChange}
+                      required
+                    />
+                  )}
                 </div>
               )}
             </div>
@@ -299,88 +506,179 @@ const RegisterSecond = ({
                 style={{ marginBottom: "1.5em" }}
                 className='security-question'
               >
-                <FormControl>
-                  <CssTextField
-                    select
-                    placeholder='Question Three'
-                    name='securityQuestionThree'
-                    value={securityQuestionThree}
-                    onChange={onChange}
-                    size='small'
-                    focusColor='#1686f0'
-                    InputLabelProps={{
-                      style: textFieldInputLabelStyle,
-                    }}
-                    InputProps={{
-                      style: {
-                        fontSize: "0.8em",
-                        padding: "0 0 0.2em 0",
-                        color: "#636362",
-                      },
-                      disableUnderline: true,
-                    }}
-                    sx={{
-                      height: "20px",
-                      width: "257px",
-                    }}
-                  >
-                    {securityQuestions.length > 0 &&
-                      securityQuestions.map((element, index) => (
-                        <MenuItem
-                          style={{
-                            fontSize: "0.8em",
-                            height: "20px",
-                            margin: "0.3em",
-                            color: "grey",
-                          }}
-                          value={element}
-                          key={index}
-                          disabled={
-                            element === securityQuestionOne ||
-                            element === securityQuestionTwo
-                          }
-                        >
-                          {element}
-                        </MenuItem>
-                      ))}
-                  </CssTextField>
-                </FormControl>
+                {!displayMode ? (
+                  <FormControl>
+                    <CssTextFieldDark
+                      select
+                      placeholder='Question Three'
+                      name='securityQuestionThree'
+                      value={securityQuestionThree}
+                      onChange={onChange}
+                      size='small'
+                      focusColor='#1686f0'
+                      InputLabelProps={{
+                        style: textFieldInputLabelStyleDark,
+                      }}
+                      InputProps={{
+                        style: {
+                          fontSize: "0.8em",
+                          padding: "0 0 0.2em 0",
+                          color: "#636362",
+                        },
+                        disableUnderline: true,
+                      }}
+                      inputProps={{
+                        classes: {
+                          icon: classes.icon,
+                        },
+                      }}
+                      sx={{
+                        height: "20px",
+                        width: "257px",
+                      }}
+                    >
+                      {securityQuestions.length > 0 &&
+                        securityQuestions.map((element, index) => (
+                          <MenuItem
+                            style={{
+                              fontSize: "0.8em",
+                              height: "20px",
+                              margin: "0.3em",
+                              color: "grey",
+                            }}
+                            value={element}
+                            key={index}
+                            disabled={
+                              element === securityQuestionOne ||
+                              element === securityQuestionTwo
+                            }
+                          >
+                            {element}
+                          </MenuItem>
+                        ))}
+                    </CssTextFieldDark>
+                  </FormControl>
+                ) : (
+                  <FormControl>
+                    <CssTextField
+                      select
+                      placeholder='Question Three'
+                      name='securityQuestionThree'
+                      value={securityQuestionThree}
+                      onChange={onChange}
+                      size='small'
+                      focusColor='#1686f0'
+                      InputLabelProps={{
+                        style: textFieldInputLabelStyle,
+                      }}
+                      InputProps={{
+                        style: {
+                          fontSize: "0.8em",
+                          padding: "0 0 0.2em 0",
+                          color: "#636362",
+                        },
+                        disableUnderline: true,
+                      }}
+                      sx={{
+                        height: "20px",
+                        width: "257px",
+                      }}
+                    >
+                      {securityQuestions.length > 0 &&
+                        securityQuestions.map((element, index) => (
+                          <MenuItem
+                            style={{
+                              fontSize: "0.8em",
+                              height: "20px",
+                              margin: "0.3em",
+                              color: "grey",
+                            }}
+                            value={element}
+                            key={index}
+                            disabled={
+                              element === securityQuestionOne ||
+                              element === securityQuestionTwo
+                            }
+                          >
+                            {element}
+                          </MenuItem>
+                        ))}
+                    </CssTextField>
+                  </FormControl>
+                )}
               </div>
               {securityQuestionThree.length !== 0 && (
                 <div
                   style={{ marginBottom: "1.3em" }}
                   className='security-question-answer'
                 >
-                  <CssTextField
-                    error={errorSnackbar || securityQuestionOneAnswerEmptyError}
-                    label='Answer Three'
-                    placeholder='Answer Three'
-                    size='small'
-                    focusColor='#1686f0'
-                    InputLabelProps={{
-                      style: textFieldInputLabelStyle,
-                    }}
-                    inputProps={{
-                      style: textFieldStyle,
-                    }}
-                    FormHelperTextProps={{
-                      style: {
-                        margin: 0,
-                        padding: "0 0 0 5px",
-                        fontSize: 10,
-                      },
-                    }}
-                    InputProps={{
-                      style: {
-                        fontSize: "0.9em",
-                        color: "#636362",
-                      },
-                    }}
-                    name='securityQuestionThreeAnswer'
-                    value={securityQuestionThreeAnswer}
-                    onChange={onChange}
-                    required
-                  />
+                  {!displayMode ? (
+                    <CssTextFieldDark
+                      error={
+                        errorSnackbar || securityQuestionOneAnswerEmptyError
+                      }
+                      label='Answer Three'
+                      placeholder='Answer Three'
+                      size='small'
+                      focusColor='#1686f0'
+                      InputLabelProps={{
+                        style: textFieldInputLabelStyleDark,
+                      }}
+                      inputProps={{
+                        style: textFieldStyle,
+                      }}
+                      FormHelperTextProps={{
+                        style: {
+                          margin: 0,
+                          padding: "0 0 0 5px",
+                          fontSize: 10,
+                        },
+                      }}
+                      InputProps={{
+                        style: {
+                          fontSize: "0.9em",
+                          color: "#636362",
+                        },
+                      }}
+                      name='securityQuestionThreeAnswer'
+                      value={securityQuestionThreeAnswer}
+                      onChange={onChange}
+                      required
+                    />
+                  ) : (
+                    <CssTextField
+                      error={
+                        errorSnackbar || securityQuestionOneAnswerEmptyError
+                      }
+                      label='Answer Three'
+                      placeholder='Answer Three'
+                      size='small'
+                      focusColor='#1686f0'
+                      InputLabelProps={{
+                        style: textFieldInputLabelStyle,
+                      }}
+                      inputProps={{
+                        style: textFieldStyle,
+                      }}
+                      FormHelperTextProps={{
+                        style: {
+                          margin: 0,
+                          padding: "0 0 0 5px",
+                          fontSize: 10,
+                        },
+                      }}
+                      InputProps={{
+                        style: {
+                          fontSize: "0.9em",
+                          color: "#636362",
+                        },
+                      }}
+                      name='securityQuestionThreeAnswer'
+                      value={securityQuestionThreeAnswer}
+                      onChange={onChange}
+                      required
+                    />
+                  )}
                 </div>
               )}
             </div>
@@ -450,11 +748,13 @@ const RegisterSecond = ({
 RegisterSecond.propTypes = {
   auth: PropTypes.object.isRequired,
   snackbar: PropTypes.object.isRequired,
+  settings: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
   snackbar: state.snackbar,
+  settings: state.settings,
 });
 
 const mapStateToActions = {};

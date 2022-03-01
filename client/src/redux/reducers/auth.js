@@ -28,6 +28,9 @@ import {
 
   // Set Count Login
   SET_COUNT_LOGIN,
+
+  // Register Set Count
+  SET_COUNT_REGISTER,
 } from "../actions/types";
 
 const initialState = {
@@ -54,7 +57,10 @@ const initialState = {
   changePasswordSuccess: false,
 
   // Set Count Login 
-  count: 0
+  count: 0,
+
+  // Set Register Count
+  registerCount: 0
 };
 
 function authReducer(state = initialState, action) {
@@ -63,12 +69,19 @@ function authReducer(state = initialState, action) {
   switch (type) {
     // CHANGE PASSWORD
 
-    // Set Count Login 
+    // Set Count Register
+    case SET_COUNT_REGISTER:
+      return {
+        ...state,
+        registerCount: payload,
+      };
+
+    // Set Count Login
     case SET_COUNT_LOGIN:
       return {
         ...state,
-        count: payload
-      }
+        count: payload,
+      };
 
     // Verify Email - Step 3 - ChangePassword.js
     case CHANGE_PASSWORD_LOADING:

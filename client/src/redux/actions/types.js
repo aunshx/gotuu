@@ -13,6 +13,9 @@ export const LOGOUT = "LOGOUT";
 // Change Password Set Count Login 
 export const SET_COUNT_LOGIN = "SET_COUNT_LOGIN";
 
+// Register Set Count 
+export const SET_COUNT_REGISTER = "SET_COUNT_REGISTER";
+
 // Change Password - Verify Email 
 export const VERIFY_EMAIL = "VERIFY_EMAIL";
 export const VERIFY_EMAIL_LOADING = "VERIFY_EMAIL_LOADING";

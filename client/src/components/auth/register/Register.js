@@ -14,25 +14,27 @@ import {
 } from '../../../redux/actions/auth'
 import RegisterFirst from './RegisterFirst';
 import RegisterSecurity from './RegisterSecurity';
+import { SET_COUNT_REGISTER } from '../../../redux/actions/types';
+import store from '../../../store'
 
 
 const Register = ({
   // Redux Actions
   register,
   // Redux State
-  auth: { isAuthenticated },
+  auth: { isAuthenticated, registerCount },
 }) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
     showPassword: false,
-    securityQuestionOne: '',
-    securityQuestionTwo: '',
-    securityQuestionThree: '',
-    securityQuestionOneAnswer: '',
-    securityQuestionTwoAnswer: '',
-    securityQuestionThreeAnswer: '',
+    securityQuestionOne: "",
+    securityQuestionTwo: "",
+    securityQuestionThree: "",
+    securityQuestionOneAnswer: "",
+    securityQuestionTwoAnswer: "",
+    securityQuestionThreeAnswer: "",
   });
 
   const [showChangePassword, setShowChangePassword] = useState(false);
@@ -51,10 +53,12 @@ const Register = ({
     securityQuestionThreeAnswerEmptyError,
     setSecurityQuestionThreeAnswerEmptyError,
   ] = useState(false);
-  const [securityQuestionOneEmptyError, setSecurityQuestionOneEmptyError] = useState(false)
-  const [securityQuestionTwoEmptyError, setSecurityQuestionTwoEmptyError] = useState(false)
-  const [securityQuestionThreeEmptyError, setSecurityQuestionThreeEmptyError] = useState(false)
-  const [step, setStep] = useState(1)
+  const [securityQuestionOneEmptyError, setSecurityQuestionOneEmptyError] =
+    useState(false);
+  const [securityQuestionTwoEmptyError, setSecurityQuestionTwoEmptyError] =
+    useState(false);
+  const [securityQuestionThreeEmptyError, setSecurityQuestionThreeEmptyError] =
+    useState(false);
 
   const {
     name,
@@ -74,7 +78,10 @@ const Register = ({
   };
 
   const decreaseStep = () => {
-    setStep(0)
+    store.dispatch({
+      type: SET_COUNT_REGISTER,
+      payload: 0
+    })
     setFormData({
       ...formData,
       password: "",
@@ -85,7 +92,7 @@ const Register = ({
       securityQuestionTwoAnswer: "",
       securityQuestionThreeAnswer: "",
     });
-  }
+  };
 
   const handleClickShowPassword = () => {
     setFormData({
@@ -103,15 +110,13 @@ const Register = ({
   const onSubmit = async (e) => {
     e.preventDefault();
 
-   if (securityQuestionOneEmptyError.length === 0) {
+    if (securityQuestionOneEmptyError.length === 0) {
       setSecurityQuestionOneEmptyError(true);
       setTimeout(() => setSecurityQuestionOneEmptyError(false), 5000);
-    } 
-    else if (securityQuestionTwoEmptyError.length === 0) {
+    } else if (securityQuestionTwoEmptyError.length === 0) {
       setSecurityQuestionTwoEmptyError(true);
       setTimeout(() => setSecurityQuestionTwoEmptyError(false), 5000);
-    }
-    else if (securityQuestionThreeEmptyError.length === 0) {
+    } else if (securityQuestionThreeEmptyError.length === 0) {
       setSecurityQuestionThreeEmptyError(true);
       setTimeout(() => setSecurityQuestionThreeEmptyError(false), 5000);
     } else if (securityQuestionOneAnswer.length === 0) {
@@ -139,18 +144,21 @@ const Register = ({
   };
 
   const increaseStep = () => {
-      if (name.length === 0) {
-        setNameEmptyError(true);
-        setTimeout(() => setNameEmptyError(false), 5000);
-      } else if (email.length === 0) {
-        setEmailEmptyError(true);
-        setTimeout(() => setEmailEmptyError(false), 5000);
-      } else if (password.length === 0) {
-        setPasswordEmptyError(true);
-        setTimeout(() => setPasswordEmptyError(false), 5000);
-      } else {
-            setStep(1);
-      }
+    if (name.length === 0) {
+      setNameEmptyError(true);
+      setTimeout(() => setNameEmptyError(false), 5000);
+    } else if (email.length === 0) {
+      setEmailEmptyError(true);
+      setTimeout(() => setEmailEmptyError(false), 5000);
+    } else if (password.length === 0) {
+      setPasswordEmptyError(true);
+      setTimeout(() => setPasswordEmptyError(false), 5000);
+    } else {
+       store.dispatch({
+         type: SET_COUNT_REGISTER,
+         payload: 1,
+       });
+    }
   };
 
   if (isAuthenticated) {
@@ -176,7 +184,7 @@ const Register = ({
             <img src={logoRes} alt='register background' />
           </div>
           <div className='register_three flex_left'>
-            {step === 0 && (
+            {registerCount === 0 && (
               <RegisterFirst
                 onSubmit={onSubmit}
                 onChange={onChange}
@@ -193,7 +201,7 @@ const Register = ({
                 increaseStep={increaseStep}
               />
             )}
-            {step === 1 && (
+            {registerCount === 1 && (
               <RegisterSecurity
                 onSubmit={onSubmit}
                 onChange={onChange}
