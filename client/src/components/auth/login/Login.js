@@ -369,7 +369,7 @@ const Login = ({
                 style={{
                   borderBottom: "1px solid #b5b5b5",
                   width: "90%",
-                  padding: "1em 0 0 0",
+                  padding: "3em 0 0 0",
                 }}
               ></div>
               <div className='sign_up_login'>

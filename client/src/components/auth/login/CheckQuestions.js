@@ -15,6 +15,7 @@ import Navbar from '../../navbar/Navbar'
 import {
   checkSecurityAnswers,
 } from "../../../redux/actions/auth";
+import windowSize from "../../../utils/windowSize";
 
 const CssTextField = styled(TextField, {
   shouldForwardProp: (props) => props !== "focusColor",
@@ -113,6 +114,7 @@ const CheckQuestions = ({
   },
   settings: { displayMode },
 }) => {
+  const {width} = windowSize()
   const iconButtonStyle = loginIconButtonStyle();
   const classes = useStyles();
 
@@ -184,14 +186,17 @@ const CheckQuestions = ({
 
   return (
     <>
-      <div className='login flex_middle'>
+      <div className={width < 476 ? "login login-extra-big flex_middle" : "login flex_middle"}>
         <div className='login-back'></div>
         {displayMode ? (
           <div className='card'>
             <div className='title ft-bold' style={{ marginTop: "0.5em" }}>
               Change Password
             </div>
-            <div className='details' style={{ color: 'grey', padding: '0 1em' }}>
+            <div
+              className='details'
+              style={{ color: "grey", padding: "0 1em" }}
+            >
               Answer correctly to your security questions to proceed.
             </div>
             <div className='app'>
