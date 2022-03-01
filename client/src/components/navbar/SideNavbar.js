@@ -12,6 +12,7 @@ import { styled } from "@mui/material/styles";
 import { logout, setCountLogin } from "../../redux/actions/auth";
 import { setSoundOn, setSoundOff } from "../../redux/actions/settings";
 import NavRem from '../popup/NavRem';
+import Footer from "../layout/Footer";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -274,6 +275,9 @@ const SideNavbar = ({
             </div>
           </div>
         )}
+      </div>
+      <div style={{ marginTop: '1.5em' }}>
+        <Footer />
       </div>
     </div>
   );

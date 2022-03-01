@@ -8,7 +8,6 @@ import Faqs from "./Faqs";
 import Future from "./Future";
 import { NavLink } from "react-router-dom";
 
-
 const ProfileDetails = ({ fixedContent }) => {
 
   const [showAll, setShowAll] = useState(true);
@@ -60,78 +59,82 @@ const ProfileDetails = ({ fixedContent }) => {
   };
 
   return (
-    <div className='about_sidebar'>
-      <div className='about_sidebar_details'>
-        <div className={fixedContent ? "contents-fixed" : "contents"}>
-          <nav className='contents_div'>
-            <div className='flex_middle'>
-              <div className='title flex_middle'>Contents</div>
-            </div>
-            <div className='list'>
-              <div className=''>
-                <div className='flex_middle'>
-                  <div style={{ marginRight: "0.8em" }}>
-                    <ul>
-                      <li style={{ padding: "0.4em 0" }} onClick={shiftToAll}>
-                        <a
-                          href='#intro-about'
-                          className={showAll ? "link-active" : "link"}
+    <>
+      <div className='about_sidebar'>
+        <div className='about_sidebar_details'>
+          <div className={fixedContent ? "contents-fixed" : "contents"}>
+            <nav className='contents_div'>
+              <div className='flex_middle'>
+                <div className='title flex_middle'>Contents</div>
+              </div>
+              <div className='list'>
+                <div className=''>
+                  <div className='flex_middle'>
+                    <div style={{ marginRight: "0.8em" }}>
+                      <ul>
+                        <li style={{ padding: "0.4em 0" }} onClick={shiftToAll}>
+                          <a
+                            href='#intro-about'
+                            className={showAll ? "link-active" : "link"}
+                          >
+                            <span className='number'>1.</span>
+                            <span>Intro</span>
+                          </a>
+                        </li>
+                        <li
+                          style={{ padding: "0.4em 0" }}
+                          onClick={shiftToEventsOnly}
                         >
-                          <span className='number'>1.</span>
-                          <span>Intro</span>
-                        </a>
-                      </li>
-                      <li
-                        style={{ padding: "0.4em 0" }}
-                        onClick={shiftToEventsOnly}
-                      >
-                        <a
-                          href='#walkthrough-about'
-                          className={showEventsOnly ? "link-active" : "link"}
+                          <a
+                            href='#walkthrough-about'
+                            className={showEventsOnly ? "link-active" : "link"}
+                          >
+                            <span className='number'>2.</span>
+                            <span>Walkthrough</span>
+                          </a>
+                        </li>
+                        <li
+                          style={{ padding: "0.4em 0" }}
+                          onClick={shiftToQuestionsOnly}
                         >
-                          <span className='number'>2.</span>
-                          <span>Walkthrough</span>
-                        </a>
-                      </li>
-                      <li
-                        style={{ padding: "0.4em 0" }}
-                        onClick={shiftToQuestionsOnly}
-                      >
-                        <a
-                          href='#faqs-about'
-                          className={showQuestionsOnly ? "link-active" : "link"}
+                          <a
+                            href='#faqs-about'
+                            className={
+                              showQuestionsOnly ? "link-active" : "link"
+                            }
+                          >
+                            <span className='number'>3.</span>
+                            <span>FAQs</span>
+                          </a>
+                        </li>
+                        <li
+                          style={{ padding: "0.4em 0" }}
+                          onClick={shiftToDualsOnly}
                         >
-                          <span className='number'>3.</span>
-                          <span>FAQs</span>
-                        </a>
-                      </li>
-                      <li
-                        style={{ padding: "0.4em 0" }}
-                        onClick={shiftToDualsOnly}
-                      >
-                        <a
-                          href='#future-about'
-                          className={showDualsOnly ? "link-active" : "link"}
-                        >
-                          <span className='number'>4.</span>
-                          <span>Future</span>
-                        </a>
-                      </li>
-                    </ul>
+                          <a
+                            href='#future-about'
+                            className={showDualsOnly ? "link-active" : "link"}
+                          >
+                            <span className='number'>4.</span>
+                            <span>Future</span>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </nav>
-        </div>
-        <div className='details'>
-          <Intro />
-          <HowTo />
-          <Faqs />
-          <Future />
+            </nav>
+          </div>
+          <div className='details'>
+            <Intro />
+            <HowTo />
+            <Faqs />
+            <Future />
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
