@@ -9,7 +9,7 @@ import { faBell, faBookOpen, faChartBar, faDoorOpen, faHome, faProjectDiagram, f
 import { Collapse, IconButton, Tooltip } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
-import { logout } from "../../redux/actions/auth";
+import { logout, setCountLogin } from "../../redux/actions/auth";
 import { setSoundOn, setSoundOff } from "../../redux/actions/settings";
 import NavRem from '../popup/NavRem';
 
@@ -35,26 +35,27 @@ const SideNavbar = ({
   // Redux Actions
   logout,
   setSoundOn,
-  setSoundOff
+  setSoundOff,
+  setCountLogin,
 }) => {
-  const [name, setName] = useState('')
+  const [name, setName] = useState("");
   const [expanded, setExpanded] = useState(false);
 
   useEffect(() => {
-    if(user !== null){
+    if (user !== null) {
       setName(user.name.split(" ")[0]);
     } else {
-      setName('')
+      setName("");
     }
-  },[])
+  }, []);
 
   const soundOn = () => {
-    setSoundOn()
-  }
+    setSoundOn();
+  };
 
   const soundOff = () => {
-    setSoundOff()
-  }
+    setSoundOff();
+  };
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -256,7 +257,10 @@ const SideNavbar = ({
             </div>
             <div className='flex_middle mrg-t-b-1'>
               <Link to='/login'>
-                <div className='flex_middle navbar_option'>
+                <div
+                  className='flex_middle navbar_option'
+                  onClick={() => setCountLogin(0)}
+                >
                   <div>
                     <FontAwesomeIcon
                       icon={faSignInAlt}
@@ -280,7 +284,8 @@ SideNavbar.propTypes = {
   settings: PropTypes.object.isRequired,
   logout: PropTypes.func.isRequired,
   setSoundOn: PropTypes.func.isRequired,
-  setSoundOff: PropTypes.func.isRequired
+  setSoundOff: PropTypes.func.isRequired,
+  setCountLogin: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -291,7 +296,8 @@ const mapStateToProps = state => ({
 const mapActionsToProps = {
   setSoundOn,
   setSoundOff,
-  logout
-}
+  logout,
+  setCountLogin,
+};
 
 export default connect(mapStateToProps, mapActionsToProps)(SideNavbar);

@@ -27,6 +27,7 @@
     --all-card-background: white;
     --progress-block-border: none;
     --single-note-border-color: none;
+    --disabled-button-color: rgb(211, 211, 211);
 }
 
 [data-theme="dark"] {
@@ -40,6 +41,7 @@
   --light-color-border-element: rgb(186,186,186);
   --progress-block-border: #7ed957;
   --grey-color: rgb(197, 194, 194);
+  --disabled-button-color: rgb(44, 44, 44);
 }
 
 * {
@@ -274,7 +276,7 @@ pre {
 .forgot_password_title {
   padding: 0.5em 0.8em 1em 0.8em;
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 0.9em;
+  font-size: 0.8em;
   color: var(--dark-font-color);
 }
 
@@ -495,6 +497,11 @@ pre {
     font-family: 'PT Serif',serif;
 }
 
+.login .card  .Mui-disabled {
+  border: 1px solid var(--disabled-button-color);
+  color: var(--disabled-button-color);
+}
+
 .login .card .forgot_password_login_main {
   font-size: 0.85em;
   cursor: pointer;
@@ -543,6 +550,23 @@ height: 90%;
   border-radius: 10px;
   margin: 0em 0 1.5em 0;
   width: 90%;
+}
+
+.login .card .errors-security {
+  background-color: var(--count-color);
+  color: white;
+  border-radius: 10px;
+  margin: 0.5em 0 0.5em 0;
+  width: 90%;
+  font-size: 0.8em;
+}
+
+.login .card .errors-hidden {
+  color: var(--login-card-background);
+  border-radius: 10px;
+  margin: 0em 0 1em 0;
+  width: 90%;
+  cursor: context-menu;
 }
 
 .login .card .sign_up_login {

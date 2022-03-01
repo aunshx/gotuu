@@ -98,7 +98,7 @@ const Login = ({
   // Redux Actions
   login,
   // Redux State
-  auth: { isAuthenticated, loginLoading, errorSnackbar },
+  auth: { loginLoading, errorSnackbar },
   settings: { displayMode }
 }) => {
   const iconButtonStyle = loginIconButtonStyle();
@@ -145,13 +145,8 @@ const Login = ({
     }
   };
 
-  if (isAuthenticated) {
-    return <Redirect to='/' />;
-  }
-
   return (
     <>
-      <Navbar />
       <div className='login flex_middle'>
         <div className='login-back'></div>
         <div className='card'>

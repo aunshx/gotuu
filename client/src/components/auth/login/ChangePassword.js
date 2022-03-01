@@ -1,21 +1,23 @@
-import React, { Fragment, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { login } from "../../../redux/actions/auth";
+import { changePassword, login } from "../../../redux/actions/auth";
 
 import LoadingButton from "@mui/lab/LoadingButton";
-import IconButton from "@mui/material/IconButton";
-import InputAdornment from "@mui/material/InputAdornment";
+import {IconButton, InputAdornment, TextField, Button, CircularProgress} from "@mui/material"
+import DoubleArrowIcon from "@mui/icons-material/DoubleArrow";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import LoginIcon from "@mui/icons-material/Login";
 
-import { Button, CircularProgress, TextField } from "@mui/material";
+
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import CheckIcon from "@mui/icons-material/Check";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import SaveAltIcon from "@mui/icons-material/SaveAlt";
 import { styled } from "@mui/material/styles";
 import { makeStyles } from "@mui/styles";
-import DoubleArrowIcon from "@mui/icons-material/DoubleArrow";
-import CheckIcon from "@mui/icons-material/Check";
 
 import logo from "../../../resources/images/gotuuLogo.png";
 import loginBack from "../../../resources/images/bigLogo.png";
@@ -23,7 +25,10 @@ import logoDark from "../../../resources/images/gotuuLogoLogin.png";
 import Alerts from "../../layout/Alerts";
 import Navbar from "../../navbar/Navbar";
 
-import { sendSecurityCode, checkSecurityCode } from "../../../redux/actions/auth";
+import {
+  changePasswordUser,
+  resetChangePassword,
+} from "../../../redux/actions/auth.js";
 
 const CssTextField = styled(TextField, {
   shouldForwardProp: (props) => props !== "focusColor",
@@ -60,20 +65,19 @@ const CssTextFieldDark = styled(TextField, {
     "&:hover fieldset": {
       borderColor: "white",
     },
-    color: 'white'
   },
 }));
 
 const loginIconButtonStyle = makeStyles({
   root: {
-    color: "gray",
-    border: "1px solid green",
+    color: "#158ed4",
+    border: "1px solid #158ed4",
     height: 28,
     backgroundColor: "none",
     "&:hover": {
       backgroundColor: "transparent",
-      color: "#1686f0",
-      border: "1px solid #1686f0",
+      color: "#0dba4d",
+      border: "1px solid #0dba4d",
     },
   },
 });
@@ -91,31 +95,39 @@ const textFieldInputLabelStyleDark = {
   color: "gray",
 };
 
-const textFieldStyle = {
-  height: "20px",
-  width: "230px",
-};
-
 const ChangePassword = ({
-  goChangePassToLogin,
-  goChangePassToChangePass2,
+  goChangePass3ToChangePass2,
+  goChangePass3ToLogin,
+  setCount,
   // Redux Actions
-  sendSecurityCode,
-  checkSecurityCode,
+  resetChangePassword,
+  changePasswordUser,
   //   Redux States
-  auth: { isAuthenticated, securityCodeLoading, securityCodeSuccess, securityCodeCheckSuccess, securityCodeCheckLoading, forgotPasswordEmail, errorSnackbar },
+  auth: { emailChangePassword, changePasswordLoading, changePasswordSuccess },
   settings: { displayMode },
 }) => {
+  useEffect(() => {
+    if (changePasswordSuccess) {
+      setTimeout(() => {
+        setCount(0);
+        resetChangePassword();
+      }, 4000);
+    }
+  }, [changePasswordSuccess]);
   const iconButtonStyle = loginIconButtonStyle();
 
   const [formData, setFormData] = useState({
-    email: "",
-    securityCode: "",
+    password: "",
+    password2: "",
+    showPassword: false,
+    showPassword2: false,
   });
 
-  const [emailEmptyError, setEmailEmptyError] = useState(false);
+  const [passwordEmptyError, setPasswordEmptyError] = useState(false);
+  const [passwordEmptyError2, setPasswordEmptyError2] = useState(false);
+  const [passwordEmptyError3, setPasswordEmptyError3] = useState(false);
 
-  const { email, securityCode } = formData;
+  const { password, password2, showPassword, showPassword2 } = formData;
 
   const onChange = (e) =>
     setFormData({
@@ -123,63 +135,158 @@ const ChangePassword = ({
       [e.target.name]: e.target.value,
     });
 
-  const submitEmailId = () => {
-    if (email.length === 0) {
-    setEmailEmptyError(true);
-    setTimeout(() => setEmailEmptyError(false), 5000);
+  const handleClickShowPassword = () => {
+    setFormData({
+      ...formData,
+      showPassword: !showPassword,
+    });
+  };
+
+  const handleClickShowPassword2 = () => {
+    setFormData({
+      ...formData,
+      showPassword2: !showPassword2,
+    });
+  };
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    // redux action dispatched
+    if (password.length === 0) {
+      setPasswordEmptyError(true);
+      setTimeout(() => setPasswordEmptyError(false), 5000);
+    } else if (password2.length === 0) {
+      setPasswordEmptyError2(true);
+      setTimeout(() => setPasswordEmptyError2(false), 5000);
+    } else if (password !== password2) {
+      setPasswordEmptyError3(true);
+      setTimeout(() => setPasswordEmptyError3(false), 5000);
     } else {
-        console.log(email)
-    sendSecurityCode(email);
+      changePasswordUser(password, emailChangePassword);
     }
-  }
+  };
 
   return (
     <>
-      <Navbar />
       <div className='login flex_middle'>
-        <div className='login-back'>
-        </div>
+        <div className='login-back'></div>
         <div className='card '>
           <div>
             <img src={displayMode ? logo : logoDark} alt='John' />
             <div className='title ft-bold' style={{ margin: "3px" }}>
-              Get Security Code
+              Change Password
             </div>
             <div className='app'>
-              {emailEmptyError && (
-                <div className='errors'>Email cannot be empty</div>
+              {passwordEmptyError && (
+                <div className='errors' style={{ marginBottom: "0.3em" }}>
+                  Password cannot be empty
+                </div>
+              )}
+              {passwordEmptyError3 && (
+                <div className='errors' style={{ marginBottom: "0.3em" }}>
+                  Passwords do not match!
+                </div>
               )}
             </div>
           </div>
           <div style={{ paddingBottom: "1em" }}>
-            <div className='forgot_password_title'>
-              Enter your registered email ID to receive the security code.
-            </div>
+            <div className='forgot_password_title'>Enter new password.</div>
             {!displayMode ? (
               <>
                 <div style={{ marginBottom: "1.3em" }}>
                   <CssTextFieldDark
-                    error={errorSnackbar || emailEmptyError}
-                    label='Email ID'
-                    placeholder='Email ID'
+                    error={passwordEmptyError}
+                    label='Password'
                     size='small'
-                    focusColor='#1686f0'
+                    variant='outlined'
+                    type={showPassword ? "text" : "password"}
                     InputLabelProps={{
                       style: textFieldInputLabelStyleDark,
                     }}
                     inputProps={{
-                      style: textFieldStyle,
-                    }}
-                    FormHelperTextProps={{
                       style: {
-                        margin: 0,
-                        padding: "0 0 0 5px",
-                        fontSize: 10,
+                        height: "20px",
+                        width: "186px",
+                        color: "white",
                       },
                     }}
-                    name='email'
-                    value={email}
+                    name='password'
+                    value={password}
                     onChange={onChange}
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position='end'>
+                          <IconButton
+                            aria-label='toggle password visibility'
+                            onClick={handleClickShowPassword}
+                          >
+                            {showPassword ? (
+                              <Visibility
+                                style={{
+                                  fontSize: 18,
+                                  color: "grey",
+                                }}
+                              />
+                            ) : (
+                              <VisibilityOff
+                                style={{
+                                  fontSize: 18,
+                                  color: "grey",
+                                }}
+                              />
+                            )}
+                          </IconButton>
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
+                </div>
+                <div>
+                  <CssTextFieldDark
+                    error={passwordEmptyError2}
+                    label='Retype Password'
+                    size='small'
+                    variant='outlined'
+                    type={showPassword2 ? "text" : "password"}
+                    InputLabelProps={{
+                      style: textFieldInputLabelStyleDark,
+                    }}
+                    inputProps={{
+                      style: {
+                        height: "20px",
+                        width: "186px",
+                        color: "white",
+                      },
+                    }}
+                    name='password2'
+                    value={password2}
+                    onChange={onChange}
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position='end'>
+                          <IconButton
+                            aria-label='toggle password visibility'
+                            onClick={handleClickShowPassword2}
+                          >
+                            {showPassword2 ? (
+                              <Visibility
+                                style={{
+                                  fontSize: 18,
+                                  color: "grey",
+                                }}
+                              />
+                            ) : (
+                              <VisibilityOff
+                                style={{
+                                  fontSize: 18,
+                                  color: "grey",
+                                }}
+                              />
+                            )}
+                          </IconButton>
+                        </InputAdornment>
+                      ),
+                    }}
                   />
                 </div>
               </>
@@ -187,37 +294,101 @@ const ChangePassword = ({
               <>
                 <div style={{ marginBottom: "1.3em" }}>
                   <CssTextField
-                    error={errorSnackbar || emailEmptyError}
-                    label='Email ID'
-                    placeholder='Email ID'
+                    error={passwordEmptyError}
+                    label='Password'
                     size='small'
-                    focusColor='#1686f0'
+                    variant='outlined'
+                    type={showPassword ? "text" : "password"}
                     InputLabelProps={{
                       style: textFieldInputLabelStyle,
                     }}
                     inputProps={{
-                      style: textFieldStyle,
-                    }}
-                    FormHelperTextProps={{
                       style: {
-                        margin: 0,
-                        padding: "0 0 0 5px",
-                        fontSize: 10,
+                        height: "20px",
+                        width: "186px",
                       },
                     }}
-                    name='email'
-                    value={email}
+                    name='password'
+                    value={password}
                     onChange={onChange}
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position='end'>
+                          <IconButton
+                            aria-label='toggle password visibility'
+                            onClick={handleClickShowPassword}
+                          >
+                            {showPassword ? (
+                              <Visibility
+                                style={{
+                                  fontSize: 18,
+                                }}
+                              />
+                            ) : (
+                              <VisibilityOff
+                                style={{
+                                  fontSize: 18,
+                                }}
+                              />
+                            )}
+                          </IconButton>
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
+                </div>
+                <div>
+                  <CssTextField
+                    error={passwordEmptyError2}
+                    label='Retype Password'
+                    size='small'
+                    variant='outlined'
+                    type={showPassword2 ? "text" : "password"}
+                    InputLabelProps={{
+                      style: textFieldInputLabelStyle,
+                    }}
+                    inputProps={{
+                      style: {
+                        height: "20px",
+                        width: "186px",
+                      },
+                    }}
+                    name='password2'
+                    value={password2}
+                    onChange={onChange}
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position='end'>
+                          <IconButton
+                            aria-label='toggle password visibility'
+                            onClick={handleClickShowPassword2}
+                          >
+                            {showPassword2 ? (
+                              <Visibility
+                                style={{
+                                  fontSize: 18,
+                                }}
+                              />
+                            ) : (
+                              <VisibilityOff
+                                style={{
+                                  fontSize: 18,
+                                }}
+                              />
+                            )}
+                          </IconButton>
+                        </InputAdornment>
+                      ),
+                    }}
                   />
                 </div>
               </>
             )}
-            <div style={{ marginBottom: "1.5em" }}>
-              {securityCodeSuccess ? (
+            <div style={{ marginTop: "1.3em" }}>
+              {changePasswordSuccess ? (
                 <Button
                   size='small'
-                  loading={securityCodeLoading}
-                  disabled={securityCodeSuccess}
+                  disabled={changePasswordSuccess}
                   loadingPosition='end'
                   endIcon={
                     <CheckIcon
@@ -228,7 +399,6 @@ const ChangePassword = ({
                     />
                   }
                   variant='outlined'
-                  onClick={submitEmailId}
                   className={iconButtonStyle.root}
                   style={{
                     border: "1px solid green",
@@ -242,13 +412,13 @@ const ChangePassword = ({
                       fontSize: "11px",
                     }}
                   >
-                    Sent
+                    Changed
                   </div>
                 </Button>
               ) : (
                 <LoadingButton
                   size='small'
-                  loading={securityCodeLoading}
+                  loading={changePasswordLoading}
                   loadingPosition='end'
                   endIcon={
                     <DoubleArrowIcon
@@ -258,154 +428,22 @@ const ChangePassword = ({
                     />
                   }
                   variant='outlined'
-                  onClick={submitEmailId}
+                  onClick={onSubmit}
                   className={iconButtonStyle.root}
                 >
                   <div
                     style={{
                       margin: "0em 0.5em 0em 0em",
-                      color: "green",
-                      borderColor: "green",
                       fontSize: "11px",
                     }}
                   >
-                    Send
+                    Change
                   </div>
                 </LoadingButton>
               )}
             </div>
-            {securityCodeSuccess && (
-              <>
-                {!displayMode ? (
-                  <>
-                    <div style={{ marginBottom: "1.3em" }}>
-                      <CssTextFieldDark
-                        error={errorSnackbar || emailEmptyError}
-                        label='Security Code'
-                        placeholder='Security Code'
-                        size='small'
-                        focusColor='#1686f0'
-                        InputLabelProps={{
-                          style: textFieldInputLabelStyleDark,
-                        }}
-                        inputProps={{
-                          style: textFieldStyle,
-                        }}
-                        FormHelperTextProps={{
-                          style: {
-                            margin: 0,
-                            padding: "0 0 0 5px",
-                            fontSize: 10,
-                          },
-                        }}
-                        name='securityCode'
-                        value={securityCode}
-                        onChange={onChange}
-                      />
-                    </div>
-                  </>
-                ) : (
-                  <>
-                    <div style={{ marginBottom: "1.3em" }}>
-                      <CssTextField
-                        error={errorSnackbar || emailEmptyError}
-                        label='Security Code'
-                        placeholder='Security Code'
-                        size='small'
-                        focusColor='#1686f0'
-                        InputLabelProps={{
-                          style: textFieldInputLabelStyle,
-                        }}
-                        inputProps={{
-                          style: textFieldStyle,
-                        }}
-                        FormHelperTextProps={{
-                          style: {
-                            margin: 0,
-                            padding: "0 0 0 5px",
-                            fontSize: 10,
-                          },
-                        }}
-                        name='securityCode'
-                        value={securityCode}
-                        onChange={onChange}
-                      />
-                    </div>
-                  </>
-                )}
-                <div>
-                  {securityCodeCheckSuccess ? (
-                    <Button
-                      size='small'
-                      loading={securityCodeCheckLoading}
-                      disabled={securityCodeCheckSuccess}
-                      loadingPosition='end'
-                      endIcon={
-                        <CheckIcon
-                          style={{
-                            fontSize: 12,
-                            color: "green",
-                          }}
-                        />
-                      }
-                      variant='outlined'
-                      onClick={() =>
-                        checkSecurityCode(securityCode, forgotPasswordEmail)
-                      }
-                      className={iconButtonStyle.root}
-                      style={{
-                        border: "1px solid green",
-                      }}
-                    >
-                      <div
-                        style={{
-                          margin: "0em 0.5em 0em 0em",
-                          color: "green",
-                          borderColor: "green",
-                          fontSize: "11px",
-                        }}
-                      >
-                        Checked
-                      </div>
-                    </Button>
-                  ) : (
-                    <LoadingButton
-                      size='small'
-                      loading={securityCodeCheckLoading}
-                      loadingPosition='end'
-                      endIcon={
-                        <DoubleArrowIcon
-                          style={{
-                            fontSize: 12,
-                          }}
-                        />
-                      }
-                      variant='outlined'
-                      onClick={() =>
-                        checkSecurityCode(securityCode, forgotPasswordEmail)
-                      }
-                      className={iconButtonStyle.root}
-                    >
-                      <div
-                        style={{
-                          margin: "0em 0.5em 0em 0em",
-                          color: "green",
-                          borderColor: "green",
-                          fontSize: "11px",
-                        }}
-                      >
-                        Check
-                      </div>
-                    </LoadingButton>
-                  )}
-                </div>
-              </>
-            )}
           </div>
-          <div
-            className='flex_evenly'
-            style={{ marginTop: "2em", marginBottom: "2em" }}
-          >
+          <div className='flex_evenly' style={{ margin: "1em 0" }}>
             <div>
               <div>
                 <Button
@@ -419,14 +457,12 @@ const ChangePassword = ({
                     />
                   }
                   variant='outlined'
-                  onClick={goChangePassToLogin}
+                  onClick={goChangePass3ToChangePass2}
                   className={iconButtonStyle.root}
                 >
                   <div
                     style={{
                       margin: "0em 0.5em 0em 0em",
-                      color: "green",
-                      borderColor: "green",
                       fontSize: "11px",
                     }}
                   >
@@ -438,16 +474,17 @@ const ChangePassword = ({
             <div>
               <Button
                 size='small'
-                disabled={!securityCodeCheckSuccess}
+                loadingPosition='end'
+                disabled={!changePasswordSuccess}
                 endIcon={
-                  <ArrowForwardIosIcon
+                  <LoginIcon
                     style={{
                       fontSize: 12,
                     }}
                   />
                 }
                 variant='outlined'
-                onClick={goChangePassToChangePass2}
+                onClick={goChangePass3ToLogin}
                 className={iconButtonStyle.root}
               >
                 <div
@@ -457,7 +494,7 @@ const ChangePassword = ({
                     fontSize: "11px",
                   }}
                 >
-                  Next
+                  Login
                 </div>
               </Button>
             </div>
@@ -474,8 +511,8 @@ const ChangePassword = ({
 ChangePassword.propTypes = {
   auth: PropTypes.object.isRequired,
   settings: PropTypes.object.isRequired,
-  sendSecurityCode: PropTypes.func.isRequired,
-  checkSecurityCode: PropTypes.func.isRequired,
+  changePasswordUser: PropTypes.func.isRequired,
+  resetChangePassword: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -484,8 +521,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapStateToActions = {
-  sendSecurityCode,
-  checkSecurityCode,
+  changePasswordUser,
+  resetChangePassword,
 };
 
 export default connect(mapStateToProps, mapStateToActions)(ChangePassword);

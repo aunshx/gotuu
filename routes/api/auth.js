@@ -21,8 +21,7 @@ router.get("/get-data", auth, async (req, res) => {
       .select("-password")
     res.json(user);
   } catch (err) {
-    console.error(err.message);
-    res.status(500).send("Server Error");
+    res.status(500).send({ errors: [{ msg: "Bad Request" }] });
   }
 });
 
@@ -34,7 +33,6 @@ router.post(
   check("email", "Please include a valid email").isEmail(),
   check("password", "Password is required").exists(),
   async (req, res) => {
-    console.log('Hit')
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).send({ errors: errors.array() });
@@ -78,7 +76,7 @@ router.post(
         }
       );
     } catch (err) {
-      res.status(500).send({ errors: [{ msg: "Bad Request" }] });
+      res.status(400).send({ errors: [{ msg: "Bad Request" }] });
     }
   }
 );
@@ -198,7 +196,7 @@ router.post(
         }
       );
     } catch (err) {
-      res.status(500).send("Server error");
+      res.status(400).send({ errors: [{ msg: "Bad Request" }] });
     }
   }
 );
@@ -206,55 +204,40 @@ router.post(
 // @route    POST api/users
 // @desc     Authenticate User
 // @access   Public
-router.post(
-  "/register/verify/:token",
-  async (req, res) => {
+// router.post(
+//   "/register/verify/:token",
+//   async (req, res) => {
 
-    try {
-      let ans = await Security.findOne({ verificationToken: req.params.token })
+//     try {
+//       let ans = await Security.findOne({ verificationToken: req.params.token })
 
-      if(ans){
-        let user = await User.updateOne(
-          { _id: req.params.token },
-          { $set: { verified: true } }
-        );
+//       if(ans){
+//         let user = await User.updateOne(
+//           { _id: req.params.token },
+//           { $set: { verified: true } }
+//         );
 
-        await Security.deleteOne({ verificationToken: req.params.id })
+//         await Security.deleteOne({ verificationToken: req.params.id })
 
-        return res.status(200).send("Email has been verified");
-      } else {
-        return res.status(400).send({ errors: [{ msg: 'Token has expired resend email' }] });
-      }
+//         return res.status(200).send("Email has been verified");
+//       } else {
+//         return res.status(400).send({ errors: [{ msg: 'Token has expired resend email' }] });
+//       }
 
-    } catch (err) {
-      console.log(err.message);
-      res.status(500).send("Server error");
-    }
-  }
-);
-
-// @route    GET api/auth
-// @desc     Get user by token
-// @access   Private
-router.get("/get-data", auth, async (req, res) => {
-  try {
-    const user = await User.findById(req.user.id)
-      .select("-password")
-    res.json(user);
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send("Server Error");
-  }
-});
+//     } catch (err) {
+//       console.log(err.message);
+//       res.status(500).send("Server error");
+//     }
+//   }
+// );
 
 // @route    POST api/users
 // @desc     Send security code
 // @access   Public
 router.post(
-  "/send-security-code",
+  "/verify-email-change-password",
   check("email", "Please include a valid email").isEmail(),
   async (req, res) => {
-
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).send({ errors: errors.array() });
@@ -266,24 +249,90 @@ router.post(
       let user = await User.findOne({ email });
 
       if (user) {
-        const securityCode = await random.int(1000000, 9999999); 
-
-        let ans = await Security.create({
-          email,
-          securityCode,
-        });
-
-        // await sendEmail(email, securityCode);
 
         return res.status(200).send({
-          msg: "Security code sent to registered email ID",
+          securityQuestionOne: user.securityQuestionOne,
+          securityQuestionTwo: user.securityQuestionTwo,
+          securityQuestionThree: user.securityQuestionThree,
         });
-
+      } else {
+        res.status(400).send({ errors: [{ msg: "User does not exist" }] });
       }
-
     } catch (err) {
-      console.log(err.message);
-      res.status(500).send("Server error");
+      res.status(400).send({ errors: [{ msg: "Bad Request" }] });
+    }
+  }
+);
+
+// @route    POST api/users
+// @desc     Check Security Question Answers 
+// @access   Public
+router.post(
+  "/check-security-answers-change-password",
+  check("securityQuestionOne", "Security question is required").notEmpty(),
+  check("securityQuestionTwo", "Security question is required").notEmpty(),
+  check("securityQuestionThree", "Security question is required").notEmpty(),
+  check(
+    "securityQuestionOneAnswer",
+    "Security question answer is required"
+  ).notEmpty(),
+  check("securityQuestionTwoAnswer", "Answer minimum length is 3").notEmpty(),
+  check(
+    "securityQuestionThreeAnswer",
+    "Security question answer is required"
+  ).notEmpty(),
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).send({ errors: errors.array() });
+    }
+
+    const {
+      securityQuestionOneAnswer,
+      securityQuestionTwoAnswer,
+      securityQuestionThreeAnswer,
+      securityQuestionOne,
+      securityQuestionTwo,
+      securityQuestionThree,
+      emailChangePassword,
+    } = req.body;
+
+    try {
+      let user = await User.findOne({
+        $and: [
+          { email: emailChangePassword },
+          { securityQuestionOne },
+          { securityQuestionTwo },
+          { securityQuestionThree},
+        ],
+      }).select('-password').select('-createdAt').select('-updatedAt').select('-name').select('-_id').select('-date');
+
+      console.log(user)
+
+      const isMatchOne = await bcrypt.compare(
+        securityQuestionOneAnswer,
+        user.securityQuestionOneAnswer
+      ); 
+      const isMatchTwo = await bcrypt.compare(
+        securityQuestionTwoAnswer,
+        user.securityQuestionTwoAnswer
+      ); 
+      const isMatchThree = await bcrypt.compare(
+        securityQuestionThreeAnswer,
+        user.securityQuestionThreeAnswer
+      ); 
+
+      console.log(isMatchOne, isMatchTwo, isMatchThree)
+
+      if (user && isMatchOne && isMatchTwo && isMatchThree) {
+        return res.status(200).send({
+          msg: "Safe to go ahead",
+        });
+      } else {
+        res.status(400).send({ errors: [{ msg: "Invalid Credentials" }] });
+      }
+    } catch (err) {
+      res.status(400).send({ errors: [{ msg: "Bad Request" }] });
     }
   }
 );
@@ -291,42 +340,42 @@ router.post(
 // @route    POST api/users
 // @desc     Validate security code
 // @access   Public
-router.post(
-  "/check-security-code",
-  check("securityCode", "Security code should be 6 digits").isLength({ min: 6 }),
-  async (req, res) => {
+// router.post(
+//   "/check-security-code",
+//   check("securityCode", "Security code should be 6 digits").isLength({ min: 6 }),
+//   async (req, res) => {
 
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).send({ errors: errors.array() });
-    }
+//     const errors = validationResult(req);
+//     if (!errors.isEmpty()) {
+//       return res.status(400).send({ errors: errors.array() });
+//     }
 
-    const { securityCode, email } = req.body;
-    let date = new Date()
+//     const { securityCode, email } = req.body;
+//     let date = new Date()
 
-    try {
+//     try {
 
-        let ans = await Security.findOne({
-          $and: [{ securityCode: securityCode }, { email: email }, {createdAt: { $gte: date.getTime() - (1000 * 60 * 10) }}],
-        }).select({ _id: 1 }).limit(1)
+//         let ans = await Security.findOne({
+//           $and: [{ securityCode: securityCode }, { email: email }, {createdAt: { $gte: date.getTime() - (1000 * 60 * 10) }}],
+//         }).select({ _id: 1 }).limit(1)
 
-        if(ans){
-          await ans.deleteOne({ _id: ans._id })
-          return res.status(200).send({
-            msg: "Validation Success",
-          });
-        } else {
-          return res
-            .status(400)
-            .send({ errors: [{ msg: "Invalid Security Code" }] });
-        }
+//         if(ans){
+//           await ans.deleteOne({ _id: ans._id })
+//           return res.status(200).send({
+//             msg: "Validation Success",
+//           });
+//         } else {
+//           return res
+//             .status(400)
+//             .send({ errors: [{ msg: "Invalid Security Code" }] });
+//         }
 
-    } catch (err) {
-      console.log(err.message);
-      res.status(500).send("Server error");
-    }
-  }
-);
+//     } catch (err) {
+//       console.log(err.message);
+//       res.status(500).send("Server error");
+//     }
+//   }
+// );
 
 // @route    POST api/users
 // @desc     Change password
@@ -350,8 +399,6 @@ router.post(
       let newPassword = await bcrypt.hash(password, salt);
 
       let ans = await User.updateOne({ 'email': email }, { $set: { 'password': newPassword } });
-
-      console.log(ans);
 
       if (ans) {
         return res.status(200).send({

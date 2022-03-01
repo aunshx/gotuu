@@ -35,60 +35,351 @@ import {
   LOGIN_LOADING,
   LOGIN_LOADING_COMPLETE,
 
-  // Forgot Password
-  SECURITY_CODE_LOADING,
-  SECURITY_CODE_LOADING_COMPLETE,
-  SECURITY_CODE_SUCCESS,
+  // Change Password - Verify Email
+  VERIFY_EMAIL_LOADING,
+  VERIFY_EMAIL_LOADING_COMPLETE,
+  VERIFY_EMAIL,
 
-  // Security Code Check
-  SECURITY_CODE_CHECK_LOADING,
-  SECURITY_CODE_CHECK_LOADING_COMPLETE,
-  SECURITY_CODE_CHECK_SUCCESS,
+  // Change Password - Check Security Answers
+  CHECK_SECURITY_ANSWERS_LOADING,
+  CHECK_SECURITY_ANSWERS_LOADING_COMPLETE,
+  CHECK_SECURITY_ANSWERS,
 
-  // Password Change
-  PASSWORD_CHANGE_SUCCESS,
-  PASSWORD_CHANGE_COMPLETE,
-  PASSWORD_CHANGE_LOADING,
+  // Change Password - Finale
+  CHANGE_PASSWORD_LOADING,
+  CHANGE_PASSWORD_LOADING_COMPLETE,
+  CHANGE_PASSWORD,
+
+  // Set Count Login
+  SET_COUNT_LOGIN
 } from "./types";
 
-// Reset Change Password Settings 
-export const resetChangePassword = () => async (dispatch) => {
+// Change count for login
+export const setCountLogin = (value) => async (dispatch) => {
   dispatch({
-    type: PASSWORD_CHANGE_COMPLETE
+    type: SET_COUNT_LOGIN,
+    payload: value
+  });
+};
+
+// Reset Security Answers password change values 
+export const resetSecurityAnswersCheck = () => async (dispatch) => {
+  dispatch({
+    type: CHECK_SECURITY_ANSWERS_LOADING_COMPLETE,
+  });
+  dispatch({
+    type: SNACKBAR_RESET
   })
 }
 
-// Reset Security Code Settings 
-export const resetSecurityCodePassword = () => async (dispatch) => {
+// Reset Verify Email password change values 
+export const resetVerifyEmail = () => async (dispatch) => {
   dispatch({
-    type: SECURITY_CODE_CHECK_LOADING_COMPLETE,
-  });
+    type: VERIFY_EMAIL_LOADING_COMPLETE
+  })
+  dispatch({
+    type: SNACKBAR_RESET
+  })
 }
+
+// Complete reset
+export const resetChangePassword = () => async (dispatch) => {
+  dispatch({
+    type: VERIFY_EMAIL_LOADING_COMPLETE,
+  });
+  dispatch({
+    type: CHECK_SECURITY_ANSWERS_LOADING_COMPLETE,
+  });
+  dispatch({
+    type: CHANGE_PASSWORD_LOADING_COMPLETE,
+  });
+  dispatch({
+    type: SNACKBAR_RESET,
+  });
+};
+
+
+// Verify Email for change password
+export const verifyEmail =
+  (email) => async (dispatch) => {
+    const value = {};
+
+    const body = JSON.stringify({ email });
+
+    try {
+      dispatch({
+        type: VERIFY_EMAIL_LOADING,
+      });
+
+      const res = await api.post("/auth/verify-email-change-password", body);
+
+      let pay = {
+        email,
+        details: res.data
+      }
+
+      dispatch({
+        type: VERIFY_EMAIL,
+        payload: pay
+      });
+
+      value.message = "Email Verified!";
+      value.type = "success";
+
+      dispatch({
+        type: SUCCESS_200,
+        payload: value,
+      });
+
+      setTimeout(
+        () =>
+          dispatch({
+            type: SNACKBAR_RESET,
+          }),
+        5000
+      );
+    } catch (error) {
+      if (error.response.status === 500) {
+        value.message = "Oops! Something went wrong. Please reload!";
+        value.type = "error";
+
+        dispatch({
+          type: ERROR_SNACKBAR,
+          payload: value,
+        });
+
+        dispatch({
+          type: VERIFY_EMAIL_LOADING_COMPLETE,
+        });
+
+        setTimeout(
+          () =>
+            dispatch({
+              type: SNACKBAR_RESET,
+            }),
+          5000
+        );
+      } else if (error.response.status === 400) {
+        value.message = error.response.data.errors[0].msg;
+        value.type = "error";
+
+        dispatch({
+          type: ERROR_SNACKBAR,
+          payload: value,
+        });
+
+        dispatch({
+          type: VERIFY_EMAIL_LOADING_COMPLETE,
+        });
+
+        setTimeout(
+          () =>
+            dispatch({
+              type: SNACKBAR_RESET,
+            }),
+          5000
+        );
+      } else if (error.response.status === 401) {
+        value.message = "Your session has expired. Please login again.";
+        value.type = "error";
+
+        dispatch({
+          type: ERROR_SNACKBAR,
+          payload: value,
+        });
+
+        dispatch({
+          type: VERIFY_EMAIL_LOADING_COMPLETE,
+        });
+
+        setTimeout(
+          () =>
+            dispatch({
+              type: SNACKBAR_RESET,
+            }),
+          5000
+        );
+      } else {
+        value.message = "Oops! Looks like something went wrong. Please reload!";
+        value.type = "error";
+
+        dispatch({
+          type: ERROR_SNACKBAR,
+          payload: value,
+        });
+
+        dispatch({
+          type: VERIFY_EMAIL_LOADING_COMPLETE,
+        });
+
+        setTimeout(
+          () =>
+            dispatch({
+              type: SNACKBAR_RESET,
+            }),
+          5000
+        );
+      }
+    }
+  };
+
+// Check security answers for change password
+export const checkSecurityAnswers =
+  (
+    securityQuestionOneAnswer,
+    securityQuestionTwoAnswer,
+    securityQuestionThreeAnswer,
+    securityQuestionOne,
+    securityQuestionTwo,
+    securityQuestionThree,
+    emailChangePassword
+  ) =>
+  async (dispatch) => {
+    const value = {};
+
+    const body = JSON.stringify({
+      securityQuestionOneAnswer,
+      securityQuestionTwoAnswer,
+      securityQuestionThreeAnswer,
+      securityQuestionOne,
+      securityQuestionTwo,
+      securityQuestionThree,
+      emailChangePassword,
+    });
+
+    try {
+      dispatch({
+        type: CHECK_SECURITY_ANSWERS_LOADING,
+      });
+
+      const res = await api.post(
+        "/auth/check-security-answers-change-password",
+        body
+      );
+
+      dispatch({
+        type: CHECK_SECURITY_ANSWERS,
+      });
+    } catch (error) {
+      if (error.response.status === 500) {
+        value.message = "Oops! Something went wrong. Please reload!";
+        value.type = "error";
+
+        dispatch({
+          type: ERROR_SNACKBAR,
+          payload: value,
+        });
+
+        dispatch({
+          type: CHECK_SECURITY_ANSWERS_LOADING_COMPLETE,
+        });
+
+        setTimeout(
+          () =>
+            dispatch({
+              type: SNACKBAR_RESET,
+            }),
+          5000
+        );
+      } else if (error.response.status === 400) {
+        value.message = error.response.data.errors[0].msg;
+        value.type = "error";
+
+        console.log('Errors')
+
+        dispatch({
+          type: ERROR_SNACKBAR,
+          payload: value,
+        });
+
+        dispatch({
+          type: CHECK_SECURITY_ANSWERS_LOADING_COMPLETE,
+        });
+
+        setTimeout(
+          () =>
+            dispatch({
+              type: SNACKBAR_RESET,
+            }),
+          5000
+        );
+      } else if (error.response.status === 401) {
+        value.message = "Your session has expired. Please login again.";
+        value.type = "error";
+
+        dispatch({
+          type: ERROR_SNACKBAR,
+          payload: value,
+        });
+
+        dispatch({
+          type: CHECK_SECURITY_ANSWERS_LOADING_COMPLETE,
+        });
+
+        setTimeout(
+          () =>
+            dispatch({
+              type: SNACKBAR_RESET,
+            }),
+          5000
+        );
+      } else {
+        value.message = "Oops! Looks like something went wrong. Please reload!";
+        value.type = "error";
+
+        dispatch({
+          type: ERROR_SNACKBAR,
+          payload: value,
+        });
+
+        dispatch({
+          type: CHECK_SECURITY_ANSWERS_LOADING_COMPLETE,
+        });
+
+        setTimeout(
+          () =>
+            dispatch({
+              type: SNACKBAR_RESET,
+            }),
+          5000
+        );
+      }
+    }
+  };
 
 // Change Password
-export const changePasswordUser =
-  (password, email) => async (dispatch) => {
+export const changePasswordUser = (password, emailChangePassword) => async (dispatch) => {
     const value = {};
 
-    const body = JSON.stringify({ password, email });
+    const body = JSON.stringify({
+      password,
+      email: emailChangePassword,
+    });
+
+    console.log(body)
 
     try {
       dispatch({
-        type: PASSWORD_CHANGE_LOADING,
+        type: CHANGE_PASSWORD_LOADING,
       });
 
-      const res = await api.post("/auth/change-password", body);
+      console.log('Hit')
+
+      const res = await api.post(
+        "/auth/change-password",
+        body
+      );
+
+      value.message =  'Password changed successfully!'
+      value.type =  'success'
 
       dispatch({
-        type: PASSWORD_CHANGE_SUCCESS
+        type: SUCCESS_200,
+        payload: value
       })
 
-      value.message = "Password Changes Successfully!";
-      value.type = "success";
-
       dispatch({
-        type: SUCCESS_200,
-        payload: value,
+        type: CHANGE_PASSWORD,
       });
 
       setTimeout(
@@ -109,7 +400,7 @@ export const changePasswordUser =
         });
 
         dispatch({
-          type: PASSWORD_CHANGE_COMPLETE,
+          type: CHANGE_PASSWORD_LOADING_COMPLETE,
         });
 
         setTimeout(
@@ -129,7 +420,7 @@ export const changePasswordUser =
         });
 
         dispatch({
-          type: PASSWORD_CHANGE_COMPLETE,
+          type: CHANGE_PASSWORD_LOADING_COMPLETE,
         });
 
         setTimeout(
@@ -149,7 +440,7 @@ export const changePasswordUser =
         });
 
         dispatch({
-          type: PASSWORD_CHANGE_COMPLETE,
+          type: CHANGE_PASSWORD_LOADING_COMPLETE,
         });
 
         setTimeout(
@@ -169,7 +460,7 @@ export const changePasswordUser =
         });
 
         dispatch({
-          type: PASSWORD_CHANGE_COMPLETE,
+          type: CHANGE_PASSWORD_LOADING_COMPLETE,
         });
 
         setTimeout(
@@ -183,242 +474,6 @@ export const changePasswordUser =
     }
   };
 
-// Send Security Code 
-export const checkSecurityCode =
-  (securityCode, email) => async (dispatch) => {
-    const value = {};
-
-    const body = JSON.stringify({ securityCode, email });
-
-    try {
-      dispatch({
-        type: SECURITY_CODE_CHECK_LOADING,
-      });
-
-      const res = await api.post("/auth/check-security-code", body);
-
-      dispatch({
-        type: SECURITY_CODE_CHECK_SUCCESS,
-      });
-
-      value.message = "Security Code Validated";
-      value.type = "success";
-
-      dispatch({
-        type: SUCCESS_200,
-        payload: value,
-      });
-
-      setTimeout(
-        () =>
-          dispatch({
-            type: SNACKBAR_RESET,
-          }),
-        5000
-      );
-    } catch (error) {
-      if (error.response.status === 500) {
-        value.message = "Oops! Something went wrong. Please reload!";
-        value.type = "error";
-
-        dispatch({
-          type: ERROR_SNACKBAR,
-          payload: value,
-        });
-
-        dispatch({
-          type: SECURITY_CODE_CHECK_LOADING_COMPLETE,
-        });
-
-        setTimeout(
-          () =>
-            dispatch({
-              type: SNACKBAR_RESET,
-            }),
-          5000
-        );
-      } else if (error.response.status === 400) {
-        value.message = error.response.data.errors[0].msg;
-        value.type = "error";
-
-        dispatch({
-          type: ERROR_SNACKBAR,
-          payload: value,
-        });
-
-        dispatch({
-          type: SECURITY_CODE_CHECK_LOADING_COMPLETE,
-        });
-
-        setTimeout(
-          () =>
-            dispatch({
-              type: SNACKBAR_RESET,
-            }),
-          5000
-        );
-      } else if (error.response.status === 401) {
-        value.message = "Your session has expired. Please login again.";
-        value.type = "error";
-
-        dispatch({
-          type: ERROR_SNACKBAR,
-          payload: value,
-        });
-
-        dispatch({
-          type: SECURITY_CODE_CHECK_LOADING_COMPLETE,
-        });
-
-        setTimeout(
-          () =>
-            dispatch({
-              type: SNACKBAR_RESET,
-            }),
-          5000
-        );
-      } else {
-        value.message = "Oops! Looks like something went wrong. Please reload!";
-        value.type = "error";
-
-        dispatch({
-          type: ERROR_SNACKBAR,
-          payload: value,
-        });
-
-        dispatch({
-          type: SECURITY_CODE_CHECK_LOADING_COMPLETE,
-        });
-
-        setTimeout(
-          () =>
-            dispatch({
-              type: SNACKBAR_RESET,
-            }),
-          5000
-        );
-      }
-    }
-  };
-
-// Send Security Code 
-export const sendSecurityCode = (email) => async (dispatch) => {
-  const value = {};
-
-  const body = JSON.stringify({ email });
-
-  try {
-    dispatch({
-      type: SECURITY_CODE_LOADING,
-      payload: email
-    });
-
-    const res = await api.post("/auth/send-security-code", body);
-
-    dispatch({
-      type: SECURITY_CODE_SUCCESS,
-    });
-
-    value.message = "Reset code sent";
-    value.type = "success";
-
-    dispatch({
-      type: SUCCESS_200,
-      payload: value,
-    });
-
-    setTimeout(
-      () =>
-        dispatch({
-          type: SNACKBAR_RESET,
-        }),
-      5000
-    );
-
-  } catch (error) {
-    if (error.response.status === 500) {
-      value.message = "Oops! Something went wrong. Please reload!";
-      value.type = "error";
-
-      dispatch({
-        type: ERROR_SNACKBAR,
-        payload: value,
-      });
-
-      dispatch({
-        type: SECURITY_CODE_LOADING_COMPLETE,
-      });
-
-      setTimeout(
-        () =>
-          dispatch({
-            type: SNACKBAR_RESET,
-          }),
-        5000
-      );
-    } else if (error.response.status === 400) {
-      value.message = error.response.data.errors[0].msg;
-      value.type = "error";
-
-      dispatch({
-        type: ERROR_SNACKBAR,
-        payload: value,
-      });
-
-      dispatch({
-        type: SECURITY_CODE_LOADING_COMPLETE,
-      });
-
-      setTimeout(
-        () =>
-          dispatch({
-            type: SNACKBAR_RESET,
-          }),
-        5000
-      );
-    } else if (error.response.status === 401) {
-      value.message = "Your session has expired. Please login again.";
-      value.type = "error";
-
-      dispatch({
-        type: ERROR_SNACKBAR,
-        payload: value,
-      });
-
-      dispatch({
-        type: SECURITY_CODE_LOADING_COMPLETE,
-      });
-
-      setTimeout(
-        () =>
-          dispatch({
-            type: SNACKBAR_RESET,
-          }),
-        5000
-      );
-    } else {
-      value.message = "Oops! Looks like something went wrong. Please reload!";
-      value.type = "error";
-
-      dispatch({
-        type: ERROR_SNACKBAR,
-        payload: value,
-      });
-
-      dispatch({
-        type: SECURITY_CODE_LOADING_COMPLETE,
-      });
-
-      setTimeout(
-        () =>
-          dispatch({
-            type: SNACKBAR_RESET,
-          }),
-        5000
-      );
-    }
-  }
-}
 
 // Load User
 export const loadUser = () => async (dispatch) => {

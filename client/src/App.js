@@ -7,7 +7,7 @@ import { DARK_MODE, LIGHT_MODE, LOGOUT } from "./redux/actions/types";
 
 import Home from "./components/Home";
 import Register from "./components/auth/register/Register";
-import Main from "./components/auth/Main";
+import Main from "./components/auth/login/Main";
 import About from "./components/about/About";
 import NotFound from "./components/layout/NotFound";
 import VerifyEmail from "./components/layout/VerifyEmail";

@@ -11,20 +11,23 @@ import {
   LOGIN_LOADING,
   LOGIN_LOADING_COMPLETE,
 
-  // Forgot Password
-  SECURITY_CODE_LOADING,
-  SECURITY_CODE_LOADING_COMPLETE,
-  SECURITY_CODE_SUCCESS,
+  // Change Password - Verify Email
+  VERIFY_EMAIL_LOADING,
+  VERIFY_EMAIL_LOADING_COMPLETE,
+  VERIFY_EMAIL,
 
-  // Security Code Check
-  SECURITY_CODE_CHECK_LOADING,
-  SECURITY_CODE_CHECK_LOADING_COMPLETE,
-  SECURITY_CODE_CHECK_SUCCESS,
+  // Change Password - Check Security Answers
+  CHECK_SECURITY_ANSWERS_LOADING,
+  CHECK_SECURITY_ANSWERS_LOADING_COMPLETE,
+  CHECK_SECURITY_ANSWERS,
 
-  // Password Change
-  PASSWORD_CHANGE_SUCCESS,
-  PASSWORD_CHANGE_COMPLETE,
-  PASSWORD_CHANGE_LOADING,
+  // Change Password - Finale
+  CHANGE_PASSWORD_LOADING,
+  CHANGE_PASSWORD_LOADING_COMPLETE,
+  CHANGE_PASSWORD,
+
+  // Set Count Login
+  SET_COUNT_LOGIN,
 } from "../actions/types";
 
 const initialState = {
@@ -34,79 +37,100 @@ const initialState = {
   user: null,
   loginLoading: false,
 
-  // Forgot Password
-  securityCodeLoading: false,
-  securityCodeSuccess: false,
-  securityCodeCheckSuccess: false,
-  securityCodeCheckLoading: false,
-  forgotPasswordEmail: '',
-  forgotPasswordLoading: false,
-  forgotPasswordChange: false
+  // Change Password - Verify Email
+  emailVerified: false,
+  emailVerificationLoading: false,
+  emailChangePassword: "",
+  securityQuestionOne: "",
+  securityQuestionTwo: "",
+  securityQuestionThree: '',
+
+  // Change Password - Check Security Answers 
+  checkSecurityAnswersLoading: false,
+  securityAnswersVerified: false,
+
+  // Change Password - Final 
+  changePasswordLoading: false,
+  changePasswordSuccess: false,
+
+  // Set Count Login 
+  count: 0
 };
 
 function authReducer(state = initialState, action) {
   const { type, payload } = action;
 
   switch (type) {
-    // Password Change
-    case PASSWORD_CHANGE_SUCCESS:
+    // CHANGE PASSWORD
+
+    // Set Count Login 
+    case SET_COUNT_LOGIN:
       return {
         ...state,
-        forgotPasswordChange: true,
+        count: payload
+      }
+
+    // Verify Email - Step 3 - ChangePassword.js
+    case CHANGE_PASSWORD_LOADING:
+      return {
+        ...state,
+        changePasswordLoading: true,
+      };
+    case CHANGE_PASSWORD_LOADING_COMPLETE:
+      return {
+        ...state,
+        changePasswordLoading: false,
+        changePasswordSuccess: false,
+      };
+    case CHANGE_PASSWORD:
+      return {
+        ...state,
+        changePasswordSuccess: true,
       };
 
-    case PASSWORD_CHANGE_LOADING:
+    // Verify Email - Step 2 - CheckQuestions.js
+    case CHECK_SECURITY_ANSWERS_LOADING:
       return {
         ...state,
-        forgotPasswordLoading: false,
+        checkSecurityAnswersLoading: true,
+      };
+    case CHECK_SECURITY_ANSWERS_LOADING_COMPLETE:
+      return {
+        ...state,
+        checkSecurityAnswersLoading: false,
+        securityAnswersVerified: false,
+      };
+    case CHECK_SECURITY_ANSWERS:
+      return {
+        ...state,
+        securityAnswersVerified: true,
       };
 
-    case PASSWORD_CHANGE_COMPLETE:
+    // Verify Email - Step 1 - CheckEmail.js
+    case VERIFY_EMAIL_LOADING:
       return {
         ...state,
-        forgotPasswordChange: false,
-        forgotPasswordLoading: false,
+        emailVerificationLoading: true,
       };
-    // Security Code
-    case SECURITY_CODE_CHECK_SUCCESS:
+    case VERIFY_EMAIL_LOADING_COMPLETE:
       return {
         ...state,
-        securityCodeCheckSuccess: true,
+        emailVerificationLoading: false,
+        emailChangePassword: "",
+        securityQuestionOne: "",
+        securityQuestionTwo: "",
+        securityQuestionThree: "",
+        emailVerified: false,
       };
-
-    case SECURITY_CODE_CHECK_LOADING:
+    case VERIFY_EMAIL:
       return {
         ...state,
-        securityCodeCheckLoading: true,
-      };
-
-    case SECURITY_CODE_CHECK_LOADING_COMPLETE:
-      return {
-        ...state,
-        securityCodeCheckLoading: false,
-        securityCodeCheckSuccess: false,
-      };
-
-    // Security Code
-    case SECURITY_CODE_SUCCESS:
-      return {
-        ...state,
-        securityCodeSuccess: true,
-      };
-
-    case SECURITY_CODE_LOADING:
-      return {
-        ...state,
-        securityCodeLoading: true,
-        forgotPasswordEmail: payload,
-      };
-
-    case SECURITY_CODE_LOADING_COMPLETE:
-      return {
-        ...state,
-        securityCodeLoading: false,
-        securityCodeSuccess: false,
-        forgotPasswordEmail: "",
+        emailVerified: true,
+        emailChangePassword: payload.email,
+        securityQuestionOne: payload.details.securityQuestionOne,
+        securityQuestionTwo: payload.details.securityQuestionTwo,
+        securityQuestionThree: payload.details.securityQuestionThree,
+        emailVerificationLoading: false,
       };
 
     // Login Loading

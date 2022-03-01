@@ -135,17 +135,6 @@ const Register = ({
         securityQuestionTwoAnswer,
         securityQuestionThreeAnswer
       );
-      console.log(
-        name,
-        email,
-        password,
-        securityQuestionOne,
-        securityQuestionTwo,
-        securityQuestionThree,
-        securityQuestionOneAnswer,
-        securityQuestionTwoAnswer,
-        securityQuestionThreeAnswer
-      );
     }
   };
 
