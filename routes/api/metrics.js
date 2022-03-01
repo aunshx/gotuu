@@ -56,8 +56,7 @@ router.get("/number-of-tuus-per-day-year", auth, async (req, res) => {
 
     return res.status(200).send(ans);
   } catch (error) {
-    console.error(error.message);
-    res.status(400).send("Something went wrong!");
+    res.status(400).send({ errors: [{ msg: "Something went wrong!" }] });
   }
 });
 
@@ -118,8 +117,7 @@ router.get("/number-of-tuus-per-day-sevendays", auth, async (req, res) => {
 
     return res.status(200).send(ans);
   } catch (error) {
-    console.error(error.message);
-    res.status(400).send("Something went wrong!");
+    res.status(400).send({ errors: [{ msg: "Something went wrong!" }] });
   }
 });
 
@@ -168,8 +166,7 @@ router.get("/number-of-tuus-per-day-currentMonth", auth, async (req, res) => {
 
     return res.status(200).send(ans);
   } catch (error) {
-    console.error(error.message);
-    res.status(400).send("Something went wrong!");
+    res.status(400).send({ errors: [{ msg: "Something went wrong!" }] });
   }
 });
 
@@ -231,8 +228,7 @@ router.get("/average-duration-tuus-per-day-sevendays", auth, async (req, res) =>
 
     return res.status(200).send(ans);
   } catch (error) {
-    console.error(error.message);
-    res.status(400).send("Something went wrong!");
+    res.status(400).send({ errors: [{ msg: "Something went wrong!" }] });
   }
 });
 
@@ -279,8 +275,7 @@ router.get("/average-duration-tuus-per-day-monthly", auth, async (req, res) => {
 
     return res.status(200).send(ans);
   } catch (error) {
-    console.error(error.message);
-    res.status(400).send("Something went wrong!");
+    res.status(400).send({ errors: [{ msg: "Something went wrong!" }] });
   }
 });
 
@@ -328,8 +323,7 @@ router.get("/average-duration-tuus-per-day-yearly", auth, async (req, res) => {
 
     return res.status(200).send(ans);
   } catch (error) {
-    console.error(error.message);
-    res.status(400).send("Something went wrong!");
+    res.status(400).send({ errors: [{ msg: "Something went wrong!" }] });
   }
 });
 
@@ -362,8 +356,7 @@ router.get("/total-number-tuus-today", auth, async (req, res) => {
     }).count();
     return res.status(200).send(ans.toString())
   } catch(error) {
-    console.error(error.message);
-    res.status(400).send("Something went wrong!");
+    res.status(400).send({ errors: [{ msg: "Something went wrong!" }] });
   }
 });
 
@@ -383,8 +376,7 @@ router.get("/total-number-tuus-all-time", auth, async (req, res) => {
     }).count();
     return res.status(200).send(ans.toString())
   } catch(error) {
-    console.error(error.message);
-    res.status(400).send("Something went wrong!");
+    res.status(400).send({ errors: [{ msg: "Something went wrong!" }] });
   }
 });
 
@@ -409,8 +401,7 @@ router.get("/total-number-tuus-seven-days", auth, async (req, res) => {
     }).count();
     return res.status(200).send(ans.toString())
   } catch(error) {
-    console.error(error.message);
-    res.status(400).send("Something went wrong!");
+    res.status(400).send({ errors: [{ msg: "Something went wrong!" }] });
   }
 });
 
@@ -434,8 +425,7 @@ router.get("/total-number-tuus-monthly", auth, async (req, res) => {
 
     return res.status(200).send(ans.toString())
   } catch(error) {
-    console.error(error.message);
-    res.status(400).send("Something went wrong!");
+    res.status(400).send({ errors: [{ msg: "Something went wrong!" }] });
   }
 });
 
@@ -459,8 +449,7 @@ router.get("/total-number-tuus-yearly", auth, async (req, res) => {
 
     return res.status(200).send(ans.toString())
   } catch(error) {
-    console.error(error.message);
-    res.status(400).send("Something went wrong!");
+    res.status(400).send({ errors: [{ msg: "Something went wrong!" }] });
   }
 });
 
@@ -518,8 +507,7 @@ router.get("/average-duration-tuus-today", auth, async (req, res) => {
     }
 
   } catch (error) {
-    console.error(error.message);
-    res.status(400).send("Something went wrong!");
+    res.status(400).send({ errors: [{ msg: "Something went wrong!" }] });
   }
 });
 
@@ -574,8 +562,7 @@ router.get(
     return res.status(200).send(complete);
     
     } catch (error) {
-      console.error(error.message);
-      res.status(400).send("Something went wrong!");
+        res.status(400).send({ errors: [{ msg: "Something went wrong!" }] });
     }
   }
 );
@@ -621,8 +608,7 @@ router.get("/average-duration-tuus-monthly", auth, async (req, res) => {
 
     return res.status(200).send(complete);
   } catch (error) {
-    console.error(error.message);
-    res.status(400).send("Something went wrong!");
+    res.status(400).send({ errors: [{ msg: "Something went wrong!" }] });
   }
 });
 
@@ -667,8 +653,7 @@ router.get("/average-duration-tuus-yearly", auth, async (req, res) => {
 
     return res.status(200).send(complete);
   } catch (error) {
-    console.error(error.message);
-    res.status(400).send("Something went wrong!");
+    res.status(400).send({ errors: [{ msg: "Something went wrong!" }] });
   }
 });
 
@@ -709,7 +694,7 @@ router.get("/average-duration-tuus-all-time", auth, async (req, res) => {
    return res.status(200).send(complete);
  } catch (error) {
    console.error(error.message);
-   res.status(400).send("Something went wrong!");
+   res.status(400).send({ errors: [{ msg: "Something went wrong!" }] });
  }
 })
 
@@ -760,8 +745,7 @@ router.get("/live-streak", auth, async (req, res) => {
     }
 
   } catch(error) {
-    console.error(error);
-    res.status(400).send("Something went wrong!");
+    res.status(400).send({ errors: [{ msg: "Something went wrong!" }] });
   }
 });
 
@@ -792,8 +776,7 @@ router.post("/get-details-specific-date-event", auth, async (req, res) => {
         ],
       });
     } catch (error) {
-      console.error(error);
-      return res.status(400).send({ msg: ["Could not get details of event"] });
+        return res.status(400).send({ msg: ["Could not get details of event"] });
     }
 
     return res.status(200).send(ans);
@@ -817,8 +800,7 @@ router.get("/get-dates-existing-events", auth, async (req, res) => {
         }
       );
     } catch (error) {
-      console.error(error);
-      return res.status(400).send({ msg: ["Could not get details of event"] });
+        return res.status(400).send({ msg: ["Could not get details of event"] });
     }
 
     return res.status(200).send(ans);

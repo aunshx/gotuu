@@ -78,7 +78,6 @@ router.post(
         }
       );
     } catch (err) {
-      console.log(err);
       res.status(500).send({ errors: [{ msg: "Bad Request" }] });
     }
   }
@@ -199,7 +198,6 @@ router.post(
         }
       );
     } catch (err) {
-      console.log(err);
       res.status(500).send("Server error");
     }
   }

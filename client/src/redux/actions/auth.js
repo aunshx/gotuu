@@ -490,6 +490,22 @@ export const register =
         payload: res.data,
       });
 
+      value.message='Welcome to Gotuu!'
+      value.type='success'
+
+      dispatch({
+        type: SUCCESS_200,
+        payload: value,
+      });
+
+      setTimeout(
+        () =>
+          dispatch({
+            type: SNACKBAR_RESET,
+          }),
+        5000
+      );
+
         dispatch({
           type: LOGIN_LOADING_COMPLETE,
         });
