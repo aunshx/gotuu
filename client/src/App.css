@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Pushster&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa&display=swap');
 
 :root {
     --primary-color: #7ed957;
@@ -28,6 +29,8 @@
     --progress-block-border: none;
     --single-note-border-color: none;
     --disabled-button-color: rgb(211, 211, 211);
+    --creator-website-color: rgb(0, 145, 255);
+    --mui-snackbar-color: rgb(238, 238, 238);
 }
 
 [data-theme="dark"] {
@@ -42,6 +45,7 @@
   --progress-block-border: #7ed957;
   --grey-color: rgb(197, 194, 194);
   --disabled-button-color: rgb(44, 44, 44);
+  --mui-snackbar-color: rgb(50, 50, 50);
 }
 
 * {
@@ -1024,7 +1028,8 @@ padding: 0  0 2em 0;
   color: var(--light-grey-color);
   font-size: 0.9em;
   font-family: Arial, Helvetica, sans-serif;
-  padding-top: 80px;
+  margin-left: 0.6em;
+  margin-bottom: 1em;
 }
 
 .timeline-end-icon {
@@ -1964,15 +1969,21 @@ padding: 0  0 2em 0;
 }
 
 .MuiSnackbar-root .MuiAlert-filledSuccess {
-    background-color: #2ebf06;
+    color: var(--grey-color);
+    border: 1px solid #2ebf06;
+    background-color: var( --mui-snackbar-color);
 }
 
 .MuiSnackbar-root .MuiAlert-filledError {
-    background-color: #f71717;
+    border:1px solid #f71717;
+    color: var(--grey-color);
+    background-color: var( --mui-snackbar-color);
 }
 
 .MuiSnackbar-root .MuiAlert-filledInfo {
-    background-color: #219be7;
+    color: var(--grey-color);
+    border: 1px solid #219be7;
+    background-color: var( --mui-snackbar-color);
 }
 
 .MuiSnackbar-root .snackbar_alert_info {
@@ -3042,9 +3053,13 @@ margin: 0 0.5em;
 }
 
 /* --------------------------- FOOTER ----------------------------- */
-.footer {
+.footer a {
   color: rgb(182, 182, 182);
-  font-size: 0.9em;
-  font-weight: bold;
+  font-size: 0.8em;
   padding: 0 0 2em 0;
+  font-family: 'Comfortaa', cursive;
+}
+
+.footer a:hover {
+  color: var(--creator-website-color);
 }

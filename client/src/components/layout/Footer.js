@@ -4,7 +4,12 @@ import PropTypes from 'prop-types';
 const Footer = (props) => {
   return (
     <div className='footer flex_middle'>
-      <span className='mrg-r-pointfive'>{String.fromCodePoint('0X00A9')}</span> Gotuu 2022
+      <a href='https://aunsh.com' target={'_blank'} rel='noreferrer nofollow' >
+        <span className='mrg-r-pointfive'>
+          {String.fromCodePoint("0X00A9")}
+        </span>
+        aunsh 2022
+      </a>
     </div>
   );
 };

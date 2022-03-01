@@ -8,7 +8,7 @@ import {
 
 const NothingToShow = ({ primaryMessage, secondaryMessage }) => {
   return (
-    <div className='empty_timeline app '>
+    <div className='empty_timeline'>
       <div className='flex_middle' style={{ marginBottom: "1em" }}>
         <div>
           <FontAwesomeIcon
@@ -22,7 +22,7 @@ const NothingToShow = ({ primaryMessage, secondaryMessage }) => {
         </div>
         <div style={{ color: "gray" }}> {primaryMessage}</div>
       </div>
-      <div>
+      <div className='flex_middle' style={{ textAlign: 'center', fontSize: '0.9em' }}>
         Try starting and completing a new Tuu! Or click on 'today' to check
         previous Tuus!
       </div>

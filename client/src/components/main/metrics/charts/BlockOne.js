@@ -91,7 +91,8 @@ const BlockOne = ({
           <div className='spinner-graph'></div>
         ) : (
           <>
-            {data.length > 0 ? (
+            {data.length > 0 ? 
+            (
               <ResponsiveContainer
                 width='100%'
                 height={width < 480 ? 240 : "100%"}

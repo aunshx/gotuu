@@ -285,8 +285,6 @@ export const checkSecurityAnswers =
         value.message = error.response.data.errors[0].msg;
         value.type = "error";
 
-        console.log('Errors')
-
         dispatch({
           type: ERROR_SNACKBAR,
           payload: value,
@@ -356,14 +354,10 @@ export const changePasswordUser = (password, emailChangePassword) => async (disp
       email: emailChangePassword,
     });
 
-    console.log(body)
-
     try {
       dispatch({
         type: CHANGE_PASSWORD_LOADING,
       });
-
-      console.log('Hit')
 
       const res = await api.post(
         "/auth/change-password",
@@ -688,8 +682,6 @@ export const login =
       });
 
       const res = await api.post("/auth/login", body);
-
-      console.log(res);
 
       dispatch({
         type: LOGIN_LOADING_COMPLETE,

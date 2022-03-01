@@ -24,7 +24,6 @@ export const getNote = (eventId) => async (dispatch) => {
   });
 
   try {
-    console.log('RUNNNNNN')
     const res = await api.post("/notes/get-note", body)
 
     return res.data
