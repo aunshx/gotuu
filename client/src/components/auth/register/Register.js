@@ -54,7 +54,7 @@ const Register = ({
   const [securityQuestionOneEmptyError, setSecurityQuestionOneEmptyError] = useState(false)
   const [securityQuestionTwoEmptyError, setSecurityQuestionTwoEmptyError] = useState(false)
   const [securityQuestionThreeEmptyError, setSecurityQuestionThreeEmptyError] = useState(false)
-  const [step, setStep] = useState(0)
+  const [step, setStep] = useState(1)
 
   const {
     name,
