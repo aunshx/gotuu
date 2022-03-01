@@ -748,14 +748,14 @@ export const getAvgDurationOfTuusPerDayPerYear = () => async (dispatch) => {
     let resMin = res.data.map((ele) => {
       return {
         name: ele.date.date,
-        value: (ele.sum / 6000).toFixed("0"),
+        value: (ele.sum / 60000).toFixed("0"),
       };
     });
 
     let resHour = res.data.map((ele) => {
       return {
         name: ele.date.date,
-        value: (ele.sum / 360000).toFixed("1"),
+        value: (ele.sum / 3600000).toFixed("3"),
       };
     });
 
