@@ -307,8 +307,6 @@ router.post(
         ],
       }).select('-password').select('-createdAt').select('-updatedAt').select('-name').select('-_id').select('-date');
 
-      console.log(user)
-
       const isMatchOne = await bcrypt.compare(
         securityQuestionOneAnswer,
         user.securityQuestionOneAnswer
@@ -322,14 +320,12 @@ router.post(
         user.securityQuestionThreeAnswer
       ); 
 
-      console.log(isMatchOne, isMatchTwo, isMatchThree)
-
       if (user && isMatchOne && isMatchTwo && isMatchThree) {
         return res.status(200).send({
           msg: "Safe to go ahead",
         });
       } else {
-        res.status(400).send({ errors: [{ msg: "Invalid Credentials" }] });
+        res.status(400).send({ errors: [{ msg: "Wrong Answers" }] });
       }
     } catch (err) {
       res.status(400).send({ errors: [{ msg: "Bad Request" }] });

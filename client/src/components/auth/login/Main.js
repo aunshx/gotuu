@@ -7,7 +7,12 @@ import CheckQuestions from "./CheckQuestions";
 import Login from "./Login";
 
 import store from '../../../store';
-import { DARK_MODE, LIGHT_MODE, } from '../../../redux/actions/types';
+import {
+  DARK_MODE,
+  LIGHT_MODE,
+  CHECK_SECURITY_ANSWERS_LOADING_COMPLETE,
+  VERIFY_EMAIL_LOADING_COMPLETE,
+} from "../../../redux/actions/types";
 import {
   resetVerifyEmail,
   resetSecurityAnswersCheck,
@@ -17,6 +22,7 @@ import {
 import ChangePassword from './ChangePassword';
 import Navbar from '../../navbar/Navbar';
 import { Redirect } from 'react-router-dom';
+import Alerts from '../../layout/Alerts';
 
 const Main = ({
   // Redux Actions
@@ -62,6 +68,9 @@ const Main = ({
 
   const goChangePass2ToChangePass = () => {
     setCountLogin(1)
+    store.dispatch({
+      type: VERIFY_EMAIL_LOADING_COMPLETE,
+    });
     resetSecurityAnswersCheck();
   };
 
@@ -70,6 +79,9 @@ const Main = ({
   };
 
   const goChangePass3ToChangePass2 = () => {
+    store.dispatch({
+      type: CHECK_SECURITY_ANSWERS_LOADING_COMPLETE,
+    });
     setCountLogin(2)
   };
 
@@ -108,6 +120,9 @@ const Main = ({
           setCount={setCountLogin}
         />
       )}
+      <div>
+        <Alerts />
+      </div>
     </>
   );
 };
