@@ -1965,7 +1965,7 @@ padding: 0  0 2em 0;
 }
 
 .MuiSnackbar-root .MuiAlert-root .MuiAlert-message {
-    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 .MuiSnackbar-root .MuiAlert-filledSuccess {
@@ -1984,33 +1984,6 @@ padding: 0  0 2em 0;
     color: var(--grey-color);
     border: 1px solid #219be7;
     background-color: var( --mui-snackbar-color);
-}
-
-.MuiSnackbar-root .snackbar_alert_info {
-    box-shadow: 2px 2px 7px -3px rgba(15, 15, 15, 0.75);
-    background-color: #5a5a5a;
-    font-weight: 600;
-    color: rgba(245, 245, 245);
-    height: 30px;
-    padding: 0em 1.5em 3.5em 1em;
-}
-
-.MuiSnackbar-root .snackbar_alert_error {
-    box-shadow: 2px 2px 7px -3px rgba(15, 15, 15, 0.75);
-    background-color: #ee2525;
-    font-weight: 600;
-    color: rgba(245, 245, 245);
-    height: 30px;
-    padding: 0em 1.5em 3.5em 1em;
-}
-
-.MuiSnackbar-root .snackbar_alert_success {
-    box-shadow: 2px 2px 7px -3px rgba(15, 15, 15, 0.75);
-    background-color: #31c10a;
-    font-weight: 600;
-    color: rgba(245, 245, 245);
-    height: 30px;
-    padding: 0em 1.5em 3.5em 1em;
 }
 
 /* ---------------------- DATE PICKER --------------------------- */
