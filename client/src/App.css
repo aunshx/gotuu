@@ -1059,6 +1059,7 @@ padding: 0  0 2em 0;
   font-weight: bold;
   margin: 20px 0;
   position: relative;
+  font-size: 0.7em;
 }
 
 .timeline .main .line .element_mini .liner_horizontal_right {
@@ -1182,6 +1183,7 @@ padding: 0  0 2em 0;
   font-weight: bold;
   margin: 25px 0;
   position: relative;
+  font-size: 0.7em;
 }
 
 .timeline .main .line .element_tiny .liner_horizontal_right {
@@ -1302,6 +1304,7 @@ padding: 0  0 2em 0;
   font-weight: bold;
   margin: 30px 0;
   position: relative;
+  font-size: 0.7em;
 }
 
 .timeline .main .line .element_extra-small .liner_horizontal_right {
@@ -1428,6 +1431,7 @@ padding: 0  0 2em 0;
   margin: 0.8em 0;
   margin: 35px 0;
   position: relative;
+  font-size: 0.7em;
 }
 
 .timeline .main .line .element_small .liner_horizontal_right {
@@ -1554,6 +1558,7 @@ padding: 0  0 2em 0;
   margin: 1em 0;
   margin: 40px 0;
   position: relative;
+  font-size: 0.7em;
 }
 
 .timeline .main .line .element_medium .liner_horizontal_right {
@@ -1678,6 +1683,7 @@ padding: 0  0 2em 0;
   margin: 1.2em 0;
   margin: 45px 0;
   position: relative;
+  font-size: 0.7em;
 }
 .timeline .main .line .element_large .liner_horizontal_right {
   border-bottom: 1px dotted var(--light-color-border-element);
@@ -1803,6 +1809,7 @@ padding: 0  0 2em 0;
   margin: 1.5em 0;
   margin: 50px 0;
   position: relative;
+  font-size: 0.7em;
 }
 .timeline .main .line .element_humongous .liner_horizontal_right {
   border-bottom: 1px dotted var(--light-color-border-element);

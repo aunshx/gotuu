@@ -98,7 +98,9 @@ const [expanded, setExpanded] = useState(false);
               >
                 <div
                   onClick={() => setShowInHours(!showInHours)}
-                  className={noteDetails ? "flex_middle" : `time_${classy}`}
+                  className={
+                    noteDetails ? "flex_middle" : `flex_middle time_${classy}`
+                  }
                 >
                   {showInHours ? (
                     <>
