@@ -2,7 +2,7 @@ import React, { Fragment, useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { login } from "../../redux/actions/auth";
+import { login } from "../../../redux/actions/auth";
 
 import LoadingButton from "@mui/lab/LoadingButton";
 import IconButton from "@mui/material/IconButton";
@@ -17,13 +17,13 @@ import { makeStyles } from "@mui/styles";
 import DoubleArrowIcon from "@mui/icons-material/DoubleArrow";
 import CheckIcon from "@mui/icons-material/Check";
 
-import logo from "../../resources/images/gotuuLogo.png";
-import loginBack from "../../resources/images/bigLogo.png";
-import logoDark from "../../resources/images/gotuuLogoLogin.png";
-import Alerts from "../layout/Alerts";
-import Navbar from "../navbar/Navbar";
+import logo from "../../../resources/images/gotuuLogo.png";
+import loginBack from "../../../resources/images/bigLogo.png";
+import logoDark from "../../../resources/images/gotuuLogoLogin.png";
+import Alerts from "../../layout/Alerts";
+import Navbar from "../../navbar/Navbar";
 
-import { sendSecurityCode, checkSecurityCode } from "../../redux/actions/auth";
+import { sendSecurityCode, checkSecurityCode } from "../../../redux/actions/auth";
 
 const CssTextField = styled(TextField, {
   shouldForwardProp: (props) => props !== "focusColor",

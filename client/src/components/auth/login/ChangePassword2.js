@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { changePassword, login } from "../../redux/actions/auth";
+import { changePassword, login } from "../../../redux/actions/auth";
 
 import LoadingButton from "@mui/lab/LoadingButton";
 import {IconButton, InputAdornment, TextField, Button, CircularProgress} from "@mui/material"
@@ -18,17 +18,17 @@ import SaveAltIcon from "@mui/icons-material/SaveAlt";
 import { styled } from "@mui/material/styles";
 import { makeStyles } from "@mui/styles";
 
-import logo from "../../resources/images/gotuuLogo.png";
-import loginBack from "../../resources/images/bigLogo.png";
-import logoDark from "../../resources/images/gotuuLogoLogin.png";
-import Alerts from "../layout/Alerts";
-import Navbar from "../navbar/Navbar";
+import logo from "../../../resources/images/gotuuLogo.png";
+import loginBack from "../../../resources/images/bigLogo.png";
+import logoDark from "../../../resources/images/gotuuLogoLogin.png";
+import Alerts from "../../layout/Alerts";
+import Navbar from "../../navbar/Navbar";
 
 import {
   changePasswordUser,
   resetChangePassword,
   resetSecurityCodePassword,
-} from "../../redux/actions/auth.js";
+} from "../../../redux/actions/auth.js";
 
 const CssTextField = styled(TextField, {
   shouldForwardProp: (props) => props !== "focusColor",

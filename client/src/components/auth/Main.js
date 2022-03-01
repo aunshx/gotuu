@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import ChangePassword from './ChangePassword';
-import Login from './Login';
-import ChangePassword2 from './ChangePassword2';
+import ChangePassword from './login/ChangePassword';
+import Login from "./login/Login";
+import ChangePassword2 from "./login/ChangePassword2";
 import store from '../../store';
 import { DARK_MODE, LIGHT_MODE, SECURITY_CODE_CHECK_LOADING_COMPLETE, SECURITY_CODE_LOADING_COMPLETE } from '../../redux/actions/types';
 
