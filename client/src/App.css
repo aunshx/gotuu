@@ -1453,64 +1453,63 @@ padding: 0  0 2em 0;
 }
 
 .timeline .main .line .element_small .liner_horizontal_right {
-  border-bottom: 1px dotted var(--light-color-border-element);
+  width: 100px;
+  position: absolute;
+  left: 97%;
+  top: 38%;
+  height: 23px;
+  padding: 0em 0.5em;
+  border-radius: 0 5px 5px 0;
+  background-color: var(--line-small-color);
+  font-size: 0.9em;
+  animation: elementMiniNoteDontShow 0.4s 1 linear
+}
+
+.timeline .main .line .element_small .liner_horizontal_right .icons {
+  color: var(--grey-color);
+}
+
+.timeline .main .line .element_small .liner_horizontal_right-elongate {
   width: 300px;
-  z-index: -1;
-  position: absolute;
-  left: 30px;
-  top: 22px;
-}
-
-.timeline .main .line .element_small .liner_horizontal_right .title-liner {
-  color: var(--light-grey-color);
-  font-size: 0.7em;
-  width: 70%;
-  margin-left: 85px;
-}
-
-
-.timeline .main .line .element_small .liner_horizontal_right_icon_1 {
-  color: var(--primary-color);
-  position: absolute;
-  left: 323px;
-  top: 28px;
+  animation: elementMiniNoteShow 0.4s 1 linear
 }
 
 .timeline .main .line .element_small .liner_horizontal_right_icon_note {
   color: var(--light-grey-color);
   position: absolute;
-  left: 100px;
-  top: 54px;
+  left: 125px;
+  top: 50px;
 }
 
 .timeline .main .line .element_small .liner_horizontal_left {
-  border-bottom: 1px dotted var(--light-color-border-element);
+  width: 100px;
+  position: absolute;
+  right: 95%;
+  top: 38%;
+  height: 23px;
+  padding: 0em 0.5em;
+  border-radius: 5px 0 0 5px;
+  background-color: var(--line-small-color);
+  font-size: 0.9em;
+  animation: elementMiniNoteDontShow 0.4s 1 linear
+}
+
+.timeline .main .line .element_small .liner_horizontal_left .icons {
+  color: var(--grey-color);
+}
+
+.timeline .main .line .element_small .liner_horizontal_left-elongate {
   width: 300px;
-  z-index: -1;
-  position: absolute;
-  right: 30px;
-  top: 22px;
-}
-
-.timeline .main .line .element_small .liner_horizontal_left .title-liner {
-  color: var(--light-grey-color);
-  font-size: 0.7em;
-  width: 70%;
-}
-
-.timeline .main .line .element_small .liner_horizontal_left_icon_1 {
-  color: var(--primary-color);
-  position: absolute;
-  right: 323px;
-  top: 29px;
+  animation: elementMiniNoteShow 0.4s 1 linear
 }
 
 .timeline .main .line .element_small .liner_horizontal_left_icon_note {
   color: var(--light-grey-color);
   position: absolute;
-  right: 100px;
-  top: 54px;
+  right: 125px;
+  top: 50px;
 }
+
 
 @media only screen and (max-width: 479px) {
 .timeline .main .line .element_small {
