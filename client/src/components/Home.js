@@ -10,7 +10,6 @@ import New from './main/metrics/New';
 
 import { getAvgDurationOfTuus, getAvgDurationOfTuusPerDay, getTotalNumberOfTuus } from '../redux/actions/metrics';
 import { useCallback } from 'react';
-import Footer from './layout/Footer';
 
 import store from "../store";
 import { DARK_MODE, LIGHT_MODE } from "../redux/actions/types";
@@ -113,7 +112,6 @@ const Home = ({
           </div>
         )}
       </div>
-      <Footer />
     </>
   );
 };

@@ -67,7 +67,7 @@ const BlockOne = ({
           </div>
         </div>
         <div className='title'>
-          Duration of Tuus - <span> {showHours ? "hrs" : "min"} </span>
+          AVG duration of Tuus - <span> {showHours ? "hrs" : "min"} </span>
         </div>
         <div
           className={
