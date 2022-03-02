@@ -6,6 +6,9 @@ import { connect } from "react-redux";
 import ArrowCircleUpOutlinedIcon from "@mui/icons-material/ArrowCircleUpOutlined";
 import ArrowCircleDownOutlinedIcon from "@mui/icons-material/ArrowCircleDownOutlined";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
+import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight'
+
 import { styled } from "@mui/material/styles";
 
 import { getNote } from '../../../redux/actions/notes';
@@ -65,6 +68,7 @@ const [expanded, setExpanded] = useState(false);
           return null;
       }
     }
+
   }, [classy, event]);
 
   const openNote = () => {
@@ -78,6 +82,10 @@ const [expanded, setExpanded] = useState(false);
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+
+  const noteManipulate = () => {
+    setShowNote(!showNote)
+  }
 
   return (
     <>
@@ -152,12 +160,53 @@ const [expanded, setExpanded] = useState(false);
               )}
               {noteDetails && (
                 <>
-                  <div className={`liner_horizontal_right cursor_pointer`}>
-                    <div className='title-liner flex_middle'>
-                      {noteDetails.title}
+                  <div
+                    className={
+                      showNote
+                        ? `liner_horizontal_right liner_horizontal_right-elongate cursor_pointer`
+                        : `liner_horizontal_right cursor_pointer`
+                    }
+                    onClick={noteManipulate}
+                  >
+                    <div
+                      className='flex_between'
+                      // style={{ alignItems: "flex-start" }}
+                    >
+                      <div></div>
+                      {showNote ? (
+                        <div className='title-liner flex_middle'>
+                          {noteDetails.title}
+                        </div>
+                      ) : (
+                        <div className='title-liner flex_middle'>
+                          {noteDetails.title !== undefined ? noteDetails.title.substr(0, noteDetails.title.indexOf(' ')) + '...' : ''}
+                        </div>
+                      )}
+                      <div className='icons'>
+                        {showNote ? (
+                          <div
+                            onClick={closeNote}
+                            style={{ marginTop: "0.5em" }}
+                          >
+                            <KeyboardDoubleArrowLeftIcon
+                              style={{ fontSize: 15 }}
+                            />
+                          </div>
+                        ) : (
+                          <div
+                            onClick={openNote}
+                            style={{ marginTop: "0.5em" }}
+                          >
+                            <KeyboardDoubleArrowRightIcon
+                              style={{ fontSize: 15 }}
+                              onClick={openNote}
+                            />
+                          </div>
+                        )}
+                      </div>
                     </div>
                   </div>
-                  <div className='cursor_pointer'>
+                  {/* <div className='cursor_pointer'>
                     {showNote ? (
                       <ArrowCircleDownOutlinedIcon
                         className='liner_horizontal_right_icon_1'
@@ -171,7 +220,7 @@ const [expanded, setExpanded] = useState(false);
                         onClick={openNote}
                       />
                     )}
-                  </div>
+                  </div> */}
                 </>
               )}
               {showNote && (
