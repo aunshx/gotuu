@@ -93,6 +93,29 @@ const Count = ({
     
   };
 
+  const stopTime = () => {
+    stopCountDown();
+    setTime(0);
+    scrollSmoothHandler();
+    if (isAuthenticated) {
+      addDurationToEventEnd(currentEventId, time);
+    }
+    store.dispatch({
+      type: ADD_NEW_NOTE,
+      payload: "",
+    });
+
+    store.dispatch({
+      type: ADD_NOTE_TITLE,
+      payload: "",
+    });
+
+    store.dispatch({
+      type: ADD_NOTE_BODY,
+      payload: "",
+    });
+  }
+
   return (
     <div
       className={
@@ -104,7 +127,7 @@ const Count = ({
       onMouseLeave={isHoveringFalse}
       onClick={() => stopCount(currentEventId, time)}
     >
-      <Time time={time} />
+      <Time time={time} stopTime={stopTime} />
     </div>
   );
 };

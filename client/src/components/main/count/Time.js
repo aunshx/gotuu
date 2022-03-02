@@ -12,6 +12,7 @@ import {
 
 const Time = ({
   time,
+  stopTime,
   // Redux Actions
   setFifteenMinAlert,
   setThirtyMinAlert,
@@ -40,6 +41,11 @@ const Time = ({
       case time === 10800000:
         setThreeHourAlert();
         break;
+
+      // Automatically stop session when crossing 6 hours
+      case time === 21600000:
+        stopTime()
+        break
 
       default:
         return null;
