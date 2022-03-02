@@ -2005,15 +2005,14 @@ padding: 0  0 2em 0;
 
 /* -------------------- METRICS --------------------------------- */
 .metrics {
-  width: 100%;
+  width: 90%;
   margin: 2em 0;
   padding: 2em 0;
-  /* height: 100vh; */
+  height: auto;
 }
 
 .metrics .main {
-  width: 70vw;
-  margin: 0 0 3em 0;
+  width: 80vw;
 }
 
 .metrics .main .title {
@@ -2030,7 +2029,7 @@ padding: 0  0 2em 0;
   grid-template-areas: "metrics_details_one metrics_details_two"
   "metrics_details_three";
   grid-template-columns: 2.2fr 1fr;
-  grid-template-rows: repeat(2, 41vh);
+  grid-template-rows: repeat(2, auto);
   width: 100%;
 }
 
@@ -2047,6 +2046,8 @@ padding: 0  0 2em 0;
     .metrics_details_three {
         grid-column: 1/2;
         grid-row: 2/3;
+          margin: 0 0 3em 0;
+
     }
 
 .main .charts {
@@ -2156,7 +2157,7 @@ padding: 0  0 2em 0;
   transform: translateY(4px);
 }
 
-@media only screen and (max-width: 479px){
+@media only screen and (max-width: 768px){
     .metrics .main {
   width: 100%;
   margin: 0 0 3em 0;

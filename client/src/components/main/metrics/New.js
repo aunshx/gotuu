@@ -52,80 +52,82 @@ const New = ({
 
 
   return (
-    <div className='metrics flex_middle' id='metrics'>
-      <div className='main'>
-        <div className='title flex_middle'>
-          <div>
-            <FontAwesomeIcon
-              icon={faChartBar}
-              className='mrg-r-point-5'
-              style={{ fontSize: 30 }}
-            />
+    <div className='app'>
+      <div className='metrics flex_middle' id='metrics'>
+        <div className='main'>
+          <div className='title flex_middle'>
+            <div>
+              <FontAwesomeIcon
+                icon={faChartBar}
+                className='mrg-r-point-5'
+                style={{ fontSize: 30 }}
+              />
+            </div>
+            <div>Metrics</div>
           </div>
-          <div>Metrics</div>
-        </div>
-        <div className='details'>
-          <div
-            className='metrics_details_one'
-            data-aos={width < 360 ? "" : "fade-up"}
-          >
-            <BlockOne
-              data={avgDurationTuusPerDay}
-              dataHours={avgDurationTuusPerDayHours}
-              loading={avgDurationTuusPerDayLoading}
-            />
-          </div>
-          <div className='metrics_details_two flex_middle'>
-            <div className='app'>
-              <div data-aos={width < 360 ? "" : "fade-up"}>
-                <LiveStreak data={liveStreak} loading={liveStreakLoading} />
-              </div>
-              <div data-aos={width < 360 ? "" : "fade-up"}>
-                <TotalTuus
-                  data={totalCountTuus}
-                  loading={totalCountTuusLoading}
-                />
-              </div>
-              <div data-aos={width < 360 ? "" : "fade-up"}>
-                <CommonTime
-                  data={avgDurationTuus}
-                  loading={avgDurationTuusLoading}
-                />
-              </div>
-              <div data-aos={width < 360 ? "" : "fade-up"}>
-                <TotalPerformance
-                  data={avgDurationTuus}
-                  loading={avgDurationTuusLoading}
-                />
-              </div>
-              <div data-aos={width < 360 ? "" : "fade-up"}>
-                <AvgBreakTime
-                  data={avgDurationTuus}
-                  loading={avgDurationTuusLoading}
-                />
+          <div className='details'>
+            <div
+              className='metrics_details_one'
+              data-aos={width < 360 ? "" : "fade-up"}
+            >
+              <BlockOne
+                data={avgDurationTuusPerDay}
+                dataHours={avgDurationTuusPerDayHours}
+                loading={avgDurationTuusPerDayLoading}
+              />
+            </div>
+            <div className='metrics_details_two flex_middle'>
+              <div className='app'>
+                <div data-aos={width < 360 ? "" : "fade-up"}>
+                  <LiveStreak data={liveStreak} loading={liveStreakLoading} />
+                </div>
+                <div data-aos={width < 360 ? "" : "fade-up"}>
+                  <TotalTuus
+                    data={totalCountTuus}
+                    loading={totalCountTuusLoading}
+                  />
+                </div>
+                <div data-aos={width < 360 ? "" : "fade-up"}>
+                  <CommonTime
+                    data={avgDurationTuus}
+                    loading={avgDurationTuusLoading}
+                  />
+                </div>
+                <div data-aos={width < 360 ? "" : "fade-up"}>
+                  <TotalPerformance
+                    data={avgDurationTuus}
+                    loading={avgDurationTuusLoading}
+                  />
+                </div>
+                <div data-aos={width < 360 ? "" : "fade-up"}>
+                  <AvgBreakTime
+                    data={avgDurationTuus}
+                    loading={avgDurationTuusLoading}
+                  />
+                </div>
               </div>
             </div>
+            <div
+              className='metrics_details_three'
+              data-aos={width < 360 ? "" : "fade-up"}
+            >
+              <BlockThree
+                data={numberOfTuusGraph}
+                loading={numberOfTuusGraphLoading}
+              />
+            </div>
           </div>
-          <div
-            className='metrics_details_three'
-            data-aos={width < 360 ? "" : "fade-up"}
-          >
-            <BlockThree
-              data={numberOfTuusGraph}
-              loading={numberOfTuusGraphLoading}
+        </div>
+        {fixedContent2 && (
+          <div id='go-up' className='cursor_pointer' data-aos='fade-up-left'>
+            <FontAwesomeIcon
+              icon={faArrowCircleUp}
+              style={{ fontSize: 30, color: "#7ed957" }}
+              onClick={goToMain}
             />
           </div>
-        </div>
+        )}
       </div>
-      {fixedContent2 && (
-        <div id='go-up' className='cursor_pointer' data-aos='fade-up-left'>
-          <FontAwesomeIcon
-            icon={faArrowCircleUp}
-            style={{ fontSize: 30, color: "#7ed957" }}
-            onClick={goToMain}
-          />
-        </div>
-      )}
     </div>
   );
 };
