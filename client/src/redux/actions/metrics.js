@@ -35,24 +35,18 @@ import {
 } from "./types";
 
 // Get avg duration of tuus per day - seven days
-export const getLiveStreak = () => async (dispatch, getState) => {
+export const getLiveStreak = () => async (dispatch) => {
   let value = {
     message: "1",
     type: "info",
   };
-
-  const { auth } = getState()
-
-  const body = JSON.stringify({
-    timezone: auth.location
-  })
 
   try {
     dispatch({
       type: LIVE_STREAK_LOADING,
     });
 
-    const res = await api.post("/metrics/live-streak", body);
+    const res = await api.get("/metrics/live-streak");
 
     dispatch({
       type: LIVE_STREAK,
