@@ -37,21 +37,7 @@ const About = (props) => {
         <div className='main-about'>
           <div className='image flex_middle'>
             <div className='title'>About</div>
-            <div className='credits' ref={refElement}>
-              Photo by{" "}
-              <a
-                href='https://unsplash.com/@nate_dumlao?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText'
-                style={{ color: "grey" }}
-              >
-                Nathan Dumlao
-              </a>{" "}
-              on{" "}
-              <a
-                href='https://unsplash.com/s/photos/time?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText'
-                style={{ color: "grey" }}
-              >
-                Unsplash
-              </a>
+            <div className='credits' ref={refElement} style={{ height: '1px' }}>
             </div>
           </div>
           <div>

@@ -2538,6 +2538,7 @@ margin: 0 2em;
   font-weight: bold;
   color: var(--primary-color);
   cursor: pointer;
+   font-size: 0.9em;
 }
 
 .about_sidebar .contents_div ul li .link:hover {

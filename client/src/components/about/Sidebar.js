@@ -2,60 +2,38 @@ import React, { useCallback, useRef, useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Intro from "./Intro";
-import Why from "./Why";
 import HowTo from "./HowTo";
-import Faqs from "./Faqs";
-import Future from "./Future";
-import { NavLink } from "react-router-dom";
+import Attribution from "./Attribution";
 
 const ProfileDetails = ({ fixedContent }) => {
 
-  const [showAll, setShowAll] = useState(true);
-  const [showEventsOnly, setShowEventsOnly] = useState(false);
-  const [showChallengesOnly, setShowChallengesOnly] = useState(false);
-  const [showQuestionsOnly, setShowQuestionsOnly] = useState(false);
-  const [showDualsOnly, setShowDualsOnly] = useState(false);
+  const walkthroughRef = useRef()
+  const introRef = useRef();
+  const attributionRef = useRef();
+
+  const [introOnly, setIntroOnly] = useState(true);
+  const [walkthroughOnly, setWalkthroughOnly] = useState(false);
+  const [attributionOnly, setAttributionOnly] = useState(false);
 
   const shiftToEventsOnly = () => {
-    setShowAll(false);
-    setShowChallengesOnly(false);
-    setShowQuestionsOnly(false);
-    setShowDualsOnly(false);
-
-    setShowEventsOnly(true);
+    setIntroOnly(false);
+    setAttributionOnly(false);
+    setWalkthroughOnly(true);
+    walkthroughRef.current.scrollIntoView({ behavior: "smooth" });
   };
-  const shiftToChallengesOnly = () => {
-    setShowAll(false);
-    setShowEventsOnly(false);
-    setShowQuestionsOnly(false);
-    setShowDualsOnly(false);
 
-    setShowChallengesOnly(true);
-  };
   const shiftToQuestionsOnly = () => {
-    setShowAll(false);
-    setShowEventsOnly(false);
-    setShowChallengesOnly(false);
-    setShowDualsOnly(false);
-
-    setShowQuestionsOnly(true);
-  };
-  const shiftToDualsOnly = () => {
-    setShowAll(false);
-    setShowEventsOnly(false);
-    setShowChallengesOnly(false);
-    setShowQuestionsOnly(false);
-
-    setShowDualsOnly(true);
+    setIntroOnly(false);
+    setWalkthroughOnly(false);
+    setAttributionOnly(true);
+    attributionRef.current.scrollIntoView({ behavior: 'smooth' })
   };
 
   const shiftToAll = () => {
-    setShowEventsOnly(false);
-    setShowChallengesOnly(false);
-    setShowQuestionsOnly(false);
-    setShowDualsOnly(false);
-
-    setShowAll(true);
+    setWalkthroughOnly(false);
+    setAttributionOnly(false);
+    setIntroOnly(true);
+    introRef.current.scrollIntoView({ behavior: 'smooth' })
   };
 
   return (
@@ -73,51 +51,34 @@ const ProfileDetails = ({ fixedContent }) => {
                     <div style={{ marginRight: "0.8em" }}>
                       <ul>
                         <li style={{ padding: "0.4em 0" }} onClick={shiftToAll}>
-                          <a
-                            href='#intro-about'
-                            className={showAll ? "link-active" : "link"}
-                          >
+                          <div className={introOnly ? "link-active" : "link"}>
                             <span className='number'>1.</span>
                             <span>Intro</span>
-                          </a>
+                          </div>
                         </li>
                         <li
                           style={{ padding: "0.4em 0" }}
                           onClick={shiftToEventsOnly}
                         >
-                          <a
-                            href='#walkthrough-about'
-                            className={showEventsOnly ? "link-active" : "link"}
+                          <div
+                            className={walkthroughOnly ? "link-active" : "link"}
                           >
                             <span className='number'>2.</span>
                             <span>Walkthrough</span>
-                          </a>
+                          </div>
                         </li>
                         <li
                           style={{ padding: "0.4em 0" }}
                           onClick={shiftToQuestionsOnly}
                         >
-                          <a
-                            href='#faqs-about'
+                          <div
                             className={
-                              showQuestionsOnly ? "link-active" : "link"
+                              attributionOnly ? "link-active" : "link"
                             }
                           >
                             <span className='number'>3.</span>
-                            <span>FAQs</span>
-                          </a>
-                        </li>
-                        <li
-                          style={{ padding: "0.4em 0" }}
-                          onClick={shiftToDualsOnly}
-                        >
-                          <a
-                            href='#future-about'
-                            className={showDualsOnly ? "link-active" : "link"}
-                          >
-                            <span className='number'>4.</span>
-                            <span>Future</span>
-                          </a>
+                            <span>Attribution</span>
+                          </div>
                         </li>
                       </ul>
                     </div>
@@ -127,10 +88,9 @@ const ProfileDetails = ({ fixedContent }) => {
             </nav>
           </div>
           <div className='details'>
-            <Intro />
-            <HowTo />
-            <Faqs />
-            <Future />
+            <Intro innerRef={introRef} />
+            <HowTo innerRef={walkthroughRef} />
+            <Attribution innerRef={attributionRef}  />
           </div>
         </div>
       </div>
