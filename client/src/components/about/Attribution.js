@@ -1,12 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const Attribution = ({ innerRef }) => {
+const Attribution = ({ innerRef, secondInnerRef }) => {
   return (
     <div className='pages' id='faqs-about' ref={innerRef}>
       <div className='title flex_middle'>Attribution</div>
-      <div className='page-details flex_middle'>
-        <div style={{ textAlign: 'center' }}>
+      <div className='page-details flex_middle' ref={secondInnerRef}>
+        <div style={{ textAlign: "center" }}>
           '<span className='title'>A</span>bout' Page Photo by{" "}
           <a
             href='https://unsplash.com/@nate_dumlao?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText'

@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Intro = ({ innerRef }) => {
+const Intro = ({ innerRef, secondInnerRef }) => {
   return (
     <div className='pages' id='intro-about' ref={innerRef}>
       <div className='title flex_middle'>Introduction</div>
-      <div className='page-details flex_left'>
+      <div className='page-details flex_left' ref={secondInnerRef}>
         <div>
           <span className='title' style={{ fontSize: "1.5em" }}>
             H

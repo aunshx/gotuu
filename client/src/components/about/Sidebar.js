@@ -15,25 +15,97 @@ const ProfileDetails = ({ fixedContent }) => {
   const [walkthroughOnly, setWalkthroughOnly] = useState(false);
   const [attributionOnly, setAttributionOnly] = useState(false);
 
+   const refElement = useCallback((node) => {
+     if (introRef.current) {
+       introRef.current.disconnect();
+     }
+     const options = {
+       root: null,
+       threshold: 0,
+     };
+     introRef.current = new IntersectionObserver((entries) => {
+       if (entries[0].isIntersecting) {
+         setIntroOnly(true);
+         setWalkthroughOnly(false);
+         setAttributionOnly(false)
+       } else {
+         setIntroOnly(false);
+       }
+     }, options);
+     if (node) {
+       introRef.current.observe(node);
+     }
+   }, []);
+
+   const refElementWalkthrough = useCallback((node) => {
+     if (walkthroughRef.current) {
+       walkthroughRef.current.disconnect();
+     }
+     const options = {
+       root: null,
+       threshold: 0.5,
+     };
+     walkthroughRef.current = new IntersectionObserver((entries) => {
+       if (entries[0].isIntersecting) {
+         setIntroOnly(false);
+         setWalkthroughOnly(true);
+         setAttributionOnly(false);
+       } else {
+         setWalkthroughOnly(false);
+       }
+     }, options);
+     if (node) {
+       walkthroughRef.current.observe(node);
+     }
+   }, []);
+
+   const refElementAttribution = useCallback((node) => {
+     if (attributionRef.current) {
+       attributionRef.current.disconnect();
+     }
+     const options = {
+       root: null,
+       threshold: 0.5,
+     };
+     attributionRef.current = new IntersectionObserver((entries) => {
+       if (entries[0].isIntersecting) {
+         setIntroOnly(false);
+         setWalkthroughOnly(false);
+         setAttributionOnly(true);
+       } else {
+         setAttributionOnly(false);
+       }
+     }, options);
+     if (node) {
+       attributionRef.current.observe(node);
+     }
+   }, []);
+
   const shiftToEventsOnly = () => {
     setIntroOnly(false);
     setAttributionOnly(false);
     setWalkthroughOnly(true);
-    walkthroughRef.current.scrollIntoView({ behavior: "smooth" });
+    walkthroughRef.current.scrollIntoView({
+      behavior: "smooth",
+      block: "center",
+    });
   };
 
   const shiftToQuestionsOnly = () => {
     setIntroOnly(false);
     setWalkthroughOnly(false);
     setAttributionOnly(true);
-    attributionRef.current.scrollIntoView({ behavior: 'smooth' })
+    attributionRef.current.scrollIntoView({
+      behavior: "smooth",
+      block: "center",
+    });
   };
 
   const shiftToAll = () => {
     setWalkthroughOnly(false);
     setAttributionOnly(false);
     setIntroOnly(true);
-    introRef.current.scrollIntoView({ behavior: 'smooth' })
+    introRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
   };
 
   return (
@@ -72,9 +144,7 @@ const ProfileDetails = ({ fixedContent }) => {
                           onClick={shiftToQuestionsOnly}
                         >
                           <div
-                            className={
-                              attributionOnly ? "link-active" : "link"
-                            }
+                            className={attributionOnly ? "link-active" : "link"}
                           >
                             <span className='number'>3.</span>
                             <span>Attribution</span>
@@ -88,9 +158,15 @@ const ProfileDetails = ({ fixedContent }) => {
             </nav>
           </div>
           <div className='details'>
-            <Intro innerRef={introRef} />
-            <HowTo innerRef={walkthroughRef} />
-            <Attribution innerRef={attributionRef}  />
+            <Intro innerRef={introRef} secondInnerRef={refElement} />
+            <HowTo
+              innerRef={walkthroughRef}
+              secondInnerRef={refElementWalkthrough}
+            />
+            <Attribution
+              innerRef={attributionRef}
+              secondInnerRef={refElementAttribution}
+            />
           </div>
         </div>
       </div>
