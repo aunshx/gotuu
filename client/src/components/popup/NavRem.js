@@ -83,12 +83,8 @@ const NavRem = ({
   const setReminderTwoHour = () => {
     if(reminderTwoHour){
       setReminderTwoHourOff()
-            console.log("KK");
-
     } else {
       setReminderTwoHourOn()
-            console.log("KKw");
-
     }
   }
   const setReminderThreeHour = () => {

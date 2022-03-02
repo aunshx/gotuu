@@ -23,7 +23,6 @@ const Home = ({
 }) => {
   useEffect(() => {
       if (localStorage.theme === "dark") {
-        console.log(localStorage.theme)
         store.dispatch({
           type: DARK_MODE,
         });

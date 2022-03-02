@@ -1973,13 +1973,12 @@ padding: 0  0 2em 0;
 }
 
 .MuiSnackbar-root .MuiAlert-root {
-    min-height: 40px;
-    padding-top: 2px;
+    min-height: 30px;
+    padding-top: 5px;
     margin-bottom: 10px;
 }
 
 .MuiSnackbar-root .MuiAlert-root .MuiAlert-message {
-    padding-bottom: 10px;
 }
 
 .MuiSnackbar-root .MuiAlert-filledSuccess {
@@ -2001,7 +2000,7 @@ padding: 0  0 2em 0;
 }
 
 /* ---------------------- DATE PICKER --------------------------- */
-.nice-dates-day.-highlight { color: var(--primary-color-darker); font-weight: bold }
+.nice-dates-day.-highlight { color: var(--primary-color-darker); font-weight: bold; }
 
 /* -------------------- METRICS --------------------------------- */
 .metrics {

@@ -14,7 +14,6 @@ const AvgBreakTime = ({ data, loading }) => {
    const [messageThree, setMessageThree] = useState(false);
 
    useEffect(() => {
-     console.log(data)
      if (data <= 1800000) {
        setMessageThree(false);
        setMessageOne(true);

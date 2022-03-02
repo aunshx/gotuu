@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React  from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import moment from "moment";
@@ -8,7 +8,6 @@ import { styled } from "@mui/material/styles";
 import { makeStyles } from "@mui/styles";
 
 import DeleteIcon from "@mui/icons-material/Delete";
-import CloseIcon from "@mui/icons-material/Close";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 import {
@@ -35,23 +34,11 @@ const CssTextField = styled(TextField, {
   border: "transparent",
 }));
 
-const textFieldStyle = {
-  height: "10px",
-  fontSize: "0.9em",
-  color: "black",
-  fontWeight: "bold",
-  padding: 0,
-};
-
 const useStyles = makeStyles(() => ({
   noBorder: {
     border: "none",
   },
 }));
-
-const map = new Map([
-  ['element', 0]
-])
 
 const Note = ({ close, 
   // Redux Actions

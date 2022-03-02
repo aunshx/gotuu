@@ -67,7 +67,6 @@ const Main = ({
   const toggleFullScreen = () => {
     setIsFull(true);
     if (handle.current.requestFullscreen) {
-      console.log(handle.current);
       handle.current.requestFullscreen();
     } else if (handle.current.msRequestFullscreen) {
       handle.current.msRequestFullscreen();
