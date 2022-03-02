@@ -1122,25 +1122,6 @@ padding: 0  0 2em 0;
 }
 
 
-
-@keyframes elementMiniNoteShow {
-  from {
-    width: 100px;
-  }
-  to {
-    width: 300px;
-  }
-}
-
-@keyframes elementMiniNoteDontShow {
-  from {
-    width: 300px;
-  }
-  to {
-    width: 100px;
-  }
-}
-
 @media only screen and (max-width: 479px) {
   .timeline .main .line  .element_mini {
   width: 80px;
@@ -1207,63 +1188,95 @@ padding: 0  0 2em 0;
 }
 
 .timeline .main .line .element_tiny .liner_horizontal_right {
-  border-bottom: 1px dotted var(--light-color-border-element);
-  width: 300px;
-  z-index: -1;
+  width: 100px;
   position: absolute;
-  left: 30px;
-  top: 13px;
+  left: 95%;
+  top: 30%;
+  height: 23px;
+  padding: 0em 0.5em;
+  border-radius: 0 5px 5px 0;
+  background-color: var(--line-tiny-color);
+  font-size: 0.9em;
+  animation: elementMiniNoteDontShow 0.4s 1 linear
 }
 
-.timeline .main .line .element_tiny .liner_horizontal_right .title-liner {
+.timeline .main .line .element_tiny .liner_horizontal_right .icons {
   color: var(--light-grey-color);
-  font-size: 0.7em;
-  width: 70%;
-  margin-left: 85px;
 }
 
-.timeline .main .line .element_tiny .liner_horizontal_right_icon_1 {
-  color: var(--primary-color);
+.timeline .main .line .element_tiny .liner_horizontal_right-elongate {
+  width: 300px;
+  animation: elementMiniNoteShow 0.4s 1 linear
+}
+
+.timeline .main .line .element_tiny .liner_horizontal_right_icon_note {
+  color: var(--light-grey-color);
   position: absolute;
-  left: 323px;
-  top: 21px;
+  left: 90px;
+  top: 30px;
 }
 
 .timeline .main .line .element_tiny .liner_horizontal_right_icon_note {
   color: var(--light-grey-color);
   position: absolute;
   left: 100px;
-  top: 23px;
+  top: 33px;
 }
 
 .timeline .main .line .element_tiny .liner_horizontal_left {
-  border-bottom: 1px dotted var(--light-color-border-element);
-  width: 300px;
-  z-index: -1;
+  width: 100px;
   position: absolute;
-  right: 30px;
-  top: 13px;
+  right: 93%;
+  top: 30%;
+  height: 23px;
+  padding: 0em 0.5em;
+  border-radius: 5px 0px 0px 5px;
+  background-color: var(--line-tiny-color);
+  font-size: 0.9em;
+  animation: elementMiniNoteDontShow 0.4s 1 linear
 }
 
-.timeline .main .line .element_tiny .liner_horizontal_left .title-liner {
+.timeline .main .line .element_tiny .liner_horizontal_left .icons {
   color: var(--light-grey-color);
-  font-size: 0.7em;
-  width: 70%;
 }
 
-.timeline .main .line .element_tiny .liner_horizontal_left_icon_1 {
-  color: var(--primary-color);
+.timeline .main .line .element_tiny .liner_horizontal_left-elongate {
+  width: 300px;
+  animation: elementMiniNoteShow 0.4s 1 linear
+}
+
+.timeline .main .line .element_tiny .liner_horizontal_left_icon_note {
+  color: var(--light-grey-color);
   position: absolute;
-  right: 323px;
-  top: 21px;
+  right: 90px;
+  top: 30px;
 }
 
 .timeline .main .line .element_tiny .liner_horizontal_left_icon_note {
   color: var(--light-grey-color);
   position: absolute;
   right: 100px;
-  top: 23px;
+  top: 33px;
 }
+
+@keyframes elementMiniNoteShow {
+  from {
+    width: 100px;
+  }
+  to {
+    width: 300px;
+  }
+}
+
+@keyframes elementMiniNoteDontShow {
+  from {
+    width: 300px;
+  }
+  to {
+    width: 100px;
+  }
+}
+
 
 @media only screen and (max-width: 479px) {
   .timeline .main .line  .element_tiny {
