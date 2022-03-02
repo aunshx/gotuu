@@ -499,6 +499,8 @@ export const getAvgDurationOfTuusPerDay = () => async (dispatch) => {
       "/metrics/average-duration-tuus-per-day-sevendays"
     );
 
+    console.log(res.data)
+
     let resMin = res.data.map((ele) => {
       return {
         name: ele.date.date,

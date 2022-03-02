@@ -67,7 +67,7 @@ const BlockOne = ({
           </div>
         </div>
         <div className='title'>
-          Avg duration of Tuus - <span> {showHours ? "hrs" : "min"} </span>
+          Duration of Tuus - <span> {showHours ? "hrs" : "min"} </span>
         </div>
         <div
           className={
@@ -134,7 +134,7 @@ const BlockOne = ({
         )}
       </div>
       <div className='footnote flex_middle'>
-        Avg duration = (total duration/number of tuuls)
+        Duration = Total Duration of Tuus per day
       </div>
     </div>
   );
