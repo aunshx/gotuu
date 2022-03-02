@@ -1132,10 +1132,9 @@ padding: 0  0 2em 0;
   margin: 20px 0;
   position: relative;
   padding-top: 0.3em;
-}
-
-.timeline .main .line .element_padding_mini {
-  padding-top: 0.3em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .timeline .main .line .element_mini .liner_horizontal_right {
@@ -1273,10 +1272,9 @@ padding: 0  0 2em 0;
   font-weight: bold;
   margin: 20px 0;
   position: relative;
-}
-
-.timeline .main .line .element_padding_tiny {
-  padding-top: 0.4em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .timeline .main .line .element_tiny .liner_horizontal_right {
@@ -1393,14 +1391,13 @@ padding: 0  0 2em 0;
   font-weight: bold;
   margin: 30px 0;
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .timeline .main .line .element_padding_extra-small {
   padding-top: 0.5em;
-}
-
-.timeline .main .line .time_extra-small {
-  padding-top: 1.2em;
 }
 
 .timeline .main .line .element_extra-small .liner_horizontal_right {
@@ -1521,14 +1518,13 @@ padding: 0  0 2em 0;
   margin: 0.8em 0;
   margin: 35px 0;
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .timeline .main .line .element_padding_small {
   padding-top: 0.5em;
-}
-
-.timeline .main .line .time_small {
-  padding-top: 1.2em;
 }
 
 .timeline .main .line .element_small .liner_horizontal_right {
@@ -1646,14 +1642,13 @@ padding: 0  0 2em 0;
   margin: 1em 0;
   margin: 40px 0;
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .timeline .main .line .element_padding_medium {
   padding-top: 0.55em;
-}
-
-.timeline .main .line .time_medium {
-  padding-top: 1.2em;
 }
 
 .timeline .main .line .element_medium .liner_horizontal_right {
@@ -1767,7 +1762,7 @@ padding: 0  0 2em 0;
   border-radius: 10px;
   background-color: var(--line-large-color);
   font-weight: bold;
-  margin: 1.2em 0;
+  margin: 1em 0;
   margin: 45px 0;
   position: relative;
   display: flex;
@@ -1777,10 +1772,6 @@ padding: 0  0 2em 0;
 
 .timeline .main .line .element_padding_large {
   padding-top: 0.7em;
-}
-
-.timeline .main .line .time_large {
-  padding-top: 1.2em;
 }
 
 .timeline .main .line .element_large .liner_horizontal_right {
@@ -1897,14 +1888,13 @@ padding: 0  0 2em 0;
   margin: 1.2em 0;
   margin: 45px 0;
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .timeline .main .line .element_padding_humongous {
   padding-top: 0.8em;
-}
-
-.timeline .main .line .time_humongous {
-  padding-top: 1.2em;
 }
 
 .timeline .main .line .element_humongous .liner_horizontal_right {
@@ -1983,7 +1973,7 @@ padding: 0  0 2em 0;
 }
 
 .MuiSnackbar-root .MuiAlert-root {
-    height: 40px;
+    min-height: 40px;
     padding-top: 2px;
     margin-bottom: 10px;
 }

@@ -125,6 +125,14 @@ const [expanded, setExpanded] = useState(false);
               </Tooltip>
               {width < 480 && noteDetails && (
                 <>
+                  <div className='title-liner flex_middle'>
+                    {noteDetails.title !== undefined
+                      ? noteDetails.title.substr(
+                          0,
+                          noteDetails.title.indexOf(" ")
+                        ) + "..."
+                      : ""}
+                  </div>
                   <div className='' onClick={handleExpandClick}>
                     <ExpandMore
                       expand={expanded}
@@ -256,6 +264,14 @@ const [expanded, setExpanded] = useState(false);
               </Tooltip>
               {width < 480 && noteDetails && (
                 <>
+                  <div className='title-liner flex_middle'>
+                    {noteDetails.title !== undefined
+                      ? noteDetails.title.substr(
+                          0,
+                          noteDetails.title.indexOf(" ")
+                        ) + "..."
+                      : ""}
+                  </div>
                   <div className='' onClick={handleExpandClick}>
                     <ExpandMore
                       expand={expanded}
