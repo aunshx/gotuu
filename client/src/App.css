@@ -6,7 +6,9 @@
     --primary-color: #7ed957;
     --primary-color-darker: #44af16;
     --primary-hover-color: #2EE59D;
+    --light-primary-color: rgb(214, 243, 214);
     --count-color: #e8544a;
+    --light-count-color: rgb(247, 223, 223);
     --count-box-shadow-color: rgba(229, 80, 46, 0.4);
     --line-mini-color: #2ee543;
     --line-tiny-color: #9fe52e;
@@ -18,6 +20,7 @@
     --closing-color: #e52e2e;
     --grey-color: rgb(105, 105, 105);
     --light-grey-color: #dcdcc8;
+    --dark-grey-color: rgb(69, 69, 69);
     --login-card-background: rgb(250, 250, 250);
     --dark-font-color: rgb(31, 31, 31);
     --light-color: white;
@@ -46,6 +49,9 @@
   --grey-color: rgb(197, 194, 194);
   --disabled-button-color: rgb(44, 44, 44);
   --mui-snackbar-color: rgb(50, 50, 50);
+  --dark-grey-color: rgb(221, 221, 221);
+  --light-count-color: rgb(49, 48, 48);
+  --light-primary-color: rgb(31, 57, 31);
 }
 
 * {
@@ -3050,4 +3056,73 @@ margin: 0 0.5em;
 
 .footer a:hover {
   color: var(--creator-website-color);
+}
+
+/* ------------------------ DELETE CARD -------------------- */
+.delete-card {
+  color: var(--dark-grey-color);
+  background-color: var(--login-card-background);
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  border-radius: 10px;
+  z-index: 1;
+  font-family: 'Roboto', sans-serif;
+  padding: 10px;
+  width: 400px;
+  min-height: 130px;
+  font-size: 0.8em;
+}
+
+.delete-card .title {
+  font-size: 1.2em;
+  color: var(--closing-color);
+}
+
+.delete-card--dark {
+  border: 1px solid var(--dark-grey-color);
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.delete-card .button {
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.delete-card .button-yes{
+display:inline-block;
+padding:0.2em 1em;
+border:0.1em solid var(--primary-color-darker);
+box-sizing: border-box;
+text-decoration:none;
+font-family:'Roboto',sans-serif;
+font-weight:300;
+color: var(--primary-color-darker);
+text-align:center;
+transition: all 0.2s;
+border-radius: 5px;
+cursor: pointer;
+background-color:var(--login-card-background);
+}
+
+.delete-card .button-yes:hover{
+background-color:var(--light-primary-color);
+}
+
+.delete-card .button-no{
+display:inline-block;
+padding:0.2em 1em;
+border:0.1em solid var(--line-humongous-color);
+box-sizing: border-box;
+text-decoration:none;
+font-family:'Roboto',sans-serif;
+font-weight:300;
+color:var(--line-humongous-color);
+text-align:center;
+transition: all 0.2s;
+border-radius: 5px;
+cursor: pointer;
+background-color:var(--login-card-background);
+}
+
+.delete-card .button-no:hover{
+background-color:var(--light-count-color);
 }

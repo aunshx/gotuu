@@ -9,7 +9,8 @@ import {
   // Create note
   ADD_NEW_NOTE,
   ADD_NOTE_TITLE,
-  ADD_NOTE_BODY
+  ADD_NOTE_BODY,
+  SUCCESS_200
 } from "./types";
 
 // Add note data body
@@ -299,6 +300,7 @@ export const deleteNote = (noteId) => async (dispatch) => {
   });
 
   try {
+    
     const res = await api.delete("/notes/delete-note", {data: body});
 
     dispatch({
@@ -315,6 +317,22 @@ export const deleteNote = (noteId) => async (dispatch) => {
       type: ADD_NOTE_BODY,
       payload: '',
     });
+
+    value.message = "Tuu & it's Note deleted successfully!"
+    value.type = 'success'
+
+    dispatch({
+      type: SUCCESS_200,
+      payload: value
+    })
+
+    setTimeout(
+      () =>
+        dispatch({
+          type: SNACKBAR_RESET,
+        }),
+      5000
+    );
 
   } catch (error) {
     if (error.response.status === 500) {

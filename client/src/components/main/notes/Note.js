@@ -1,9 +1,9 @@
-import React  from "react";
+import React, { useState }  from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import moment from "moment";
 
-import { Tooltip, TextField } from "@mui/material";
+import { Tooltip, TextField, Modal, Fade, Box } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { makeStyles } from "@mui/styles";
 
@@ -15,6 +15,7 @@ import {
   sendNoteDataBody,
   sendNoteTitle,
 } from "../../../redux/actions/notes";
+import DeleteWarning from "./DeleteWarning";
 
 const CssTextField = styled(TextField, {
   shouldForwardProp: (props) => props !== "focusColor",
@@ -40,6 +41,17 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
+const style = {
+  position: "fixed",
+  top: "50%",
+  left: "48%",
+  transform: "translate(-50%, -50%)",
+  bgcolor: "background.paper",
+  boxShadow: 24,
+  border: "none",
+  p: 4,
+};
+
 const Note = ({ close, 
   // Redux Actions
   deleteNote,
@@ -49,7 +61,7 @@ const Note = ({ close,
   notes: { noteId, noteTitle, noteBody } 
 }) => {
   const textAttitude = useStyles();
-  // const [checkingList, setCheckingList] = useState('')
+  const [isDeleteOpen, setIsDeleteOpen] = useState(false);
 
   const CHARACTER_LIMIT = 250;
 
@@ -67,6 +79,14 @@ const Note = ({ close,
     }
   };
 
+  const openDeleteBox = () => {
+    setIsDeleteOpen(true);
+  };
+
+  const closeDeleteBox = () => {
+    setIsDeleteOpen(false);
+  };
+
   // const handleSpace = (e) => {
   //   if(e.keyCode === 32){
   //     if(map.get("element") === '1. ' || map.get("element") === '1) ' || map.get("element") === '- ' || map.get("element") === 'a. ' || map.get("element") === 'a) ' || map.get("element") === 'A. ' || map.get("element") === 'A) ' || map.get("element") === '-> '){
@@ -79,11 +99,6 @@ const Note = ({ close,
   //     console.log(map);
   //   }
   // }
-
-  const deleteTheNote = (noteId) => {
-    deleteNote(noteId);
-    close();
-  };
 
   return (
     <>
@@ -145,12 +160,29 @@ const Note = ({ close,
                 style={{ fontSize: 18 }}
                 className='icons'
               >
-                <DeleteIcon onClick={() => deleteTheNote(noteId)} />
+                <DeleteIcon onClick={openDeleteBox} />
               </Tooltip>
             </div>
           </div>
         </div>
       </div>
+      <Modal
+        open={isDeleteOpen}
+        onClose={closeDeleteBox}
+        closeAfterTransition
+        BackdropProps={{
+          timeout: 500,
+          style: {
+            backgroundColor: "rgba(0,0,0,0.8)",
+          },
+        }}
+      >
+        <Fade in={isDeleteOpen}>
+          <Box style={style}>
+            <DeleteWarning close={closeDeleteBox} noteId={noteId} />
+          </Box>
+        </Fade>
+      </Modal>
     </>
   );
 };

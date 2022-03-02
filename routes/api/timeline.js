@@ -31,8 +31,7 @@ let ans = {}
 
     return res.status(200).send(ans._id)
   } catch (err) {
-    console.error(err.message);
-    res.status(500).send("Server Error");
+    res.status(400).send({ errors: [{ msg: "Something went wrong!" }] });
   }
 });
 
@@ -45,7 +44,7 @@ router.post("/add-details-event", auth, async (req, res) => {
 
     let intDuration = parseInt(duration)
 
-    let todayDate = moment().startOf('day')
+    let todayDate = moment().startOf('days')
 
 let ans = {}
   try {
@@ -81,8 +80,7 @@ let ans = {}
 
     return res.status(200).send(ans)
   } catch (err) {
-    console.error(err.message);
-    res.status(500).send("Server Error");
+    res.status(400).send({ errors: [{ msg: "Something went wrong!" }] });
   }
 });
 
@@ -118,8 +116,7 @@ let ans = {}
 
     return res.status(200).send(ans)
   } catch (err) {
-    console.error(err.message);
-    res.status(500).send("Server Error");
+    res.status(400).send({ errors: [{ msg: "Something went wrong!" }] });
   }
 });
 
@@ -155,8 +152,7 @@ let ans = {}
 
     return res.status(200).send(ans)
   } catch (err) {
-    console.error(err.message);
-    res.status(500).send("Server Error");
+    res.status(400).send({ errors: [{ msg: "Something went wrong!" }] });
   }
 });
 
@@ -183,10 +179,30 @@ let ans = {}
 
     return res.status(200).send(ans)
   } catch (err) {
-    console.error(err.message);
-    res.status(500).send("Server Error");
+    res.status(400).send({ errors: [{ msg: "Something went wrong!" }] });
   }
 });
+
+// @route    DELETE api/timeline
+// @desc     Delete an event
+// @access   Private
+
+router.post(
+  "/delete-event",
+  auth,
+  async (req, res) => {
+
+    const { eventId } = req.body;
+
+    try {
+      let event = await Timeline.deleteOne({ _id: eventId })
+
+      return res.status(200).send('Event deleted successfully!');
+    } catch (error) {
+     res.status(400).send({ errors: [{ msg: "Something went wrong!" }] });
+    }
+  }
+);
 
 
 module.exports = router;

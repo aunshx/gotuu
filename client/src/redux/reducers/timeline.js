@@ -2,33 +2,57 @@ import {
   // Timeline Specifics
   CREATE_TIMELINE,
   ADD_ENTRY_TIMELINE,
-
   CREATE_DATES_CAPTURED,
   ADD_DATES_CAPTURED,
 
   // Loading
   LOADING_TIMELINE,
   LOADING_TIMELINE_COMPLETE,
+
+  // Delete Event
+  DELETE_EVENT_LOADING,
+  DELETE_EVENT,
+  DELETE_EVENT_LOADING_COMPLETE,
 } from "../actions/types";
 //
 const initialState = {
   timeline: [],
   datesCaptured: [],
   timelineLoading: false,
-  currentEventId: ''
+  currentEventId: '',
+  deleteEventLoading: false
 };
 
 function authReducer(state = initialState, action) {
   const { type, payload } = action;
 
   switch (type) {
+    // Delete Event
+    case DELETE_EVENT_LOADING:
+      return {
+        ...state,
+        deleteEventLoading: true,
+      };
+    case DELETE_EVENT_LOADING_COMPLETE:
+      return {
+        ...state,
+        deleteEventLoading: false,
+      };
+    case DELETE_EVENT:
+      return {
+        ...state,
+        timeline: state.timeline.filter((element, index) => (
+          element._id !== payload
+        )),
+      };
+
     // Create new event
     case ADD_ENTRY_TIMELINE:
       return {
         ...state,
         currentEventId: payload,
       };
-      
+
     // Create dates captured
     case CREATE_DATES_CAPTURED:
       return {

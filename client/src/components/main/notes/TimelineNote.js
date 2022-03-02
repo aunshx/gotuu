@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import moment from "moment";
 
-import { Tooltip, TextField } from "@mui/material";
+import { Tooltip, TextField, Modal, Fade, Box } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { makeStyles } from "@mui/styles";
 
@@ -13,6 +13,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import {
   deleteNote,
 } from "../../../redux/actions/notes";
+import DeleteWarning from "./DeleteWarning";
 
 const CssTextField = styled(TextField, {
   shouldForwardProp: (props) => props !== "focusColor",
@@ -32,36 +33,51 @@ const CssTextField = styled(TextField, {
   border: "transparent",
 }));
 
-
 const useStyles = makeStyles(() => ({
   noBorder: {
     border: "none",
   },
 }));
 
+const style = {
+  position: "fixed",
+  top: "50%",
+  left: "48%",
+  transform: "translate(-50%, -50%)",
+  bgcolor: "background.paper",
+  boxShadow: 24,
+  border: "none",
+  p: 4,
+};
 
 const TimelineNote = ({
   noteDetails,
   close,
+  eventId,
+  dateSelected,
+  setReload,
   // Redux Actions
   deleteNote,
   // Redux State
 }) => {
+    const [isDeleteOpen, setIsDeleteOpen] = useState(false);
+
   const textAttitude = useStyles();
 
   const CHARACTER_LIMIT = 250;
 
-  const deleteTheNote = (noteId) => {
-    deleteNote(noteId);
-    close();
-  };
+   const openDeleteBox = () => {
+     setIsDeleteOpen(true);
+   };
+
+   const closeDeleteBox = () => {
+     setIsDeleteOpen(false);
+   };
 
   return (
     <>
       <div className={"single_note_1_timeline"} data-aos='zoom-in-left'>
-        <div className='title-single-note'>
-          {noteDetails.title}
-        </div>
+        <div className='title-single-note'>{noteDetails.title}</div>
         <div className='body'>
           <CssTextField
             fullWidth
@@ -107,12 +123,35 @@ const TimelineNote = ({
                 style={{ fontSize: 18 }}
                 className='icons'
               >
-                <DeleteIcon onClick={() => deleteTheNote(noteDetails._id)} />
+                <DeleteIcon onClick={openDeleteBox} />
               </Tooltip>
             </div>
           </div>
         </div>
       </div>
+      <Modal
+        open={isDeleteOpen}
+        onClose={closeDeleteBox}
+        closeAfterTransition
+        BackdropProps={{
+          timeout: 500,
+          style: {
+            backgroundColor: "rgba(0,0,0,0.8)",
+          },
+        }}
+      >
+        <Fade in={isDeleteOpen}>
+          <Box style={style}>
+            <DeleteWarning
+              close={closeDeleteBox}
+              noteId={noteDetails._id}
+              eventId={eventId}
+              dateSelected={dateSelected}
+              setReload={setReload}
+            />
+          </Box>
+        </Fade>
+      </Modal>
     </>
   );
 };

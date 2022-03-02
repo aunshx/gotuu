@@ -32,6 +32,7 @@ const ExpandMore = styled((props) => {
 const Element = ({
   event,
   type,
+  setReload,
   // Redux Actions
   getNote,
 }) => {
@@ -160,6 +161,7 @@ const [expanded, setExpanded] = useState(false);
                         <TimelineNote
                           noteDetails={noteDetails}
                           close={handleExpandClick}
+                          setNoteDetails={setNoteDetails}
                         />
                       </div>
                     </Collapse>
@@ -220,7 +222,12 @@ const [expanded, setExpanded] = useState(false);
               )}
               {showNote && (
                 <div className='liner_horizontal_right_icon_note'>
-                  <TimelineNote noteDetails={noteDetails} close={closeNote} />
+                  <TimelineNote
+                    noteDetails={noteDetails}
+                    close={closeNote}
+                    eventId={event._id}
+                    setReload={setReload}
+                  />
                 </div>
               )}
             </div>
@@ -360,7 +367,12 @@ const [expanded, setExpanded] = useState(false);
               )}
               {showNote && (
                 <div className='liner_horizontal_left_icon_note'>
-                  <TimelineNote noteDetails={noteDetails} close={closeNote} />
+                  <TimelineNote
+                    noteDetails={noteDetails}
+                    close={closeNote}
+                    eventId={event._id}
+                    setReload={setReload}
+                  />
                 </div>
               )}
             </div>

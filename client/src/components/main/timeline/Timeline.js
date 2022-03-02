@@ -38,6 +38,9 @@ const Timeline = ({
   const [dateSelected, setDateSelected] = useState();
   const [isDatePickerOpened, setIsDatePickerOpened] = useState(false);
   const [isTilted, setIsTilted] = useState(false);
+  const [reload, setReload] = useState(true)
+
+  useEffect(() => setReload(true), [reload]);
 
   useEffect(() => {
     if (isDatePickerOpened) {
@@ -147,22 +150,30 @@ const Timeline = ({
           </div>
 
           <div className='line'>
-            {timeline.length > 0 ? (
-              timeline.map((event, index) => (
-                <div key={index}>
-                  <div className='' data-aos={width < 360 ? "" : "fade-in"}>
-                    <Element event={event} type={index} />
-                  </div>
-                </div>
-              ))
-            ) : (
+            {reload && (
               <>
-                <NothingToShow
-                  primaryMessage={"Timeline is empty"}
-                  secondaryMessage={
-                    "Try starting and completing a new Tuu! Or click on 'today' to check previous Tuus!"
-                  }
-                />
+                {timeline.length > 0 ? (
+                  timeline.map((event, index) => (
+                    <div key={index}>
+                      <div className='' data-aos={width < 360 ? "" : "fade-in"}>
+                        <Element
+                          event={event}
+                          type={index}
+                          setReload={setReload}
+                        />
+                      </div>
+                    </div>
+                  ))
+                ) : (
+                  <>
+                    <NothingToShow
+                      primaryMessage={"Timeline is empty"}
+                      secondaryMessage={
+                        "Try starting and completing a new Tuu! Or click on 'today' to check previous Tuus!"
+                      }
+                    />
+                  </>
+                )}
               </>
             )}
           </div>

@@ -107,6 +107,11 @@ export const ADD_DATES_CAPTURED = "ADD_DATES_CAPTURED";
 export const LOADING_TIMELINE = "LOADING_TIMELINE";
 export const LOADING_TIMELINE_COMPLETE = "LOADING_TIMELINE_COMPLETE";
 
+// Delete Event 
+export const DELETE_EVENT = "DELETE_EVENT";
+export const DELETE_EVENT_LOADING = "DELETE_EVENT_LOADING";
+export const DELETE_EVENT_LOADING_COMPLETE = "DELETE_EVENT_LOADING_COMPLETE";
+
 // ----------------------- NOTES ------------------------------
 export const ADD_NEW_NOTE = "ADD_NEW_NOTE";
 export const ADD_NOTE_TITLE = "ADD_NOTE_TITLE";
