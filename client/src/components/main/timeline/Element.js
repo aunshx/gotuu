@@ -168,10 +168,7 @@ const [expanded, setExpanded] = useState(false);
                     }
                     onClick={noteManipulate}
                   >
-                    <div
-                      className='flex_between'
-                      // style={{ alignItems: "flex-start" }}
-                    >
+                    <div className='flex_between'>
                       <div></div>
                       {showNote ? (
                         <div className='title-liner flex_middle'>
@@ -179,7 +176,12 @@ const [expanded, setExpanded] = useState(false);
                         </div>
                       ) : (
                         <div className='title-liner flex_middle'>
-                          {noteDetails.title !== undefined ? noteDetails.title.substr(0, noteDetails.title.indexOf(' ')) + '...' : ''}
+                          {noteDetails.title !== undefined
+                            ? noteDetails.title.substr(
+                                0,
+                                noteDetails.title.indexOf(" ")
+                              ) + "..."
+                            : ""}
                         </div>
                       )}
                       <div className='icons'>
@@ -206,21 +208,6 @@ const [expanded, setExpanded] = useState(false);
                       </div>
                     </div>
                   </div>
-                  {/* <div className='cursor_pointer'>
-                    {showNote ? (
-                      <ArrowCircleDownOutlinedIcon
-                        className='liner_horizontal_right_icon_1'
-                        style={{ fontSize: 18, cursor: "pointer" }}
-                        onClick={closeNote}
-                      />
-                    ) : (
-                      <ArrowCircleUpOutlinedIcon
-                        className='liner_horizontal_right_icon_1'
-                        style={{ fontSize: 18, cursor: "pointer" }}
-                        onClick={openNote}
-                      />
-                    )}
-                  </div> */}
                 </>
               )}
               {showNote && (
@@ -305,25 +292,53 @@ const [expanded, setExpanded] = useState(false);
               )}
               {noteDetails && (
                 <>
-                  <div className={`liner_horizontal_left`}>
-                    <div className='title-liner flex_middle'>
-                      {noteDetails.title}
+                  <div
+                    className={
+                      showNote
+                        ? `liner_horizontal_left liner_horizontal_left-elongate cursor_pointer`
+                        : `liner_horizontal_left cursor_pointer`
+                    }
+                    onClick={noteManipulate}
+                  >
+                    <div className='flex_between'>
+                      <div className='icons'>
+                        {showNote ? (
+                          <div
+                            onClick={closeNote}
+                            style={{ marginTop: "0.5em" }}
+                          >
+                            <KeyboardDoubleArrowRightIcon
+                              style={{ fontSize: 15 }}
+                            />
+                          </div>
+                        ) : (
+                          <div
+                            onClick={openNote}
+                            style={{ marginTop: "0.5em" }}
+                          >
+                            <KeyboardDoubleArrowLeftIcon
+                              style={{ fontSize: 15 }}
+                              onClick={openNote}
+                            />
+                          </div>
+                        )}
+                      </div>
+                      {showNote ? (
+                        <div className='title-liner flex_middle'>
+                          {noteDetails.title}
+                        </div>
+                      ) : (
+                        <div className='title-liner flex_middle'>
+                          {noteDetails.title !== undefined
+                            ? noteDetails.title.substr(
+                                0,
+                                noteDetails.title.indexOf(" ")
+                              ) + "..."
+                            : ""}
+                        </div>
+                      )}
+                      <div></div>
                     </div>
-                  </div>
-                  <div className='cursor_pointer'>
-                    {showNote ? (
-                      <ArrowCircleDownOutlinedIcon
-                        className='liner_horizontal_left_icon_1'
-                        style={{ fontSize: 18, cursor: "pointer" }}
-                        onClick={closeNote}
-                      />
-                    ) : (
-                      <ArrowCircleUpOutlinedIcon
-                        className='liner_horizontal_left_icon_1'
-                        style={{ fontSize: 18, cursor: "pointer" }}
-                        onClick={openNote}
-                      />
-                    )}
                   </div>
                 </>
               )}
