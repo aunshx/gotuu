@@ -31,6 +31,9 @@ import {
 
   // Register Set Count
   SET_COUNT_REGISTER,
+
+  // Current Location
+  CURRENT_LOCATION,
 } from "../actions/types";
 
 const initialState = {
@@ -60,13 +63,22 @@ const initialState = {
   count: 0,
 
   // Set Register Count
-  registerCount: 0
+  registerCount: 0,
+
+  // Current Location 
+  location: ''
 };
 
 function authReducer(state = initialState, action) {
   const { type, payload } = action;
 
   switch (type) {
+    // Set current location 
+    case CURRENT_LOCATION:
+      return {
+        ...state,
+        location: payload
+      }
     // CHANGE PASSWORD
 
     // Set Count Register

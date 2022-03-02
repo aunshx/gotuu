@@ -142,18 +142,27 @@ export const getLiveStreak = () => async (dispatch) => {
 };
 
 // Get avg duration of tuus per day - seven days
-export const getNumberOfTuusPerDay = () => async (dispatch) => {
+export const getNumberOfTuusPerDay = () => async (dispatch, getState) => {
   let value = {
     message: "1",
     type: "info",
   };
+
+  const { auth } = getState()
+
+  const body = JSON.stringify({
+    timezone: auth.location
+  })
 
   try {
     dispatch({
       type: NUMBER_OF_TUUS_LOADING,
     });
 
-    const res = await api.get("/metrics/number-of-tuus-per-day-sevendays");
+    const res = await api.post(
+      "/metrics/number-of-tuus-per-day-sevendays",
+      body
+    );
 
     let res2 = res.data.map((ele) => {
       return {
@@ -256,19 +265,27 @@ export const getNumberOfTuusPerDay = () => async (dispatch) => {
 };
 
 // Get avg duration of tuus per day - per month
-export const getNumberOfTuusCurrentMonth = () => async (dispatch) => {
+export const getNumberOfTuusCurrentMonth = () => async (dispatch, getState) => {
   let value = {
     message: "1",
     type: "info",
   };
+
+  const { auth } = getState();
+
+  const body = JSON.stringify({
+    timezone: auth.location,
+  });
+
 
   try {
     dispatch({
       type: NUMBER_OF_TUUS_LOADING,
     });
 
-    const res = await api.get(
-      "/metrics/number-of-tuus-per-day-currentMonth"
+    const res = await api.post(
+      "/metrics/number-of-tuus-per-day-currentMonth",
+      body
     );
 
       let res2 = res.data.map((ele) => {
@@ -369,18 +386,24 @@ export const getNumberOfTuusCurrentMonth = () => async (dispatch) => {
 };
 
 // Get avg duration of tuus per day - per year
-export const getNumberOfTuusYear = () => async (dispatch) => {
+export const getNumberOfTuusYear = () => async (dispatch, getState) => {
   let value = {
     message: "1",
     type: "info",
   };
+
+  const { auth } = getState();
+
+  const body = JSON.stringify({
+    timezone: auth.location,
+  });
 
   try {
     dispatch({
       type: NUMBER_OF_TUUS_LOADING,
     });
 
-    const res = await api.get("/metrics/number-of-tuus-per-day-year");
+    const res = await api.post("/metrics/number-of-tuus-per-day-year", body);
 
       let res2 = res.data.map((ele) => {
         return {
@@ -484,22 +507,26 @@ export const getNumberOfTuusYear = () => async (dispatch) => {
 
 // -------------- BLOCK ONE - GRAPH ------------------------------
 // Get avg duration of tuus per day
-export const getAvgDurationOfTuusPerDay = () => async (dispatch) => {
+export const getAvgDurationOfTuusPerDay = () => async (dispatch, getState) => {
   let value = {
     message: "1",
     type: "info",
   };
+
+  const { auth } = getState();
+
+  const body = JSON.stringify({
+    timezone: auth.location,
+  });
 
   try {
     dispatch({
       type: AVG_DURATION_TUUS_PER_DAY_LOADING,
     });
 
-    const res = await api.get(
-      "/metrics/average-duration-tuus-per-day-sevendays"
+    const res = await api.post(
+      "/metrics/average-duration-tuus-per-day-sevendays", body
     );
-
-    console.log(res.data)
 
     let resMin = res.data.map((ele) => {
       return {
@@ -614,21 +641,27 @@ export const getAvgDurationOfTuusPerDay = () => async (dispatch) => {
 };
 
 // Get avg duration of tuus per day - per month
-export const getAvgDurationOfTuusPerDayPerMonth = () => async (dispatch) => {
+export const getAvgDurationOfTuusPerDayPerMonth = () => async (dispatch, getState) => {
   let value = {
     message: "1",
     type: "info",
   };
+
+  const { auth } = getState();
+
+  const body = JSON.stringify({
+    timezone: auth.location,
+  });
 
   try {
     dispatch({
       type: AVG_DURATION_TUUS_PER_DAY_LOADING,
     });
 
-    const res = await api.get("/metrics/average-duration-tuus-per-day-monthly");
+    const res = await api.post("/metrics/average-duration-tuus-per-day-monthly", body);
 
     let resMin = res.data.map((ele) => {
-      return switchMonth2Min(ele)
+      return switchMonth2Min(ele);
     });
 
     let resHour = res.data.map((ele) => {
@@ -734,18 +767,24 @@ export const getAvgDurationOfTuusPerDayPerMonth = () => async (dispatch) => {
 };
 
 // Get avg duration of tuus per day - per year
-export const getAvgDurationOfTuusPerDayPerYear = () => async (dispatch) => {
+export const getAvgDurationOfTuusPerDayPerYear = () => async (dispatch, getState) => {
   let value = {
     message: "1",
     type: "info",
   };
+
+  const { auth } = getState();
+
+  const body = JSON.stringify({
+    timezone: auth.location,
+  });
 
   try {
     dispatch({
       type: AVG_DURATION_TUUS_PER_DAY_LOADING,
     });
 
-    const res = await api.get("/metrics/average-duration-tuus-per-day-yearly");
+    const res = await api.post("/metrics/average-duration-tuus-per-day-yearly", body);
 
     let resMin = res.data.map((ele) => {
       return {

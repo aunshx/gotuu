@@ -17,8 +17,11 @@ const { getMonthInString } = require('../../middleware/getMonthInString')
 // @desc     Get average duration of tuus per day
 // @access   Private
 
-router.get("/number-of-tuus-per-day-year", auth, async (req, res) => {
+router.post("/number-of-tuus-per-day-year", auth, async (req, res) => {
   let ans = {};
+
+  const { timezone } = req.body
+
   try {
     ans = await Timeline.aggregate([
       {
@@ -35,11 +38,12 @@ router.get("/number-of-tuus-per-day-year", auth, async (req, res) => {
             date: {
               $dateToString: {
                 date: "$createdAt",
+                timezone,
                 format: "%Y",
               },
             },
             year: {
-              $year: { date: "$createdAt" },
+              $year: { date: "$createdAt", timezone },
             },
           },
           count: { $sum: 1 },
@@ -52,7 +56,7 @@ router.get("/number-of-tuus-per-day-year", auth, async (req, res) => {
           _id: 0,
         },
       },
-    ]).sort({ 'date.year': 1 });
+    ]).sort({ "date.year": 1 });
 
     return res.status(200).send(ans);
   } catch (error) {
@@ -66,9 +70,10 @@ router.get("/number-of-tuus-per-day-year", auth, async (req, res) => {
 // @desc     Get average duration of tuus per day
 // @access   Private
 
-router.get("/number-of-tuus-per-day-sevendays", auth, async (req, res) => {
+router.post("/number-of-tuus-per-day-sevendays", auth, async (req, res) => {
 
   let ans = {};
+  const { timezone } = req.body
   try {
     ans = await Timeline.aggregate([
       {
@@ -90,17 +95,18 @@ router.get("/number-of-tuus-per-day-sevendays", auth, async (req, res) => {
             date: {
               $dateToString: {
                 date: "$createdAt",
+                timezone,
                 format: "%d/%m/%Y",
               },
             },
             month: {
-              $month: { date: "$createdAt" },
+              $month: { date: "$createdAt", timezone },
             },
             day: {
-              $dayOfMonth: { date: "$createdAt" },
+              $dayOfMonth: { date: "$createdAt", timezone },
             },
             year: {
-              $year: { date: "$createdAt" },
+              $year: { date: "$createdAt", timezone },
             },
           },
           count: { $sum: 1 },
@@ -126,9 +132,9 @@ router.get("/number-of-tuus-per-day-sevendays", auth, async (req, res) => {
 // @desc     Get number of tuus per month
 // @access   Private
 
-router.get("/number-of-tuus-per-day-currentMonth", auth, async (req, res) => {
+router.post("/number-of-tuus-per-day-currentMonth", auth, async (req, res) => {
   let ans = {};
-
+  const { timezone } = req.body;
   try {
     ans = await Timeline.aggregate([
       {
@@ -145,11 +151,12 @@ router.get("/number-of-tuus-per-day-currentMonth", auth, async (req, res) => {
             date: {
               $dateToString: {
                 date: "$createdAt",
+                timezone,
                 format: "%m",
               },
             },
             month: {
-              $month: { date: "$createdAt" },
+              $month: { date: "$createdAt", timezone },
             },
           },
           count: { $sum: 1 },
@@ -178,9 +185,13 @@ router.get("/number-of-tuus-per-day-currentMonth", auth, async (req, res) => {
 // @route    POST api/metrics
 // @desc     Get average duration of tuus per day
 // @access   Private
-router.get("/average-duration-tuus-per-day-sevendays", auth, async (req, res) => {
+router.post("/average-duration-tuus-per-day-sevendays", auth, async (req, res) => {
   let ans = {};
+
+  const { timezone } = req.body
+
   try {
+
     ans = await Timeline.aggregate([
       {
         $match: {
@@ -201,17 +212,18 @@ router.get("/average-duration-tuus-per-day-sevendays", auth, async (req, res) =>
             date: {
               $dateToString: {
                 date: "$createdAt",
+                timezone,
                 format: "%d/%m/%Y",
               },
             },
             month: {
-              $month: { date: "$createdAt" },
+              $month: { date: "$createdAt", timezone },
             },
             day: {
-              $dayOfMonth: { date: "$createdAt" },
+              $dayOfMonth: { date: "$createdAt", timezone },
             },
             year: {
-              $year: { date: "$createdAt" },
+              $year: { date: "$createdAt", timezone },
             },
           },
           sum: { $sum: "$duration" },
@@ -236,8 +248,10 @@ router.get("/average-duration-tuus-per-day-sevendays", auth, async (req, res) =>
 // @route    POST api/metrics
 // @desc     Get average duration of tuus per day-  month
 // @access   Private
-router.get("/average-duration-tuus-per-day-monthly", auth, async (req, res) => {
+router.post("/average-duration-tuus-per-day-monthly", auth, async (req, res) => {
   let ans = {};
+  const { timezone } = req.body;
+
   try {
     ans = await Timeline.aggregate([
       {
@@ -254,11 +268,12 @@ router.get("/average-duration-tuus-per-day-monthly", auth, async (req, res) => {
             date: {
               $dateToString: {
                 date: "$createdAt",
+                timezone,
                 format: "%m",
               },
             },
             month: {
-              $month: { date: "$createdAt" },
+              $month: { date: "$createdAt", timezone },
             },
           },
           sum: { $sum: "$duration" },
@@ -284,8 +299,9 @@ router.get("/average-duration-tuus-per-day-monthly", auth, async (req, res) => {
 // @desc     Get average duration of tuus per day - yearly
 // @access   Private
 
-router.get("/average-duration-tuus-per-day-yearly", auth, async (req, res) => {
+router.post("/average-duration-tuus-per-day-yearly", auth, async (req, res) => {
   let ans = {};
+  const { timezone } = req.body;
   try {
     ans = await Timeline.aggregate([
       {
@@ -302,11 +318,12 @@ router.get("/average-duration-tuus-per-day-yearly", auth, async (req, res) => {
             date: {
               $dateToString: {
                 date: "$createdAt",
+                timezone,
                 format: "%Y",
               },
             },
             year: {
-              $year: { date: "$createdAt" },
+              $year: { date: "$createdAt", timezone },
             },
           },
           sum: { $sum: "$duration" },

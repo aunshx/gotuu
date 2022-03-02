@@ -13,6 +13,9 @@ export const LOGOUT = "LOGOUT";
 // Change Password Set Count Login 
 export const SET_COUNT_LOGIN = "SET_COUNT_LOGIN";
 
+// Current Location 
+export const CURRENT_LOCATION = "CURRENT_LOCATION";
+
 // Register Set Count 
 export const SET_COUNT_REGISTER = "SET_COUNT_REGISTER";
 

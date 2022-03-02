@@ -1,6 +1,7 @@
 import api from "../../utils/api";
 import setAuthToken from "../../utils/setAuthToken";
 import moment from "moment";
+import axios from 'axios'
 
 import {
   getTimelineDatesCaptured,
@@ -51,8 +52,34 @@ import {
   CHANGE_PASSWORD,
 
   // Set Count Login
-  SET_COUNT_LOGIN
+  SET_COUNT_LOGIN,
+
+  //  Current Location
+  CURRENT_LOCATION,
 } from "./types";
+
+// Current location capture 
+export const captureCurrentLocation = () => async (dispatch, getState) => {
+  const ipDeets = await axios.get("https://api.ipify.org?format=json/");
+  const ipDetails = await axios.get(`http://ip-api.com/json/${ipDeets.data}`);
+
+  dispatch({
+    type: CURRENT_LOCATION,
+    payload: ipDetails.data.timezone,
+  });
+
+  let date = new Date();
+
+   dispatch(getTimelineDatesCaptured());
+   dispatch(getTimelineEvent(moment(date).toISOString()));
+   dispatch(getAvgDurationOfTuusPerDay());
+   dispatch(getNumberOfTuusPerDay());
+   dispatch(getAvgDurationOfTuus());
+   dispatch(getTotalNumberOfTuus());
+   dispatch(getLiveStreak());
+   dispatch(getSoundStatus());
+   dispatch(getReminderStatus());
+};
 
 // Change count for login
 export const setCountLogin = (value) => async (dispatch) => {
@@ -470,7 +497,7 @@ export const changePasswordUser = (password, emailChangePassword) => async (disp
 
 
 // Load User
-export const loadUser = () => async (dispatch) => {
+export const loadUser = () => async (dispatch, getState) => {
   if (localStorage.token) {
     setAuthToken(localStorage.token);
      try {
@@ -481,17 +508,7 @@ export const loadUser = () => async (dispatch) => {
          payload: res.data,
        });
 
-       let date = new Date();
-
-       dispatch(getTimelineDatesCaptured());
-       dispatch(getTimelineEvent(moment(date).toISOString()));
-       dispatch(getAvgDurationOfTuusPerDay());
-       dispatch(getNumberOfTuusPerDay());
-       dispatch(getAvgDurationOfTuus());
-       dispatch(getTotalNumberOfTuus());
-       dispatch(getLiveStreak());
-       dispatch(getSoundStatus());
-       dispatch(getReminderStatus());
+       dispatch(captureCurrentLocation())
      } catch (err) {
        dispatch({
          type: AUTH_ERROR,
