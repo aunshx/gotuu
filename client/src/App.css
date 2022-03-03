@@ -3186,6 +3186,12 @@ background-color:var(--light-count-color);
   width: 400px;
   min-height: 130px;
   font-size: 0.8em;
+  border: none;
+}
+
+.actions-card .triple_grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
 }
 
 .actions-card .title {
@@ -3255,4 +3261,10 @@ background-color:var(--light-count-color);
 
 .actions-card .actions-two-active .title {
   color: var(--closing-color);
+}
+
+@media only screen and (max-width: 550px) {
+  .actions-card {
+  width: 270px;
+}
 }

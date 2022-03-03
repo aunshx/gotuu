@@ -40,7 +40,7 @@ const ExpandMore = styled((props) => {
 const style = {
   position: "fixed",
   top: "50%",
-  left: "48%",
+  left: "50%",
   transform: "translate(-50%, -50%)",
   bgcolor: "background.paper",
   boxShadow: 24,
