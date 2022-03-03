@@ -54,17 +54,19 @@ const Element = ({
   setReload,
   // Redux Actions
   getNote,
+  // Redux State
+  notes: { noteId, noteTitle, noteBody },
 }) => {
-  const {  width } = windowSize()
+  const { width } = windowSize();
   const [classy, setClassy] = useState("");
   const [showInHours, setShowInHours] = useState(false);
   const [noteDetails, setNoteDetails] = useState({});
-  const [showNote, setShowNote] = useState(false)
+  const [showNote, setShowNote] = useState(false);
   const [expanded, setExpanded] = useState(false);
-  const [isActionsOpen, setIsActionsOpen] = useState(false)
+  const [isActionsOpen, setIsActionsOpen] = useState(false);
 
   const callback = useCallback(() => {
-    openActions()
+    openActions();
   }, []);
 
   const bind = useLongPress(noteDetails ? null : callback, {
@@ -76,10 +78,10 @@ const Element = ({
   });
 
   useEffect(() => {
-    let ans = getNote(event._id)
+    let ans = getNote(event._id);
     ans.then((data) => {
-      setNoteDetails(data)
-    })
+      setNoteDetails(data);
+    });
 
     if (event.duration) {
       switch (true) {
@@ -101,51 +103,51 @@ const Element = ({
           return null;
       }
     }
-
   }, [classy, event]);
 
   const openNote = () => {
-    setShowNote(true)
+    setShowNote(true);
   };
 
   const closeNote = () => {
-    setShowNote(false)
+
+      setShowNote(false);
   };
 
   const openActions = () => {
-    setIsActionsOpen(true)
-  }
+    setIsActionsOpen(true);
+  };
 
   const closeActions = () => {
-    setIsActionsOpen(false)
-    setReload(false)
+    setIsActionsOpen(false);
+    setReload(false);
     store.dispatch({
       type: ADD_NEW_NOTE,
-      payload: ''
+      payload: "",
     });
     store.dispatch({
       type: ADD_NOTE_TITLE,
-      payload: ''
+      payload: "",
     });
     store.dispatch({
       type: ADD_NOTE_BODY,
-      payload: ''
+      payload: "",
     });
-  }
+  };
 
   const showInHoursAction = () => {
-    if(noteDetails) {
+    if (noteDetails) {
       setShowInHours(!showInHours);
     }
-  }
+  };
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
 
   const noteManipulate = () => {
-    setShowNote(!showNote)
-  }
+    setShowNote(!showNote);
+  };
 
   return (
     <>
@@ -220,8 +222,9 @@ const Element = ({
                       <div>
                         <TimelineNote
                           noteDetails={noteDetails}
-                          close={handleExpandClick}
-                          setNoteDetails={setNoteDetails}
+                          close={closeNote}
+                          eventId={event._id}
+                          setReload={setReload}
                         />
                       </div>
                     </Collapse>
@@ -464,10 +467,12 @@ const Element = ({
 };
 
 Element.propTypes = {
+  notes: PropTypes.object.isRequired,
   getNote: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
+  notes: state.notes
 });
 
 const mapActionsToProps = {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import moment from "moment";
@@ -9,11 +9,14 @@ import { makeStyles } from "@mui/styles";
 
 import DeleteIcon from "@mui/icons-material/Delete";
 import CloseIcon from "@mui/icons-material/Close";
+import EditIcon from "@mui/icons-material/Edit";
+
+import DeleteWarning from "./DeleteWarning";
 
 import {
-  deleteNote,
+  sendNoteDataBody,
+  sendNoteTitle,
 } from "../../../redux/actions/notes";
-import DeleteWarning from "./DeleteWarning";
 
 const CssTextField = styled(TextField, {
   shouldForwardProp: (props) => props !== "focusColor",
@@ -57,32 +60,88 @@ const TimelineNote = ({
   dateSelected,
   setReload,
   // Redux Actions
-  deleteNote,
-  // Redux State
+  sendNoteDataBody,
+  sendNoteTitle,
 }) => {
-    const [isDeleteOpen, setIsDeleteOpen] = useState(false);
+  const [isDeleteOpen, setIsDeleteOpen] = useState(false);
+  const [isEditOkay, setIsEditOkay] = useState(false)
+  const [noTitleError, setNoTitleError] = useState(false);
 
   const textAttitude = useStyles();
 
   const CHARACTER_LIMIT = 250;
 
-   const openDeleteBox = () => {
-     setIsDeleteOpen(true);
-   };
+  const openDeleteBox = () => {
+    setIsDeleteOpen(true);
+  };
 
-   const closeDeleteBox = () => {
-     setIsDeleteOpen(false);
-   };
+  const closeDeleteBox = () => {
+    setIsDeleteOpen(false);
+  };
+
+  const onChange = (noteId, e) => {
+    let titleContent = "";
+    let bodyContent = "";
+
+    if (e.target.name === "noteTitle") {
+      titleContent = e.target.value;
+      noteDetails.title = titleContent
+      sendNoteTitle(noteId, titleContent, bodyContent);
+    }
+    if (e.target.name === "noteBody") {
+      bodyContent = e.target.value;
+      noteDetails.body = bodyContent;
+      sendNoteDataBody(noteId, bodyContent);
+    }
+  };
+
+  const startEdit = () => {
+    setIsEditOkay(true)
+  }
+
+  const stopEdit = () => {
+    if (noteDetails.title <= 0) {
+      setNoTitleError(true);
+      setTimeout(() => setNoTitleError(false), 4000);
+    } else {
+      setIsEditOkay(false);
+    }
+  }
+
+  const closeNote = () => {
+    if(noteDetails.title <= 0){
+      setNoTitleError(true);
+      setTimeout(() => setNoTitleError(false), 4000);
+    } else {
+      setIsEditOkay(false);
+      close();
+    }
+  }
 
   return (
     <>
       <div className={"single_note_1_timeline"} data-aos='zoom-in-left'>
-        <div className='title-single-note'>{noteDetails.title}</div>
-        <div className='body'>
+        {isEditOkay ? (
+          <div className='title-single-note'>
+            <input
+              name='noteTitle'
+              value={noteDetails.title}
+              autoFocus={true}
+              onChange={(e) => onChange(noteDetails._id, e)}
+              placeholder='Title'
+            />
+          </div>
+        ) : (
+          <div className='title-single-note'>{noteDetails.title}</div>
+        )}
+        <div className='body app'>
+          {noTitleError && (
+            <div className='errors flex_middle'>Title cannot be empty!</div>
+          )}
           <CssTextField
             fullWidth
             multiline
-            disabled={true}
+            disabled={!isEditOkay}
             placeholder='Details'
             inputProps={{
               maxLength: CHARACTER_LIMIT,
@@ -98,6 +157,7 @@ const TimelineNote = ({
             }}
             name='noteBody'
             value={noteDetails.body}
+            onChange={(e) => onChange(noteDetails._id, e)}
           />
         </div>
         <div className='note-footer'>
@@ -114,8 +174,27 @@ const TimelineNote = ({
                 style={{ fontSize: 22 }}
                 className='icons'
               >
-                <CloseIcon onClick={() => close()} />
+                <CloseIcon onClick={closeNote} />
               </Tooltip>
+            </div>
+            <div>
+              {isEditOkay ? (
+                <Tooltip
+                  title='Edit'
+                  style={{ fontSize: 18 }}
+                  className='icons-active'
+                >
+                  <EditIcon onClick={stopEdit} />
+                </Tooltip>
+              ) : (
+                <Tooltip
+                  title='Edit'
+                  style={{ fontSize: 18 }}
+                  className='icons'
+                >
+                  <EditIcon onClick={startEdit} />
+                </Tooltip>
+              )}
             </div>
             <div>
               <Tooltip
@@ -157,15 +236,16 @@ const TimelineNote = ({
 };
 
 TimelineNote.propTypes = {
-  notes: PropTypes.object.isRequired,
-  deleteNote: PropTypes.func.isRequired,
+  sendNoteDataBody: PropTypes.func.isRequired,
+  sendNoteTitle: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
 });
 
 const mapActionsToProps = {
-  deleteNote,
+  sendNoteDataBody,
+  sendNoteTitle,
 };
 
 export default connect(mapStateToProps, mapActionsToProps)(TimelineNote);
