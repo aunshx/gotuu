@@ -59,9 +59,8 @@ let ans = {}
           }
         );
 
-        let ans3 = await LiveCount.findOneAndUpdate(
+        let ans3 = await LiveCount.findOne(
           { userId: req.user.id },
-          { date: todayDate },
         );
 
         if(!ans3){
