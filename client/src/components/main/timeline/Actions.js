@@ -76,11 +76,20 @@ const Actions = ({
             : "actions-card ft-bold"
         }
       >
-        <div className='title flex_middle'>
-          <div style={{ marginRight: "0.6em" }}>
-            <FontAwesomeIcon icon={faDiceD6} style={{ marginBottom: "1px" }} />
+        <div className='triple_grid'>
+        <div></div>
+          <div className='title flex_middle'>
+            <div style={{ marginRight: "0.6em" }}>
+              <FontAwesomeIcon
+                icon={faDiceD6}
+                style={{ marginBottom: "1px" }}
+              />
+            </div>
+            <div>Actions</div>
           </div>
-          <div>Actions</div>
+          <div className="flex_right cursor_pointer">
+              <CloseIcon className='cancel' style={{ fontSize: 15 }} onClick={close} />
+          </div>
         </div>
         <div className='flex_evenly'>
           <div

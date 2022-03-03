@@ -288,6 +288,7 @@ const Element = ({
                   ? `element_${classy} triple_grid cursor_pointer element_padding_${classy}`
                   : `element_${classy} triple_grid cursor_pointer`
               }
+              {...bind}
             >
               <div></div>
               <Tooltip
@@ -295,7 +296,7 @@ const Element = ({
                 placement='top'
               >
                 <div
-                  onClick={() => setShowInHours(!showInHours)}
+                  onClick={showInHoursAction}
                   className={
                     noteDetails ? "flex_middle" : `flex_middle time_${classy}`
                   }
@@ -438,10 +439,7 @@ const Element = ({
       >
         <Fade in={isActionsOpen}>
           <Box style={style}>
-            <Actions
-              close={closeActions}
-              eventId={event._id}
-            />
+            <Actions close={closeActions} eventId={event._id} />
           </Box>
         </Fade>
       </Modal>

@@ -2266,6 +2266,18 @@ padding: 0  0 2em 0;
     z-index: 10;
 }
 
+.single_note_1 .errors {
+  width: 90%;
+  background-color: var(--count-color);
+  color: var(--light-color);
+  font-size: 0.6em;
+  border-radius: 10px;
+  font-weight: 600;
+  padding: 0 1em;
+  margin-top: 1em;
+  font-family: 'Roboto', sans-serif;
+}
+
 @keyframes singleNoteIn {
     0% {
         transform: scale(0.1);

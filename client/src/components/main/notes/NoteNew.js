@@ -28,7 +28,7 @@ const CssTextField = styled(TextField, {
   // focused color for input with variant='outlined'
   "& .MuiOutlinedInput-root": {
     "&.Mui-focused fieldset": {
-      border: "1px solid red",
+      borderColor: "none",
       fontSize: "0.9em",
     },
   },
@@ -63,6 +63,8 @@ const NoteNew = ({
 }) => {
   const textAttitude = useStyles();
 
+  const [noTitleError, setNoTitleError] = useState(false)
+
   const CHARACTER_LIMIT = 250;
 
   const onChange = (noteId, e) => {
@@ -79,6 +81,15 @@ const NoteNew = ({
     }
   };
 
+  const closeNote = () => {
+      if(noteTitle.length <= 0) {
+        setNoTitleError(true)
+        setTimeout(() => setNoTitleError(false), 4000);
+      } else {
+          close()
+      }
+  }
+
   return (
     <>
       <div className={"single_note_1"} data-aos='fade-up'>
@@ -91,7 +102,10 @@ const NoteNew = ({
             placeholder='Title'
           />
         </div>
-        <div className='body'>
+        <div className='body app'>
+          {noTitleError &&  <div className='errors flex_middle'>
+              Title cannot be empty!
+          </div> }
           <CssTextField
             fullWidth
             multiline
@@ -130,7 +144,7 @@ const NoteNew = ({
                 style={{ fontSize: 22 }}
                 className='icons'
               >
-                <ExpandMoreIcon onClick={() => close()} />
+                <ExpandMoreIcon onClick={closeNote} />
               </Tooltip>
             </div>
           </div>
