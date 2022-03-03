@@ -50,6 +50,17 @@ const Count = ({
     };
   }, [isCounting]);
 
+  useEffect(() => {
+    const unloadCallback = (event) => {
+      event.preventDefault();
+      event.returnValue = "";
+      return "";
+    };
+
+    window.addEventListener("beforeunload", unloadCallback);
+    return () => window.removeEventListener("beforeunload", unloadCallback);
+  }, []);
+
   const stopCount = (currentEventId, time) => {
     if (time < 60000) {
       let value = {
