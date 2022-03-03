@@ -72,12 +72,12 @@ const Actions = ({
       <div
         className={
           displayMode
-            ? "actions-card actions-card--dark ft-bold"
-            : "actions-card ft-bold"
+            ? "actions-card"
+            : "actions-card actions-card--dark ft-bold"
         }
       >
         <div className='triple_grid'>
-        <div></div>
+          <div></div>
           <div className='title flex_middle'>
             <div style={{ marginRight: "0.6em" }}>
               <FontAwesomeIcon
@@ -87,8 +87,12 @@ const Actions = ({
             </div>
             <div>Actions</div>
           </div>
-          <div className="flex_right cursor_pointer">
-              <CloseIcon className='cancel' style={{ fontSize: 15 }} onClick={close} />
+          <div className='flex_right cursor_pointer'>
+            <CloseIcon
+              className='cancel'
+              style={{ fontSize: 15 }}
+              onClick={close}
+            />
           </div>
         </div>
         <div className='flex_evenly'>
