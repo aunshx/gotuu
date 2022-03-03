@@ -92,7 +92,7 @@ const NoteNew = ({
 
   return (
     <>
-      <div className={"single_note_1"} data-aos='fade-up'>
+      <div className={"single_note_1"} data-aos='fade-up' style={{ boxShadow: 'none' }} >
         <div className='title'>
           <input
             name='noteTitle'

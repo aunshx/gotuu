@@ -4,13 +4,17 @@ import { Tooltip, Collapse, IconButton, Modal, Fade, Box } from "@mui/material";
 import { connect } from "react-redux";
 import { useLongPress, LongPressDetectEvents } from "use-long-press";
 
-import {
-  faStickyNote,
-} from "@fortawesome/free-solid-svg-icons";
-
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight'
+
+import store from '../../../store'
+
+import {
+  ADD_NEW_NOTE,
+  ADD_NOTE_TITLE,
+  ADD_NOTE_BODY,
+} from '../../../redux/actions/types'
 
 import { styled } from "@mui/material/styles";
 
@@ -115,6 +119,18 @@ const Element = ({
   const closeActions = () => {
     setIsActionsOpen(false)
     setReload(false)
+    store.dispatch({
+      type: ADD_NEW_NOTE,
+      payload: ''
+    });
+    store.dispatch({
+      type: ADD_NOTE_TITLE,
+      payload: ''
+    });
+    store.dispatch({
+      type: ADD_NOTE_BODY,
+      payload: ''
+    });
   }
 
   const showInHoursAction = () => {
