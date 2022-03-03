@@ -98,7 +98,90 @@ export const addDurationToEventEnd = (id, duration) => async (dispatch) => {
         5000
       );
     } else {
-      value.message = "Oops! Looks like something went wrong. Please reload!";
+      value.message = "Oops! Something went wrong. Please reload!";
+      value.type = "error";
+
+      dispatch({
+        type: ERROR_SNACKBAR,
+        payload: value,
+      })
+
+      setTimeout(
+        () =>
+          dispatch({
+            type: SNACKBAR_RESET,
+          }),
+        5000
+      );
+    }
+  }
+};
+
+// Add duration after the event ends
+export const deleteAllEmptyEvents = () => async (dispatch) => {
+  let value = {
+    message: "1",
+    type: "info",
+  };
+
+  try {    
+    const res = await api.post("/timeline/delete-all-empty-events");
+
+  } catch (error) {
+    if (error.response.status === 500) {
+      value.message = "Oops! Something went wrong. Please reload!";
+      value.type = "error";
+
+      dispatch({
+        type: ERROR_SNACKBAR,
+        payload: value,
+      });
+
+      setTimeout(
+        () =>
+          dispatch({
+            type: SNACKBAR_RESET,
+          }),
+        5000
+      );
+    } else if (error.response.status === 400) {
+      value.message = error.response.data.errors[0].msg;
+      value.type = "error";
+
+      dispatch({
+        type: ERROR_SNACKBAR,
+        payload: value,
+      });
+
+      dispatch({
+        type: ERROR_AUTH_SNACKBAR,
+      })
+
+      setTimeout(
+        () =>
+          dispatch({
+            type: SNACKBAR_RESET,
+          }),
+        5000
+      );
+    } else if (error.response.status === 401) {
+      value.message = "Your session has expired. Please login again.";
+      value.type = "error";
+
+      dispatch({
+        type: ERROR_SNACKBAR,
+        payload: value,
+      })
+
+      setTimeout(
+        () =>
+          dispatch({
+            type: SNACKBAR_RESET,
+          }),
+        5000
+      );
+    } else {
+      value.message = "Oops! Something went wrong. Please reload!";
       value.type = "error";
 
       dispatch({
@@ -185,7 +268,7 @@ export const createNewEvent = () => async (dispatch) => {
         5000
       );
     } else {
-      value.message = "Oops! Looks like something went wrong. Please reload!";
+      value.message = "Oops! Something went wrong. Please reload!";
       value.type = "error";
 
       dispatch({
@@ -292,7 +375,7 @@ export const getTimelineDatesCaptured = () => async (dispatch) => {
         5000
       );
     } else {
-      value.message = "Oops! Looks like something went wrong. Please reload!";
+      value.message = "Oops! Something went wrong. Please reload!";
       value.type = "error";
 
       dispatch({
@@ -407,7 +490,7 @@ export const getTimelineEvent = (date) => async (dispatch) => {
         5000
       );
     } else {
-      value.message = "Oops! Looks like something went wrong. Please reload!";
+      value.message = "Oops! Something went wrong. Please reload!";
       value.type = "error";
 
       dispatch({
@@ -522,7 +605,7 @@ export const getTimelineEventAsc = (date) => async (dispatch) => {
         5000
       );
     } else {
-      value.message = "Oops! Looks like something went wrong. Please reload!";
+      value.message = "Oops! Something went wrong. Please reload!";
       value.type = "error";
 
       dispatch({
@@ -636,7 +719,7 @@ export const deleteEvent = (eventId, dateSelected) => async (dispatch) => {
         5000
       );
     } else {
-      value.message = "Oops! Looks like something went wrong. Please reload!";
+      value.message = "Oops! Something went wrong. Please reload!";
       value.type = "error";
 
       dispatch({

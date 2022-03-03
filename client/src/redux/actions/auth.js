@@ -5,8 +5,9 @@ import axios from 'axios'
 
 import {
   getTimelineDatesCaptured,
-  getTimelineEvent
-} from './timeline'
+  getTimelineEvent,
+  deleteAllEmptyEvents,
+} from "./timeline";
 
 import {
   getAvgDurationOfTuusPerDay,
@@ -70,6 +71,7 @@ export const captureCurrentLocation = () => async (dispatch, getState) => {
 
   let date = new Date();
 
+  dispatch(deleteAllEmptyEvents());
    dispatch(getTimelineDatesCaptured());
    dispatch(getTimelineEvent(moment(date).toISOString()));
    dispatch(getAvgDurationOfTuusPerDay());

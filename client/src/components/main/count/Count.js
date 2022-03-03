@@ -53,6 +53,7 @@ const Count = ({
   useEffect(() => {
     const unloadCallback = (event) => {
       event.preventDefault();
+      alert('A Tuu is in progress. Do you want to reload?')
       event.returnValue = "";
       return "";
     };

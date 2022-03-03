@@ -30,7 +30,13 @@ function App() {
     }, []);
   return (
     <Provider store={store}>
-      <Router>
+      <Router
+        getUserConfirmation={(message, callback) => {
+          // this is the default behavior
+          const allowTransition = window.confirm(message);
+          callback(allowTransition);
+        }}
+      >
         <>
           <Switch>
             <Route exact path='/' component={Home} />
