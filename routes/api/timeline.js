@@ -203,5 +203,44 @@ router.post(
   }
 );
 
+// @route    DELETE api/timeline
+// @desc     Delete all empty events
+// @access   Private
+
+router.post(
+  "/delete-all-empty-events",
+  auth,
+  async (req, res) => {
+
+    try {
+      let event = await Timeline.deleteMany({ $and: [ { userId: req.user.id, duration: null } ] })
+      
+      return res.status(200).send('Empty events deleted successfully!');
+    } catch (error) {
+     res.status(400).send({ errors: [{ msg: "Could not delete empty events!" }] });
+    }
+  }
+);
+// @route    DELETE api/timeline
+// @desc     Delete an event
+// @access   Private
+
+router.post(
+  "/delete-event",
+  auth,
+  async (req, res) => {
+
+    const { eventId } = req.body;
+
+    try {
+      let event = await Timeline.deleteOne({ _id: eventId })
+
+      return res.status(200).send('Event deleted successfully!');
+    } catch (error) {
+     res.status(400).send({ errors: [{ msg: "Something went wrong!" }] });
+    }
+  }
+);
+
 
 module.exports = router;
