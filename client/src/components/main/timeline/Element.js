@@ -114,6 +114,7 @@ const Element = ({
 
   const closeActions = () => {
     setIsActionsOpen(false)
+    setReload(false)
   }
 
   const showInHoursAction = () => {
@@ -440,7 +441,6 @@ const Element = ({
             <Actions
               close={closeActions}
               eventId={event._id}
-              setReload={setReload}
             />
           </Box>
         </Fade>
