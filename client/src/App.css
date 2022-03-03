@@ -3127,3 +3127,86 @@ background-color:var(--login-card-background);
 .delete-card .button-no:hover{
 background-color:var(--light-count-color);
 }
+
+/* ------------------ ACTIONS CARD ---------------------- */
+.actions-card {
+  color: var(--dark-grey-color);
+  background-color: var(--login-card-background);
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  border-radius: 10px;
+  z-index: 1;
+  font-family: 'Roboto', sans-serif;
+  padding: 10px;
+  width: 400px;
+  min-height: 130px;
+  font-size: 0.8em;
+}
+
+.actions-card .title {
+  font-size: 1.2em;
+  color: var(--primary-color);
+}
+
+.actions-card--dark {
+  border: 1px solid var(--dark-grey-color);
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.actions-card .actions-one,
+.actions-card .actions-two {
+  cursor: pointer;
+  border: 1px solid var(--grey-color);
+  padding: 0.4em 0.6em;
+  border-radius: 20%;
+  margin-top: 1em;
+}
+
+.actions-card .actions-one .title,
+.actions-card .actions-two .title {
+  color: var(--grey-color);
+  font-weight: 500;
+  font-size: 0.8em;
+}
+
+.actions-card .actions-one .logo,
+.actions-card .actions-two .logo{
+  color: var(--grey-color);
+}
+
+.actions-card .actions-one .logo{
+  margin-bottom: 0.4em;
+}
+
+.actions-card .actions-one {
+  padding: 0.4em 0.6em;
+}
+
+.actions-card .actions .logo {
+  color: var(--grey-color);
+}
+
+.actions-card .actions-one-active {
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+}
+
+.actions-card .actions-one-active .logo {
+  color: var(--primary-color);
+}
+
+.actions-card .actions-one-active .title {
+  color: var(--primary-color);
+}
+
+.actions-card .actions-two-active {
+  color: var(--closing-color);
+  border: 1px solid var(--closing-color);
+}
+
+.actions-card .actions-two-active .logo {
+  color: var(--closing-color);
+}
+
+.actions-card .actions-two-active .title {
+  color: var(--closing-color);
+}

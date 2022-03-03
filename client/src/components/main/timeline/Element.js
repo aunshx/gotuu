@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Tooltip, Collapse, IconButton } from "@mui/material";
+import { Tooltip, Collapse, IconButton, Modal, Fade, Box } from "@mui/material";
 import { connect } from "react-redux";
+import { useLongPress, LongPressDetectEvents } from "use-long-press";
 
-import ArrowCircleUpOutlinedIcon from "@mui/icons-material/ArrowCircleUpOutlined";
-import ArrowCircleDownOutlinedIcon from "@mui/icons-material/ArrowCircleDownOutlined";
+import {
+  faStickyNote,
+} from "@fortawesome/free-solid-svg-icons";
+
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight'
@@ -15,6 +18,7 @@ import { getNote } from '../../../redux/actions/notes';
 import TimelineNote from '../notes/TimelineNote';
 
 import windowSize from '../../../utils/windowSize';
+import Actions from './Actions';
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -29,6 +33,17 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
+const style = {
+  position: "fixed",
+  top: "50%",
+  left: "48%",
+  transform: "translate(-50%, -50%)",
+  bgcolor: "background.paper",
+  boxShadow: 24,
+  border: "none",
+  p: 4,
+};
+
 const Element = ({
   event,
   type,
@@ -36,12 +51,25 @@ const Element = ({
   // Redux Actions
   getNote,
 }) => {
-  const {  width, height} = windowSize()
+  const {  width } = windowSize()
   const [classy, setClassy] = useState("");
   const [showInHours, setShowInHours] = useState(false);
   const [noteDetails, setNoteDetails] = useState({});
   const [showNote, setShowNote] = useState(false)
-const [expanded, setExpanded] = useState(false);
+  const [expanded, setExpanded] = useState(false);
+  const [isActionsOpen, setIsActionsOpen] = useState(false)
+
+  const callback = useCallback(() => {
+    openActions()
+  }, []);
+
+  const bind = useLongPress(noteDetails ? null : callback, {
+    onCancel: () => setShowInHours(!showInHours),
+    threshold: 500,
+    captureEvent: true,
+    cancelOnMovement: false,
+    detect: LongPressDetectEvents.BOTH,
+  });
 
   useEffect(() => {
     let ans = getNote(event._id)
@@ -80,6 +108,20 @@ const [expanded, setExpanded] = useState(false);
     setShowNote(false)
   };
 
+  const openActions = () => {
+    setIsActionsOpen(true)
+  }
+
+  const closeActions = () => {
+    setIsActionsOpen(false)
+  }
+
+  const showInHoursAction = () => {
+    if(noteDetails) {
+      setShowInHours(!showInHours);
+    }
+  }
+
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
@@ -99,6 +141,7 @@ const [expanded, setExpanded] = useState(false);
                   ? `element_${classy} triple_grid cursor_pointer element_padding_${classy}`
                   : `element_${classy} triple_grid cursor_pointer`
               }
+              {...bind}
             >
               <div></div>
               <Tooltip
@@ -106,10 +149,10 @@ const [expanded, setExpanded] = useState(false);
                 placement='top'
               >
                 <div
-                  onClick={() => setShowInHours(!showInHours)}
                   className={
                     noteDetails ? "flex_middle" : `flex_middle time_${classy}`
                   }
+                  onClick={showInHoursAction}
                 >
                   {showInHours ? (
                     <>
@@ -381,6 +424,27 @@ const [expanded, setExpanded] = useState(false);
           <div></div>
         </div>
       )}
+      <Modal
+        open={isActionsOpen}
+        onClose={closeActions}
+        closeAfterTransition
+        BackdropProps={{
+          timeout: 500,
+          style: {
+            backgroundColor: "rgba(0,0,0,0.8)",
+          },
+        }}
+      >
+        <Fade in={isActionsOpen}>
+          <Box style={style}>
+            <Actions
+              close={closeActions}
+              eventId={event._id}
+              setReload={setReload}
+            />
+          </Box>
+        </Fade>
+      </Modal>
     </>
   );
 };

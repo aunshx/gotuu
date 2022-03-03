@@ -108,10 +108,12 @@ const ChangePassword = ({
 }) => {
   useEffect(() => {
     if (changePasswordSuccess) {
-      setTimeout(() => {
+      const timer = setTimeout(() => {
         setCount(0);
         resetChangePassword();
       }, 4000);
+
+      return () => clearTimeout(timer);
     }
   }, [changePasswordSuccess]);
   const iconButtonStyle = loginIconButtonStyle();
