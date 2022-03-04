@@ -724,8 +724,12 @@ router.get("/average-duration-tuus-all-time", auth, async (req, res) => {
 // @access   Private
 router.get("/live-streak", auth, async (req, res) => {
   let ans = {};
-   let yestDate = moment().startOf("days").subtract(1, "days");
-   let todayDate = moment().startOf("days");
+    let yestDate = moment()
+      .utcOffset(0, true)
+      .startOf("day")
+      .subtract(1, "day")
+      .format("LL");
+    let todayDate = moment().utcOffset(0, true).startOf("day").format("LL");
   try {
    
     ans = await LiveCount.findOneAndUpdate(
@@ -760,6 +764,54 @@ router.get("/live-streak", auth, async (req, res) => {
     } else {
           return res.status(200).send(ans2[0].count.toString());
     }
+
+  } catch(error) {
+    res.status(400).send({ errors: [{ msg: "Cannot compute live streak :(" }] });
+  }
+});
+
+// @route    POST api/metrics
+// @desc     Increment live streak
+// @access   Private
+router.get("/live-streak-check", auth, async (req, res) => {
+  let ans = {};
+   let yestDate = moment().utcOffset(0, true).startOf("day").subtract(1, "day").format('LL');
+   let todayDate = moment().utcOffset(0, true).startOf("day").format("LL");
+  try {
+   
+    // ans = await LiveCount.findOneAndUpdate(
+    //   {
+    //     $and: [{ userId: req.user.id }, { date: { $eq: yestDate } }],
+    //   },
+    //   { $inc: { count: 1 }, date: todayDate },
+    //   {
+    //     returnOriginal: false,
+    //   }
+    // )
+
+    // if(!ans){
+    //    let ans3 = await LiveCount.findOneAndUpdate(
+    //   {
+    //     userId: req.user.id
+    //   },
+    //   { count: 0 },
+    //   {
+    //     returnOriginal: false,
+    //   }
+    // )
+
+    // }
+
+    // let ans2 = await LiveCount.find(
+    //     { userId: req.user.id }
+    // ).select({ count: 1, _id: 0 })
+
+    // if(!ans2){
+    //       return res.status(200).send('0');
+    // } else {
+    //       return res.status(200).send(ans2[0].count.toString());
+    // }
+    return res.status(200).send('1')
 
   } catch(error) {
     res.status(400).send({ errors: [{ msg: "Something went wrong!" }] });

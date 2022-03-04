@@ -44,7 +44,7 @@ router.post("/add-details-event", auth, async (req, res) => {
 
     let intDuration = parseInt(duration)
 
-    let todayDate = moment().startOf('days')
+    let todayDate = moment().utcOffset(0, true).startOf("day").format("LL");
 
 let ans = {}
   try {
