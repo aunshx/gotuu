@@ -8,5 +8,6 @@ export const data = [
     imageLight: "https://i.postimg.cc/Wpxc4qNh/register.gif",
     imageDark: "https://i.postimg.cc/NjWrHrTL/Animation-Dark.gif",
     tags: ["Security", "Register", "Questions"],
+    altImg: "Registration Process Gif",
   },
 ];

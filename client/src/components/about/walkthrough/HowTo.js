@@ -11,7 +11,7 @@ const HowTo = ({ innerRef, secondInnerRef }) => {
       <div className='page-details-walkthrough' ref={secondInnerRef}>
         <div className='writing app'>
           {data.length > 0 && data.map((element, index) => (
-            <Para key={index} imageLight={element.imageLight} srNo={index+1} imageDark={element.imageDark} title={element.title} details={element.details} tags={element.tags}  />
+            <Para key={index} imageLight={element.imageLight} srNo={index+1} imageDark={element.imageDark} title={element.title} details={element.details} tags={element.tags} altImg={element.altImg} />
           ))}
         j</div>
       </div>

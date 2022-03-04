@@ -2759,6 +2759,23 @@ margin: 0 0.5em;
   margin: 1em 3em;
 }
 
+.walkthrough-para .image-para {
+  position: relative;
+}
+
+.walkthrough-para .image-para .enlarge {
+  position: absolute;
+  bottom: 7%;
+  left: 2%;
+  color: var(--grey-color);
+  cursor: pointer;
+  font-size: 0.75em;
+}
+
+.walkthrough-para .image-para .enlarge:hover {
+  color: var(--primary-hover-color);
+}
+
 .walkthrough-para .details-para .tags {
   padding: 0.1em 0.5em;
   background-color: var(--grey-color);
@@ -2767,6 +2784,10 @@ margin: 0 0.5em;
   font-size: 0.6em;
   border-radius: 5px;
   margin: 0 0.5em;
+}
+
+.walkthrough-para .details-para .max-gif-card {
+
 }
 
 .walkthrough-para .caption {
