@@ -6,7 +6,7 @@ export const data = [
       "Always keep the answers to your security questions stored securely.",
     ],
     imageLight: "https://i.postimg.cc/Wpxc4qNh/register.gif",
-    imageDark: "",
+    imageDark: "https://i.postimg.cc/NjWrHrTL/Animation-Dark.gif",
     tags: ["Security", "Register", "Questions"],
   },
 ];

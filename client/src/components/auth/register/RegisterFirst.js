@@ -262,12 +262,14 @@ const RegisterFirst = ({
                           <Visibility
                             style={{
                               fontSize: 18,
+                              color: 'grey'
                             }}
                           />
                         ) : (
                           <VisibilityOff
                             style={{
                               fontSize: 18,
+                              color: 'grey'
                             }}
                           />
                         )}
