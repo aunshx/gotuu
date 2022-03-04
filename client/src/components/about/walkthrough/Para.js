@@ -1,25 +1,70 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux';
 
-const Para = ({ srNo }) => {
+import Tags from './Tags'
+
+import defaultImage from '../../../resources/images/default.jpg'
+
+const Para = ({
+  srNo,
+  imageLight,
+  imageDark,
+  title,
+  details,
+  tags,
+  // Redux States
+  settings: { displayMode }
+}) => {
+
   return (
-    <div className='walkthrough-para'>
-        <div className="title-para flex_middle">
-            <span style={{ marginRight: '0.3em' }}>{srNo}.</span> Whats the need for security questions during registration?
+    <div
+      className={
+        displayMode
+          ? "walkthrough-para"
+          : "walkthrough-para  walkthrough-para--dark"
+      }
+    >
+      <div className='title-para flex_middle'>
+        <span style={{ marginRight: "0.3em" }}>{srNo}.</span> {title}
+      </div>
+      <div className='image-para flex_middle'>
+        <img
+          src={
+            displayMode ? imageLight || defaultImage : imageDark || defaultImage
+          }
+          alt='Registration Process Gif'
+        />
+      </div>
+      <div className='flex_between ft-bold details-para'>
+        <div style={{ fontSize: "0.9em", color: "grey" }}>
+          Details
         </div>
-        <div className="image-para">
-            <img src="" alt="" />
+        <div className='flex_between'>
+            {tags.length > 0 && tags.map((element, index) => (
+                <Tags key={index} title={element} />
+            ))}
         </div>
-        <div className="caption">
+      </div>
+      <div className='caption'>
         <ul>
-            <li>Security questions are used if you forget your password.</li>
-            <li>Always keep the answers to your security questions stored securely.</li>
+          {details.length > 0 &&
+            details.map((element, index) => <li key={index}>{element}</li>)}
         </ul>
-        </div>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-Para.propTypes = {}
+Para.propTypes = {
+  settings: PropTypes.object.isRequired,
+};
 
-export default Para
+const mapStateToProps = (state) => ({
+  settings: state.settings,
+});
+
+const mapStateToActions = {
+};
+
+export default connect(mapStateToProps, mapStateToActions)(Para);

@@ -34,6 +34,7 @@
     --disabled-button-color: rgb(211, 211, 211);
     --creator-website-color: rgb(0, 145, 255);
     --mui-snackbar-color: rgb(238, 238, 238);
+    --flip-color: rgb(230, 230, 230);
 }
 
 [data-theme="dark"] {
@@ -52,6 +53,7 @@
   --dark-grey-color: rgb(221, 221, 221);
   --light-count-color: rgb(49, 48, 48);
   --light-primary-color: rgb(31, 57, 31);
+  --flip-color: rgb(44, 43, 43);
 }
 
 * {
@@ -2725,15 +2727,25 @@ margin: 0 0.5em;
 
 /* ----------------------------- WALKTHROUGH ------------------------------ */
 .walkthrough-para {
-  border: 1px solid red;
   width: 90%;
   height: auto;
+   box-shadow: 0px 0px 6px -3px rgba(15, 15, 15, 0.75);
+   padding: 0em 1em;
+   border-radius: 10px;
+   margin: 2em 0;
+}
+
+.walkthrough-para--dark {
+  box-shadow: none;
+  border: 1px solid var(--primary-color);
 }
 
 .walkthrough-para .image-para img {
   width: 100%;
-  height: 400px;
+  height: 500px;
   object-fit: contain;
+  border-top: 1px solid var(--flip-color);
+  border-bottom: 1px solid var(--flip-color);
 }
 
 .walkthrough-para .title-para {
@@ -2743,8 +2755,22 @@ margin: 0 0.5em;
   margin: 1em 0.5em;
 }
 
+.walkthrough-para .details-para {
+  margin: 1em 3em;
+}
+
+.walkthrough-para .details-para .tags {
+  padding: 0.1em 0.5em;
+  background-color: var(--grey-color);
+  color: var(--light-color);
+  font-weight: bold;
+  font-size: 0.6em;
+  border-radius: 5px;
+  margin: 0 0.5em;
+}
+
 .walkthrough-para .caption {
-  margin: 1em 0 0 7%;
+  margin: 0.8em 0 2em 7%;
 }
 
 .walkthrough-para .caption ul li::before {
@@ -2777,15 +2803,15 @@ margin: 0 0.5em;
   display: grid;
   grid-template-areas: "register_one"
   "register_two register_three";
-  height: 94vh;
+  height: auto;
   grid-template-columns: 1fr 0.5fr;
-  grid-template-rows: 100px calc(94vh - 160px);
+  grid-template-rows: 14vh calc(89vh - 14vh);
 }
 
 .register .register_one {
   grid-row: 1/2;
   grid-column: 1/3;
-  margin-bottom: 1em;
+  margin-top: 1em;
 }
 .register .register_two {
   grid-row: 2/3;
@@ -3264,4 +3290,38 @@ background-color:var(--light-count-color);
   .actions-card {
   width: 270px;
 }
+}
+
+/* -------------------------------- RIPPLE LOADER --------------------- */
+.lds-ripple {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+.lds-ripple div {
+  position: absolute;
+  border: 4px solid var(--primary-color);
+  opacity: 1;
+  border-radius: 50%;
+  animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+.lds-ripple div:nth-child(2) {
+  animation-delay: -0.5s;
+}
+@keyframes lds-ripple {
+  0% {
+    top: 36px;
+    left: 36px;
+    width: 0;
+    height: 0;
+    opacity: 1;
+  }
+  100% {
+    top: 0px;
+    left: 0px;
+    width: 72px;
+    height: 72px;
+    opacity: 0;
+  }
 }
