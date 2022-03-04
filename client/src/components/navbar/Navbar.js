@@ -54,7 +54,7 @@ const Navbar = ({ goMain, isActive,
         <div className=''>
           {menu ? (
             <div className='flex_middle'>
-              <Tooltip title='Toggle' placement='left'>
+              <Tooltip title='Display Mode' placement='left'>
                 <div>
                   <DarkMode />
                 </div>

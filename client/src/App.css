@@ -2781,6 +2781,11 @@ margin: 0 0.5em;
  padding: 0.5em 1em 2em 1em;
 }
 
+.max-gif-card--dark {
+ border: 1px solid var(--primary-color);
+ box-shadow: none;
+}
+
 .max-gif-card .triple_grid {
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
@@ -2795,7 +2800,7 @@ margin: 0 0.5em;
 
 .max-gif-card .icons {
   color: var(--grey-color);
-  margin-bottom: 0.25em;
+  margin-bottom: 0.3em;
 }
 
 .max-gif-card img {
