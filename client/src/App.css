@@ -2765,11 +2765,42 @@ margin: 0 0.5em;
 
 .walkthrough-para .image-para .enlarge {
   position: absolute;
-  bottom: 7%;
+  bottom: 3%;
   left: 2%;
   color: var(--grey-color);
   cursor: pointer;
   font-size: 0.75em;
+}
+
+.max-gif-card  {
+ width: 100%;
+ height: 100%;
+ background-color: var(--login-card-background);
+ box-shadow: 0px 0px 6px -3px rgba(15, 15, 15, 0.75);
+ border-radius: 10px;
+ padding: 0.5em 1em 2em 1em;
+}
+
+.max-gif-card .triple_grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+}
+
+.max-gif-card .title {
+  color: var(--grey-color);
+  font-weight: bold;
+  margin-bottom: 0.5em;
+  font-size: 1.1em;
+}
+
+.max-gif-card .icons {
+  color: var(--grey-color);
+  margin-bottom: 0.25em;
+}
+
+.max-gif-card img {
+  width: 95%;
+  height: 87%;
 }
 
 .walkthrough-para .image-para .enlarge:hover {
