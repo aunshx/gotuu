@@ -10,4 +10,17 @@ export const data = [
     tags: ["Security", "Register", "Questions"],
     altImg: "Registration Process Gif",
   },
+  {
+    title: "Creating a Tuu (Event)",
+    details: [
+      "Time upto milliseconds is shown for counting",
+      "You cannot stop event before 1 minute is completed",
+      "Write notes for the corresponding Tuu",
+      "Check the timeline after Tuu is completed",
+    ],
+    imageLight: "https://i.postimg.cc/HWyc3b84/Go-Use-Light.gif",
+    imageDark: "https://i.postimg.cc/h4xtFJQ1/Go-Use-Dark.gif",
+    tags: ["Gotuu", "Count", "Time"],
+    altImg: "Gotuu Process Gif",
+  },
 ];
