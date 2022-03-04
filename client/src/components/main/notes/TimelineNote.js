@@ -21,6 +21,10 @@ import {
 const CssTextField = styled(TextField, {
   shouldForwardProp: (props) => props !== "focusColor",
 })((p) => ({
+  ".MuiInputBase-input.Mui-disabled": {
+    WebkitTextFillColor: "grey",
+    color: "grey"
+  },
   // input label when focused
   "& label.Mui-focused": {
     color: "none",
@@ -36,11 +40,20 @@ const CssTextField = styled(TextField, {
   border: "transparent",
 }));
 
+
 const useStyles = makeStyles(() => ({
   noBorder: {
     border: "none",
   },
 }));
+
+const textFieldInputLabelStyleDark = {
+  fontSize: "0.9em",
+  alignSelf: "center",
+  justifySelf: "center",
+  color: "gray",
+};
+
 
 const style = {
   position: "fixed",
@@ -141,6 +154,7 @@ const TimelineNote = ({
           <CssTextField
             fullWidth
             multiline
+            variant='outlined'
             disabled={!isEditOkay}
             placeholder='Details'
             inputProps={{
@@ -148,6 +162,9 @@ const TimelineNote = ({
               style: {
                 fontSize: "0.85em",
               },
+            }}
+            InputLabelProps={{
+              style: textFieldInputLabelStyleDark,
             }}
             InputProps={{
               classes: { notchedOutline: textAttitude.noBorder },

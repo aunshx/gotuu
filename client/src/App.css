@@ -2454,6 +2454,10 @@ padding: 0  0 2em 0;
     min-height: 230px;
 }
 
+.single_note_1_timeline .body .Mui-disabled {
+ color: green;
+}
+
 
 .single_note_1_timeline .note-footer {
     display: flex;
