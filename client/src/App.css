@@ -2943,6 +2943,11 @@ margin: 0 0.5em;
     margin-bottom:0em;
 }
 
+.register .register_three .card  .Mui-disabled {
+  border: 1px solid var(--disabled-button-color);
+  color: var(--disabled-button-color);
+}
+
 .register .register_three .card .details {
     color: var(--grey-color);
     font-size: 12px;

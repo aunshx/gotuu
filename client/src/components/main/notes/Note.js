@@ -58,7 +58,8 @@ const Note = ({ close,
   sendNoteDataBody,
   sendNoteTitle,
   // Redux State
-  notes: { noteId, noteTitle, noteBody } 
+  notes: { noteId, noteTitle, noteBody },
+  settings: { displayMode }
 }) => {
   const textAttitude = useStyles();
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
@@ -112,7 +113,7 @@ const Note = ({ close,
 
   return (
     <>
-      <div className={"single_note_1"} data-aos='fade-up'>
+      <div className={"single_note_1"} data-aos='fade-up' style={displayMode ? {} : {boxShadow: 'none'}}>
         <div className='title'>
           <input
             name='noteTitle'
@@ -202,13 +203,15 @@ const Note = ({ close,
 
 Note.propTypes = {
   notes: PropTypes.object.isRequired,
+  settings: PropTypes.object.isRequired,
   deleteNote: PropTypes.func.isRequired,
   sendNoteDataBody: PropTypes.func.isRequired,
   sendNoteTitle: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  notes: state.notes
+  notes: state.notes,
+  settings: state.settings,
 });
 
 const mapActionsToProps = {
