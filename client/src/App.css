@@ -2731,6 +2731,30 @@ margin: 0 0.5em;
 }
 /* ------------------------------------------------------------------ */
 
+/* ----------------------------- WALKTHROUGH ------------------------------ */
+.walkthrough {
+  border: 1px solid red;
+  width: 80%;
+  height: 400px;
+}
+
+.walkthrough img {
+  width: 100%;
+  height: 400px;
+  object-fit: contain;
+}
+
+.walkthrough .title {
+  font-size: 1em;
+  color: var(--dark-grey-color);
+  font-weight: 600;
+}
+
+.walkthrough .caption {
+  font-size: 0.7em;
+}
+
+
 /* ----------------------------- REGISTER --------------------------- */
 .register_welcome {
   color: var(--grey-color);

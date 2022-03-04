@@ -2,7 +2,7 @@ import React, { useCallback, useRef, useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Intro from "./Intro";
-import HowTo from "./HowTo";
+import HowTo from "./walkthrough/HowTo";
 import Attribution from "./Attribution";
 
 const ProfileDetails = ({ fixedContent }) => {
