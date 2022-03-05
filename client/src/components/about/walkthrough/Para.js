@@ -12,6 +12,8 @@ import MaxGif from './MaxGif'
 import defaultImage from '../../../resources/images/default.jpg'
 import transfer from '../../../resources/images/bigLogo.png'
 
+import windowSize from '../../../utils/windowSize'
+
 const style = {
   position: "fixed",
   top: "50%",
@@ -36,6 +38,7 @@ const Para = ({
 }) => {
 
     const [maximize, setMaximize] = useState(false)
+    const { width } = windowSize()
 
     const [gifSee, setGifSee] = useState(true)
 
@@ -86,13 +89,15 @@ const Para = ({
           )}
 
           <div className='enlarge flex_middle'>
-            <Tooltip title='Enlarge' placement='top'>
+            {width > 786 && (
+              <Tooltip title='Enlarge' placement='top'>
               <OpenInFullIcon
                 style={{ fontSize: 15 }}
                 onClick={enlargeGif}
                 className='enlarge-one'
               />
             </Tooltip>
+            )}
             <Tooltip title='Replay' placement='top'>
               <ReplayOutlinedIcon
                 style={{ fontSize: 16, marginLeft: "0.5em" }}
