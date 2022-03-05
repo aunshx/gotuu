@@ -29,6 +29,8 @@ const Para = ({
   srNo,
   imageLight,
   imageDark,
+  imageLightMobile,
+  imageDarkMobile,
   title,
   details,
   tags,
@@ -69,16 +71,31 @@ const Para = ({
         </div>
         <div className='image-para flex_middle'>
           {gifSee ? (
-            <img
-              src={
-                gifSee
-                  ? displayMode
-                    ? imageLight || defaultImage
-                    : imageDark || defaultImage
-                  : transfer
-              }
-              alt={altImg}
-            />
+            <>
+              {width < 650 ? (
+                <img
+                  src={
+                    gifSee
+                      ? displayMode
+                        ? imageLightMobile || defaultImage
+                        : imageDarkMobile || defaultImage
+                      : transfer
+                  }
+                  alt={altImg}
+                />
+              ) : (
+                <img
+                  src={
+                    gifSee
+                      ? displayMode
+                        ? imageLight || defaultImage
+                        : imageDark || defaultImage
+                      : transfer
+                  }
+                  alt={altImg}
+                />
+              )}
+            </>
           ) : (
             <div class='lds-ripple'>
               <div></div>
@@ -113,7 +130,10 @@ const Para = ({
           }
         >
           <div style={{ fontSize: "0.9em", color: "grey" }}>Details</div>
-          <div className='flex_between' style={ width < 600 ? { marginTop: '0.5em' } : {} } >
+          <div
+            className='flex_between'
+            style={width < 600 ? { marginTop: "0.5em" } : {}}
+          >
             {tags.length > 0 &&
               tags.map((element, index) => (
                 <Tags key={index} title={element} />
