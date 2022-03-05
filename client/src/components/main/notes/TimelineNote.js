@@ -89,10 +89,10 @@ const TimelineNote = ({
   const [noTitleError, setNoTitleError] = useState(false);
 
   useEffect(() => {
-    if(noteDetails.completed === false){
-      setCompletion(false)
-    } else{
+    if(completion){
       setCompletion(true)
+    } else{
+      setCompletion(false)
     }
   }, [])
 
