@@ -40,4 +40,17 @@ export const data = [
     tags: ["Timeline", "Notes", "Completion"],
     altImg: "Timeline Process Gif",
   },
+  {
+    title: "Timeline Specifics",
+    details: [
+      "To change between latest and oldest Tuus, click on the 'chain-link' icon.",
+      "Checkout the timeline from other dates by clicking on 'today'",
+      "Dates on which Tuus have been recorded are shown in green color.",
+      "To minimize the date-picker click on the close icon on it.",
+    ],
+    imageLight: "https://i.postimg.cc/9XNJDyQq/Timeline-Light-Short.gif",
+    imageDark: "https://i.postimg.cc/43PNPfYj/Timeline-Dark-Short.gif",
+    tags: ["Timeline", "Notes", "Specifics"],
+    altImg: "Timeline Specifics Process Gif",
+  },
 ];
