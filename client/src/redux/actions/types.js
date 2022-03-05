@@ -116,6 +116,8 @@ export const DELETE_EVENT_LOADING_COMPLETE = "DELETE_EVENT_LOADING_COMPLETE";
 export const ADD_NEW_NOTE = "ADD_NEW_NOTE";
 export const ADD_NOTE_TITLE = "ADD_NOTE_TITLE";
 export const ADD_NOTE_BODY = "ADD_NOTE_BODY";
+export const NOTE_COMPLETE = "NOTE_COMPLETE";
+export const NOTE_INCOMPLETE = "NOTE_INCOMPLETE";
 
 // -------------------- METRICS ------------------------------
 export const TOTAL_COUNT_TUUS = "TOTAL_COUNT_TUUS";

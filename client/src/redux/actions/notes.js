@@ -10,7 +10,11 @@ import {
   ADD_NEW_NOTE,
   ADD_NOTE_TITLE,
   ADD_NOTE_BODY,
-  SUCCESS_200
+  SUCCESS_200,
+
+  // Note complete
+  NOTE_COMPLETE,
+  NOTE_INCOMPLETE,
 } from "./types";
 
 // Add note data body
@@ -276,6 +280,236 @@ export const sendNoteTitle = (noteId, title) => async (dispatch) => {
         type: ERROR_SNACKBAR,
         payload: value,
       });
+
+      setTimeout(
+        () =>
+          dispatch({
+            type: SNACKBAR_RESET,
+          }),
+        5000
+      );
+    }
+  }
+};
+
+// Complete note
+export const noteTaskComplete = (noteId) => async (dispatch) => {
+  let value = {
+    message: "1",
+    type: "info",
+  };
+
+  let bodySend = JSON.stringify({
+    noteId,
+  });
+
+  try {
+    
+    dispatch({
+      type: NOTE_COMPLETE,
+    });
+
+    const res = await api.post("/notes/change-note-to-complete", bodySend);
+
+    value.message = 'Kudos! All tasks completed!'
+    value.type = 'success'
+
+    dispatch({
+      type: SUCCESS_200,
+      payload: value
+    })
+
+        setTimeout(
+          () =>
+            dispatch({
+              type: SNACKBAR_RESET,
+            }),
+          4000
+        );
+
+  } catch (error) {
+    if (error.response.status === 500) {
+      value.message = "Oops! Something went wrong. Please reload!";
+      value.type = "error";
+
+      dispatch({
+        type: ERROR_SNACKBAR,
+        payload: value,
+      });
+
+       dispatch({
+         type: NOTE_INCOMPLETE,
+       });
+
+      setTimeout(
+        () =>
+          dispatch({
+            type: SNACKBAR_RESET,
+          }),
+        5000
+      );
+    } else if (error.response.status === 400) {
+      value.message = error.response.data.errors[0].msg;
+      value.type = "error";
+
+      dispatch({
+        type: ERROR_SNACKBAR,
+        payload: value,
+      });
+
+          dispatch({
+            type: NOTE_INCOMPLETE,
+          });
+
+
+      setTimeout(
+        () =>
+          dispatch({
+            type: SNACKBAR_RESET,
+          }),
+        5000
+      );
+    } else if (error.response.status === 401) {
+      value.message = "Your session has expired. Please login again.";
+      value.type = "error";
+
+      dispatch({
+        type: ERROR_SNACKBAR,
+        payload: value,
+      });
+
+          dispatch({
+            type: NOTE_INCOMPLETE,
+          });
+
+
+      setTimeout(
+        () =>
+          dispatch({
+            type: SNACKBAR_RESET,
+          }),
+        5000
+      );
+    } else {
+      value.message = "Oops! Looks like something went wrong. Please reload!";
+      value.type = "error";
+
+      dispatch({
+        type: ERROR_SNACKBAR,
+        payload: value,
+      });
+
+          dispatch({
+            type: NOTE_INCOMPLETE,
+          });
+
+
+      setTimeout(
+        () =>
+          dispatch({
+            type: SNACKBAR_RESET,
+          }),
+        5000
+      );
+    }
+  }
+};
+
+// Incomplete note
+export const noteTaskIncomplete = (noteId) => async (dispatch) => {
+  let value = {
+    message: "1",
+    type: "info",
+  };
+
+  let bodySend = JSON.stringify({
+    noteId,
+  });
+
+  try {
+    
+    dispatch({
+      type: NOTE_INCOMPLETE,
+    });
+
+    const res = await api.post("/notes/change-note-to-incomplete", bodySend);
+
+  } catch (error) {
+    if (error.response.status === 500) {
+      value.message = "Oops! Something went wrong. Please reload!";
+      value.type = "error";
+
+      dispatch({
+        type: ERROR_SNACKBAR,
+        payload: value,
+      });
+
+       dispatch({
+         type: NOTE_COMPLETE,
+       });
+
+      setTimeout(
+        () =>
+          dispatch({
+            type: SNACKBAR_RESET,
+          }),
+        5000
+      );
+    } else if (error.response.status === 400) {
+      value.message = error.response.data.errors[0].msg;
+      value.type = "error";
+
+      dispatch({
+        type: ERROR_SNACKBAR,
+        payload: value,
+      });
+
+          dispatch({
+            type: NOTE_COMPLETE,
+          });
+
+
+      setTimeout(
+        () =>
+          dispatch({
+            type: SNACKBAR_RESET,
+          }),
+        5000
+      );
+    } else if (error.response.status === 401) {
+      value.message = "Your session has expired. Please login again.";
+      value.type = "error";
+
+      dispatch({
+        type: ERROR_SNACKBAR,
+        payload: value,
+      });
+
+          dispatch({
+            type: NOTE_COMPLETE,
+          });
+
+
+      setTimeout(
+        () =>
+          dispatch({
+            type: SNACKBAR_RESET,
+          }),
+        5000
+      );
+    } else {
+      value.message = "Oops! Looks like something went wrong. Please reload!";
+      value.type = "error";
+
+      dispatch({
+        type: ERROR_SNACKBAR,
+        payload: value,
+      });
+
+          dispatch({
+            type: NOTE_COMPLETE,
+          });
+
 
       setTimeout(
         () =>

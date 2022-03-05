@@ -9,11 +9,15 @@ import { makeStyles } from "@mui/styles";
 
 import DeleteIcon from "@mui/icons-material/Delete";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import CheckCircleOutlinedIcon from "@mui/icons-material/CheckCircleOutlined";
+import CircleOutlinedIcon from "@mui/icons-material/CircleOutlined";
 
 import {
   deleteNote,
   sendNoteDataBody,
   sendNoteTitle,
+  noteTaskIncomplete,
+  noteTaskComplete,
 } from "../../../redux/actions/notes";
 import DeleteWarning from "./DeleteWarning";
 
@@ -52,14 +56,17 @@ const style = {
   p: 4,
 };
 
-const Note = ({ close, 
+const Note = ({
+  close,
   // Redux Actions
   deleteNote,
   sendNoteDataBody,
   sendNoteTitle,
+  noteTaskIncomplete,
+  noteTaskComplete,
   // Redux State
-  notes: { noteId, noteTitle, noteBody },
-  settings: { displayMode }
+  notes: { noteId, noteTitle, noteBody, noteComplete },
+  settings: { displayMode },
 }) => {
   const textAttitude = useStyles();
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
@@ -68,11 +75,11 @@ const Note = ({ close,
   const CHARACTER_LIMIT = 250;
 
   const onChange = (noteId, e) => {
-    let titleContent = ''
-    let bodyContent = ''
+    let titleContent = "";
+    let bodyContent = "";
 
     if (e.target.name === "noteTitle") {
-       titleContent = e.target.value;
+      titleContent = e.target.value;
       sendNoteTitle(noteId, titleContent, bodyContent);
     }
     if (e.target.name === "noteBody") {
@@ -98,6 +105,14 @@ const Note = ({ close,
     }
   };
 
+  const makeCompleteNote  = () => {
+    noteTaskComplete(noteId)
+  }
+
+  const makeIncompleteNote  = () => {
+    noteTaskIncomplete(noteId)
+  }
+
   // const handleSpace = (e) => {
   //   if(e.keyCode === 32){
   //     if(map.get("element") === '1. ' || map.get("element") === '1) ' || map.get("element") === '- ' || map.get("element") === 'a. ' || map.get("element") === 'a) ' || map.get("element") === 'A. ' || map.get("element") === 'A) ' || map.get("element") === '-> '){
@@ -113,7 +128,11 @@ const Note = ({ close,
 
   return (
     <>
-      <div className={"single_note_1"} data-aos='fade-up' style={displayMode ? {} : {boxShadow: 'none'}}>
+      <div
+        className={"single_note_1"}
+        data-aos='fade-up'
+        style={displayMode ? {} : { boxShadow: "none" }}
+      >
         <div className='title'>
           <input
             name='noteTitle'
@@ -168,6 +187,27 @@ const Note = ({ close,
                 <ExpandMoreIcon onClick={closeNote} />
               </Tooltip>
             </div>
+            {noteComplete ? (
+              <div>
+                <Tooltip
+                  title='Tasks Incomplete'
+                  style={{ fontSize: 18, color: "#44af16" }}
+                  className='icons'
+                >
+                  <CheckCircleOutlinedIcon onClick={makeIncompleteNote} />
+                </Tooltip>
+              </div>
+            ) : (
+              <div>
+                <Tooltip
+                  title='Tasks Incomplete'
+                  style={{ fontSize: 18, color: "#e8544a" }}
+                  className='icons'
+                >
+                  <CircleOutlinedIcon onClick={makeCompleteNote} />
+                </Tooltip>
+              </div>
+            )}
             <div>
               <Tooltip
                 title='Delete Note'
@@ -207,6 +247,8 @@ Note.propTypes = {
   deleteNote: PropTypes.func.isRequired,
   sendNoteDataBody: PropTypes.func.isRequired,
   sendNoteTitle: PropTypes.func.isRequired,
+  noteTaskComplete: PropTypes.func.isRequired,
+  noteTaskIncomplete: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -218,6 +260,8 @@ const mapActionsToProps = {
   deleteNote,
   sendNoteDataBody,
   sendNoteTitle,
+  noteTaskIncomplete,
+  noteTaskComplete,
 };
 
 export default connect(mapStateToProps, mapActionsToProps)(Note);

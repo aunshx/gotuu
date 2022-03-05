@@ -135,5 +135,57 @@ router.post(
   }
 );
 
+// @route    POST api/notes
+// @desc     Completion to INCOMPLETE
+// @access   Private
+
+router.post(
+  "/change-note-to-incomplete",
+  auth,
+  async (req, res) => {
+
+    const { noteId } = req.body;
+
+    try {
+
+      let ans = await Notes.updateOne(
+        { _id: noteId },
+        { $set: { completed: false } }
+      );
+
+      return res.status(200).send(ans);
+    } catch (error) {
+      console.log(error)
+      res.status(400).send({ errors: [ { msg: 'Something went wrong' } ] });
+    }
+  }
+);
+
+// @route    POST api/notes
+// @desc     Completion to COMPLETE
+// @access   Private
+
+router.post(
+  "/change-note-to-complete",
+  auth,
+  async (req, res) => {
+
+    const { noteId } = req.body;
+
+    try {
+
+      let ans = await Notes.updateOne(
+        { _id: noteId },
+        { $set: { completed: true } }
+      );
+
+      return res.status(200).send(ans);
+    } catch (error) {
+      console.log(error)
+      res.status(400).send({ errors: [ { msg: 'Something went wrong' } ] });
+    }
+  }
+);
+
 
 module.exports  = router
