@@ -72,8 +72,10 @@ export const data = [
     ],
     imageLight: "https://i.postimg.cc/d3byFsm4/Metrics-Light.gif",
     imageDark: "https://i.postimg.cc/15xhg8BM/Metrics-Dark.gif",
-    imageLightMobile: "",
-    imageDarkMobile: "",
+    imageLightMobile:
+      "https://i.postimg.cc/Z58V2Dzz/Metrics-Graph-Mobile-Light.gif",
+    imageDarkMobile:
+      "https://i.postimg.cc/nhb3df51/Metrics-Graph-Mobile-Dark.gif",
     tags: ["Metrics", "Graphs", "Statistics"],
     altImg: "Timeline Specifics Process Gif",
   },
