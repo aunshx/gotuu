@@ -64,6 +64,7 @@ const Element = ({
   const [showNote, setShowNote] = useState(false);
   const [expanded, setExpanded] = useState(false);
   const [isActionsOpen, setIsActionsOpen] = useState(false);
+  const [completion, setCompletion] = useState(false);
 
   const callback = useCallback(() => {
     openActions();
@@ -81,6 +82,9 @@ const Element = ({
     let ans = getNote(event._id);
     ans.then((data) => {
       setNoteDetails(data);
+       if (data.completed) {
+         setCompletion(true);
+       }
     });
 
     if (event.duration) {
@@ -103,6 +107,7 @@ const Element = ({
           return null;
       }
     }
+   
   }, [classy, event]);
 
   const openNote = () => {
@@ -290,11 +295,19 @@ const Element = ({
                     close={closeNote}
                     eventId={event._id}
                     setReload={setReload}
+                    completion={completion}
+                    setCompletion={setCompletion}
                   />
                 </div>
               )}
             </div>
-            <div className={`liner_vertical cursor_pointer`}></div>
+            <div
+              className={
+                completion
+                  ? `liner_vertical cursor_pointer`
+                  : `liner_vertical-incomplete cursor_pointer`
+              }
+            ></div>
           </div>
           <div></div>
         </div>
@@ -436,11 +449,19 @@ const Element = ({
                     close={closeNote}
                     eventId={event._id}
                     setReload={setReload}
+                    completion={completion}
+                    setCompletion={setCompletion}
                   />
                 </div>
               )}
             </div>
-            <div className={`liner_vertical cursor_pointer`}></div>
+            <div
+              className={
+                completion
+                  ? `liner_vertical cursor_pointer`
+                  : `liner_vertical-incomplete cursor_pointer`
+              }
+            ></div>
           </div>
           <div></div>
         </div>

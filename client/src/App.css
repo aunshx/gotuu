@@ -18,6 +18,7 @@
     --line-large-color: #e5592e;
     --line-humongous-color: #e52e2e;
     --closing-color: #e52e2e;
+    --light-closing-color: #ff7373;
     --grey-color: rgb(105, 105, 105);
     --light-grey-color: #dcdcc8;
     --dark-grey-color: rgb(69, 69, 69);
@@ -1054,6 +1055,16 @@ padding: 0  0 2em 0;
   transform: rotate(90deg);
   height: 0.1em;
   background-color: var(--light-grey-color);
+  width: 70px;
+  z-index: -1;
+}
+
+.timeline .main .line .liner_vertical-incomplete {
+   -ms-transform: rotate(90deg);
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
+  height: 0.1em;
+  background-color: var(--light-closing-color);
   width: 70px;
   z-index: -1;
 }

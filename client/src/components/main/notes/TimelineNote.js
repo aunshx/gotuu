@@ -76,6 +76,8 @@ const TimelineNote = ({
   eventId,
   dateSelected,
   setReload,
+  completion,
+  setCompletion,
   // Redux Actions
   sendNoteDataBody,
   sendNoteTitle,
@@ -85,7 +87,6 @@ const TimelineNote = ({
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
   const [isEditOkay, setIsEditOkay] = useState(false);
   const [noTitleError, setNoTitleError] = useState(false);
-  const [completion, setCompletion] = useState(false);
 
   useEffect(() => {
     if(noteDetails.completed === false){
@@ -203,7 +204,7 @@ const TimelineNote = ({
           />
         </div>
         <div className='note-footer'>
-          <div style={{ fontSize: "0.8em" }}>
+          <div style={{ fontSize: "0.9em" }}>
             {moment(noteDetails.createdAt).format("hh:mm a")}
           </div>
           <div style={{ fontSize: "0.9em" }}>
