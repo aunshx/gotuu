@@ -22,6 +22,16 @@ const Attribution = ({ innerRef, secondInnerRef }) => {
             Unsplash
           </a>
         </div>
+        <div style={{ textAlign: "center" }}>
+          Photo by{" "}
+          <a href='https://unsplash.com/@bradhelmink?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText'>
+            Brad Helmink
+          </a>{" "}
+          on{" "}
+          <a href='https://unsplash.com/s/photos/unknown?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText'>
+            Unsplash
+          </a>
+        </div>
       </div>
     </div>
   );

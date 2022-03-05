@@ -212,14 +212,14 @@ const Main = ({
             <Reminder message={"30 Mins Done! Rock on!"} type={"30"} />
           )}
           {oneHourAlert && reminderOneHour && (
-            <Reminder message={"It's a whole hour! Leggoooo"} type={"60"} />
+            <Reminder message={"It's been a whole hour! Leggoo"} type={"60"} />
           )}
           {twoHourAlert && reminderTwoHour && (
-            <Reminder message={"Wow 2 hours?! You're on FIREEE"} type={"120"} />
+            <Reminder message={"Wow 2 hrs?! You're on FIREEE"} type={"120"} />
           )}
           {threeHourAlert && reminderThreeHour && (
             <Reminder
-              message={"3 hours! That's it. You're the BEST."}
+              message={"3 hrs! That's it. You're the BEST."}
               type={"180"}
             />
           )}
