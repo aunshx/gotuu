@@ -2836,6 +2836,7 @@ margin: 0 0.5em;
   font-size: 0.6em;
   border-radius: 5px;
   margin: 0 0.5em;
+  width: auto;
 }
 
 .walkthrough-para .caption {

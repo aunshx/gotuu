@@ -71,13 +71,11 @@ const Para = ({
           {gifSee ? (
             <img
               src={
-                gifSee ? (
-                  displayMode
-                  ? imageLight || defaultImage
-                  : imageDark || defaultImage
-                ) : (
-                  transfer
-                )
+                gifSee
+                  ? displayMode
+                    ? imageLight || defaultImage
+                    : imageDark || defaultImage
+                  : transfer
               }
               alt={altImg}
             />
@@ -91,12 +89,12 @@ const Para = ({
           <div className='enlarge flex_middle'>
             {width > 786 && (
               <Tooltip title='Enlarge' placement='top'>
-              <OpenInFullIcon
-                style={{ fontSize: 15 }}
-                onClick={enlargeGif}
-                className='enlarge-one'
-              />
-            </Tooltip>
+                <OpenInFullIcon
+                  style={{ fontSize: 15 }}
+                  onClick={enlargeGif}
+                  className='enlarge-one'
+                />
+              </Tooltip>
             )}
             <Tooltip title='Replay' placement='top'>
               <ReplayOutlinedIcon
@@ -107,9 +105,15 @@ const Para = ({
             </Tooltip>
           </div>
         </div>
-        <div className='flex_between ft-bold details-para'>
+        <div
+          className={
+            width < 600
+              ? "app ft-bold details-para"
+              : "flex_between ft-bold details-para"
+          }
+        >
           <div style={{ fontSize: "0.9em", color: "grey" }}>Details</div>
-          <div className='flex_between'>
+          <div className='flex_between' style={ width < 600 ? { marginTop: '0.5em' } : {} } >
             {tags.length > 0 &&
               tags.map((element, index) => (
                 <Tags key={index} title={element} />
