@@ -58,6 +58,9 @@ import {
 
   //  Current Location
   CURRENT_LOCATION,
+
+  // Reminders
+  REMINDER_ALERT_RESET,
 } from "./types";
 
 // Current location capture 
@@ -847,4 +850,6 @@ export const login =
   };
 
 // Logout
-export const logout = () => ({ type: LOGOUT });
+export const logout = () => async (dispatch) => { 
+  dispatch({ type: LOGOUT })
+};

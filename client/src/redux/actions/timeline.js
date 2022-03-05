@@ -25,8 +25,16 @@ import {
   DELETE_EVENT_LOADING_COMPLETE,
 } from "./types";
 
+import {
+  getAvgDurationOfTuusPerDay,
+  getAvgDurationOfTuus,
+  getTotalNumberOfTuus,
+  getNumberOfTuusPerDay,
+  getLiveStreak,
+} from "./metrics";
+
 // Add duration after the event ends
-export const addDurationToEventEnd = (id, duration) => async (dispatch) => {
+export const addDurationToEventEnd = (id, duration) => async (dispatch, getState) => {
   let value = {
     message: "1",
     type: "info",
@@ -42,7 +50,14 @@ export const addDurationToEventEnd = (id, duration) => async (dispatch) => {
     
     const res = await api.post("/timeline/add-details-event", body);
 
-    dispatch(getTimelineEvent(date));
+    dispatch(deleteAllEmptyEvents());
+    dispatch(getTimelineDatesCaptured());
+    dispatch(getTimelineEvent(moment(date).toISOString()));
+    dispatch(getAvgDurationOfTuusPerDay());
+    dispatch(getNumberOfTuusPerDay());
+    dispatch(getAvgDurationOfTuus());
+    dispatch(getTotalNumberOfTuus());
+    dispatch(getLiveStreak());
 
   } catch (error) {
     if (error.response.status === 500) {
