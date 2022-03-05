@@ -55,8 +55,10 @@ export const data = [
     ],
     imageLight: "https://i.postimg.cc/9XNJDyQq/Timeline-Light-Short.gif",
     imageDark: "https://i.postimg.cc/43PNPfYj/Timeline-Dark-Short.gif",
-    imageLightMobile: "",
-    imageDarkMobile: "",
+    imageLightMobile:
+      "https://i.postimg.cc/NMJGQ4Td/Timeline-Specifics-Mobile-Light.gif",
+    imageDarkMobile:
+      "https://i.postimg.cc/yY5KQxXS/Timeline-Specifics-Mobile-Dark.gif",
     tags: ["Timeline", "Notes", "Specifics"],
     altImg: "Timeline Specifics Process Gif",
   },
