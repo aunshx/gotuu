@@ -20,7 +20,7 @@ export const data = [
       "Write notes for the corresponding Tuu",
       "Check the timeline after Tuu is completed",
     ],
-    imageLight: "https://i.postimg.cc/HWyc3b84/Go-Use-Light.gif",
+    imageLight: "https://i.postimg.cc/J0vS51sW/Go.gif",
     imageDark: "https://i.postimg.cc/h4xtFJQ1/Go-Use-Dark.gif",
     imageLightMobile: "https://i.postimg.cc/4ygYDnQP/Go-Mobile-Light.gif",
     imageDarkMobile: "https://i.postimg.cc/pVFN7pgz/Go-Mobile-Dark.gif",

@@ -43,7 +43,7 @@ const ProfileDetails = ({ fixedContent }) => {
      }
      const options = {
        root: null,
-       threshold: 0.5,
+       threshold: 0,
      };
      walkthroughRef.current = new IntersectionObserver((entries) => {
        if (entries[0].isIntersecting) {
