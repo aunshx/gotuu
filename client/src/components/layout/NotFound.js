@@ -23,8 +23,10 @@ const NotFound = () => {
           </div>
           <div className='app'>
             <div className='fourOfour app' style={{ justifyContent: "center" }}>
-              <div>404</div>
-              <div style={{ marginBottom: "1em" }}>Page Not Found</div>
+              <div className='flex_middle'>404</div>
+              <div style={{ marginBottom: "1em" }} className='flex_middle'>
+                Page Not Found
+              </div>
             </div>
           </div>
           <div className='flex_middle'>

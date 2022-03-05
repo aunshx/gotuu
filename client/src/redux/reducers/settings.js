@@ -44,7 +44,7 @@ const initialState = {
   sound: true,
 
   // Alerts
-  fifteenMinAlert: false,
+  fifteenMinAlert: true,
   thirtyMinAlert: false,
   oneHourAlert: false,
   twoHourAlert: false,
@@ -53,7 +53,7 @@ const initialState = {
 
   // Reminders
   reminder: true,
-  reminderFifteenMin: false,
+  reminderFifteenMin: true,
   reminderThirtyMin: false,
   reminderOneHour: false,
   reminderTwoHour: false,

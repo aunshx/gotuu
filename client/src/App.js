@@ -3,14 +3,13 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Provider } from "react-redux";
 
 import { loadUser } from "./redux/actions/auth";
-import { DARK_MODE, LIGHT_MODE, LOGOUT } from "./redux/actions/types";
+import { LOGOUT } from "./redux/actions/types";
 
 import Home from "./components/Home";
 import Register from "./components/auth/register/Register";
 import Main from "./components/auth/login/Main";
 import About from "./components/about/About";
 import NotFound from "./components/layout/NotFound";
-import VerifyEmail from "./components/layout/VerifyEmail";
 import store from "./store";
 import setAuthToken from './utils/setAuthToken'
 
@@ -43,7 +42,6 @@ function App() {
             <Route exact path='/register' component={Register} />
             <Route exact path='/login' component={Main} />
             <Route exact path='/about' component={About} />
-            <Route path='/auth' component={VerifyEmail} />
             <Route component={NotFound} />
           </Switch>
         </>

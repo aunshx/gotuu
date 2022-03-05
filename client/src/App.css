@@ -2213,12 +2213,12 @@ padding: 0  0 2em 0;
      position: fixed;
      top: 0;
      right: 0;
-      background: url('./resources/images/backgroundRAM.jpg') no-repeat center center/cover;
+      background: url('./resources/images/backgroundRam2.jpg') no-repeat center center/cover;
       height: 100vh;
       width: 100vw;
       z-index: -1;
-      filter: blur(7px);
-      -webkit-filter: blur(7px);
+      filter: blur(8px);
+      -webkit-filter: blur(8px);
    }
 
    .not_found .crux img {
@@ -2228,7 +2228,7 @@ padding: 0  0 2em 0;
    }
 
    .not_found .crux {
-     color: var(--light-color);
+     color: var(--dark-font-color);
      font-size: 1.5em;
      font-weight: bold;
      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -2237,9 +2237,9 @@ padding: 0  0 2em 0;
    .not_found .inputButton {
      border: 2px solid var(--primary-color);
      border-radius: 10px;
-     background-color: var(--light-color);
+     background: none;
      font-size: 0.9em;
-     color: var(--grey-color);
+     color: var(--light-color);
      font-weight: bold;
      cursor: pointer;
    }
@@ -2249,13 +2249,52 @@ padding: 0  0 2em 0;
    }
 
    .not_found .fourOfour {
-     font-size: 8em;
+     font-size: 5em;
      font-weight: bold;
-     color: var(--light-color);
+     color: var(--grey-color);
      box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
-     width: 50vw;
+     width: 600px;
      height: 55vh;
      border-radius: 10px;
+     text-align: center;
+   }
+
+   @media only screen and (max-width: 720px) {
+    .not_found .fourOfour {
+     font-size: 4em;
+     font-weight: bold;
+     color: var(--grey-color);
+     box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+     width: 400px;
+     height: 55vh;
+     border-radius: 10px;
+     text-align: center;
+   }
+   }
+
+   @media only screen and (max-width: 460px) {
+    .not_found .fourOfour {
+     font-size: 3em;
+     font-weight: bold;
+     color: var(--grey-color);
+     box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+     width: 270px;
+     height: 55vh;
+     border-radius: 10px;
+     text-align: center;
+   }
+   .not_found .crux img {
+     width: 140px;
+     height: 80px;
+     object-fit: contain;
+   }
+
+   .not_found .crux {
+     color: var(--dark-font-color);
+     font-size: 1em;
+     font-weight: bold;
+     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+   }
    }
 
    /* ----------------------------- NOTES ----------------------------- */
