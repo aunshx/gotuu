@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import moment from "moment";
@@ -10,12 +10,16 @@ import { makeStyles } from "@mui/styles";
 import DeleteIcon from "@mui/icons-material/Delete";
 import CloseIcon from "@mui/icons-material/Close";
 import EditIcon from "@mui/icons-material/Edit";
+import CheckCircleOutlinedIcon from "@mui/icons-material/CheckCircleOutlined";
+import CircleOutlinedIcon from "@mui/icons-material/CircleOutlined";
 
 import DeleteWarning from "./DeleteWarning";
 
 import {
   sendNoteDataBody,
   sendNoteTitle,
+  noteTaskComplete,
+  noteTaskIncomplete
 } from "../../../redux/actions/notes";
 
 const CssTextField = styled(TextField, {
@@ -75,10 +79,21 @@ const TimelineNote = ({
   // Redux Actions
   sendNoteDataBody,
   sendNoteTitle,
+  noteTaskComplete,
+  noteTaskIncomplete,
 }) => {
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
-  const [isEditOkay, setIsEditOkay] = useState(false)
+  const [isEditOkay, setIsEditOkay] = useState(false);
   const [noTitleError, setNoTitleError] = useState(false);
+  const [completion, setCompletion] = useState(false);
+
+  useEffect(() => {
+    if(noteDetails.completed === false){
+      setCompletion(false)
+    } else{
+      setCompletion(true)
+    }
+  }, [])
 
   const textAttitude = useStyles();
 
@@ -98,7 +113,7 @@ const TimelineNote = ({
 
     if (e.target.name === "noteTitle") {
       titleContent = e.target.value;
-      noteDetails.title = titleContent
+      noteDetails.title = titleContent;
       sendNoteTitle(noteId, titleContent, bodyContent);
     }
     if (e.target.name === "noteBody") {
@@ -109,8 +124,8 @@ const TimelineNote = ({
   };
 
   const startEdit = () => {
-    setIsEditOkay(true)
-  }
+    setIsEditOkay(true);
+  };
 
   const stopEdit = () => {
     if (noteDetails.title <= 0) {
@@ -119,17 +134,27 @@ const TimelineNote = ({
     } else {
       setIsEditOkay(false);
     }
-  }
+  };
 
   const closeNote = () => {
-    if(noteDetails.title <= 0){
+    if (noteDetails.title <= 0) {
       setNoTitleError(true);
       setTimeout(() => setNoTitleError(false), 4000);
     } else {
       setIsEditOkay(false);
       close();
     }
-  }
+  };
+
+  const makeCompleteNote = () => {
+    noteTaskComplete(noteDetails._id);
+    setCompletion(true)
+  };
+
+  const makeIncompleteNote = () => {
+    noteTaskIncomplete(noteDetails._id);
+    setCompletion(false);
+  };
 
   return (
     <>
@@ -194,6 +219,27 @@ const TimelineNote = ({
                 <CloseIcon onClick={closeNote} />
               </Tooltip>
             </div>
+            {completion ? (
+              <div>
+                <Tooltip
+                  title='Tasks Complete'
+                  style={{ fontSize: 18, color: "#44af16" }}
+                  className='icons'
+                >
+                  <CheckCircleOutlinedIcon onClick={makeIncompleteNote} />
+                </Tooltip>
+              </div>
+            ) : (
+              <div>
+                <Tooltip
+                  title='Tasks Incomplete'
+                  style={{ fontSize: 18, color: "#e8544a" }}
+                  className='icons'
+                >
+                  <CircleOutlinedIcon onClick={makeCompleteNote} />
+                </Tooltip>
+              </div>
+            )}
             <div>
               {isEditOkay ? (
                 <Tooltip
@@ -255,6 +301,8 @@ const TimelineNote = ({
 TimelineNote.propTypes = {
   sendNoteDataBody: PropTypes.func.isRequired,
   sendNoteTitle: PropTypes.func.isRequired,
+  noteTaskComplete: PropTypes.func.isRequired,
+  noteTaskIncomplete: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -263,6 +311,8 @@ const mapStateToProps = (state) => ({
 const mapActionsToProps = {
   sendNoteDataBody,
   sendNoteTitle,
+  noteTaskIncomplete,
+  noteTaskComplete,
 };
 
 export default connect(mapStateToProps, mapActionsToProps)(TimelineNote);

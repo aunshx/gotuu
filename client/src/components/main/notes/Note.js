@@ -200,7 +200,7 @@ const Note = ({
             ) : (
               <div>
                 <Tooltip
-                  title='Tasks Incomplete'
+                  title='Tasks Complete'
                   style={{ fontSize: 18, color: "#e8544a" }}
                   className='icons'
                 >
