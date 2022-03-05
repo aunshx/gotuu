@@ -23,40 +23,76 @@ router.post("/number-of-tuus-per-day-year", auth, async (req, res) => {
   const { timezone } = req.body
 
   try {
-    ans = await Timeline.aggregate([
-      {
-        $match: {
-          $and: [
-            { userId: new mongoose.Types.ObjectId(req.user.id) },
-            { duration: { $ne: null } },
-          ],
+    if(timezone.length <= 0) {
+      ans = await Timeline.aggregate([
+        {
+          $match: {
+            $and: [
+              { userId: new mongoose.Types.ObjectId(req.user.id) },
+              { duration: { $ne: null } },
+            ],
+          },
         },
-      },
-      {
-        $group: {
-          _id: {
-            date: {
-              $dateToString: {
-                date: "$createdAt",
-                timezone,
-                format: "%Y",
+        {
+          $group: {
+            _id: {
+              date: {
+                $dateToString: {
+                  date: "$createdAt",
+                  format: "%Y",
+                },
+              },
+              year: {
+                $year: { date: "$createdAt" },
               },
             },
-            year: {
-              $year: { date: "$createdAt", timezone },
-            },
+            count: { $sum: 1 },
           },
-          count: { $sum: 1 },
         },
-      },
-      {
-        $project: {
-          date: "$_id",
-          count: 1,
-          _id: 0,
+        {
+          $project: {
+            date: "$_id",
+            count: 1,
+            _id: 0,
+          },
         },
-      },
-    ]).sort({ "date.year": 1 });
+      ]).sort({ "date.year": 1 });
+    } else {
+      ans = await Timeline.aggregate([
+        {
+          $match: {
+            $and: [
+              { userId: new mongoose.Types.ObjectId(req.user.id) },
+              { duration: { $ne: null } },
+            ],
+          },
+        },
+        {
+          $group: {
+            _id: {
+              date: {
+                $dateToString: {
+                  date: "$createdAt",
+                  timezone,
+                  format: "%Y",
+                },
+              },
+              year: {
+                $year: { date: "$createdAt", timezone },
+              },
+            },
+            count: { $sum: 1 },
+          },
+        },
+        {
+          $project: {
+            date: "$_id",
+            count: 1,
+            _id: 0,
+          },
+        },
+      ]).sort({ "date.year": 1 });
+    }
 
     return res.status(200).send(ans);
   } catch (error) {
@@ -75,51 +111,98 @@ router.post("/number-of-tuus-per-day-sevendays", auth, async (req, res) => {
   let ans = {};
   const { timezone } = req.body
   try {
-    ans = await Timeline.aggregate([
-      {
-        $match: {
-          $and: [
-            { userId: new mongoose.Types.ObjectId(req.user.id) },
-            { duration: { $ne: null } },
-            {
-              updatedAt: {
-                $gte: new Date(new Date() - 7 * 60 * 60 * 24 * 1000),
+    if(timezone.length <= 0){
+      ans = await Timeline.aggregate([
+        {
+          $match: {
+            $and: [
+              { userId: new mongoose.Types.ObjectId(req.user.id) },
+              { duration: { $ne: null } },
+              {
+                updatedAt: {
+                  $gte: new Date(new Date() - 7 * 60 * 60 * 24 * 1000),
+                },
               },
-            },
-          ],
-        },
-      },
-      {
-        $group: {
-          _id: {
-            date: {
-              $dateToString: {
-                date: "$createdAt",
-                timezone,
-                format: "%d/%m/%Y",
-              },
-            },
-            month: {
-              $month: { date: "$createdAt", timezone },
-            },
-            day: {
-              $dayOfMonth: { date: "$createdAt", timezone },
-            },
-            year: {
-              $year: { date: "$createdAt", timezone },
-            },
+            ],
           },
-          count: { $sum: 1 },
         },
-      },
-      {
-        $project: {
-          date: "$_id",
-          count: 1,
-          _id: 0,
+        {
+          $group: {
+            _id: {
+              date: {
+                $dateToString: {
+                  date: "$createdAt",
+                  format: "%d/%m/%Y",
+                },
+              },
+              month: {
+                $month: { date: "$createdAt" },
+              },
+              day: {
+                $dayOfMonth: { date: "$createdAt" },
+              },
+              year: {
+                $year: { date: "$createdAt" },
+              },
+            },
+            count: { $sum: 1 },
+          },
         },
-      },
-    ]).sort({ "date.year": 1, "date.month": 1, "date.day": 1 });
+        {
+          $project: {
+            date: "$_id",
+            count: 1,
+            _id: 0,
+          },
+        },
+      ]).sort({ "date.year": 1, "date.month": 1, "date.day": 1 });
+    } else {
+      ans = await Timeline.aggregate([
+        {
+          $match: {
+            $and: [
+              { userId: new mongoose.Types.ObjectId(req.user.id) },
+              { duration: { $ne: null } },
+              {
+                updatedAt: {
+                  $gte: new Date(new Date() - 7 * 60 * 60 * 24 * 1000),
+                },
+              },
+            ],
+          },
+        },
+        {
+          $group: {
+            _id: {
+              date: {
+                $dateToString: {
+                  date: "$createdAt",
+                  timezone,
+                  format: "%d/%m/%Y",
+                },
+              },
+              month: {
+                $month: { date: "$createdAt", timezone },
+              },
+              day: {
+                $dayOfMonth: { date: "$createdAt", timezone },
+              },
+              year: {
+                $year: { date: "$createdAt", timezone },
+              },
+            },
+            count: { $sum: 1 },
+          },
+        },
+        {
+          $project: {
+            date: "$_id",
+            count: 1,
+            _id: 0,
+          },
+        },
+      ]).sort({ "date.year": 1, "date.month": 1, "date.day": 1 });
+    }
 
     return res.status(200).send(ans);
   } catch (error) {
@@ -136,40 +219,76 @@ router.post("/number-of-tuus-per-day-currentMonth", auth, async (req, res) => {
   let ans = {};
   const { timezone } = req.body;
   try {
-    ans = await Timeline.aggregate([
-      {
-        $match: {
-          $and: [
-            { userId: new mongoose.Types.ObjectId(req.user.id) },
-            { duration: { $ne: null } },
-          ],
+    if(timezone.length <= 0) {
+      ans = await Timeline.aggregate([
+        {
+          $match: {
+            $and: [
+              { userId: new mongoose.Types.ObjectId(req.user.id) },
+              { duration: { $ne: null } },
+            ],
+          },
         },
-      },
-      {
-        $group: {
-          _id: {
-            date: {
-              $dateToString: {
-                date: "$createdAt",
-                timezone,
-                format: "%m",
+        {
+          $group: {
+            _id: {
+              date: {
+                $dateToString: {
+                  date: "$createdAt",
+                  format: "%m",
+                },
+              },
+              month: {
+                $month: { date: "$createdAt" },
               },
             },
-            month: {
-              $month: { date: "$createdAt", timezone },
-            },
+            count: { $sum: 1 },
           },
-          count: { $sum: 1 },
         },
-      },
-      {
-        $project: {
-          date: "$_id",
-          count: 1,
-          _id: 0,
+        {
+          $project: {
+            date: "$_id",
+            count: 1,
+            _id: 0,
+          },
         },
-      },
-    ]).sort({ "date.month": 1 });
+      ]).sort({ "date.month": 1 });
+    } else {
+      ans = await Timeline.aggregate([
+        {
+          $match: {
+            $and: [
+              { userId: new mongoose.Types.ObjectId(req.user.id) },
+              { duration: { $ne: null } },
+            ],
+          },
+        },
+        {
+          $group: {
+            _id: {
+              date: {
+                $dateToString: {
+                  date: "$createdAt",
+                  timezone,
+                  format: "%m",
+                },
+              },
+              month: {
+                $month: { date: "$createdAt", timezone },
+              },
+            },
+            count: { $sum: 1 },
+          },
+        },
+        {
+          $project: {
+            date: "$_id",
+            count: 1,
+            _id: 0,
+          },
+        },
+      ]).sort({ "date.month": 1 });
+    }
 
     return res.status(200).send(ans);
   } catch (error) {
@@ -192,51 +311,99 @@ router.post("/average-duration-tuus-per-day-sevendays", auth, async (req, res) =
 
   try {
 
-    ans = await Timeline.aggregate([
-      {
-        $match: {
-          $and: [
-            { userId: new mongoose.Types.ObjectId(req.user.id) },
-            { duration: { $ne: null } },
-            {
-              updatedAt: {
-                $gte: new Date(new Date() - 7 * 60 * 60 * 24 * 1000),
+    if(timezone.length <= 0) {
+      ans = await Timeline.aggregate([
+        {
+          $match: {
+            $and: [
+              { userId: new mongoose.Types.ObjectId(req.user.id) },
+              { duration: { $ne: null } },
+              {
+                updatedAt: {
+                  $gte: new Date(new Date() - 7 * 60 * 60 * 24 * 1000),
+                },
               },
-            },
-          ],
-        },
-      },
-      {
-        $group: {
-          _id: {
-            date: {
-              $dateToString: {
-                date: "$createdAt",
-                timezone,
-                format: "%d/%m/%Y",
-              },
-            },
-            month: {
-              $month: { date: "$createdAt", timezone },
-            },
-            day: {
-              $dayOfMonth: { date: "$createdAt", timezone },
-            },
-            year: {
-              $year: { date: "$createdAt", timezone },
-            },
+            ],
           },
-          sum: { $sum: "$duration" },
         },
-      },
-      {
-        $project: {
-          date: "$_id",
-          sum: 1,
-          _id: 0,
+        {
+          $group: {
+            _id: {
+              date: {
+                $dateToString: {
+                  date: "$createdAt",
+                  format: "%d/%m/%Y",
+                },
+              },
+              month: {
+                $month: { date: "$createdAt" },
+              },
+              day: {
+                $dayOfMonth: { date: "$createdAt" },
+              },
+              year: {
+                $year: { date: "$createdAt" },
+              },
+            },
+            sum: { $sum: "$duration" },
+          },
         },
-      },
-    ]).sort({ "date.year": 1, "date.month": 1, "date.day": 1 });
+        {
+          $project: {
+            date: "$_id",
+            sum: 1,
+            _id: 0,
+          },
+        },
+      ]).sort({ "date.year": 1, "date.month": 1, "date.day": 1 });
+
+    } else {
+      ans = await Timeline.aggregate([
+        {
+          $match: {
+            $and: [
+              { userId: new mongoose.Types.ObjectId(req.user.id) },
+              { duration: { $ne: null } },
+              {
+                updatedAt: {
+                  $gte: new Date(new Date() - 7 * 60 * 60 * 24 * 1000),
+                },
+              },
+            ],
+          },
+        },
+        {
+          $group: {
+            _id: {
+              date: {
+                $dateToString: {
+                  date: "$createdAt",
+                  timezone,
+                  format: "%d/%m/%Y",
+                },
+              },
+              month: {
+                $month: { date: "$createdAt", timezone },
+              },
+              day: {
+                $dayOfMonth: { date: "$createdAt", timezone },
+              },
+              year: {
+                $year: { date: "$createdAt", timezone },
+              },
+            },
+            sum: { $sum: "$duration" },
+          },
+        },
+        {
+          $project: {
+            date: "$_id",
+            sum: 1,
+            _id: 0,
+          },
+        },
+      ]).sort({ "date.year": 1, "date.month": 1, "date.day": 1 });
+    }
 
     return res.status(200).send(ans);
   } catch (error) {
@@ -253,40 +420,76 @@ router.post("/average-duration-tuus-per-day-monthly", auth, async (req, res) => 
   const { timezone } = req.body;
 
   try {
-    ans = await Timeline.aggregate([
-      {
-        $match: {
-          $and: [
-            { userId: new mongoose.Types.ObjectId(req.user.id) },
-            { duration: { $ne: null } },
-          ],
+    if(timezone.length <= 0) {
+      ans = await Timeline.aggregate([
+        {
+          $match: {
+            $and: [
+              { userId: new mongoose.Types.ObjectId(req.user.id) },
+              { duration: { $ne: null } },
+            ],
+          },
         },
-      },
-      {
-        $group: {
-          _id: {
-            date: {
-              $dateToString: {
-                date: "$createdAt",
-                timezone,
-                format: "%m",
+        {
+          $group: {
+            _id: {
+              date: {
+                $dateToString: {
+                  date: "$createdAt",
+                  format: "%m",
+                },
+              },
+              month: {
+                $month: { date: "$createdAt" },
               },
             },
-            month: {
-              $month: { date: "$createdAt", timezone },
-            },
+            sum: { $sum: "$duration" },
           },
-          sum: { $sum: "$duration" },
         },
-      },
-      {
-        $project: {
-          date: "$_id",
-          sum: 1,
-          _id: 0,
+        {
+          $project: {
+            date: "$_id",
+            sum: 1,
+            _id: 0,
+          },
         },
-      },
-    ]).sort({ "date.month": 1 });
+      ]).sort({ "date.month": 1 });
+    } else {
+      ans = await Timeline.aggregate([
+        {
+          $match: {
+            $and: [
+              { userId: new mongoose.Types.ObjectId(req.user.id) },
+              { duration: { $ne: null } },
+            ],
+          },
+        },
+        {
+          $group: {
+            _id: {
+              date: {
+                $dateToString: {
+                  date: "$createdAt",
+                  timezone,
+                  format: "%m",
+                },
+              },
+              month: {
+                $month: { date: "$createdAt", timezone },
+              },
+            },
+            sum: { $sum: "$duration" },
+          },
+        },
+        {
+          $project: {
+            date: "$_id",
+            sum: 1,
+            _id: 0,
+          },
+        },
+      ]).sort({ "date.month": 1 });
+    }
 
     return res.status(200).send(ans);
   } catch (error) {
@@ -303,40 +506,77 @@ router.post("/average-duration-tuus-per-day-yearly", auth, async (req, res) => {
   let ans = {};
   const { timezone } = req.body;
   try {
-    ans = await Timeline.aggregate([
-      {
-        $match: {
-          $and: [
-            { userId: new mongoose.Types.ObjectId(req.user.id) },
-            { duration: { $ne: null } },
-          ],
+    if(timezone.length <= 0) {
+      ans = await Timeline.aggregate([
+        {
+          $match: {
+            $and: [
+              { userId: new mongoose.Types.ObjectId(req.user.id) },
+              { duration: { $ne: null } },
+            ],
+          },
         },
-      },
-      {
-        $group: {
-          _id: {
-            date: {
-              $dateToString: {
-                date: "$createdAt",
-                timezone,
-                format: "%Y",
+        {
+          $group: {
+            _id: {
+              date: {
+                $dateToString: {
+                  date: "$createdAt",
+                  format: "%Y",
+                },
+              },
+              year: {
+                $year: { date: "$createdAt" },
               },
             },
-            year: {
-              $year: { date: "$createdAt", timezone },
-            },
+            sum: { $sum: "$duration" },
           },
-          sum: { $sum: "$duration" },
         },
-      },
-      {
-        $project: {
-          date: "$_id",
-          sum: 1,
-          _id: 0,
+        {
+          $project: {
+            date: "$_id",
+            sum: 1,
+            _id: 0,
+          },
         },
-      },
-    ]).sort({ "date.year": 1 });
+      ]).sort({ "date.year": 1 });
+
+    } else {
+      ans = await Timeline.aggregate([
+        {
+          $match: {
+            $and: [
+              { userId: new mongoose.Types.ObjectId(req.user.id) },
+              { duration: { $ne: null } },
+            ],
+          },
+        },
+        {
+          $group: {
+            _id: {
+              date: {
+                $dateToString: {
+                  date: "$createdAt",
+                  timezone,
+                  format: "%Y",
+                },
+              },
+              year: {
+                $year: { date: "$createdAt", timezone },
+              },
+            },
+            sum: { $sum: "$duration" },
+          },
+        },
+        {
+          $project: {
+            date: "$_id",
+            sum: 1,
+            _id: 0,
+          },
+        },
+      ]).sort({ "date.year": 1 });
+    }
 
     return res.status(200).send(ans);
   } catch (error) {
