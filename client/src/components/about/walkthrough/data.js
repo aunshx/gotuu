@@ -93,8 +93,10 @@ export const data = [
     ],
     imageLight: "https://i.postimg.cc/xdhdZ0GC/Metrics-Light-Blocks.gif",
     imageDark: "https://i.postimg.cc/1X4yH22S/Metrics-Dark-Blocks.gif",
-    imageLightMobile: "https://i.postimg.cc/8kd7pK2z/Register-Mobile-Light.gif",
-    imageDarkMobile: "https://i.postimg.cc/8kd7pK2z/Register-Mobile-Light.gif",
+    imageLightMobile:
+      "https://i.postimg.cc/Y2NNpLyQ/Metrics-Blocks-Mobile-Light.gif",
+    imageDarkMobile:
+      "https://i.postimg.cc/jqfgyj3j/Metrics-Blocks-Mobile-Dark.gif",
     tags: ["Metrics", "Blocks", "Duration"],
     altImg: "Timeline Specifics Process Gif",
   },
