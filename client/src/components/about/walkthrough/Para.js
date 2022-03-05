@@ -2,12 +2,15 @@ import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux';
 import { Modal, Box, Fade, Tooltip } from '@mui/material'
+
 import OpenInFullIcon from "@mui/icons-material/OpenInFull";
+import ReplayOutlinedIcon from "@mui/icons-material/ReplayOutlined";
 
 import Tags from './Tags'
 import MaxGif from './MaxGif'
 
 import defaultImage from '../../../resources/images/default.jpg'
+import transfer from '../../../resources/images/bigLogo.png'
 
 const style = {
   position: "fixed",
@@ -34,12 +37,19 @@ const Para = ({
 
     const [maximize, setMaximize] = useState(false)
 
+    const [gifSee, setGifSee] = useState(true)
+
     const enlargeGif = () => {
         setMaximize(true)
     }
 
     const reduceGif = () => {
         setMaximize(false)
+    }
+
+    const reloadGif = () => {
+      setGifSee(false)
+      setTimeout(() => setGifSee(true), 300);
     }
 
   return (
@@ -55,19 +65,42 @@ const Para = ({
           <span style={{ marginRight: "0.3em" }}>{srNo}.</span> {title}
         </div>
         <div className='image-para flex_middle'>
-          <img
-            src={
-              displayMode
-                ? imageLight || defaultImage
-                : imageDark || defaultImage
-            }
-            alt={altImg}
-          />
-          <Tooltip title='Enlarge' placement='top'>
-            <div className='enlarge flex_middle' onClick={enlargeGif}>
-                <OpenInFullIcon style={{ fontSize: 15 }} />
+          {gifSee ? (
+            <img
+              src={
+                gifSee ? (
+                  displayMode
+                  ? imageLight || defaultImage
+                  : imageDark || defaultImage
+                ) : (
+                  transfer
+                )
+              }
+              alt={altImg}
+            />
+          ) : (
+            <div class='lds-ripple'>
+              <div></div>
+              <div></div>
             </div>
-          </Tooltip>
+          )}
+
+          <div className='enlarge flex_middle'>
+            <Tooltip title='Enlarge' placement='top'>
+              <OpenInFullIcon
+                style={{ fontSize: 15 }}
+                onClick={enlargeGif}
+                className='enlarge-one'
+              />
+            </Tooltip>
+            <Tooltip title='Replay' placement='top'>
+              <ReplayOutlinedIcon
+                style={{ fontSize: 16, marginLeft: "0.5em" }}
+                className='enlarge-two'
+                onClick={reloadGif}
+              />
+            </Tooltip>
+          </div>
         </div>
         <div className='flex_between ft-bold details-para'>
           <div style={{ fontSize: "0.9em", color: "grey" }}>Details</div>

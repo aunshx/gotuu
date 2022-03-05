@@ -2819,8 +2819,12 @@ margin: 0 0.5em;
   height: 87%;
 }
 
-.walkthrough-para .image-para .enlarge:hover {
-  color: var(--primary-hover-color);
+.walkthrough-para .image-para .enlarge-one:hover {
+  color: var(--primary-color);
+}
+
+.walkthrough-para .image-para .enlarge-two:hover {
+  color: var(--primary-color);
 }
 
 .walkthrough-para .details-para .tags {

@@ -2,6 +2,7 @@ import api from "../../utils/api";
 import setAuthToken from "../../utils/setAuthToken";
 import moment from "moment";
 import axios from 'axios'
+import ct from "countries-and-timezones"
 
 import {
   getTimelineDatesCaptured,
@@ -61,26 +62,50 @@ import {
 
 // Current location capture 
 export const captureCurrentLocation = () => async (dispatch, getState) => {
-  const ipDeets = await axios.get("https://api.ipify.org?format=json/");
-  const ipDetails = await axios.get(`http://ip-api.com/json/${ipDeets.data}`);
+  try {
+    const ipDetails = await axios.get(
+      `https://api.geoapify.com/v1/ipinfo?&apiKey=153db888812b4bbab8fbf99b99ceb3cf`
+    );
 
-  dispatch({
-    type: CURRENT_LOCATION,
-    payload: ipDetails.data.timezone,
-  });
+    const countryTimeZone = ct.getCountry(ipDetails.data.country.iso_code)
 
-  let date = new Date();
+    dispatch({
+      type: CURRENT_LOCATION,
+      payload: countryTimeZone.timezones[0],
+    });
 
-  dispatch(deleteAllEmptyEvents());
-   dispatch(getTimelineDatesCaptured());
-   dispatch(getTimelineEvent(moment(date).toISOString()));
-   dispatch(getAvgDurationOfTuusPerDay());
-   dispatch(getNumberOfTuusPerDay());
-   dispatch(getAvgDurationOfTuus());
-   dispatch(getTotalNumberOfTuus());
-   dispatch(getLiveStreak());
-   dispatch(getSoundStatus());
-   dispatch(getReminderStatus());
+    let date = new Date();
+
+    dispatch(deleteAllEmptyEvents());
+    dispatch(getTimelineDatesCaptured());
+    dispatch(getTimelineEvent(moment(date).toISOString()));
+    dispatch(getAvgDurationOfTuusPerDay());
+    dispatch(getNumberOfTuusPerDay());
+    dispatch(getAvgDurationOfTuus());
+    dispatch(getTotalNumberOfTuus());
+    dispatch(getLiveStreak());
+    dispatch(getSoundStatus());
+    dispatch(getReminderStatus());
+  } catch (e) {
+
+    dispatch({
+      type: CURRENT_LOCATION,
+      payload: '',
+    });
+
+    let date = new Date();
+
+    dispatch(deleteAllEmptyEvents());
+    dispatch(getTimelineDatesCaptured());
+    dispatch(getTimelineEvent(moment(date).toISOString()));
+    dispatch(getAvgDurationOfTuusPerDay());
+    dispatch(getNumberOfTuusPerDay());
+    dispatch(getAvgDurationOfTuus());
+    dispatch(getTotalNumberOfTuus());
+    dispatch(getLiveStreak());
+    dispatch(getSoundStatus());
+    dispatch(getReminderStatus());
+  }
 };
 
 // Change count for login
