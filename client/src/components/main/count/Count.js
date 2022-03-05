@@ -11,6 +11,7 @@ import {
   ADD_NEW_NOTE,
   ADD_NOTE_TITLE,
   ADD_NOTE_BODY,
+  NOTE_INCOMPLETE,
 } from "../../../redux/actions/types";
 import {
   addDurationToEventEnd
@@ -102,7 +103,9 @@ const Count = ({
         payload: "",
       });
     }
-    
+      store.dispatch({
+        type: NOTE_INCOMPLETE,
+      });
   };
 
   const stopTime = () => {
@@ -126,6 +129,9 @@ const Count = ({
       type: ADD_NOTE_BODY,
       payload: "",
     });
+    store.dispatch({
+      type: NOTE_INCOMPLETE
+    })
   }
 
   return (

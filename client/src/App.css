@@ -1143,14 +1143,15 @@ padding: 0  0 2em 0;
 
 @media only screen and (max-width: 479px) {
   .timeline .main .line  .element_mini {
-  width: 80px;
+  width: 60px;
   height: 60px;
-  border-radius: 10px;
+  border-radius: 50%;
   background-color: var(--line-mini-color);
   font-weight: bold;
   margin: 20px 0;
   position: relative;
-  padding-top: 0.3em;
+  font-size: 0.7em;
+  padding-top: 0.6em;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1284,12 +1285,15 @@ padding: 0  0 2em 0;
 
 @media only screen and (max-width: 479px) {
   .timeline .main .line  .element_tiny {
-  width: 100px;
-  height: 60px;
-  border-radius: 10px;
+   width: 70px;
+  height: 70px;
+  border-radius: 50%;
   background-color: var(--line-tiny-color);
   font-weight: bold;
-  margin: 20px 0;
+  margin: 25px 0;
+  padding-top: 0.6em;
+  position: relative;
+  font-size: 0.7em;
   position: relative;
   display: flex;
   align-items: center;
@@ -1403,13 +1407,14 @@ padding: 0  0 2em 0;
 
 @media only screen and (max-width: 479px) {
 .timeline .main .line .element_extra-small {
-  width: 120px;
-  height: 70px;
-  border-radius: 10px;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
   background-color: var(--line-extra-small-color);
   font-weight: bold;
   margin: 30px 0;
   position: relative;
+  font-size: 0.7em;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1529,14 +1534,15 @@ padding: 0  0 2em 0;
 
 @media only screen and (max-width: 479px) {
 .timeline .main .line .element_small {
-   width: 140px;
-  height: 70px;
-  border-radius: 10px;
+   width: 90px;
+  height: 90px;
+  border-radius: 50%;
   background-color: var(--line-small-color);
   font-weight: bold;
   margin: 0.8em 0;
   margin: 35px 0;
   position: relative;
+  font-size: 0.7em;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1653,14 +1659,15 @@ padding: 0  0 2em 0;
 
 @media only screen and (max-width: 479px) {
 .timeline .main .line .element_medium {
- width: 160px;
-  height: 70px;
-  border-radius: 10px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
   background-color: var(--line-medium-color);
   font-weight: bold;
   margin: 1em 0;
   margin: 40px 0;
   position: relative;
+  font-size: 0.7em;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1776,14 +1783,15 @@ padding: 0  0 2em 0;
 
 @media only screen and (max-width: 479px) {
 .timeline .main .line .element_large {
- width: 180px;
-  height: 70px;
-  border-radius: 10px;
+ width: 110px;
+  height: 110px;
+  border-radius: 50%;
   background-color: var(--line-large-color);
   font-weight: bold;
-  margin: 1em 0;
+  margin: 1.2em 0;
   margin: 45px 0;
   position: relative;
+  font-size: 0.7em;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1899,14 +1907,15 @@ padding: 0  0 2em 0;
 
 @media only screen and (max-width: 479px) {
 .timeline .main .line .element_humongous {
- width: 200px;
-  height: 70px;
-  border-radius: 10px;
+ width: 120px;
+  height: 120px;
+  border-radius: 50%;
   background-color: var(--line-humongous-color);
   font-weight: bold;
-  margin: 1.2em 0;
-  margin: 45px 0;
+  margin: 1.5em 0;
+  margin: 50px 0;
   position: relative;
+  font-size: 0.7em;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -3302,6 +3311,12 @@ background-color:var(--login-card-background);
 
 .delete-card .button-no:hover{
 background-color:var(--light-count-color);
+}
+
+@media only screen and (max-width: 650px) {
+  .delete-card {
+    width: 270px;
+  }
 }
 
 /* ------------------ ACTIONS CARD ---------------------- */

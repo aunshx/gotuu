@@ -14,6 +14,7 @@ import {
   ADD_NEW_NOTE,
   ADD_NOTE_TITLE,
   ADD_NOTE_BODY,
+  NOTE_INCOMPLETE,
 } from '../../../redux/actions/types'
 
 import { styled } from "@mui/material/styles";
@@ -138,6 +139,9 @@ const Element = ({
       type: ADD_NOTE_BODY,
       payload: "",
     });
+    store.dispatch({
+      type: NOTE_INCOMPLETE
+    })
   };
 
   const showInHoursAction = () => {
@@ -148,6 +152,12 @@ const Element = ({
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
+  };
+  const handleExpandClickOn = () => {
+    setExpanded(true);
+  };
+  const handleExpandClickOff = () => {
+    setExpanded(false);
   };
 
   const noteManipulate = () => {
@@ -165,6 +175,7 @@ const Element = ({
                   ? `element_${classy} triple_grid cursor_pointer element_padding_${classy}`
                   : `element_${classy} triple_grid cursor_pointer`
               }
+              style={noteDetails ? {} : { paddingTop: "0" }}
               {...bind}
             >
               <div></div>
@@ -193,7 +204,10 @@ const Element = ({
               </Tooltip>
               {width < 480 && noteDetails && (
                 <>
-                  <div className='title-liner flex_middle'>
+                  <div
+                    className='title-liner flex_middle'
+                    style={expanded ? { display: "none" } : {}}
+                  >
                     {noteDetails.title !== undefined
                       ? noteDetails.title.substr(
                           0,
@@ -201,42 +215,39 @@ const Element = ({
                         ) + "..."
                       : ""}
                   </div>
-                  <div className='' onClick={handleExpandClick}>
-                    <ExpandMore
-                      expand={expanded}
-                      aria-expanded={expanded}
-                      aria-label='show more'
-                    >
-                      <ExpandMoreIcon
-                        style={{
-                          fontSize: 28,
-                        }}
-                        onClick={handleExpandClick}
-                      />
-                    </ExpandMore>
-                  </div>
-                  <div className=''>
-                    <Collapse
-                      in={expanded}
-                      timeout='auto'
-                      unmountOnExit
+                  <ExpandMore
+                    expand={expanded}
+                    aria-expanded={expanded}
+                    aria-label='show more'
+                    style={expanded ? { display: "none" } : {}}
+                  >
+                    <ExpandMoreIcon
                       style={{
-                        padding: 0,
+                        fontSize: 28,
                       }}
-                    >
-                      <div>
-                        <TimelineNote
-                          noteDetails={noteDetails}
-                          close={closeNote}
-                          eventId={event._id}
-                          setReload={setReload}
-                        />
-                      </div>
-                    </Collapse>
-                  </div>
+                      onClick={handleExpandClick}
+                    />
+                  </ExpandMore>
+                  <Collapse
+                    in={expanded}
+                    timeout='auto'
+                    unmountOnExit
+                    style={{
+                      padding: 0,
+                    }}
+                  >
+                    <TimelineNote
+                      noteDetails={noteDetails}
+                      close={handleExpandClickOff}
+                      eventId={event._id}
+                      setReload={setReload}
+                      completion={completion}
+                      setCompletion={setCompletion}
+                    />
+                  </Collapse>
                 </>
               )}
-              {noteDetails && (
+              {width > 480 && noteDetails && (
                 <>
                   <div
                     className={
@@ -288,7 +299,7 @@ const Element = ({
                   </div>
                 </>
               )}
-              {showNote && (
+              {width > 480 && showNote && (
                 <div className='liner_horizontal_right_icon_note'>
                   <TimelineNote
                     noteDetails={noteDetails}
@@ -303,9 +314,11 @@ const Element = ({
             </div>
             <div
               className={
-                completion
-                  ? `liner_vertical cursor_pointer`
-                  : `liner_vertical-incomplete cursor_pointer`
+                noteDetails
+                  ? completion
+                    ? `liner_vertical cursor_pointer`
+                    : `liner_vertical-incomplete cursor_pointer`
+                  : "liner_vertical cursor_pointer"
               }
             ></div>
           </div>
@@ -320,6 +333,7 @@ const Element = ({
                   ? `element_${classy} triple_grid cursor_pointer element_padding_${classy}`
                   : `element_${classy} triple_grid cursor_pointer`
               }
+              style={noteDetails ? {} : { paddingTop: "0" }}
               {...bind}
             >
               <div></div>
@@ -348,7 +362,10 @@ const Element = ({
               </Tooltip>
               {width < 480 && noteDetails && (
                 <>
-                  <div className='title-liner flex_middle'>
+                  <div
+                    className='title-liner flex_middle'
+                    style={expanded ? { display: "none" } : {}}
+                  >
                     {noteDetails.title !== undefined
                       ? noteDetails.title.substr(
                           0,
@@ -356,38 +373,39 @@ const Element = ({
                         ) + "..."
                       : ""}
                   </div>
-                  <div className='' onClick={handleExpandClick}>
-                    <ExpandMore
-                      expand={expanded}
-                      onClick={handleExpandClick}
-                      aria-expanded={expanded}
-                      aria-label='show more'
-                    >
-                      <ExpandMoreIcon
-                        style={{
-                          fontSize: 28,
-                        }}
-                        onClick={handleExpandClick}
-                      />
-                    </ExpandMore>
-                  </div>
-                  <div className=''>
-                    <Collapse
-                      in={expanded}
-                      timeout='auto'
-                      unmountOnExit
+                  <ExpandMore
+                    expand={expanded}
+                    onClick={handleExpandClickOn}
+                    aria-expanded={expanded}
+                    aria-label='show more'
+                    style={expanded ? { display: "none" } : {}}
+                  >
+                    <ExpandMoreIcon
                       style={{
-                        padding: 0,
+                        fontSize: 28,
                       }}
-                    >
-                      <div>
-                        <TimelineNote
-                          noteDetails={noteDetails}
-                          close={handleExpandClick}
-                        />
-                      </div>
-                    </Collapse>
-                  </div>
+                      onClick={handleExpandClickOn}
+                    />
+                  </ExpandMore>
+                  <Collapse
+                    in={expanded}
+                    timeout='auto'
+                    unmountOnExit
+                    style={{
+                      padding: 0,
+                    }}
+                  >
+                    <div>
+                      <TimelineNote
+                        noteDetails={noteDetails}
+                        close={handleExpandClickOff}
+                        eventId={event._id}
+                        setReload={setReload}
+                        completion={completion}
+                        setCompletion={setCompletion}
+                      />
+                    </div>
+                  </Collapse>
                 </>
               )}
               {noteDetails && (

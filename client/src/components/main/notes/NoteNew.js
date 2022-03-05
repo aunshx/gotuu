@@ -3,18 +3,21 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import moment from "moment";
 
-import { Tooltip, TextField, Modal, Fade, Box } from "@mui/material";
+import { Tooltip, TextField } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { makeStyles } from "@mui/styles";
 
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import CheckCircleOutlinedIcon from "@mui/icons-material/CheckCircleOutlined";
+import CircleOutlinedIcon from "@mui/icons-material/CircleOutlined";
 
 import {
   deleteNote,
   sendNoteDataBody,
   sendNoteTitle,
+  noteTaskIncomplete,
+  noteTaskComplete,
 } from "../../../redux/actions/notes";
-import DeleteWarning from "./DeleteWarning";
 
 const CssTextField = styled(TextField, {
   shouldForwardProp: (props) => props !== "focusColor",
@@ -57,12 +60,14 @@ const NoteNew = ({
   // Redux Actions
   sendNoteDataBody,
   sendNoteTitle,
+  noteTaskIncomplete,
+  noteTaskComplete,
   // Redux State
-  notes: { noteId, noteTitle, noteBody },
+  notes: { noteId, noteTitle, noteBody, noteComplete },
 }) => {
   const textAttitude = useStyles();
 
-  const [noTitleError, setNoTitleError] = useState(false)
+  const [noTitleError, setNoTitleError] = useState(false);
 
   const CHARACTER_LIMIT = 250;
 
@@ -81,17 +86,29 @@ const NoteNew = ({
   };
 
   const closeNote = () => {
-      if(noteTitle.length <= 0) {
-        setNoTitleError(true)
-        setTimeout(() => setNoTitleError(false), 4000);
-      } else {
-          close()
-      }
-  }
+    if (noteTitle.length <= 0) {
+      setNoTitleError(true);
+      setTimeout(() => setNoTitleError(false), 4000);
+    } else {
+      close();
+    }
+  };
+
+  const makeCompleteNote = () => {
+    noteTaskComplete(noteId);
+  };
+
+  const makeIncompleteNote = () => {
+    noteTaskIncomplete(noteId);
+  };
 
   return (
     <>
-      <div className={"single_note_1"} data-aos='fade-up' style={{ boxShadow: 'none' }} >
+      <div
+        className={"single_note_1"}
+        data-aos='fade-up'
+        style={{ boxShadow: "none" }}
+      >
         <div className='title'>
           <input
             name='noteTitle'
@@ -102,9 +119,9 @@ const NoteNew = ({
           />
         </div>
         <div className='body app'>
-          {noTitleError &&  <div className='errors flex_middle'>
-              Title cannot be empty!
-          </div> }
+          {noTitleError && (
+            <div className='errors flex_middle'>Title cannot be empty!</div>
+          )}
           <CssTextField
             fullWidth
             multiline
@@ -146,6 +163,27 @@ const NoteNew = ({
                 <ExpandMoreIcon onClick={closeNote} />
               </Tooltip>
             </div>
+            {noteComplete ? (
+              <div>
+                <Tooltip
+                  title='Tasks Incomplete'
+                  style={{ fontSize: 18, color: "#44af16" }}
+                  className='icons'
+                >
+                  <CheckCircleOutlinedIcon onClick={makeIncompleteNote} />
+                </Tooltip>
+              </div>
+            ) : (
+              <div>
+                <Tooltip
+                  title='Tasks Complete'
+                  style={{ fontSize: 18, color: "#e8544a" }}
+                  className='icons'
+                >
+                  <CircleOutlinedIcon onClick={makeCompleteNote} />
+                </Tooltip>
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -158,6 +196,8 @@ NoteNew.propTypes = {
   deleteNote: PropTypes.func.isRequired,
   sendNoteDataBody: PropTypes.func.isRequired,
   sendNoteTitle: PropTypes.func.isRequired,
+  noteTaskComplete: PropTypes.func.isRequired,
+  noteTaskIncomplete: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -168,6 +208,8 @@ const mapActionsToProps = {
   deleteNote,
   sendNoteDataBody,
   sendNoteTitle,
+  noteTaskIncomplete,
+  noteTaskComplete,
 };
 
 export default connect(mapStateToProps, mapActionsToProps)(NoteNew);

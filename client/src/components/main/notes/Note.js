@@ -7,7 +7,6 @@ import { Tooltip, TextField, Modal, Fade, Box } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { makeStyles } from "@mui/styles";
 
-import DeleteIcon from "@mui/icons-material/Delete";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import CheckCircleOutlinedIcon from "@mui/icons-material/CheckCircleOutlined";
 import CircleOutlinedIcon from "@mui/icons-material/CircleOutlined";
@@ -208,15 +207,6 @@ const Note = ({
                 </Tooltip>
               </div>
             )}
-            <div>
-              <Tooltip
-                title='Delete Note'
-                style={{ fontSize: 18 }}
-                className='icons'
-              >
-                <DeleteIcon onClick={openDeleteBox} />
-              </Tooltip>
-            </div>
           </div>
         </div>
       </div>
