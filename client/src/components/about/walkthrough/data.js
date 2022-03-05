@@ -65,13 +65,11 @@ export const data = [
   {
     title: "Updating existing event with no notes",
     details: [
-      "To change between latest and oldest Tuus, click on the 'chain-link' icon.",
-      "Checkout the timeline from other dates by clicking on 'today'",
-      "Dates on which Tuus have been recorded are shown in green color.",
-      "To minimize the date-picker click on the close icon on it.",
+      "Add a note or delete a Tuu which has no note by long pressing/clicking on the event.",
+      "Normal click will change hours to minutes and vice-versa.",
     ],
-    imageLight: "https://i.postimg.cc/9XNJDyQq/Timeline-Light-Short.gif",
-    imageDark: "https://i.postimg.cc/43PNPfYj/Timeline-Dark-Short.gif",
+    imageLight: "https://i.postimg.cc/9fYBM4L4/Long-Press-Light.gif",
+    imageDark: "https://i.postimg.cc/1RNRkbMd/Long-Press-Dark.gif",
     imageLightMobile:
       "https://i.postimg.cc/Y2NNpLyQ/Metrics-Blocks-Mobile-Light.gif",
     imageDarkMobile:
