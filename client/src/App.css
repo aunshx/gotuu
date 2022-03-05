@@ -648,21 +648,7 @@ height: 95%;
   height: -moz-calc(100vh);
   height: -webkit-calc(100vh);
   }
-
-  .main-active:after {
-    content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          border-radius: 0;
-          background: linear-gradient(120deg, yellow, green, blue, red);
-          background-size: 400% 400%;
-          animation: frame-enter 0s forwards ease-in-out reverse, gradient-animation 4s ease-in-out infinite;
-
-  }
-
+  
   .main .expand-icon,
   .main-active  .expand-icon {
     position: absolute;

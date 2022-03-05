@@ -22,6 +22,8 @@ export const data = [
     ],
     imageLight: "https://i.postimg.cc/HWyc3b84/Go-Use-Light.gif",
     imageDark: "https://i.postimg.cc/h4xtFJQ1/Go-Use-Dark.gif",
+    imageLightMobile: "https://i.postimg.cc/4ygYDnQP/Go-Mobile-Light.gif",
+    imageDarkMobile: "https://i.postimg.cc/pVFN7pgz/Go-Mobile-Dark.gif",
     tags: ["Gotuu", "Count", "Time"],
     altImg: "Gotuu Process Gif",
   },
