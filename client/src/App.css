@@ -435,7 +435,7 @@ pre {
 
   .side_navbar {
   width: 100vw;
-  background-color: var(--light-color);
+  background-color: var(--all-card-background);
 }
 
 .side_navbar .title {

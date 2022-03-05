@@ -21,15 +21,15 @@ const ProfileDetails = ({ fixedContent }) => {
      }
      const options = {
        root: null,
-       threshold: 0,
+       threshold: 0.5,
      };
      introRef.current = new IntersectionObserver((entries) => {
        if (entries[0].isIntersecting) {
          setIntroOnly(true);
          setWalkthroughOnly(false);
-         setAttributionOnly(false)
        } else {
          setIntroOnly(false);
+         setWalkthroughOnly(true);
        }
      }, options);
      if (node) {
@@ -43,15 +43,15 @@ const ProfileDetails = ({ fixedContent }) => {
      }
      const options = {
        root: null,
-       threshold: 0,
+       threshold: 0.2,
      };
      walkthroughRef.current = new IntersectionObserver((entries) => {
        if (entries[0].isIntersecting) {
          setIntroOnly(false);
          setWalkthroughOnly(true);
-         setAttributionOnly(false);
        } else {
          setWalkthroughOnly(false);
+         setIntroOnly(true);
        }
      }, options);
      if (node) {
@@ -65,15 +65,15 @@ const ProfileDetails = ({ fixedContent }) => {
      }
      const options = {
        root: null,
-       threshold: 0.5,
+       threshold: 0.8,
      };
      attributionRef.current = new IntersectionObserver((entries) => {
        if (entries[0].isIntersecting) {
-         setIntroOnly(false);
          setWalkthroughOnly(false);
          setAttributionOnly(true);
        } else {
          setAttributionOnly(false);
+         setWalkthroughOnly(true);
        }
      }, options);
      if (node) {
