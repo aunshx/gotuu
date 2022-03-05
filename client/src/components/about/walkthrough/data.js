@@ -63,6 +63,23 @@ export const data = [
     altImg: "Timeline Specifics Process Gif",
   },
   {
+    title: "Updating existing event with no notes",
+    details: [
+      "To change between latest and oldest Tuus, click on the 'chain-link' icon.",
+      "Checkout the timeline from other dates by clicking on 'today'",
+      "Dates on which Tuus have been recorded are shown in green color.",
+      "To minimize the date-picker click on the close icon on it.",
+    ],
+    imageLight: "https://i.postimg.cc/9XNJDyQq/Timeline-Light-Short.gif",
+    imageDark: "https://i.postimg.cc/43PNPfYj/Timeline-Dark-Short.gif",
+    imageLightMobile:
+      "https://i.postimg.cc/Y2NNpLyQ/Metrics-Blocks-Mobile-Light.gif",
+    imageDarkMobile:
+      "https://i.postimg.cc/jqfgyj3j/Metrics-Blocks-Mobile-Dark.gif",
+    tags: ["Timeline", "Notes", "Specifics"],
+    altImg: "Timeline Specifics Process Gif",
+  },
+  {
     title: "Metrics - Graphs",
     details: [
       "'Duration Of Tuus' graph shows the number of mins/hours of Tuus recorded in the given amount of time",

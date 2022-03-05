@@ -475,9 +475,11 @@ const Element = ({
             </div>
             <div
               className={
-                completion
-                  ? `liner_vertical cursor_pointer`
-                  : `liner_vertical-incomplete cursor_pointer`
+                noteDetails
+                  ? completion
+                    ? `liner_vertical cursor_pointer`
+                    : `liner_vertical-incomplete cursor_pointer`
+                  : "liner_vertical cursor_pointer"
               }
             ></div>
           </div>
