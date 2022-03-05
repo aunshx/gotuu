@@ -53,4 +53,17 @@ export const data = [
     tags: ["Timeline", "Notes", "Specifics"],
     altImg: "Timeline Specifics Process Gif",
   },
+  {
+    title: "Metrics - Graphs",
+    details: [
+      "'Duration Of Tuus' graph shows the number of mins/hours of Tuus recorded in the given amount of time",
+      "Click on the m/h button to change between minutes and hours.",
+      "'No. Of Tuus Completed' graph shows the number of Tuus recorded in a given amount of time.",
+      "Select between recent seven days, month and year to check metrics of different time periods.",
+    ],
+    imageLight: "https://i.postimg.cc/d3byFsm4/Metrics-Light.gif",
+    imageDark: "https://i.postimg.cc/15xhg8BM/Metrics-Dark.gif",
+    tags: ["Timeline", "Notes", "Specifics"],
+    altImg: "Timeline Specifics Process Gif",
+  },
 ];
