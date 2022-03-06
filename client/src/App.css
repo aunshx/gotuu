@@ -374,7 +374,7 @@ pre {
 .side_navbar {
   width: 230px;
   background-color: var(--all-card-background);
-  height: 100%;
+  height: 130%;
 }
 
 .side_navbar .title {

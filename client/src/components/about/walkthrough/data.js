@@ -118,22 +118,17 @@ export const data = [
   {
     title: "Settings Change and Alerts",
     details: [
-      "'Live Streak' block shows the number of days of continuous engagement with Gotuu in the given amount of time",
-      "The 'Total Tuus' block shows the number of Tuus completed in the given amount of time.",
-      "'Avg Tuu Duration' is the average time (total duration of Tuus/number of tuus) of a Tuu in the given period of time.",
-      "Click on the block to interchange between minutes and hours.",
-      "Based on the metrics provided, the Gotuu AI creates an estimate of your performance and categorizes it in three categories viz. 'Good', 'Average' and 'Bad'",
-      "One way to increase performance is to complete Tuus of longer durations and greater frequencies.",
-      "Based on the total performance, the Gotuu AI calculates the synopsis of your performance which includes some useful advice!",
-      "Click on the duration selector to see the metrics in different periods of time.",
+      "Reminders are presented after intervals of 15 mins, 30 mins, 1 hour, 2 hours and 3 hours.",
+      "Reminders can be turned off at once or individually.",
+      "If you don't want music along with the alerts, it can be turned off."
     ],
-    imageLight: "https://i.postimg.cc/xdhdZ0GC/Metrics-Light-Blocks.gif",
-    imageDark: "https://i.postimg.cc/1X4yH22S/Metrics-Dark-Blocks.gif",
+    imageLight: "https://i.postimg.cc/MZcjKjcH/Settings-Change-Light.gif",
+    imageDark: "https://i.postimg.cc/fb2JMwDY/Settings-Change-Dark.gif",
     imageLightMobile:
       "https://i.postimg.cc/YCwBJ1HF/Settings-Change-Mobile-Light.gif",
     imageDarkMobile:
-      "https://i.postimg.cc/jqfgyj3j/Metrics-Blocks-Mobile-Dark.gif",
-    tags: ["Metrics", "Blocks", "Duration"],
-    altImg: "Timeline Specifics Process Gif",
+      "https://i.postimg.cc/63p5PFZT/Settings-Change-Mobile-Dark.gif",
+    tags: ["Settings", "Alerts", "Sound", "Reminders"],
+    altImg: "Changing Settings Process Gif",
   },
 ];
