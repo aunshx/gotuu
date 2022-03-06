@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import Intro from "./Intro";
 import HowTo from "./walkthrough/HowTo";
 import Attribution from "./Attribution";
+import Footer from "../layout/Footer";
 
 const ProfileDetails = ({ fixedContent }) => {
 
@@ -167,6 +168,7 @@ const ProfileDetails = ({ fixedContent }) => {
               innerRef={attributionRef}
               secondInnerRef={refElementAttribution}
             />
+            <Footer />
           </div>
         </div>
       </div>

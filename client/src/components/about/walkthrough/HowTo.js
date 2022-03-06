@@ -25,7 +25,6 @@ const HowTo = ({ innerRef, secondInnerRef }) => {
                 imageDarkMobile={element.imageDarkMobile}
               />
             ))}
-          j
         </div>
       </div>
     </div>
