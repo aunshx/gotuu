@@ -39,10 +39,10 @@
 }
 
 [data-theme="dark"] {
-  --login-card-background: rgb(4, 4, 4);
-  --all-card-background: rgb(4, 4, 4);
+  --login-card-background: rgb(8, 8, 8);
+  --all-card-background: rgb(8, 8, 8);
   --dark-font-color: rgb(250, 250, 250);
-  --background-color: rgb(19, 19, 19);
+  --background-color: rgb(18, 18, 18);
   --single-note-timeline-color: rgb(201, 201, 201);
   --single-note-border-color: #7ed957;
   --black-color: rgb(255, 255, 255);
