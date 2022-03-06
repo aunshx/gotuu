@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
+import { Checkbox, styled, FormControlLabel, Typography } from "@mui/material";
+import { makeStyles } from "@mui/styles";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -25,6 +25,14 @@ import {
   setReminderThreeHourOn,
   setReminderThreeHourOff,
 } from "../../redux/actions/settings";
+
+const FormControlLabelEdited = styled(FormControlLabel, {
+  shouldForwardProp: (props) => props !== "focusColor",
+})((p) => ({
+  ".Mui-disabled": {
+    color: "grey",
+  },
+}));
 
 const NavRem = ({
   // Redux State
@@ -131,78 +139,73 @@ const NavRem = ({
         Reminder Times
       </div>
       <div>
-        <FormControlLabel
+        <FormControlLabelEdited
           control={
             <Checkbox
               checked={reminderFifteenMin}
               onChange={setReminderFifteenMin}
               sx={{ "& .MuiSvgIcon-root": { fontSize: 18 } }}
               color='success'
-              disabled={!reminder}
             />
           }
-          label='15 mins'
-          style={{ color: "grey" }}
+          label={<Typography style={{ color: "grey" }}>15 mins</Typography>}
+          disabled={!reminder}
         />
       </div>
       <div>
-        <FormControlLabel
+        <FormControlLabelEdited
           control={
             <Checkbox
               checked={reminderThirtyMin}
               onChange={setReminderThirtyMin}
               sx={{ "& .MuiSvgIcon-root": { fontSize: 18 } }}
               color='success'
-              disabled={!reminder}
             />
           }
-          label='30 mins'
-          style={{ color: "grey" }}
+          label={<Typography style={{ color: "grey" }}>30 mins</Typography>}
+          disabled={!reminder}
         />
       </div>
       <div>
-        <FormControlLabel
+        <FormControlLabelEdited
           control={
             <Checkbox
               checked={reminderOneHour}
               onChange={setReminderOneHour}
               sx={{ "& .MuiSvgIcon-root": { fontSize: 18 } }}
               color='success'
-              disabled={!reminder}
             />
           }
-          label='1 hour'
-          style={{ color: "grey" }}
+          label={<Typography style={{ color: "grey" }}>1 hour</Typography>}
+          disabled={!reminder}
         />
       </div>
       <div>
-        <FormControlLabel
+        <FormControlLabelEdited
           control={
             <Checkbox
               checked={reminderTwoHour}
               onChange={setReminderTwoHour}
               sx={{ "& .MuiSvgIcon-root": { fontSize: 18 } }}
               color='success'
-              disabled={!reminder}
             />
           }
-          label='2 hours'
-          style={{ color: "grey" }}
+          label={<Typography style={{ color: "grey" }}>2 hours</Typography>}
+          disabled={!reminder}
         />
       </div>
       <div>
-        <FormControlLabel
+        <FormControlLabelEdited
           control={
             <Checkbox
               checked={reminderThreeHour}
               onChange={setReminderThreeHour}
               sx={{ "& .MuiSvgIcon-root": { fontSize: 18 } }}
               color='success'
-              disabled={!reminder}
             />
           }
-          label='3 hours'
-          style={{ color: "grey" }}
+          label={<Typography style={{ color: "grey" }}>3 hours</Typography>}
+          disabled={!reminder}
         />
       </div>
     </div>
