@@ -120,10 +120,10 @@ export const data = [
     details: [
       "Reminders are presented after intervals of 15 mins, 30 mins, 1 hour, 2 hours and 3 hours.",
       "Reminders can be turned off at once or individually.",
-      "If you don't want music along with the alerts, it can be turned off."
+      "If you don't want music along with the alerts, it can be turned off.",
     ],
     imageLight: "https://i.postimg.cc/MZcjKjcH/Settings-Change-Light.gif",
-    imageDark: "https://i.postimg.cc/fb2JMwDY/Settings-Change-Dark.gif",
+    imageDark: "https://i.postimg.cc/nLmP62xf/Settings-Change-Dark.gif",
     imageLightMobile:
       "https://i.postimg.cc/YCwBJ1HF/Settings-Change-Mobile-Light.gif",
     imageDarkMobile:

@@ -32,7 +32,7 @@ const SideNavbar = ({
   verticalMenu,
   // Redux States
   auth: { isAuthenticated, user },
-  settings: { sound },
+  settings: { sound, displayMode },
   // Redux Actions
   logout,
   setSoundOn,
@@ -63,7 +63,9 @@ const SideNavbar = ({
   };
 
   return (
-    <div className='side_navbar'>
+    <div
+      className={displayMode ? "side_navbar" : "side_navbar side_navbar--dark"}
+    >
       <div className='title triple_grid mrg-t-b-1'>
         <div />
         <div className='center_everything'>Hi! {name}</div>
@@ -276,7 +278,7 @@ const SideNavbar = ({
           </div>
         )}
       </div>
-      <div style={{ marginTop: '1.5em' }}>
+      <div style={{ marginTop: "1.5em" }}>
         <Footer />
       </div>
     </div>

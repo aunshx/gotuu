@@ -29,8 +29,8 @@ const DeleteWarning = ({
     <div
       className={
         displayMode
-          ? "delete-card delete-card--dark ft-bold app"
-          : "delete-card ft-bold app"
+          ? "delete-card ft-bold app"
+          : "delete-card delete-card--dark ft-bold app"
       }
       style={{ justifyContent: "space-around" }}
     >
