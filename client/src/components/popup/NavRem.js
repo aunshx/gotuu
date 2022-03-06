@@ -29,6 +29,7 @@ import {
 const FormControlLabelEdited = styled(FormControlLabel, {
   shouldForwardProp: (props) => props !== "focusColor",
 })((p) => ({
+  "& .MuiSvgIcon-root": { fontSize: 18, color: 'grey' },
   ".Mui-disabled": {
     color: "grey",
   },
@@ -186,7 +187,9 @@ const NavRem = ({
             <Checkbox
               checked={reminderTwoHour}
               onChange={setReminderTwoHour}
-              sx={{ "& .MuiSvgIcon-root": { fontSize: 18 } }}
+              sx={{
+                "& .MuiSvgIcon-root": { fontSize: 18 },
+              }}
               color='success'
             />
           }
