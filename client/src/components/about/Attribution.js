@@ -5,9 +5,9 @@ const Attribution = ({ innerRef, secondInnerRef }) => {
   return (
     <div className='pages' id='faqs-about' ref={innerRef}>
       <div className='title flex_middle'>Attribution</div>
-      <div className='page-details flex_middle' ref={secondInnerRef}>
-        <div style={{ textAlign: "center" }}>
-          '<span className='title'>A</span>bout' Page Photo by{" "}
+      <div className='page-details app' ref={secondInnerRef}>
+        <div style={{ textAlign: "center", margin: '0.5em' }}>
+          'About' Page Photo by{" "}
           <a
             href='https://unsplash.com/@nate_dumlao?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText'
             style={{ color: "grey" }}
@@ -23,12 +23,18 @@ const Attribution = ({ innerRef, secondInnerRef }) => {
           </a>
         </div>
         <div style={{ textAlign: "center" }}>
-          Photo by{" "}
-          <a href='https://unsplash.com/@bradhelmink?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText'>
+          '404 Not Found' Page Photo by{" "}
+          <a
+            href='https://unsplash.com/@bradhelmink?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText'
+            style={{ color: "grey" }}
+          >
             Brad Helmink
           </a>{" "}
           on{" "}
-          <a href='https://unsplash.com/s/photos/unknown?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText'>
+          <a
+            href='https://unsplash.com/s/photos/unknown?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText'
+            style={{ color: "grey" }}
+          >
             Unsplash
           </a>
         </div>
