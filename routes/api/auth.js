@@ -11,6 +11,8 @@ const User = require("../../models/User");
 const Security = require("../../models/Security");
 const { verify } = require("crypto");
 
+require("dotenv").config();
+
 // @route    GET api/auth
 // @desc     Get user by token
 // @access   Private
@@ -67,7 +69,8 @@ router.post(
 
       jwt.sign(
         payload,
-        config.get("jwtSecret"),
+        // config.get("jwtSecret"),
+        process.env.JWT_SECRET,
         { expiresIn: "1d" },
         (err, token) => {
           if (err) throw err;
@@ -187,7 +190,8 @@ router.post(
 
       jwt.sign(
         payload,
-        config.get("jwtSecret"),
+        // config.get("jwtSecret"),
+        process.env.JWT_SECRET,
         { expiresIn: 360000 },
         (err, token) => {
           if (err) throw err;
