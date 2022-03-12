@@ -1,0 +1,27 @@
+{
+  "files": {
+    "main.css": "/static/css/main.7cf7fbb6.css",
+    "main.js": "/static/js/main.1b5393d4.js",
+    "static/js/845.4fbf7743.chunk.js": "/static/js/845.4fbf7743.chunk.js",
+    "static/media/registerBackground.png": "/static/media/registerBackground.90c5c7b17e704c7053c6.png",
+    "static/media/about.jpg": "/static/media/about.889e42f35e9ba142ca89.jpg",
+    "static/media/backgroundRam2.jpg": "/static/media/backgroundRam2.523d0d685a80af08be32.jpg",
+    "static/media/successBellThreeHours.mp3": "/static/media/successBellThreeHours.190bbb1287b5ad8f0786.mp3",
+    "static/media/reminderBellOneHour.mp3": "/static/media/reminderBellOneHour.ca27729e030edc4c6451.mp3",
+    "static/media/reminderBell.mp3": "/static/media/reminderBell.e2e5840fe5726ca3eba6.mp3",
+    "static/media/toggle.mp3": "/static/media/toggle.e2e956cec8e665fdac87.mp3",
+    "static/media/default.jpg": "/static/media/default.042eb33250ef1f00c912.jpg",
+    "static/media/gotuuLogo.png": "/static/media/gotuuLogo.ba3d925a875c8b225da9.png",
+    "static/media/oops.png": "/static/media/oops.db58fa66005e733daa3a.png",
+    "static/media/gotuuLogoLogin.png": "/static/media/gotuuLogoLogin.6c29786c8fd618f56d80.png",
+    "static/media/bigLogo.png": "/static/media/bigLogo.ee95229dc258cbe1e944.png",
+    "index.html": "/index.html",
+    "main.7cf7fbb6.css.map": "/static/css/main.7cf7fbb6.css.map",
+    "main.1b5393d4.js.map": "/static/js/main.1b5393d4.js.map",
+    "845.4fbf7743.chunk.js.map": "/static/js/845.4fbf7743.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7cf7fbb6.css",
+    "static/js/main.1b5393d4.js"
+  ]
+}
