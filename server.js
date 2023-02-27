@@ -2,7 +2,7 @@ const express = require("express");
 const expressSanitizer = require("express-sanitizer");
 const path = require("path");
 
-const { task } = require("./workers/workers");
+// const { task } = require("./workers/workers");
 const connectDB = require("./config/db");
 
 const app = express();

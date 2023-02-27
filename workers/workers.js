@@ -4,7 +4,6 @@ const axios = require('axios');
 const task = cron.schedule("*/12 * * * *", async () => {
   try {
     const res = await axios.get('https://aunsh.com')
-    const res2 = await axios.get("https://fun-with-reddit.herokuapp.com/");
 
     console.log('Req sent')
   } catch (error) {
